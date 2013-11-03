@@ -1,0 +1,10 @@
+#question {
+    text-align: center;
+    font-family: "Lucida Grande";
+    font-size: 14px;
+    width: 600px;
+}
+
+#questionCanvas {
+    margin-top: 20px;
+}
