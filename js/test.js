@@ -1,12 +1,13 @@
 
-var TriangleTest = function(questions, time, order, finishHandler) {
+var Test = function(style, questions, time, order, finishHandler) {
+	this.style = style;
 	this.questions = questions;
 	this.time = time;
 	this.order = order;
 	this.finishHandler = finishHandler;
 }
 
-TriangleTest.prototype.begin = function() {
+Test.prototype.begin = function() {
 	if (this.order === "random") {
 		this.questions = _.shuffle(this.questions);
 	}
@@ -14,13 +15,19 @@ TriangleTest.prototype.begin = function() {
 	this.currentQuestion = 0;
 	this.showQuestion();
 };
-TriangleTest.prototype.showQuestion = function() {
+Test.prototype.showQuestion = function() {
 
 	if (this.questions.length <= this.currentQuestion) {
 		return this.end();
 	}
 
-	var question = new TriangleQuestion(this.questions[this.currentQuestion]);
+	var question;
+	if (this.style === "triangle") {
+		question = new TriangleQuestion(this.questions[this.currentQuestion]);
+	}
+	else if (this.style === "multipleChoice") {
+		question = new MultipleChoiceQuestion(this.questions[this.currentQuestion]);
+	}
 	question.show();
 
 	var base = this;
@@ -29,15 +36,32 @@ TriangleTest.prototype.showQuestion = function() {
 		base.showQuestion();
 	}, this.time * 1000);
 };
-TriangleTest.prototype.end = function() {
+Test.prototype.end = function() {
 	console.log("Triangle test finished");
 	this.finishHandler();
+}
+
+var MultipleChoiceQuestion = function(question) {
+	this.question = question;
+}
+MultipleChoiceQuestion.prototype.show = function() {
+	console.log("Showing MultipleChoiceQuestion");
+    $("#question").text(this.question.question);
+
+    $("#answers").empty();
+    
+    _.each(this.question.answers, function (answer, i) {
+    	var answerText = String.fromCharCode(65 + i) + ") " + answer;
+    	$("#answers").append("<input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label>");
+
+    });
 }
 
 var TriangleQuestion = function(question) {
 	this.question = question;
 }
 TriangleQuestion.prototype.show = function() {
+	console.log("Showing TriangleQuestion");
     $("#question").text(this.question.question);
 
     var canvas = $("#questionCanvas");
@@ -59,11 +83,11 @@ TriangleQuestion.prototype.buildBoard = function(canvas) {
     var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge/2)));
 
     var aCircle = new Circle(a);
-    aCircle.addLabel(this.question["answers"]["a"], LabelLocation.ABOVE);
+    aCircle.addLabel(this.question["answers"][0], LabelLocation.ABOVE);
     var bCircle = new Circle(b);
-    bCircle.addLabel(this.question["answers"]["b"], LabelLocation.BELOW);
+    bCircle.addLabel(this.question["answers"][1], LabelLocation.BELOW);
     var cCircle = new Circle(c);
-    cCircle.addLabel(this.question["answers"]["c"], LabelLocation.BELOW);
+    cCircle.addLabel(this.question["answers"][2], LabelLocation.BELOW);
 
     var centerCircle = new Circle(center);
     centerCircle.addLabel("Don't know", LabelLocation.BELOW);

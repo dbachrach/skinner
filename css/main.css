@@ -21,8 +21,18 @@
     font-family: "Lucida Grande";
     font-size: 14px;
     width: 600px;
+    margin: 0 auto;
 }
 
-.triangleCanvas {
-    margin-top: 20px;
+#triangleCanvas {
+    margin: 20px auto;
+}
+
+#answers {
+	margin-top: 20px;
+	text-align: center;
+}
+#answers label {
+	margin-left: 4px;
+	margin-right: 20px;
 }

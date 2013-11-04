@@ -2,20 +2,20 @@
 	"multipleChoiceQuestions-1": [
 		{
 			"question": "Whose studies of bodies in motion lent support to the heliocentric model of the solar system?",
-			"answers": {
-				"a": "Galileo",
-				"b": "Kepler",
-				"c": "Newtown"
-			},
+			"answers": [
+				"Galileo",
+				"Kepler",
+				"Newtown"
+			],
 			"correctAnswer": "a"
 		},
 		{
 			"question": "Who invented the flux capacitor?",
-			"answers": {
-				"a": "Doc Brown",
-				"b": "Doc Stevens",
-				"c": "Marty McFly"
-			},
+			"answers": [
+				"Doc Brown",
+				"Doc Stevens",
+				"Marty McFly"
+			],
 			"correctAnswer": "a"
 		}
 	],

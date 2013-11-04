@@ -30,6 +30,8 @@ Experiment.prototype.end = function() {
 	console.log("End experiment");
 };
 
+console.log("Starting experiment");
+
 // TODO: Shouldn't need this in production
 $.ajaxSetup ({
     cache: false // Disable caching of AJAX responses

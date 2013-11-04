@@ -15,9 +15,15 @@
 		},
 		{
 			"type": "test",
+			"style": "multipleChoice",
+			"questionSet": "multipleChoiceQuestions-1",
+			"time": 2
+		},
+		{
+			"type": "test",
 			"style": "triangle",
 			"questionSet": "multipleChoiceQuestions-1",
-			"time": 20,
+			"time": 2,
 			"order": "random"
 		},
 		{

@@ -76,13 +76,14 @@ var TestPage = function(data, prevCompletion, nextCompletion) {
 	this.nextCompletion = nextCompletion;
 }
 TestPage.prototype.show = function() {
-	console.log("Showing TestPage");
-
 	var testStyle = this.data.style;
+
+	console.log("Showing TestPage: " + testStyle);
+	
 	var base = this;
 	LoadLayout("test_" + testStyle, function() {
 		$.getJSON("json/questions.json").then(function(json) {
-		    var t = new TriangleTest(json[base.data.questionSet], base.data.time, base.data.order, function() {
+		    var t = new Test(testStyle, json[base.data.questionSet], base.data.time, base.data.order, function() {
 				base.next();
 			});
 			t.begin();
