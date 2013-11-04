@@ -18,6 +18,8 @@
 #content {
 	margin-top: 20px;
 	font-family: "Times New Roman";
+	text-align: left;
+	white-space: pre-line;
 }
 #buttons {
 	margin-top: 20px;

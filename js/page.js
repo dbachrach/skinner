@@ -30,7 +30,13 @@ TextPage.prototype.show = function() {
 	var base = this;
 	LoadLayout("text", function() {
 		$("#title").text(base.data.title);
-		$("#content").text(base.data.content);
+
+		if (base.data.content) {
+			$("#content").text(base.data.content);
+		}
+		else if (base.data.contentFile) {
+			$("#content").load("content/" + base.data.contentFile);
+		}
 
 		var configButton = function(button, text, clickHandler) {
 			if (text) {
