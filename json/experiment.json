@@ -9,7 +9,7 @@
 		{
 			"type": "text",
 			"title": "Passage 1",
-			"contentFile": "passage1.txt",
+			"contentFile": "passage1",
 			"prevButton": "Previous page",
 			"nextButton": "Next page"
 		},

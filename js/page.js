@@ -1,6 +1,22 @@
-var LoadLayout = function(name, afterLoadHandler) {
+var LoadLayout = function(name, bindings, data, afterLoadHandler) {
 	$("#page").load("layouts/pages/" + name + ".html", function() {
-		afterLoadHandler();
+		_.each(bindings, function(binding) {
+			var field = $("#" + binding);
+			var bindValue = data[binding];
+			var bindFile = data[binding + "File"];
+
+			if (bindValue) {
+				field.text(bindValue);
+				field.prop("value", bindValue);
+			}
+			else if (bindFile) {
+				field.load("content/" + bindFile + ".txt");
+			}
+			else {
+				field.hide();
+			}
+		});
+		if (afterLoadHandler) { afterLoadHandler(); }
 	});
 }
 
@@ -28,30 +44,11 @@ TextPage.prototype.show = function() {
 	console.log("Showing TextPge");
 
 	var base = this;
-	LoadLayout("text", function() {
-		$("#title").text(base.data.title);
-
-		if (base.data.content) {
-			$("#content").text(base.data.content);
-		}
-		else if (base.data.contentFile) {
-			$("#content").load("content/" + base.data.contentFile);
-		}
-
-		var configButton = function(button, text, clickHandler) {
-			if (text) {
-				button.prop("value", text);
-				button.click(clickHandler);
-			}
-			else {
-				button.hide();
-			}
-		}
-
-		configButton($("#nextButton"), base.data.nextButton, function() {
+	LoadLayout("text", ["title", "content", "prevButton", "nextButton"], base.data, function() {
+		$("#nextButton").click(function() {
 			base.next();
 		});
-		configButton($("#prevButton"), base.data.prevButton, function() {
+		$("#prevButton").click(function() {
 			base.prev();
 		});
 	});
@@ -70,11 +67,8 @@ var DistractorPage = function(data, prevCompletion, nextCompletion) {
 DistractorPage.prototype.show = function() {
 	console.log("Showing DistractorPage");
 
-	var base = this;
-	LoadLayout("distractor", function() {
-		var contentString = "You are now going to play tetris for 9 minutes."
-		$("#content").text(contentString);
-	});
+	var bindData = {"content" : "You are now going to play tetris for 9 minutes."};
+	LoadLayout("distractor", _.keys(bindData), bindData);
 };
 
 var TestPage = function(data, prevCompletion, nextCompletion) {
@@ -87,7 +81,7 @@ TestPage.prototype.show = function() {
 	console.log("Showing TestPage: " + testStyle);
 	
 	var base = this;
-	LoadLayout("test_" + testStyle, function() {
+	LoadLayout("test_" + testStyle, null, null, function() {
 		$.getJSON("json/questions.json").then(function(json) {
 		    var t = new Test(testStyle, json[base.data.questionSet], base.data.time, base.data.order, function() {
 				base.next();
