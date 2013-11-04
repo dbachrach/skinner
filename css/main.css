@@ -1,27 +1,27 @@
 
+#page {
+	width: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
 /*
 	TextPage
 */
 #title {
 	font-size: 30px;
 	font-style: bold;
-	text-align: center;
 }
 #content {
 	margin-top: 20px;
-	text-align: center;
 }
 #buttons {
 	margin-top: 20px;
-	text-align: center;
 }
 
 #question {
-    text-align: center;
     font-family: "Lucida Grande";
     font-size: 14px;
-    width: 600px;
-    margin: 0 auto;
 }
 
 #triangleCanvas {
@@ -30,7 +30,6 @@
 
 #answers {
 	margin-top: 20px;
-	text-align: center;
 }
 #answers label {
 	margin-left: 4px;
