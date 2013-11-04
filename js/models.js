@@ -62,7 +62,7 @@ Circle.prototype.draw = function(ctx) {
 Circle.prototype.drawLabel = function(ctx) {
     var labelOffset = 28 * ((this.labelLocation === LabelLocation.BELOW) ? 1 : -1);
     ctx.fillStyle = "black";
-    ctx.font = "14px Lucida Grande";
+    ctx.font = "16px Verdana";
     ctx.textAlign = "center";
     ctx.fillText(this.labelText, this.center.x, this.center.y + labelOffset);
 }
