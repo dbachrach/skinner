@@ -29,7 +29,7 @@ Circle.prototype.addLabel = function(text, location) {
 	this.labelText = text;
 	this.labelLocation = location;
 }
-Circle.prototype.draw = function() {
+Circle.prototype.draw = function(ctx) {
     ctx.lineWidth = 3;
     ctx.strokeStyle = "black";
 
@@ -37,6 +37,7 @@ Circle.prototype.draw = function() {
 		ctx.lineWidth = ctx.lineWidth * 2;
 	}
 
+	var unselectedColor = "white";
     var fillColor = unselectedColor;
     
     if (this.highlighted) { fillColor = this.center.color; }
@@ -55,11 +56,11 @@ Circle.prototype.draw = function() {
     }
 
     if (this.hasLabel) {
-    	this.drawLabel();
+    	this.drawLabel(ctx);
     }
 }
-Circle.prototype.drawLabel = function() {
-    var labelOffset = 28 * ((this.labelLocation == LabelLocation.BELOW) ? 1 : -1);
+Circle.prototype.drawLabel = function(ctx) {
+    var labelOffset = 28 * ((this.labelLocation === LabelLocation.BELOW) ? 1 : -1);
     ctx.fillStyle = "black";
     ctx.font = "14px Lucida Grande";
     ctx.textAlign = "center";
@@ -93,12 +94,12 @@ var Triangle = function(d, e, f) {
 	this.e = e;
 	this.f = f;
 }
-Triangle.prototype.draw = function() {
-	this.drawLine(this.d, this.e);
-	this.drawLine(this.e, this.f);
-	this.drawLine(this.f, this.d);    
+Triangle.prototype.draw = function(ctx) {
+	this.drawLine(ctx, this.d, this.e);
+	this.drawLine(ctx, this.e, this.f);
+	this.drawLine(ctx, this.f, this.d);    
 }
-Triangle.prototype.drawLine = function(p1, p2) {
+Triangle.prototype.drawLine = function(ctx, p1, p2) {
 	ctx.lineWidth = 8;
     
     var gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
@@ -113,8 +114,13 @@ Triangle.prototype.drawLine = function(p1, p2) {
 }
 
 
-var QuestionBoard = function() {
+var QuestionBoard = function(canvas) {
+	this.canvas = canvas;
+	this.ctx = this.canvas[0].getContext('2d');
+
 	this.elements = new Array();
+
+	this.attachMouseHandlers();
 }
 QuestionBoard.prototype.addElement = function(element) {
 	this.elements.push(element);
@@ -128,7 +134,7 @@ QuestionBoard.prototype.interactiveElements = function() {
 	})
 }
 QuestionBoard.prototype.redraw = function() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    this.ctx.clearRect(0, 0, 600, 450);
     
  //    ctx.beginPath();
  //    ctx.moveTo(a.x, a.y);
@@ -161,8 +167,8 @@ QuestionBoard.prototype.redraw = function() {
  //    ctx.fill();
 
  	this.elements.forEach(function(e) {
-		e.draw();
-	});
+		e.draw(this.ctx);
+	}, this);
 }
 QuestionBoard.prototype.hitTest = function(p) { 
     var hit = this.interactiveElements().filter(function(e) {
@@ -209,4 +215,47 @@ var GenerateCirclesBetweenPoints = function(d, e) {
         circles[i-1] = new Circle(midpoint(d, e, i / (pointsPerEdge + 1)));
     }
     return circles;
+}
+QuestionBoard.prototype.attachMouseHandlers = function() {
+	var base = this;
+	this.canvas.click(function (e) {
+	    var p = base.getCursorPosition(e);
+	    var circle = base.hitTest(p);
+	    if (circle) {
+	    	base.deselectAll();
+	    	circle.clicked();
+	    }
+	    base.redraw();
+	});
+
+	this.canvas.mousemove(function (e) {
+	    var p = base.getCursorPosition(e);
+	    var circle = base.hitTest(p);
+	    base.unhighlightAll();
+	    if (circle) {
+	    	circle.highlight();
+	        base.canvas.css("cursor", "pointer");
+	    }
+	    else {
+	        base.canvas.css("cursor", "default");
+	    }
+	    base.redraw();
+	});
+}
+QuestionBoard.prototype.getCursorPosition = function(e) {
+    var x;
+    var y;
+    if (e.pageX != undefined && e.pageY != undefined) {
+        x = e.pageX;
+        y = e.pageY;
+    }
+    else {
+        x = e.clientX + document.body.scrollLeft +
+                document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop +
+                document.documentElement.scrollTop;
+    }
+    x -= this.canvas[0].offsetLeft;
+    y -= this.canvas[0].offsetTop;
+    return new Point(x, y);
 }
