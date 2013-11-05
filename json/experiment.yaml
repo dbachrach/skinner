@@ -1,0 +1,27 @@
+---
+pages:
+  - type: text
+    title: Instructions
+    contentFile: instructions
+    nextButton: Start
+
+  - type: text
+    title: Passage 1
+    contentFile: passage1
+    prevButton: Previous page
+    nextButton: Next page
+
+  - type: test
+    style: multipleChoice
+    questionSet: multipleChoiceQuestions-1
+    time: 2 seconds
+
+  - type: test
+    style: triangle
+    questionSet: multipleChoiceQuestions-1
+    time: 2 seconds
+    order: random
+
+  - type: distractor
+    exercise: tetris
+    time: 9 minutes

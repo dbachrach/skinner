@@ -1,0 +1,15 @@
+---
+multipleChoiceQuestions-1:
+  - question: Whose studies of bodies in motion lent support to the heliocentric model of the solar system?
+    answers:
+      - Galileo
+      - Kepler
+      - Newton
+    correctAnswer: a
+
+  - question: Who invented the flux capacitor?
+    answers:
+      - Doc Stevens
+      - Marty McFly
+      - Doc Brown
+    correctAnswer: c

@@ -82,12 +82,11 @@ TestPage.prototype.show = function() {
 	
 	var base = this;
 	LoadLayout("test_" + testStyle, null, null, function() {
-		$.getJSON("json/questions.json").then(function(json) {
-		    var t = new Test(testStyle, json[base.data.questionSet], base.data.time, base.data.order, function() {
-				base.next();
-			});
-			t.begin();
+		var questionData = YAML.load("json/questions.yaml");
+		var test = new Test(testStyle, questionData[base.data.questionSet], base.data.time, base.data.order, function() {
+			base.next();
 		});
+		test.begin();
 	});
 };
 TestPage.prototype.next = function() {

@@ -37,7 +37,6 @@ $.ajaxSetup ({
     cache: false // Disable caching of AJAX responses
 });
 
-$.getJSON("json/experiment.json").then(function(json) {
-    var exp = new Experiment(json["pages"]);
-	exp.begin();
-});
+var expData = YAML.load("json/experiment.yaml");
+var exp = new Experiment(expData["pages"]);
+exp.begin();

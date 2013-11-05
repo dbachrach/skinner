@@ -2,7 +2,7 @@
 var Test = function(style, questions, time, order, finishHandler) {
 	this.style = style;
 	this.questions = questions;
-	this.time = time;
+	this.time = ParseTime(time);
 	this.order = order;
 	this.finishHandler = finishHandler;
 }
@@ -34,7 +34,7 @@ Test.prototype.showQuestion = function() {
 	setTimeout(function() { 
 		base.currentQuestion++;
 		base.showQuestion();
-	}, this.time * 1000);
+	}, this.time);
 };
 Test.prototype.end = function() {
 	console.log("Triangle test finished");
@@ -49,7 +49,7 @@ MultipleChoiceQuestion.prototype.show = function() {
     $("#question").text(this.question.question);
 
     $("#answers").empty();
-    
+
     _.each(this.question.answers, function (answer, i) {
     	var answerText = String.fromCharCode(65 + i) + ") " + answer;
     	$("#answers").append("<input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label>");
