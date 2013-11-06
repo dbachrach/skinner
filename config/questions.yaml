@@ -1,15 +1,19 @@
 ---
 multipleChoiceQuestions-1:
-  - question: Whose studies of bodies in motion lent support to the heliocentric model of the solar system?
+  - question: What is the scientific name (genus and species) for the common domestic ferret?
     answers:
-      - Galileo
-      - Kepler
-      - Newton
+      - Mustela putorius furo
+      - Mustela eversmanii
+      - Mustela putorius
     correctAnswer: a
+    metadata:
+      competitive: yes
 
-  - question: Who invented the flux capacitor?
+  - question: What family does the ferret belong to?
     answers:
-      - Doc Stevens
-      - Marty McFly
-      - Doc Brown
-    correctAnswer: c
+      - Herpestidae
+      - Mustelidae
+      - Mephitidae
+    correctAnswer: b
+    metadata:
+      competitive: yes

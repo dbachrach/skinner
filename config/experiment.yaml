@@ -22,6 +22,11 @@ pages:
     time: 2 seconds
     order: random
 
+  - type: text
+    title: Passage 2
+    contentFile: passage2
+    nextButton: Next page
+
   - type: distractor
     exercise: tetris
     time: 9 minutes
