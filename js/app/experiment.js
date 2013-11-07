@@ -1,4 +1,4 @@
-define(["app/page"], function (Page) {
+define([], function () {
     "use strict";
 
     function Experiment(pages) {
@@ -25,8 +25,12 @@ define(["app/page"], function (Page) {
             base.currentPage++;
             base.showPage();
         }
-        var page = new Page(this.pages[this.currentPage], pageCompletePrev, pageCompleteNext);
-        page.show();
+
+        var pageData = this.pages[this.currentPage];
+        require(["app/" + pageData.type + "Page"], function (Page) {
+            var question = new Page(pageData, pageCompletePrev, pageCompleteNext);
+            question.show();
+        });
     };
     Experiment.prototype.end = function () {
         console.log("End experiment");
