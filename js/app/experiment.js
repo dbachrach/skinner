@@ -1,33 +1,36 @@
-define (["app/page"], function(Page) {
-	var Experiment = function(pages) {
-		this.pages = pages;
-	}
-	Experiment.prototype.begin = function() {
-		this.currentPage = 0;
-		this.showPage();
-	};
-	Experiment.prototype.showPage = function() {
-		console.log("Show page: " + this.currentPage + " of " + this.pages.length);
+define(["app/page"], function (Page) {
+    "use strict";
 
-		if (this.pages.length <= this.currentPage) {
-			return this.end();
-		}
+    function Experiment(pages) {
+        this.pages = pages;
+    }
 
-		var base = this;
-		var pageCompletePrev = function() {
-			base.currentPage--;
-			base.showPage();
-		}
-		var pageCompleteNext = function() {
-			base.currentPage++;
-			base.showPage();
-		}
-		var page = new Page(this.pages[this.currentPage], pageCompletePrev, pageCompleteNext);
-		page.show();
-	};
-	Experiment.prototype.end = function() {
-		console.log("End experiment");
-	};
+    Experiment.prototype.begin = function () {
+        this.currentPage = 0;
+        this.showPage();
+    };
+    Experiment.prototype.showPage = function () {
+        console.log("Show page: " + this.currentPage + " of " + this.pages.length);
 
-	return Experiment;
+        if (this.pages.length <= this.currentPage) {
+            return this.end();
+        }
+
+        var base = this;
+        function pageCompletePrev() {
+            base.currentPage--;
+            base.showPage();
+        }
+        function pageCompleteNext() {
+            base.currentPage++;
+            base.showPage();
+        }
+        var page = new Page(this.pages[this.currentPage], pageCompletePrev, pageCompleteNext);
+        page.show();
+    };
+    Experiment.prototype.end = function () {
+        console.log("End experiment");
+    };
+
+    return Experiment;
 });

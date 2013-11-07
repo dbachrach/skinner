@@ -1,4 +1,4 @@
-define (["jquery", "underscore", "app/helpers", "app/trianglequestion"], function(j, u, helpers, TriangleQuestion) {
+define (["jquery", "underscore", "app/helpers"], function(j, u, helpers) {
 	var Test = function(style, questions, time, order, finishHandler) {
 		console.log("Creating test");
 		this.style = style;
@@ -22,14 +22,11 @@ define (["jquery", "underscore", "app/helpers", "app/trianglequestion"], functio
 			return this.end();
 		}
 
-		var question;
-		if (this.style === "triangle") {
-			question = new TriangleQuestion(this.questions[this.currentQuestion]);
-		}
-		else if (this.style === "multipleChoice") {
-			question = new MultipleChoiceQuestion(this.questions[this.currentQuestion]);
-		}
-		question.show();
+		var base = this;
+		require(["app/" + this.style + "Question"], function (Question) {
+			var question = new Question(base.questions[base.currentQuestion]);
+			question.show();
+		});
 
 		var base = this;
 		setTimeout(function() { 
@@ -42,21 +39,5 @@ define (["jquery", "underscore", "app/helpers", "app/trianglequestion"], functio
 		this.finishHandler();
 	}
 
-	var MultipleChoiceQuestion = function(question) {
-		this.question = question;
-	}
-	MultipleChoiceQuestion.prototype.show = function() {
-		console.log("Showing MultipleChoiceQuestion");
-	    $("#question").text(this.question.question);
-
-	    $("#answers").empty();
-
-	    _.each(this.question.answers, function (answer, i) {
-	    	var answerText = String.fromCharCode(65 + i) + ") " + answer;
-	    	$("#answers").append("<input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label>");
-
-	    });
-	}
-	
 	return Test;
 });

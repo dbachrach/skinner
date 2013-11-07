@@ -2,10 +2,11 @@ requirejs.config({
     baseUrl: 'js/vendor',
     paths: {
         app: '../app'
-    }
+    },
+    urlArgs: "bust=" + (new Date()).getTime() // for development to not cache scripts
 });
-require(["jquery", "yaml", "app/experiment"], function(j, yaml, Experiment) {
-    // TODO: Shouldn't need this in production
+
+require(["jquery", "yaml", "app/experiment"], function (j, yaml, Experiment) {
 	$.ajaxSetup ({
 	    cache: false // Disable caching of AJAX responses
 	});
