@@ -6,14 +6,14 @@ define (["jquery"], function(jquery) {
 		BELOW: 1
 	}
 
-	var Point = function(x, y, color) {
+	function Point(x, y, color) {
 	   this.x = x;
 	   this.y = y;
 	   color = typeof color !== 'undefined' ? color : "black"; // default is black
 	   this.color = color;
 	}
 
-	var Circle = function(center) {
+	function Circle(center) {
 		var defaultRadius = 8;
 
 		this.interactive = true;
@@ -27,12 +27,12 @@ define (["jquery"], function(jquery) {
 		this.selected = false;
 		this.highlighted = false;
 	}
-	Circle.prototype.addLabel = function(text, location) {
+	Circle.prototype.addLabel = function (text, location) {
 		this.hasLabel = true;
 		this.labelText = text;
 		this.labelLocation = location;
 	}
-	Circle.prototype.draw = function(ctx) {
+	Circle.prototype.draw = function (ctx) {
 	    ctx.lineWidth = 3;
 	    ctx.strokeStyle = "black";
 
@@ -62,14 +62,14 @@ define (["jquery"], function(jquery) {
 	    	this.drawLabel(ctx);
 	    }
 	}
-	Circle.prototype.drawLabel = function(ctx) {
+	Circle.prototype.drawLabel = function (ctx) {
 	    var labelOffset = 28 * ((this.labelLocation === LabelLocation.BELOW) ? 1 : -1);
 	    ctx.fillStyle = "black";
 	    ctx.font = "16px Verdana";
 	    ctx.textAlign = "center";
 	    ctx.fillText(this.labelText, this.center.x, this.center.y + labelOffset);
 	}
-	Circle.prototype.hitTest = function(p) {
+	Circle.prototype.hitTest = function (p) {
 		var clickOffset = this.radius * 3;
 		if ((Math.pow((p.x - this.center.x), 2) + Math.pow((p.y - this.center.y), 2)
 				<= Math.pow(this.radius + clickOffset, 2))) {
@@ -77,32 +77,32 @@ define (["jquery"], function(jquery) {
 		}
 		return null;
 	}
-	Circle.prototype.clicked = function() {
+	Circle.prototype.clicked = function () {
 		this.selected = true;
 	}
-	Circle.prototype.deselect = function() {
+	Circle.prototype.deselect = function () {
 		this.selected = false;
 	}
-	Circle.prototype.highlight = function() {
+	Circle.prototype.highlight = function () {
 		this.highlighted = true;
 	}
-	Circle.prototype.unhighlight = function() {
+	Circle.prototype.unhighlight = function () {
 		this.highlighted = false;
 	}
 
-	var Triangle = function(d, e, f) {
+	var Triangle = function (d, e, f) {
 		this.interactive = false;
 
 		this.d = d;
 		this.e = e;
 		this.f = f;
 	}
-	Triangle.prototype.draw = function(ctx) {
+	Triangle.prototype.draw = function (ctx) {
 		this.drawLine(ctx, this.d, this.e);
 		this.drawLine(ctx, this.e, this.f);
 		this.drawLine(ctx, this.f, this.d);    
 	}
-	Triangle.prototype.drawLine = function(ctx, p1, p2) {
+	Triangle.prototype.drawLine = function (ctx, p1, p2) {
 		ctx.lineWidth = 8;
 	    
 	    var gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
@@ -117,7 +117,7 @@ define (["jquery"], function(jquery) {
 	}
 
 
-	var QuestionBoard = function(canvas) {
+	function QuestionBoard(canvas) {
 		this.canvas = canvas;
 		this.ctx = this.canvas[0].getContext('2d');
 
@@ -125,18 +125,18 @@ define (["jquery"], function(jquery) {
 
 		this.attachMouseHandlers();
 	}
-	QuestionBoard.prototype.addElement = function(element) {
+	QuestionBoard.prototype.addElement = function (element) {
 		this.elements.push(element);
 	}
-	QuestionBoard.prototype.addElements = function(elements) {
+	QuestionBoard.prototype.addElements = function (elements) {
 		this.elements = this.elements.concat(elements);	
 	}
-	QuestionBoard.prototype.interactiveElements = function() {
+	QuestionBoard.prototype.interactiveElements = function () {
 		return this.elements.filter(function(e) {
 			return e.interactive;
 		})
 	}
-	QuestionBoard.prototype.redraw = function() {
+	QuestionBoard.prototype.redraw = function () {
 	    this.ctx.clearRect(0, 0, 600, 450);
 	    
 	 //    ctx.beginPath();
@@ -169,34 +169,34 @@ define (["jquery"], function(jquery) {
 	 //    ctx.fillStyle = radialGradient;
 	 //    ctx.fill();
 
-	 	this.elements.forEach(function(e) {
+	 	this.elements.forEach(function (e) {
 			e.draw(this.ctx);
 		}, this);
 	}
-	QuestionBoard.prototype.hitTest = function(p) { 
-	    var hit = this.interactiveElements().filter(function(e) {
+	QuestionBoard.prototype.hitTest = function (p) { 
+	    var hit = this.interactiveElements().filter(function (e) {
 			return (e.hitTest(p));
 		});
 		return hit[0];
 	}
-	QuestionBoard.prototype.deselectAll = function() {
-		this.interactiveElements().forEach(function(e) {
+	QuestionBoard.prototype.deselectAll = function () {
+		this.interactiveElements().forEach(function (e) {
 			e.deselect();
 		});
 	}
-	QuestionBoard.prototype.unhighlightAll = function() {
-	    this.interactiveElements().forEach(function(e) {
+	QuestionBoard.prototype.unhighlightAll = function () {
+	    this.interactiveElements().forEach(function (e) {
 			e.unhighlight();
 		});
 	}
 
 
-	var GenerateCirclesBetweenPoints = function(d, e) {
+	var GenerateCirclesBetweenPoints = function (d, e) {
 		var midval = function(v1, v2, percent) {
 			return v1 + ((v2 - v1) * percent); 
 		}
 
-		var midcolor = function(color1, color2, percent) {
+		var midcolor = function (color1, color2, percent) {
 			var rgb1 = color1.match(/\d+/g);
 		    var rgb2 = color2.match(/\d+/g);
 		    var rMid = midval(parseInt(rgb1[0]), parseInt(rgb2[0]), percent);
@@ -205,7 +205,7 @@ define (["jquery"], function(jquery) {
 		    return "rgb(" + Math.round(rMid) + "," + Math.round(gMid) + "," + Math.round(bMid) + ")";
 		}
 
-		var midpoint = function(p1, p2, percent) {
+		var midpoint = function (p1, p2, percent) {
 			var xMid = midval(p1.x, p2.x, percent);
 		    var yMid = midval(p1.y, p2.y, percent);
 		    var colorMid = midcolor(p1.color, p2.color, percent);
@@ -219,7 +219,7 @@ define (["jquery"], function(jquery) {
 	    }
 	    return circles;
 	}
-	QuestionBoard.prototype.attachMouseHandlers = function() {
+	QuestionBoard.prototype.attachMouseHandlers = function () {
 		var base = this;
 		this.canvas.click(function (e) {
 		    var p = base.getCursorPosition(e);
@@ -245,7 +245,7 @@ define (["jquery"], function(jquery) {
 		    base.redraw();
 		});
 	}
-	QuestionBoard.prototype.getCursorPosition = function(e) {
+	QuestionBoard.prototype.getCursorPosition = function (e) {
 	    var x;
 	    var y;
 	    if (e.pageX != undefined && e.pageY != undefined) {
@@ -263,10 +263,10 @@ define (["jquery"], function(jquery) {
 	    return new Point(x, y);
 	}
 
-	var TriangleQuestion = function(question) {
+	function TriangleQuestion(question) {
 		this.question = question;
 	}
-	TriangleQuestion.prototype.show = function() {
+	TriangleQuestion.prototype.show = function () {
 		console.log("Showing TriangleQuestion");
 	    $("#question").text(this.question.question);
 
@@ -274,8 +274,7 @@ define (["jquery"], function(jquery) {
 	    var qboard = this.buildBoard(canvas);
 		qboard.redraw();
 	}
-
-	TriangleQuestion.prototype.buildBoard = function(canvas) {
+	TriangleQuestion.prototype.buildBoard = function (canvas) {
 	    var edge = 400.0;
 	    var xOffset = (600 - edge) / 2;
 	    var yOffset = 50.0;

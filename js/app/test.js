@@ -10,7 +10,7 @@ define (["jquery", "underscore", "app/helpers"], function(jquery, underscore, he
 		this.finishHandler = finishHandler;
 	}
 
-	Test.prototype.begin = function() {
+	Test.prototype.begin = function () {
 		if (this.order === "random") {
 			this.questions = _.shuffle(this.questions);
 		}
@@ -18,7 +18,7 @@ define (["jquery", "underscore", "app/helpers"], function(jquery, underscore, he
 		this.currentQuestion = 0;
 		this.showQuestion();
 	};
-	Test.prototype.showQuestion = function() {
+	Test.prototype.showQuestion = function () {
 
 		if (this.questions.length <= this.currentQuestion) {
 			return this.end();

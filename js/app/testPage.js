@@ -1,12 +1,12 @@
 define (["yaml", "app/Test", "app/helpers"], function(yaml, Test, helpers) {
 	"use strict";
 
-	var TestPage = function(data, prevCompletion, nextCompletion) {
+	function TestPage(data, prevCompletion, nextCompletion) {
 		this.data = data;
 		this.prevCompletion = prevCompletion;
 		this.nextCompletion = nextCompletion;
 	}
-	TestPage.prototype.show = function() {
+	TestPage.prototype.show = function () {
 		var testStyle = this.data.style;
 
 		console.log("Showing TestPage: " + testStyle);
@@ -20,7 +20,7 @@ define (["yaml", "app/Test", "app/helpers"], function(yaml, Test, helpers) {
 			test.begin();
 		});
 	};
-	TestPage.prototype.next = function() {
+	TestPage.prototype.next = function () {
 		this.nextCompletion();
 	}
 
