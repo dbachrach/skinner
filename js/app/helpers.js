@@ -1,4 +1,6 @@
-define (["jquery", "underscore"], function () {
+define (["jquery", "underscore"], function (jquery, underscore) {
+	"use strict";
+
 	return {
 		ParseTime: function (time) {
 			matches = time.match(/(\d)+ *(.*)/);

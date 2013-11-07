@@ -1,4 +1,6 @@
-define(["jquery"], function() {
+define(["jquery"], function(jquery) {
+	"use strict";
+
 	var MultipleChoiceQuestion = function(question) {
 		this.question = question;
 	}

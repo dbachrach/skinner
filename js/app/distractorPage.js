@@ -1,5 +1,6 @@
 define (["app/helpers"], function(helpers) {
-
+	"use strict";
+	
 	var DistractorPage = function(data, prevCompletion, nextCompletion) {
 		this.data = data;
 		this.nextCompletion = nextCompletion;

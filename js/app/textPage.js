@@ -1,4 +1,5 @@
 define (["jquery", "app/helpers"], function(jquery, helpers) {
+	"use strict";
 
 	var TextPage = function(data, prevCompletion, nextCompletion) {
 		this.data = data;

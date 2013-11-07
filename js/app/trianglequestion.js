@@ -1,4 +1,6 @@
-define (["jquery"], function() {
+define (["jquery"], function(jquery) {
+	"use strict";
+
 	var LabelLocation = {
 		ABOVE: 0,
 		BELOW: 1

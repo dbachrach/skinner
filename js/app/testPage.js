@@ -1,4 +1,5 @@
 define (["yaml", "app/Test", "app/helpers"], function(yaml, Test, helpers) {
+	"use strict";
 
 	var TestPage = function(data, prevCompletion, nextCompletion) {
 		this.data = data;

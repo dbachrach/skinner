@@ -1,4 +1,6 @@
-define (["jquery", "underscore", "app/helpers"], function(j, u, helpers) {
+define (["jquery", "underscore", "app/helpers"], function(jquery, underscore, helpers) {
+	"use strict";
+
 	var Test = function(style, questions, time, order, finishHandler) {
 		console.log("Creating test");
 		this.style = style;
