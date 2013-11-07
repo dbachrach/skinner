@@ -3,10 +3,10 @@ requirejs.config({
     paths: {
         app: '../app'
     },
-    urlArgs: "bust=" + (new Date()).getTime() // for development to not cache scripts
+    urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
 });
 
-require(["jquery", "yaml", "app/experiment"], function (j, yaml, Experiment) {
+require(["jquery", "yaml", "app/experiment"], function (jquery, yaml, Experiment) {
 	$.ajaxSetup ({
 	    cache: false // Disable caching of AJAX responses
 	});

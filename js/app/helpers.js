@@ -3,7 +3,7 @@ define (["jquery", "underscore"], function (jquery, underscore) {
 
 	return {
 		ParseTime: function (time) {
-			matches = time.match(/(\d)+ *(.*)/);
+			var matches = time.match(/(\d)+ *(.*)/);
 
 			var number = parseInt(matches[0]);
 
