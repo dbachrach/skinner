@@ -3,9 +3,11 @@ define (["jquery", "underscore"], function (jquery, underscore) {
 
 	return {
 		ParseTime: function (time) {
+			if (_.isUndefined(time)) { return undefined; }
+
 			var matches = time.match(/(\d)+ *(.*)/);
 
-			var number = parseInt(matches[0]);
+			var number = parseInt(matches[0], 10);
 
 			var unit = 1000;
 			if (_.contains(["sec", "second", "seconds", "secs"], matches[1]) != -1) {
@@ -20,7 +22,7 @@ define (["jquery", "underscore"], function (jquery, underscore) {
 		},
 		LoadLayout: function (name, bindings, data, afterLoadHandler) {
 			$("#page").load("layouts/pages/" + name + ".html", function() {
-				_.each(bindings, function(binding) {
+				_.each(bindings.concat(["nextButton", "prevButton"]), function(binding) {
 					var field = $("#" + binding);
 					var bindValue = data[binding];
 					var bindFile = data[binding + "File"];
@@ -28,9 +30,11 @@ define (["jquery", "underscore"], function (jquery, underscore) {
 					if (bindValue) {
 						field.text(bindValue);
 						field.prop("value", bindValue);
+						field.show();
 					}
 					else if (bindFile) {
 						field.load("content/" + bindFile + ".txt");
+						field.show();
 					}
 					else {
 						field.hide();

@@ -1,9 +1,8 @@
 define (["app/helpers"], function(helpers) {
 	"use strict";
 
-	function DistractorPage(data, prevCompletion, nextCompletion) {
+	function DistractorPage(data) {
 		this.data = data;
-		this.nextCompletion = nextCompletion;
 	}
 	DistractorPage.prototype.show = function() {
 		console.log("Showing DistractorPage");

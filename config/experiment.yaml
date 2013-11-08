@@ -1,4 +1,6 @@
 ---
+name: Erin Sparck's Triangle Experiment
+
 pages:
   - type: text
     title: Instructions
@@ -8,8 +10,7 @@ pages:
   - type: text
     title: Passage 1
     contentFile: passage1
-    prevButton: Previous page
-    nextButton: Next page
+    nextButton: Continue
 
   - type: test
     style: multipleChoice
@@ -17,7 +18,14 @@ pages:
     time: 2 seconds
 
   - type: test
+    style: cuedRecall
+    questionSet: multipleChoiceQuestions-1
+    time: 5 seconds
+    nextButton: Next page
+
+  - type: test
     style: triangle
+    pointsPerEdge: 2
     questionSet: multipleChoiceQuestions-1
     time: 2 seconds
     order: random
@@ -30,3 +38,4 @@ pages:
   - type: distractor
     exercise: tetris
     time: 9 minutes
+

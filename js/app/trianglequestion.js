@@ -9,7 +9,7 @@ define (["jquery"], function(jquery) {
 	function Point(x, y, color) {
 	   this.x = x;
 	   this.y = y;
-	   color = typeof color !== 'undefined' ? color : "black"; // default is black
+	   color = color || "black";
 	   this.color = color;
 	}
 
@@ -191,7 +191,7 @@ define (["jquery"], function(jquery) {
 	}
 
 
-	var GenerateCirclesBetweenPoints = function (d, e) {
+	var GenerateCirclesBetweenPoints = function (d, e, pointsPerEdge) {
 		var midval = function(v1, v2, percent) {
 			return v1 + ((v2 - v1) * percent); 
 		}
@@ -199,9 +199,9 @@ define (["jquery"], function(jquery) {
 		var midcolor = function (color1, color2, percent) {
 			var rgb1 = color1.match(/\d+/g);
 		    var rgb2 = color2.match(/\d+/g);
-		    var rMid = midval(parseInt(rgb1[0]), parseInt(rgb2[0]), percent);
-		    var gMid = midval(parseInt(rgb1[1]), parseInt(rgb2[1]), percent);
-		    var bMid = midval(parseInt(rgb1[2]), parseInt(rgb2[2]), percent);
+		    var rMid = midval(parseInt(rgb1[0], 10), parseInt(rgb2[0], 10), percent);
+		    var gMid = midval(parseInt(rgb1[1], 10), parseInt(rgb2[1], 10), percent);
+		    var bMid = midval(parseInt(rgb1[2], 10), parseInt(rgb2[2], 10), percent);
 		    return "rgb(" + Math.round(rMid) + "," + Math.round(gMid) + "," + Math.round(bMid) + ")";
 		}
 
@@ -212,7 +212,6 @@ define (["jquery"], function(jquery) {
 			return new Point(xMid, yMid, colorMid);
 		}
 
-	    var pointsPerEdge = 3;
 	    var circles = new Array(pointsPerEdge);
 	    for (var i = 1; i <= pointsPerEdge; i++) {
 	        circles[i-1] = new Circle(midpoint(d, e, i / (pointsPerEdge + 1)));
@@ -263,8 +262,9 @@ define (["jquery"], function(jquery) {
 	    return new Point(x, y);
 	}
 
-	function TriangleQuestion(question) {
+	function TriangleQuestion(question, data) {
 		this.question = question;
+		this.pointsPerEdge = data.pointsPerEdge || 3;
 	}
 	TriangleQuestion.prototype.show = function () {
 		console.log("Showing TriangleQuestion");
@@ -295,14 +295,15 @@ define (["jquery"], function(jquery) {
 	    cCircle.addLabel(this.question["answers"][2], LabelLocation.BELOW);
 
 	    var centerCircle = new Circle(center);
-	    centerCircle.addLabel("Don't know", LabelLocation.BELOW);
+	    centerCircle.addLabel("Don't know", LabelLocation.ABOVE);
 
+	    // var pointsPerEdge = this.question["pointsPerEdge"];
 	    var qboard = new QuestionBoard(canvas);
 	    qboard.addElement(new Triangle(a, b, c))
 	    qboard.addElements([aCircle, bCircle, cCircle, centerCircle]);
-	    qboard.addElements(GenerateCirclesBetweenPoints(a, b));
-	    qboard.addElements(GenerateCirclesBetweenPoints(b, c));
-	    qboard.addElements(GenerateCirclesBetweenPoints(c, a));
+	    qboard.addElements(GenerateCirclesBetweenPoints(a, b, this.pointsPerEdge));
+	    qboard.addElements(GenerateCirclesBetweenPoints(b, c, this.pointsPerEdge));
+	    qboard.addElements(GenerateCirclesBetweenPoints(c, a, this.pointsPerEdge));
 	    return qboard;
 	}
 

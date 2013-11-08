@@ -1,7 +1,7 @@
 define(["jquery"], function(jquery) {
 	"use strict";
 
-	function MultipleChoiceQuestion(question) {
+	function MultipleChoiceQuestion(question, data) {
 		this.question = question;
 	}
 	MultipleChoiceQuestion.prototype.show = function () {
@@ -12,7 +12,7 @@ define(["jquery"], function(jquery) {
 
 	    _.each(this.question.answers, function (answer, i) {
 	    	var answerText = String.fromCharCode(65 + i) + ") " + answer;
-	    	$("#answers").append("<input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label>");
+	    	$("#answers").append("<input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label><br />");
 	    });
 	}
 	
