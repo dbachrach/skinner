@@ -1,4 +1,4 @@
-define (["jquery", "underscore"], function (jquery, underscore) {
+define (["jquery", "underscore"], function ($, underscore) {
 	"use strict";
 
 	return {

@@ -1,4 +1,4 @@
-define (["yaml", "app/helpers"], function(yaml, helpers) {
+define (["require", "yaml", "core/helpers", "core/tri"], function(require, yaml, helpers, tri) {
 	"use strict";
 
 	function TestPage(data, experiment) {
@@ -31,9 +31,10 @@ define (["yaml", "app/helpers"], function(yaml, helpers) {
 		}
 
 		var base = this;
-		require(["app/" + this.style + "Question"], function (Question) {
-			var question = new Question(base.questions[base.currentQuestionIndex], base.data);
-			question.show();
+		var req = tri.getModule(this.style, "question");
+		require([req], function (Question) {
+			base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.data);
+			base.currentQuestion.show();
 		});
 
 		if (_.isNumber(this.time)) {
@@ -48,6 +49,10 @@ define (["yaml", "app/helpers"], function(yaml, helpers) {
 
 	TestPage.prototype.next = function () {
 		clearTimeout(this.timeout);
+
+		console.log("Recording response for question " + this.currentQuestion);
+		// subject.record(this.currentQuestion.question, this.question.selectedAnswer());
+
 		this.currentQuestionIndex++;
 		this.showQuestion();
 	}

@@ -1,4 +1,4 @@
-define (["jquery"], function(jquery) {
+define (["jquery"], function($) {
 	"use strict";
 
 	var LabelLocation = {

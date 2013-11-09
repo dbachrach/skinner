@@ -1,4 +1,4 @@
-define (["app/helpers"], function(helpers) {
+define (["core/helpers"], function(helpers) {
 	"use strict";
 
 	function DistractorPage(data) {

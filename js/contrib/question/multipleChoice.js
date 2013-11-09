@@ -1,4 +1,4 @@
-define(["jquery"], function(jquery) {
+define(["jquery"], function($) {
 	"use strict";
 
 	function MultipleChoiceQuestion(question, data) {
@@ -15,6 +15,9 @@ define(["jquery"], function(jquery) {
 	    	$("#answers").append("<input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label><br />");
 	    });
 	}
+	MultipleChoiceQuestion.prototype.selectedAnswer = function() {
+		return "a";
+	};
 	
 	return MultipleChoiceQuestion;
 });
