@@ -1,0 +1,15 @@
+---
+
+dimensions:
+  Practice Type:
+    - Study Only
+    - Multiple Choice
+    - Triangle
+
+  Passage order:
+    - 1, 2
+    - 2, 1
+
+  Test order:
+    - A, B
+    - B, A

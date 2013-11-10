@@ -18,13 +18,13 @@ require(["jquery", "yaml", "core/tri", "core/experiment"], function ($, yaml, tr
 	    cache: false // Disable caching of AJAX responses
 	});
 
-    tri.login(function (subjectNumber) {
-        console.log("Subject Number " + subjectNumber + " logged in");
+    tri.login(function (subject) {
+        console.log("Subject Number " + subject + " logged in");
         // var packageData = YAML.load("config/packages.yaml");
         // tri.use(packageData["packages"]);
 
         var expData = YAML.load("config/experiment.yaml");
-        var exp = new Experiment(expData["pages"]);
+        var exp = new Experiment(expData["pages"], subject);
         exp.begin();
     });
 });

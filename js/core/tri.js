@@ -1,4 +1,4 @@
-define (["jquery", "underscore", "core/subject"], function ($, _, Subject) {
+define (["jquery", "underscore", "yaml", "core/subject"], function ($, _, yaml, Subject) {
 	"use strict";
 
 	return {
@@ -16,12 +16,21 @@ define (["jquery", "underscore", "core/subject"], function ($, _, Subject) {
 			});
 		},
 		getModule: function (name, type) {
-			//"core/page/" + pageData.type + "Page"
 			console.log("getModule: " + name + " " + type);
-			var modules = {
-				"page": { "test": "core", "text": "core", "distractor": "contrib", "countdown": "contrib" },
-				"question": { "cuedRecall": "contrib", "multipleChoice": "contrib", "triangle": "app" }
-			};
+
+			var modules = {"page": {}, "question": {}};
+			var packages = YAML.load("config/packages.yaml").packages;
+			_.each(packages, function (packageName) {
+				var pack = YAML.load("js/" + packageName + "/package.yaml");
+				_.each(pack.page, function(packagePage) {
+					modules.page[packagePage] = packageName;
+				});
+				_.each(pack.question, function(packagePage) {
+					modules.question[packagePage] = packageName;
+				});
+			})
+			console.log("modules");
+			console.log(modules);
 			return modules[type][name] + "/" +  type + "/" + name;
 		}
 	}

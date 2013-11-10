@@ -10,7 +10,7 @@ define (["jquery", "underscore", "core/helpers"], function($, _, helpers) {
 		console.log("Showing CountdownPage");
 
 		var base = this;
-		helpers.LoadLayout("countdown", ["title", "content"], this.data, function () {
+		helpers.LoadLayout("countdown", ["title", "content"], this.data, this.experiment, function () {
 			var count = base.time;
 			function countdown(val, completion) {
 				console.log("countdown with " + val);

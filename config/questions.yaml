@@ -1,4 +1,12 @@
 ---
+example:
+  - question: What is the capital of British Columbia, Canada?
+    answers:
+      - Toronto
+      - Vancouver
+      - Berlin
+    correctAnswer: b
+
 multipleChoiceQuestions-1:
   - question: What is the scientific name (genus and species) for the common domestic ferret?
     answers:

@@ -19,7 +19,7 @@ define (["require", "underscore", "yaml", "core/helpers", "core/tri"], function(
 		console.log("Showing TestPage: " + this.style);
 		
 		var base = this;
-		helpers.LoadLayout("test_" + this.style, [], base.data, function() {
+		helpers.LoadLayout("test_" + this.style, [], this.data, this.experiment, function() {
 			base.currentQuestionIndex = 0;
 			base.showQuestion();
 		});

@@ -1,0 +1,12 @@
+---
+
+name: contrib
+author: TRI
+
+page:
+  - countdown
+  - distractor
+
+question:
+  - cuedRecall
+  - multipleChoice

@@ -20,7 +20,26 @@ define (["jquery", "underscore"], function ($, _) {
 			console.log("Parsed time for " + number + ", unit: " + unit);
 			return number * unit;
 		},
-		LoadLayout: function (name, bindings, data, afterLoadHandler) {
+		// resolveDimensions: function (value) {
+		// 	var matches = value.match(/{{(.*)}}/g);
+		// 	console.log(matches);
+		// },
+		LoadLayout: function (name, bindings, data, experiment, afterLoadHandler) {
+			function resolveDimensions(value) {
+				var re = /{{(.*)}}/g;
+				var matches = re.exec(value); // TODO: Only matches once
+				if (matches) {
+					console.log(matches);
+					// _.each(matches, function (match) {
+						var x = experiment.subject.condition[matches[1]];
+						x = x.replace(" ", "");
+						value = value.replace(matches[0], x);
+					// });
+					// console.log(matches);
+				}
+				return value;
+			}
+
 			$("#page").load("layouts/pages/" + name + ".html", function() {
 				_.each(bindings.concat(["nextButton", "prevButton"]), function(binding) {
 					var field = $("#" + binding);
@@ -33,6 +52,7 @@ define (["jquery", "underscore"], function ($, _) {
 						field.show();
 					}
 					else if (bindFile) {
+						bindFile = resolveDimensions(bindFile);
 						field.load("content/" + bindFile + ".txt");
 						field.show();
 					}

@@ -41,8 +41,6 @@ define(["require", "jquery", "underscore", "core/tri"], function (require, $, _,
         }
 
         var base = this;
-
-        // TODO: Add timer for all pages
         
         var pageData = this.pages[this.currentPageIndex];
         var req = tri.getModule(pageData.type, "page");
