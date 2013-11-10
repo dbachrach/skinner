@@ -1,5 +1,4 @@
-// TODO: Use noconflict underscore
-define (["jquery", "underscore", "core/helpers"], function($, underscore, helpers) {
+define (["jquery", "underscore", "core/helpers"], function($, _, helpers) {
 	"use strict";
 
 	function CountdownPage(data, experiment) {

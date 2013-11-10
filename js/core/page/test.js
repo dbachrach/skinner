@@ -1,4 +1,4 @@
-define (["require", "yaml", "core/helpers", "core/tri"], function(require, yaml, helpers, tri) {
+define (["require", "underscore", "yaml", "core/helpers", "core/tri"], function(require, _, yaml, helpers, tri) {
 	"use strict";
 
 	function TestPage(data, experiment) {

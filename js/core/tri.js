@@ -1,4 +1,4 @@
-define (["jquery", "underscore", "core/subject"], function ($, underscore, Subject) {
+define (["jquery", "underscore", "core/subject"], function ($, _, Subject) {
 	"use strict";
 
 	return {

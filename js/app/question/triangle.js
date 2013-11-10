@@ -275,6 +275,7 @@ define (["jquery"], function($) {
 		qboard.redraw();
 	}
 	TriangleQuestion.prototype.buildBoard = function (canvas) {
+		// TODO: retina support
 	    var edge = 400.0;
 	    var xOffset = (600 - edge) / 2;
 	    var yOffset = 50.0;

@@ -1,4 +1,4 @@
-define(["require", "jquery", "core/tri"], function (require, $, tri) {
+define(["require", "jquery", "underscore", "core/tri"], function (require, $, _, tri) {
     "use strict";
 
     function Experiment(pages, subject) {

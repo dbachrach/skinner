@@ -1,13 +1,14 @@
 requirejs.config({
-    baseUrl: 'js/core/vendor',
+    baseUrl: "js/core/vendor",
     paths: {
-        app: '../../app',
-        core: '../',
-        contrib: '../../contrib'
+        app: "../../app",
+        core: "../",
+        contrib: "../../contrib"
     },
     map: {
-      '*': { 'jquery': 'jquery-private' },
-      'jquery-private': { 'jquery': 'jquery' }
+      "*": { "jquery": "jquery-private", "underscore": "underscore-private" },
+      "jquery-private": { "jquery": "jquery" },
+      "underscore-private": { "underscore": "underscore" }
     },
     urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
 });

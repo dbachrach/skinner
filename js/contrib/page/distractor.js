@@ -1,4 +1,4 @@
-define (["core/helpers"], function(helpers) {
+define (["underscore", "core/helpers"], function(_, helpers) {
 	"use strict";
 
 	function DistractorPage(data) {
