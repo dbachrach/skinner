@@ -13,3 +13,5 @@
 - Correct module loading
 - Condition options ({{}} in yaml, {{}} in txt files, yaml ifs)
 - Convert to CSV
+- Create helper apps (tri start app, tri start package)
+- Noconflict yaml parser

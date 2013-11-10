@@ -41,10 +41,9 @@ define(["require", "jquery", "underscore", "core/tri"], function (require, $, _,
         }
 
         var base = this;
-        
+
         var pageData = this.pages[this.currentPageIndex];
-        var req = tri.getModule(pageData.type, "page");
-        require([req], function (Page) {
+        tri.loadModule(pageData.type, "page", function (Page) {
             base.currentPage = new Page(pageData, base);
             base.currentPage.show();
         });

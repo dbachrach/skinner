@@ -31,8 +31,7 @@ define (["require", "underscore", "yaml", "core/helpers", "core/tri"], function(
 		}
 
 		var base = this;
-		var req = tri.getModule(this.style, "question");
-		require([req], function (Question) {
+		tri.loadModule(this.style, "question", function (Question) {
 			base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.data);
 			base.currentQuestion.show();
 		});

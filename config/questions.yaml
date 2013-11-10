@@ -7,7 +7,7 @@ example:
       - Berlin
     correctAnswer: b
 
-multipleChoiceQuestions-1:
+passage1-a:
   - question: What is the scientific name (genus and species) for the common domestic ferret?
     answers:
       - Mustela putorius furo
@@ -25,3 +25,9 @@ multipleChoiceQuestions-1:
     correctAnswer: b
     metadata:
       competitive: yes
+
+passage1-b:
+
+passage2-a:
+
+passage2-b:
