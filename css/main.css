@@ -1,7 +1,7 @@
 body {
 	background-color: #f8f8f8;
 }
-#page {
+#main {
 	width: 600px;
 	margin: 0 auto;
 	text-align: center;
@@ -50,4 +50,8 @@ body {
 	margin-top: 20px;
 	font-size: 40px;
 	width: 500px;
+}
+
+#countdown {
+	font-size: 100px;
 }

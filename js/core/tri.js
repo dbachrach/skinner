@@ -19,7 +19,7 @@ define (["jquery", "underscore", "core/subject"], function ($, underscore, Subje
 			//"core/page/" + pageData.type + "Page"
 			console.log("getModule: " + name + " " + type);
 			var modules = {
-				"page": { "test": "core", "text": "core", "distractor": "contrib" },
+				"page": { "test": "core", "text": "core", "distractor": "contrib", "countdown": "contrib" },
 				"question": { "cuedRecall": "contrib", "multipleChoice": "contrib", "triangle": "app" }
 			};
 			return modules[type][name] + "/" +  type + "/" + name;

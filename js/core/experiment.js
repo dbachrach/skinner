@@ -25,6 +25,10 @@ define(["require", "jquery", "core/tri"], function (require, $, tri) {
                     base.nextPage();
                 }
             });
+            
+            $("#prevButton").hide();
+            $("#nextButton").hide();
+
             base.currentPageIndex = 0;
             base.showPage();
         });
@@ -37,6 +41,8 @@ define(["require", "jquery", "core/tri"], function (require, $, tri) {
         }
 
         var base = this;
+
+        // TODO: Add timer for all pages
         
         var pageData = this.pages[this.currentPageIndex];
         var req = tri.getModule(pageData.type, "page");

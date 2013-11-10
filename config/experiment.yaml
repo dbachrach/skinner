@@ -5,12 +5,17 @@ pages:
   - type: text
     title: Instructions
     contentFile: instructions
+    time: 3 seconds
     nextButton: Start
 
   - type: text
     title: Passage 1
     contentFile: passage1
     nextButton: Continue
+
+  - type: countdown
+    title: You are about to start the test in...
+    time: 5 seconds
 
   - type: test
     style: multipleChoice
@@ -33,9 +38,13 @@ pages:
   - type: text
     title: Passage 2
     contentFile: passage2
+    time: 3 seconds
     nextButton: Next page
+
+  - type: countdown
+    title: You are about to start the test in...
+    time: 5 seconds
 
   - type: distractor
     exercise: tetris
     time: 9 minutes
-
