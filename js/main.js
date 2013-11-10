@@ -3,7 +3,8 @@ requirejs.config({
     paths: {
         app: "../../app",
         core: "../",
-        contrib: "../../contrib"
+        contrib: "../../contrib",
+        distr: "../../distr"
     },
     map: {
       "*": { "jquery": "jquery-private", "underscore": "underscore-private" },
@@ -20,8 +21,6 @@ require(["jquery", "yaml", "core/tri", "core/experiment"], function ($, yaml, tr
 
     tri.login(function (subject) {
         console.log("Subject Number " + subject + " logged in");
-        // var packageData = YAML.load("config/packages.yaml");
-        // tri.use(packageData["packages"]);
 
         var expData = YAML.load("config/experiment.yaml");
         var exp = new Experiment(expData["pages"], subject);

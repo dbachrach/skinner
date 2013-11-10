@@ -5,10 +5,6 @@ pages:
   - type: text
     title: Instructions
     contentFile:
-      # when PracticeType is:
-      #   - Study only: instructions-practice
-      #   - Multiple choice: instructions-multipleChoice
-      #   - Triangle: instructions-triangle
     contentFile: instructions-{{Practice Type}}
     time: 3 seconds
     nextButton: Start
@@ -18,28 +14,16 @@ pages:
     questionSet: example
     nextButton: I understand it!
 
-  - type: text
-    title: Passage 1
-    contentFile: passage1
-    nextButton: Continue
-
-  - type: countdown
-    title: You are about to start the test in...
-    time: 5 seconds
-
-  - type: test
-    style: multipleChoice
-    questionSet: multipleChoiceQuestions-1
-    time: 2 seconds
+  - task: study
 
   - type: test
     style: cuedRecall
-    questionSet: multipleChoiceQuestions-1
+    questionSet: passage1-a
     nextButton: Next
 
   - type: test
     style: triangle
-    questionSet: multipleChoiceQuestions-1
+    questionSet: passage1-a
     time: 2 seconds
     order: random
 
@@ -56,3 +40,20 @@ pages:
   - type: distractor
     exercise: tetris
     time: 9 minutes
+
+
+tasks:
+  study:
+    - type: text
+      title: Passage 1
+      contentFile: passage
+      nextButton: Continue
+
+    - type: countdown
+      title: You are about to start the test in...
+      time: 5 seconds
+
+    - type: test
+      style: multipleChoice
+      questionSet: passage1-a
+      time: 5 seconds

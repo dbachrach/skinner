@@ -274,6 +274,9 @@ define (["jquery"], function($) {
 	    var qboard = this.buildBoard(canvas);
 		qboard.redraw();
 	}
+	TriangleQuestion.prototype.selectedAnswer = function () {
+		return "TODO"; // TODO:
+	}
 	TriangleQuestion.prototype.buildBoard = function (canvas) {
 	    var edge = 400.0;
 	    var xOffset = (600 - edge) / 2;

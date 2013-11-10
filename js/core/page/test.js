@@ -6,6 +6,8 @@ define (["require", "underscore", "yaml", "core/helpers", "core/tri"], function(
 
 		this.style = data.style;
 		this.questions = questionData[data.questionSet];
+		console.log(this.questions);
+		console.log(data);
 		this.time = helpers.ParseTime(data.time);
 		this.order = data.order;
 		this.data = data;
@@ -49,8 +51,8 @@ define (["require", "underscore", "yaml", "core/helpers", "core/tri"], function(
 	TestPage.prototype.next = function () {
 		clearTimeout(this.timeout);
 
-		console.log("Recording response for question " + this.currentQuestion);
-		// subject.record(this.currentQuestion.question, this.question.selectedAnswer());
+		console.log("Recording response for question: " +  this.currentQuestion.selectedAnswer());
+		// subject.record(this.currentQuestion.question, this.currentQuestion.selectedAnswer());
 
 		this.currentQuestionIndex++;
 		this.showQuestion();

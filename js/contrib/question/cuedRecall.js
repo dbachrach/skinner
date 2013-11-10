@@ -9,6 +9,9 @@ define(["jquery"], function($) {
 	    $("#question").text(this.question.question);
 	    $("#cuedRecallAnswer").val("");
 	}
+	CuedRecallQuestion.prototype.selectedAnswer = function() {
+		return $("#cuedRecallAnswer").val();
+	};
 	
 	return CuedRecallQuestion;
 });
