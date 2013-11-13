@@ -1,7 +1,7 @@
 define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], function(require, _, yaml, helpers, tri) {
 	"use strict";
 
-	function TestPage(data, experiment) {
+	function TestPage(data, trial) {
 		var questionData = YAML.load("config/questions.yaml");
 
 		this.style = data.style;
@@ -11,7 +11,7 @@ define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], f
 		this.time = helpers.ParseTime(data.time);
 		this.order = data.order;
 		this.data = data;
-		this.experiment = experiment;
+		this.trial = trial;
 
 		this.layoutName = "test_" + this.style;
 
@@ -44,7 +44,7 @@ define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], f
 		}
 	};
 	TestPage.prototype.end = function () {
-        this.experiment.nextPage();
+        this.trial.nextPage();
     };
 
 	TestPage.prototype.next = function () {

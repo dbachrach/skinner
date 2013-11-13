@@ -1,16 +1,16 @@
 define (["jquery", "underscore", "tri/core/helpers"], function($, _, helpers) {
 	"use strict";
 
-	function CountdownPage(data, experiment) {
+	function CountdownPage(data, trial) {
 		this.data = data;
 		this.time = helpers.ParseTime(data.time);
-		this.experiment = experiment;
+		this.trial = trial;
 	}
 	CountdownPage.prototype.show = function() {
 		console.log("Showing CountdownPage");
 
 		var base = this;
-		helpers.LoadLayout("countdown", ["title", "content"], this.data, this.experiment, function () {
+		helpers.LoadLayout("countdown", ["title", "content"], this.data, this.trial, function () {
 			var count = base.time;
 			function countdown(val, completion) {
 				console.log("countdown with " + val);
@@ -28,7 +28,7 @@ define (["jquery", "underscore", "tri/core/helpers"], function($, _, helpers) {
 		});
 	};
 	CountdownPage.prototype.end = function () {
-        this.experiment.nextPage();
+        this.trial.nextPage();
     };
 
 	return CountdownPage;

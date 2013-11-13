@@ -13,30 +13,12 @@ requirejs.config({
     urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
 });
 
-require(["jquery", "yaml", "tri/core/tri", "tri/core/subject", "tri/core/experiment"], function ($, yaml, tri, Subject, Experiment) {
+require(["jquery", "yaml", "tri/core/experiment"], function ($, yaml, Experiment) {
 	$.ajaxSetup ({
 	    cache: false // Disable caching of AJAX responses
 	});
 
-    function login(callback) {
-        // TODO: Look for login type
-        $("#main").load("layouts/login.html", function () {
-            $("#loginButton").click(function () {
-                var subject = new Subject($("#subjectNumber").val());
-                callback(subject);
-            });
-        });
-    }
-
-    function experiment(subject) {
-        var expData = YAML.load("config/experiment.yaml");
-        var exp = new Experiment(expData["pages"], subject);
-        exp.begin();
-    }
-
-    login(function (subject) {
-        console.log("Subject Number " + subject + " logged in");
-
-        experiment(subject);
-    });
+    var expData = YAML.load("config/experiment.yaml");
+    var exp = new Experiment(expData);
+    exp.begin();
 });

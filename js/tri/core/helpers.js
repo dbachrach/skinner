@@ -24,7 +24,7 @@ define (["jquery", "underscore"], function ($, _) {
 		// 	var matches = value.match(/{{(.*)}}/g);
 		// 	console.log(matches);
 		// },
-		LoadLayout: function (name, bindings, data, experiment, afterLoadHandler) {
+		LoadLayout: function (name, bindings, data, trial, afterLoadHandler) {
 			
 			function resolveDimensions(value) {
 				var re = /{{(.*)}}/g;
@@ -32,7 +32,7 @@ define (["jquery", "underscore"], function ($, _) {
 				if (matches) {
 					console.log(matches);
 					// _.each(matches, function (match) {
-						var x = experiment.subject.condition[matches[1]];
+						var x = trial.subject.condition[matches[1]];
 						x = x.replace(" ", "");
 						value = value.replace(matches[0], x);
 					// });

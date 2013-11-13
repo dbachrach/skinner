@@ -1,9 +1,9 @@
 define (["tri/core/helpers"], function(helpers) {
 	"use strict";
 
-	function TextPage(data, experiment) {
+	function TextPage(data, trial) {
 		this.data = data;
-		this.experiment = experiment;
+		this.trial = trial;
 		this.bindable = ["title", "content"];
 	}
 	
