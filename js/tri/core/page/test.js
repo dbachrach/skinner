@@ -1,4 +1,4 @@
-define (["require", "underscore", "yaml", "core/helpers", "core/tri"], function(require, _, yaml, helpers, tri) {
+define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], function(require, _, yaml, helpers, tri) {
 	"use strict";
 
 	function TestPage(data, experiment) {
@@ -13,18 +13,17 @@ define (["require", "underscore", "yaml", "core/helpers", "core/tri"], function(
 		this.data = data;
 		this.experiment = experiment;
 
+		this.layoutName = "test_" + this.style;
+
 		if (this.order === "random") {
 			this.questions = _.shuffle(this.questions);
 		}
 	}
 	TestPage.prototype.show = function () {
 		console.log("Showing TestPage: " + this.style);
-		
-		var base = this;
-		helpers.LoadLayout("test_" + this.style, [], this.data, this.experiment, function() {
-			base.currentQuestionIndex = 0;
-			base.showQuestion();
-		});
+
+		this.currentQuestionIndex = 0;
+		this.showQuestion();
 	};
 	TestPage.prototype.showQuestion = function () {
 

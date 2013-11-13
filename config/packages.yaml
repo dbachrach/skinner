@@ -1,4 +1,8 @@
 packages:
-  - core
-  - contrib
-  - distr
+
+  - app
+  - tri:
+    - core
+    - contrib
+  - distr:
+    - countdown

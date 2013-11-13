@@ -1,5 +1,6 @@
 ---
 name: Erin Sparck's Triangle Experiment
+login: basic
 
 pages:
   - type: text
@@ -9,12 +10,26 @@ pages:
     time: 3 seconds
     nextButton: Start
 
-  - type: test
-    style: triangle
-    questionSet: example
-    nextButton: I understand it!
+  # - type: test
+  #   style: triangle
+  #   questionSet: example
+  #   nextButton: I understand it!
 
-  - task: study
+  # - task: study
+
+  - type: text
+    title: Passage 1
+    contentFile: passage1
+    nextButton: Continue
+
+  - type: countdown
+    title: You are about to start the test in...
+    time: 5 seconds
+
+  - type: test
+    style: multipleChoice
+    questionSet: passage1-a
+    time: 5 seconds
 
   - type: test
     style: cuedRecall
@@ -24,7 +39,7 @@ pages:
   - type: test
     style: triangle
     questionSet: passage1-a
-    time: 2 seconds
+    time: 20 seconds
     order: random
 
   - type: text

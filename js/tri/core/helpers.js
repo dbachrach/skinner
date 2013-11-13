@@ -25,6 +25,7 @@ define (["jquery", "underscore"], function ($, _) {
 		// 	console.log(matches);
 		// },
 		LoadLayout: function (name, bindings, data, experiment, afterLoadHandler) {
+			
 			function resolveDimensions(value) {
 				var re = /{{(.*)}}/g;
 				var matches = re.exec(value); // TODO: Only matches once

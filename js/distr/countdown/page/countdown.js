@@ -1,4 +1,4 @@
-define (["jquery", "underscore", "core/helpers"], function($, _, helpers) {
+define (["jquery", "underscore", "tri/core/helpers"], function($, _, helpers) {
 	"use strict";
 
 	function CountdownPage(data, experiment) {

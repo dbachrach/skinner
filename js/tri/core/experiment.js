@@ -1,4 +1,4 @@
-define(["require", "jquery", "underscore", "core/tri"], function (require, $, _, tri) {
+define(["require", "jquery", "underscore", "tri/core/tri", "tri/core/helpers"], function (require, $, _, tri, helpers) {
     "use strict";
 
     function Experiment(pages, subject) {
@@ -39,13 +39,25 @@ define(["require", "jquery", "underscore", "core/tri"], function (require, $, _,
         if (this.pages.length <= this.currentPageIndex) {
             return this.end();
         }
-
+        // TODO: Handle back button reloads a new page rather than using the old one
         var base = this;
 
         var pageData = this.pages[this.currentPageIndex];
+        console.log("loading page data");
+        console.log(pageData);
         tri.loadModule(pageData.type, "page", function (Page) {
             base.currentPage = new Page(pageData, base);
-            base.currentPage.show();
+
+            // Load layout on the page's behalf
+            var layoutName = base.currentPage.layoutName || base.currentPage.data.type;
+            console.log("Layoutname " + base.currentPage.layoutName + " " + base.currentPage.data.type + " " + layoutName)
+            var bindable = base.currentPage.bindable || [];
+            var bindContent = _.extend({}, base.currentPage.data, base.currentPage.extendedBindContent);
+            helpers.LoadLayout(layoutName, bindable, bindContent, base, function () {
+                if (_.isFunction(base.currentPage.show)) {
+                    base.currentPage.show();
+                }
+            });
         });
     };
     Experiment.prototype.previousPage = function () {
