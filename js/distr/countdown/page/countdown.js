@@ -10,7 +10,8 @@ define (["jquery", "underscore", "tri/core/helpers"], function($, _, helpers) {
 		console.log("Showing CountdownPage");
 
 		var base = this;
-		helpers.LoadLayout("countdown", ["title", "content"], this.data, this.trial, function () {
+		// TODO: Remove use of load layout
+		helpers.LoadLayout("countdown", ["title", "content"], this.data, function () {
 			var count = base.time;
 			function countdown(val, completion) {
 				console.log("countdown with " + val);

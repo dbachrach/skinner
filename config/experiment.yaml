@@ -41,8 +41,8 @@ tasks:
       time: 5 seconds
 
     - type: test
-      style: !!str {{Preparation.questionType}}
-      questionSet: passage{{NUM}}-{{OPTION}}
+      style: >{{Preparation.questionType}}
+      questionSet: passage{{NUM}}-a
       time: 5 seconds
 
   distract:
