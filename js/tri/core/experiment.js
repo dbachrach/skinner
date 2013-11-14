@@ -15,7 +15,7 @@ define(["jquery", "underscore", "tri/core/trial", "tri/core/tri"], function ($, 
     Experiment.prototype.login = function (callback) {
         var base = this;
         tri.loadModule(this.data.login.type, "login", function (Login) {
-            var loginProcess = new Login(this.data.login);
+            var loginProcess = new Login(base.data.login);
             loginProcess.start(callback);
         });
     }
