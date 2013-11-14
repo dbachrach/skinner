@@ -18,6 +18,12 @@ require(["jquery", "yaml", "tri/core/experiment"], function ($, yaml, Experiment
 	    cache: false // Disable caching of AJAX responses
 	});
 
+    // TODO: This should go somewhere else, 
+    // and also check the state of the experiment to let people leave when they are done
+    $(window).bind("beforeunload", function () {
+        return "Are you sure you want to leave? The experiment is not completed yet.";
+    });
+
     var expData = YAML.load("config/experiment.yaml");
     var exp = new Experiment(expData);
     exp.begin();
