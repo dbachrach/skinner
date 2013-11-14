@@ -50,8 +50,15 @@ define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], f
 	TestPage.prototype.next = function () {
 		clearTimeout(this.timeout);
 
-		console.log("Recording response for question: " +  this.currentQuestion.selectedAnswer());
-		// subject.record(this.currentQuestion.question, this.currentQuestion.selectedAnswer());
+		
+		if (_.isFunction(this.currentQuestion.reportAnswer)) {
+			this.currentQuestion.reportAnswer(this, this.trial.subject);
+		}
+		else {
+			console.log("Recording response for question: " +  this.currentQuestion.selectedAnswer());
+			console.log(this.trial);
+			this.trial.subject.report(this, this.currentQuestion, this.currentQuestion.selectedAnswer());
+		}
 
 		this.currentQuestionIndex++;
 		this.showQuestion();

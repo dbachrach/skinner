@@ -104,7 +104,7 @@ define (["jquery"], function($) {
 	}
 	Triangle.prototype.drawLine = function (ctx, p1, p2) {
 		ctx.lineWidth = 8;
-	    
+
 	    var gradient = ctx.createLinearGradient(p1.x, p1.y, p2.x, p2.y);
 	    gradient.addColorStop(0, p1.color);
 	    gradient.addColorStop(1, p2.color);
@@ -120,6 +120,10 @@ define (["jquery"], function($) {
 	function QuestionBoard(canvas) {
 		this.canvas = canvas;
 		this.ctx = this.canvas[0].getContext('2d');
+
+		if(window.devicePixelRatio == 2) {
+			this.ctx.scale(2, 2);
+		}
 
 		this.elements = new Array();
 
@@ -271,6 +275,16 @@ define (["jquery"], function($) {
 	    $("#question").text(this.question.question);
 
 	    var canvas = $("#questionCanvas");
+	    canvas[0].style.width = "600px";
+	    canvas[0].style.height = "450px";
+	    if(window.devicePixelRatio == 2) {
+		    canvas[0].width = 1200;
+	    	canvas[0].height = 900;
+		}
+		else {
+			canvas[0].width = 600;
+			canvas[0].height = 450;
+		}
 	    var qboard = this.buildBoard(canvas);
 		qboard.redraw();
 	}

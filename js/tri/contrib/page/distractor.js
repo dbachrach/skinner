@@ -1,12 +1,10 @@
 define (["underscore", "tri/core/helpers"], function(_, helpers) {
 	"use strict";
 
-	function DistractorPage(data) {
+	function DistractorPage(data, trial) {
 		this.data = data;
-
-		var bindData = {"content" : "You are now going to play tetris for 9 minutes."};
-		this.bindable = _.keys(bindData);
-		this.extendedBindContent = bindData;
+		this.trial = trial;
+		this.exercise = this.data.exercise;
 	}
 	
 	return DistractorPage;

@@ -5,19 +5,23 @@ define (["require", "jquery", "underscore", "yaml"], function (require, $, _, ya
 		console.log("getModule: " + name + " " + type);
 
 		// TODO: Cache this
-		var modules = {"page": {}, "question": {}};
+		var modules = {"page": {}, "question": {}, "login": {}};
 		var packages = YAML.load("config/packages.yaml").packages;
 		// TODO: This code should be cleaned up
 
 		function savePack(packageName) {
+			// TODO: Make this generic beyond question/page/login
 			console.log("opening js/" + packageName + "/package.yaml");
 			var pack = YAML.load("js/" + packageName + "/package.yaml");
 			console.log(pack);
 			_.each(pack.page, function(packagePage) {
 				modules.page[packagePage] = packageName;
 			});
-			_.each(pack.question, function(packagePage) {
-				modules.question[packagePage] = packageName;
+			_.each(pack.question, function(packageQuestion) {
+				modules.question[packageQuestion] = packageName;
+			});
+			_.each(pack.login, function(packageLogin) {
+				modules.login[packageLogin] = packageName;
 			});
 		}
 

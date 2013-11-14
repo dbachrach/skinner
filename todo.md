@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Resize buttons
+- [ ] Semantic UI everywhere
 - [ ] Fill out instructions
 - [ ] Example triangle
 - [ ] Define conditions
@@ -18,3 +18,8 @@
 - [x] Add distr to require map
 - [ ] Make page background white box
 - [ ] Add sections concept to experiment
+- [ ] Add tests
+- [ ] Move layouts into package folders
+- [ ] pretty animations?
+- [ ] write docs
+- 

@@ -10,3 +10,6 @@ page:
 question:
   - cuedRecall
   - multipleChoice
+
+login:
+  - basic

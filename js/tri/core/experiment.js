@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "tri/core/trial", "tri/core/subject"], function ($, _, Trial, Subject) {
+define(["jquery", "underscore", "tri/core/trial", "tri/core/tri"], function ($, _, Trial, tri) {
     "use strict";
 
     function Experiment(data) {
@@ -6,19 +6,17 @@ define(["jquery", "underscore", "tri/core/trial", "tri/core/subject"], function 
     }
 
     Experiment.prototype.begin = function () {
-        var _this = this;
-        this.login(function () {
-            _this.trial();
+        var base = this;
+        this.login(function (subject) {
+            base.subject = subject;
+            base.trial();
         });
     };
     Experiment.prototype.login = function (callback) {
-        // TODO: Look for login type
-        var _this = this;
-        $("#main").load("layouts/login.html", function () {
-            $("#loginButton").click(function () {
-                _this.subject = new Subject($("#subjectNumber").val());
-                if (_.isFunction(callback)) callback();
-            });
+        var base = this;
+        tri.loadModule(this.data.login.type, "login", function (Login) {
+            var loginProcess = new Login(this.data.login);
+            loginProcess.start(callback);
         });
     }
     Experiment.prototype.trial = function () {

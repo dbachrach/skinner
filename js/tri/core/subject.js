@@ -19,7 +19,16 @@ define (["underscore", "yaml"], function (_, yaml) {
 		// 	// memo[dimension] = _.sample(options); // TODO: This is random, it should be deterministic
 		// 	return 
 		// }, {});
+
+		this.reports = {};
 	}
+	Subject.prototype.report = function(page, key, value) {
+		if (!_.contains(this.reports, page)) {
+			this.reports[page] = {};
+		}
+		this.reports[page][key] = value;
+		console.log("reports." + page + "." + key + " = " + value);
+	};
 
 	return Subject;
 });
