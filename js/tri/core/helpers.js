@@ -30,11 +30,22 @@ define (["jquery", "underscore"], function ($, _) {
 				var re = /{{(.*)}}/g;
 				var matches = re.exec(value); // TODO: Only matches once
 				if (matches) {
+					console.log("matches:");
 					console.log(matches);
 					// _.each(matches, function (match) {
-						var x = trial.subject.condition[matches[1]];
-						x = x.replace(" ", "");
-						value = value.replace(matches[0], x);
+
+					var searchPath = matches[1].split(".");
+					var x;
+					if (searchPath.length == 1) {
+						if (searchPath[0] == "NUM") x = "1"; // TODO: Remove this if statement
+						else x = trial.subject.condition[searchPath[0]];
+					}
+					else if (searchPath.length == 2) {
+						x = trial.subject.condition[searchPath[0]][searchPath[1]];
+					}
+					// TODO: Generic and support more than 2 parts in the search path
+					
+					value = value.replace(matches[0], x);
 					// });
 					// console.log(matches);
 				}

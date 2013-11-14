@@ -1,67 +1,39 @@
 ---
 name: Erin Sparck's Triangle Experiment
-login: basic
+authors: [Erin Sparck, Robert Bjork, Elizabeth Bjork]
 
-pages:
-  - type: text
-    title: Instructions
-    contentFile:
-    contentFile: instructions-{{Practice Type}}
-    time: 3 seconds
-    nextButton: Start
+login: 
+  type: basic
 
-  # - type: test
-  #   style: triangle
-  #   questionSet: example
-  #   nextButton: I understand it!
 
-  # - task: study
+steps:
+  - task: prepare
 
-  - type: text
-    title: Passage 1
-    contentFile: passage1
-    nextButton: Continue
+  - task: study
+    repeat: COUNT(passages)
 
-  - type: countdown
-    title: You are about to start the test in...
-    time: 5 seconds
+  - task: distract
 
-  - type: test
-    style: multipleChoice
-    questionSet: passage1-a
-    time: 5 seconds
-
-  - type: test
-    style: cuedRecall
-    questionSet: passage1-a
-    nextButton: Next
-
-  - type: test
-    style: triangle
-    questionSet: passage1-a
-    time: 20 seconds
-    order: random
-
-  - type: text
-    title: Passage 2
-    contentFile: passage2
-    time: 3 seconds
-    nextButton: Next
-
-  - type: countdown
-    title: You are about to start the test in...
-    time: 5 seconds
-
-  - type: distractor
-    exercise: tetris
-    time: 9 minutes
+  - task: exam
 
 
 tasks:
+  prepare:
+    - type: text
+      title: Instructions
+      contentFile: instructions-{{Preparation.name}}
+      time: 3 seconds
+      nextButton: Start
+
+    - type: test
+      style: triangle
+      questionSet: example
+      nextButton: I understand it!
+
   study:
     - type: text
-      title: Passage 1
-      contentFile: passage
+      title: Passage {{NUM}}
+      contentFile: passage{{NUM}}
       nextButton: Continue
 
     - type: countdown
@@ -69,6 +41,18 @@ tasks:
       time: 5 seconds
 
     - type: test
-      style: multipleChoice
-      questionSet: passage1-a
+      style: !!str {{Preparation.questionType}}
+      questionSet: passage{{NUM}}-{{OPTION}}
       time: 5 seconds
+
+  distract:
+    - type: distractor
+      exercise: tetris
+      time: 9 minutes
+      content: You are now going to play Tetris for 9 minutes.
+
+  exam:
+    - type: test
+      style: cuedRecall
+      questionSet: passage1-a
+      nextButton: Next

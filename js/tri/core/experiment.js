@@ -20,7 +20,7 @@ define(["jquery", "underscore", "tri/core/trial", "tri/core/tri"], function ($, 
         });
     }
     Experiment.prototype.trial = function () {
-        var trial = new Trial(this.data.pages, this.subject);
+        var trial = new Trial(this.data.steps, this.data.tasks, this.subject);
         trial.begin();
     }
 

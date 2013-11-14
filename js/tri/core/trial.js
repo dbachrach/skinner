@@ -1,72 +1,58 @@
-define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers"], function ($, _, tri, helpers) {
+define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers", "tri/core/task"], function ($, _, tri, helpers, Task) {
     "use strict";
 
-    function Trial(pages, subject) {
-        this.pages = pages;
+    function Trial(steps, tasks, subject) {
+        this.steps = steps;
+        this.tasks = tasks;
         this.subject = subject;
+
+        console.log("Created trial with steps:");
+        console.log(this.steps);
     }
 
     Trial.prototype.begin = function () {
         var base = this;
         $("#main").load("layouts/trial.html", function () {
             $("#prevButton").click(function () {
-                if (_.isFunction(base.currentPage.prev)) {
-                    base.currentPage.prev();
-                }
-                else {
-                    base.previousPage();
-                }
+                base.currentStep.previousPage();
             });
             $("#nextButton").click(function () {
-                if (_.isFunction(base.currentPage.next)) {
-                    base.currentPage.next();
-                }
-                else {
-                    base.nextPage();
-                }
+                base.currentStep.nextPage();
             });
             
             $("#prevButton").hide();
             $("#nextButton").hide();
 
-            base.currentPageIndex = 0;
-            base.showPage();
+            base.currentStepIndex = 0;
+            base.showStep();
         });
     };
-    Trial.prototype.showPage = function () {
-        console.log("Show page: " + this.currentPageIndex + " of " + this.pages.length);
+    Trial.prototype.showStep = function () {
+        console.log("Show step: " + this.currentStepIndex + " of " + this.steps.length);
 
-        if (this.pages.length <= this.currentPageIndex) {
+        if (this.steps.length <= this.currentStepIndex) {
             return this.end();
         }
         // TODO: Handle back button reloads a new page rather than using the old one
         var base = this;
 
-        var pageData = this.pages[this.currentPageIndex];
-        console.log("loading page data");
-        console.log(pageData);
-        tri.loadModule(pageData.type, "page", function (Page) {
-            base.currentPage = new Page(pageData, base);
+        var stepData = this.steps[this.currentStepIndex];
+        console.log("loading step data:");
+        console.log(stepData);
 
-            // Load layout on the page's behalf
-            var layoutName = base.currentPage.layoutName || base.currentPage.data.type;
-            console.log("Layoutname " + base.currentPage.layoutName + " " + base.currentPage.data.type + " " + layoutName)
-            var bindable = base.currentPage.bindable || [];
-            var bindContent = _.extend({}, base.currentPage.data, base.currentPage.extendedBindContent);
-            helpers.LoadLayout(layoutName, bindable, bindContent, base, function () {
-                if (_.isFunction(base.currentPage.show)) {
-                    base.currentPage.show();
-                }
-            });
-        });
+        var taskData = this.tasks[stepData.task];
+        console.log("loading task data:");
+        console.log(taskData);
+        this.currentStep = new Task(this, taskData, this.subject);
+        this.currentStep.begin();
     };
-    Trial.prototype.previousPage = function () {
-        this.currentPageIndex--;
-        this.showPage();
+    Trial.prototype.previousStep = function () {
+        this.currentStepIndex--;
+        this.showStep();
     }
-    Trial.prototype.nextPage = function () {
-        this.currentPageIndex++;
-        this.showPage();
+    Trial.prototype.nextStep = function () {
+        this.currentStepIndex++;
+        this.showStep();
     }
     Trial.prototype.end = function () {
         console.log("End trial");

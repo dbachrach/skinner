@@ -1,14 +1,16 @@
 ---
 
 dimensions:
-  Practice Type:
-    - Study Only
-    - Multiple Choice
-    - Triangle
+  Preparation:
+    - name: multipleChoice
+      questionType: multipleChoice
 
-  Passage order:
-    - 1, 2
-    - 2, 1
+    - name: triangle
+      questionType: triangle
+
+  Order:
+  - 1,2
+  - 2,1
 
   Test order:
     - A, B

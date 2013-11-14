@@ -22,4 +22,5 @@
 - [ ] Move layouts into package folders
 - [ ] pretty animations?
 - [ ] write docs
+- [ ] Allow specifying module namespace in yaml
 - 
