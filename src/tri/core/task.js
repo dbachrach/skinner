@@ -48,23 +48,9 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], fun
         this.showPage();
     }
     Task.prototype.end = function () {
-        console.log("Task.end()");
         this.trial.nextStep();
     };
     Task.prototype.updateButtons = function (pageData) {
-        console.log("Task.updateButtons()");
-        // _.each(["nextButton", "prevButton"], function(button) {
-        //      var field = $("#" + button);
-        //      var bindValue = pageData[button];
-
-        //      if (bindValue) {
-        //          field.text(bindValue);
-        //          field.show();
-        //      }
-        //      else {
-        //          field.hide();
-        //      }
-        // });
         tri.loadLayoutInPackage("buttons", "src/tri/core/", pageData, "#buttons");
     }
 
