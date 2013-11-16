@@ -10,7 +10,7 @@ steps:
   - task: prepare
 
   - task: study
-    repeat: COUNT(passages)
+    repeat-with: passages
 
   - task: distract
 

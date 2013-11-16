@@ -19,8 +19,10 @@
 - [ ] Make page background white box
 - [ ] Add sections concept to experiment
 - [ ] Add tests
-- [ ] Move layouts into package folders
+- [x] Move layouts into package folders
 - [ ] pretty animations?
 - [ ] write docs
 - [ ] Allow specifying module namespace in yaml
 - [ ] Play with the triangle color palette
+- [ ] Modified YAML parser to support no {} style dictionaries
+- [ ] Observer pattern to bind events to view updates

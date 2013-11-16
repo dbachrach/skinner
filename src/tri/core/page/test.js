@@ -1,4 +1,4 @@
-define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], function(require, _, yaml, helpers, tri) {
+define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/core/tri"], function(require, _, YAML, intervals, tri) {
 	"use strict";
 
 	function TestPage(data, trial) {
@@ -8,12 +8,10 @@ define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], f
 		this.questions = questionData[data.questionSet];
 		console.log(this.questions);
 		console.log(data);
-		this.time = helpers.ParseTime(data.time);
+		this.time = intervals.parseTimeInterval(data.time);
 		this.order = data.order;
 		this.data = data;
 		this.trial = trial;
-
-		this.layoutName = "test_" + this.style;
 
 		if (this.order === "random") {
 			this.questions = _.shuffle(this.questions);
@@ -22,8 +20,11 @@ define (["require", "underscore", "yaml", "tri/core/helpers", "tri/core/tri"], f
 	TestPage.prototype.show = function () {
 		console.log("Showing TestPage: " + this.style);
 
-		this.currentQuestionIndex = 0;
-		this.showQuestion();
+		var base = this;
+		tri.loadLayout(this.style, "question", "#test", function () {
+			base.currentQuestionIndex = 0;
+			base.showQuestion();
+		});		
 	};
 	TestPage.prototype.showQuestion = function () {
 

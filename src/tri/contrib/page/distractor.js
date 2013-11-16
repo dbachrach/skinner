@@ -1,4 +1,4 @@
-define (["underscore", "tri/core/helpers"], function(_, helpers) {
+define ([], function() {
 	"use strict";
 
 	function DistractorPage(data, trial) {

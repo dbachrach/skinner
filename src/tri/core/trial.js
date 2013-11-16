@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers", "tri/core/task"], function ($, _, tri, helpers, Task) {
+define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/task"], function ($, _, tri, Task) {
     "use strict";
 
     function Trial(steps, tasks, subject) {
@@ -12,23 +12,22 @@ define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers", "tri/core/ta
 
     Trial.prototype.begin = function () {
         var base = this;
-        $("#main").load("layouts/trial.html", function () {
-            $("#prevButton").click(function () {
+
+        tri.loadLayoutInPackage("trial", "src/tri/core/", {}, "#main", function () {
+            $("#main").on("click", "#prevButton", function () {
                 base.currentStep.previousPage();
             });
-            $("#nextButton").click(function () {
+
+            $("#main").on("click", "#nextButton", function () {
                 base.currentStep.nextPage();
             });
-            
-            $("#prevButton").hide();
-            $("#nextButton").hide();
 
             base.currentStepIndex = 0;
             base.showStep();
         });
     };
     Trial.prototype.showStep = function () {
-        console.log("Show step: " + this.currentStepIndex + " of " + this.steps.length);
+        console.log("Show step: " + (this.currentStepIndex + 1) + " of " + this.steps.length);
 
         if (this.steps.length <= this.currentStepIndex) {
             return this.end();

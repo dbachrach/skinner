@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers"], function ($, _, tri, helpers) {
+define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], function ($, _, tri, helpers) {
     "use strict";
 
     function Task(trial, pages, subject) {
@@ -6,13 +6,12 @@ define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers"], function ($
         this.pages = pages;
         this.subject = subject;
     }
-
     Task.prototype.begin = function () {
         this.currentPageIndex = 0;
         this.showPage();
     };
     Task.prototype.showPage = function () {
-        console.log("Show page: " + this.currentPageIndex + " of " + this.pages.length);
+        console.log("Task.showPage() :: Show page: " + (this.currentPageIndex + 1) + " of " + this.pages.length);
 
         if (this.pages.length <= this.currentPageIndex) {
             return this.end();
@@ -22,17 +21,17 @@ define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers"], function ($
 
         var pageData = helpers.resolveData(this.pages[this.currentPageIndex], this.subject);
 
-        console.log("loading resolved page data:");
-        console.log(pageData);
         tri.loadModule(pageData.type, "page", function (Page) {
             base.currentPage = new Page(pageData, base);
 
             // Load layout on the page's behalf
             var layoutName = base.currentPage.layoutName || base.currentPage.data.type;
-            console.log("Layoutname " + base.currentPage.layoutName + " " + base.currentPage.data.type + " " + layoutName)
-            var bindable = base.currentPage.bindable || [];
+
             var bindContent = _.extend({}, base.currentPage.data, base.currentPage.extendedBindContent);
-            helpers.LoadLayout(layoutName, bindable, bindContent, function () {
+            tri.loadPageLayout(layoutName, bindContent, function () {
+
+                base.updateButtons(pageData);
+
                 if (_.isFunction(base.currentPage.show)) {
                     base.currentPage.show();
                 }
@@ -49,9 +48,25 @@ define(["jquery", "underscore", "tri/core/tri", "tri/core/helpers"], function ($
         this.showPage();
     }
     Task.prototype.end = function () {
-        console.log("End Task");
+        console.log("Task.end()");
         this.trial.nextStep();
     };
+    Task.prototype.updateButtons = function (pageData) {
+        console.log("Task.updateButtons()");
+        // _.each(["nextButton", "prevButton"], function(button) {
+        //      var field = $("#" + button);
+        //      var bindValue = pageData[button];
+
+        //      if (bindValue) {
+        //          field.text(bindValue);
+        //          field.show();
+        //      }
+        //      else {
+        //          field.hide();
+        //      }
+        // });
+        tri.loadLayoutInPackage("buttons", "src/tri/core/", pageData, "#buttons");
+    }
 
     return Task;
 });

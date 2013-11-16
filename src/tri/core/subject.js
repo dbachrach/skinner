@@ -1,4 +1,4 @@
-define (["underscore", "yaml"], function (_, yaml) {
+define (["underscore", "yaml"], function (_, YAML) {
 	"use strict";
 
 	function Subject(number) {
@@ -8,7 +8,7 @@ define (["underscore", "yaml"], function (_, yaml) {
 		this.condition = {};
 		var base = this;
 		_.each(dimensions, function (options, dimension) {
-			console.log("dim " + dimension + ": " + options);
+			// console.log("dim " + dimension + ": " + options);
 			base.condition[dimension] = _.sample(options); // TODO: This is random, it should be deterministic
 		});
 		// this.condition = _.map(dimensions, function (options, dimension) {

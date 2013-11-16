@@ -1,9 +1,9 @@
-define (["jquery", "underscore", "tri/core/helpers"], function($, _, helpers) {
+define (["jquery", "underscore", "src/tri/core/intervals"], function($, _, intervals) {
 	"use strict";
 
 	function CountdownPage(data, trial) {
 		this.data = data;
-		this.time = helpers.ParseTime(data.time);
+		this.time = intervals.parseTimeInterval(data.time);
 		this.trial = trial;
 		this.bindable = ["title", "content"];
 	}
