@@ -26,14 +26,6 @@ passage1-a:
     metadata:
       competitive: yes
 
-passage1-b:
-  - question: What is the capital of British Columbia, Canada?
-    answers:
-      - Toronto
-      - Vancouver
-      - Berlin
-    correctAnswer: b
-
 passage2-a:
   - question: What is the capital of British Columbia, Canada?
     answers:
@@ -42,10 +34,3 @@ passage2-a:
       - Berlin
     correctAnswer: b
 
-passage2-b:
-  - question: What is the capital of British Columbia, Canada?
-    answers:
-      - Toronto
-      - Vancouver
-      - Berlin
-    correctAnswer: b

@@ -1,9 +1,9 @@
 define ([], function() {
 	"use strict";
 
-	function DistractorPage(data, trial) {
+	function DistractorPage(data, task) {
 		this.data = data;
-		this.trial = trial;
+		this.task = task;
 		this.exercise = this.data.exercise;
 	}
 	

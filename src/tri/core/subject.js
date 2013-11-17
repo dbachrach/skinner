@@ -1,15 +1,17 @@
 define (["underscore", "yaml"], function (_, YAML) {
 	"use strict";
 
-	function Subject(number) {
+	function Subject(number, dimensions) {
 		this.number = number;
 		
-		var dimensions = YAML.load("config/dimensions.yaml")["dimensions"];
+		// var dimensions = YAML.load("config/dimensions.yaml")["dimensions"];
 		this.condition = {};
 		var base = this;
 		_.each(dimensions, function (options, dimension) {
 			// console.log("dim " + dimension + ": " + options);
 			base.condition[dimension] = _.sample(options); // TODO: This is random, it should be deterministic
+			console.log("Subject[" + dimension + "] = ");
+			console.log(base.condition[dimension]);
 		});
 		// this.condition = _.map(dimensions, function (options, dimension) {
 		// 	return 
@@ -22,12 +24,12 @@ define (["underscore", "yaml"], function (_, YAML) {
 
 		this.reports = {};
 	}
-	Subject.prototype.report = function(page, key, value) {
+	Subject.prototype.report = function(page, key, value, tags) {
 		if (!_.contains(this.reports, page)) {
 			this.reports[page] = {};
 		}
-		this.reports[page][key] = value;
-		console.log("reports." + page + "." + key + " = " + value);
+		this.reports[page][key] = { "value": value, "tags": tags };
+		console.log("reports." + page + "." + key + " = " + value + ", tags= " + tags);
 	};
 
 	return Subject;

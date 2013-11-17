@@ -1,10 +1,12 @@
 define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], function ($, _, tri, helpers) {
     "use strict";
 
-    function Task(trial, pages, subject) {
+    function Task(trial, pages, subject, additionalDimensionData, context) {
         this.trial = trial;
         this.pages = pages;
         this.subject = subject;
+        this.additionalDimensionData = additionalDimensionData;
+        this.context = context;
     }
     Task.prototype.begin = function () {
         this.currentPageIndex = 0;
@@ -19,7 +21,29 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], fun
         // TODO: Handle back button reloads a new page rather than using the old one
         var base = this;
 
-        var pageData = helpers.resolveData(this.pages[this.currentPageIndex], this.subject);
+        var pageData = helpers.resolveData(this.pages[this.currentPageIndex], this.subject, this.additionalDimensionData, this.context);
+
+        // TODO: Handle an unless statement
+        var skipPage = false;
+        var showStatement = pageData["show"];
+        if (showStatement) {
+            // TODO: Generalize this
+            var matches = showStatement.match(/^(.*) (.*) is "(.*)"$/);
+            // TODO: Proper chekcing all matches
+            var command = matches[1];
+            if (command === "if" && matches[1] !== matches[2]) {
+                skipPage = true;
+            }
+            else if (command === "unless" && matches[1] === matches[2]) {
+                skipPage = true;
+            }
+        }
+
+        if (skipPage) {
+            console.log("Ignoring this page.");
+            this.nextPage();
+            return;
+        }
 
         tri.loadModule(pageData.type, "page", function (Page) {
             base.currentPage = new Page(pageData, base);
@@ -38,16 +62,32 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], fun
             });
         });
     };
-    Task.prototype.previousPage = function () {
+    Task.prototype.previous = function () {
         // TODO: Handle going back from one task to the previous task
-        this.currentPageIndex--;
-        this.showPage();
+        if (_.isFunction(this.currentPage.prev)) {
+            this.currentPage.prev();
+        }
+        else {
+            this.currentPageIndex--;
+            this.showPage();
+        }
+    }
+    Task.prototype.next = function () {
+        console.log("Task::next()");
+        if (_.isFunction(this.currentPage.next)) {
+             this.currentPage.next();
+        }
+        else {
+            this.nextPage();
+        }
     }
     Task.prototype.nextPage = function () {
+        console.log("Task::nextPage()");
         this.currentPageIndex++;
         this.showPage();
     }
     Task.prototype.end = function () {
+        console.log("Task.end()");
         this.trial.nextStep();
     };
     Task.prototype.updateButtons = function (pageData) {

@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "src/tri/core/trial", "src/tri/core/tri"], function ($, _, Trial, tri) {
+define(["jquery", "underscore", "src/tri/core/subject", "src/tri/core/trial", "src/tri/core/tri"], function ($, _, Subject, Trial, tri) {
     "use strict";
 
     function Experiment(data) {
@@ -7,7 +7,9 @@ define(["jquery", "underscore", "src/tri/core/trial", "src/tri/core/tri"], funct
 
     Experiment.prototype.begin = function () {
         var base = this;
-        this.login(function (subject) {
+        this.login(function (subjectNumber) {
+            var dimensions = base.data.dimensions;
+            var subject = new Subject(subjectNumber, dimensions);
             base.trial(subject);
         });
     };

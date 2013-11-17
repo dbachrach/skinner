@@ -2,15 +2,29 @@
 name: Erin Sparck's Triangle Experiment
 authors: [Erin Sparck, Robert Bjork, Elizabeth Bjork]
 
+
 login: 
   type: basic
+
+
+dimensions:
+  Preparation:
+    - name: multipleChoice
+      questionType: multipleChoice
+
+    - name: triangle
+      questionType: triangle
+
+  Order:
+    - passageId: [1, 2]
+    - passageId: [2, 1]
 
 
 steps:
   - task: prepare
 
   - task: study
-    repeat-with: passages
+    repeat: across {{Order.passageId}}
 
   - task: distract
 
@@ -22,33 +36,33 @@ tasks:
     - type: text
       title: Instructions
       contentFile: instructions-{{Preparation.name}}
-      time: 3 seconds
       nextButton: Start
 
-    - type: test
+    - show: if {{Preparation.name}} is "triangle"
+      type: test
       style: triangle
       questionSet: example
       nextButton: I understand it!
 
   study:
     - type: text
-      title: Passage {{NUM}}
-      contentFile: passage{{NUM}}
+      title: Passage {{%%index}}
+      contentFile: passage{{%Order.passageId}}
       nextButton: Continue
 
     - type: countdown
       title: You are about to start the test in...
-      time: 5 seconds
+      time: 2 seconds
 
     - type: test
       style: >{{Preparation.questionType}}
-      questionSet: passage{{NUM}}-a
-      time: 5 seconds
+      questionSet: passage{{%Order.passageId}}-a
+      time: 2 seconds
 
   distract:
     - type: distractor
       exercise: tetris
-      time: 9 minutes
+      time: 2 seconds
       content: You are now going to play Tetris for 9 minutes.
 
   exam:

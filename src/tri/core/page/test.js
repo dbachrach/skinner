@@ -1,17 +1,19 @@
 define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/core/tri"], function(require, _, YAML, intervals, tri) {
 	"use strict";
 
-	function TestPage(data, trial) {
+	function TestPage(data, task) {
 		var questionData = YAML.load("config/questions.yaml");
 
 		this.style = data.style;
+
 		this.questions = questionData[data.questionSet];
-		console.log(this.questions);
+		console.log("this.questions");console.log(this.questions);
+		console.log("data set");console.log(data.questionSet);
 		console.log(data);
 		this.time = intervals.parseTimeInterval(data.time);
 		this.order = data.order;
 		this.data = data;
-		this.trial = trial;
+		this.task = task;
 
 		if (this.order === "random") {
 			this.questions = _.shuffle(this.questions);
@@ -21,10 +23,10 @@ define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/cor
 		console.log("Showing TestPage: " + this.style);
 
 		var base = this;
-		tri.loadLayout(this.style, "question", "#test", function () {
+		tri.loadLayout(this.style, "question", this.data, "#test", function () {
 			base.currentQuestionIndex = 0;
 			base.showQuestion();
-		});		
+		});	
 	};
 	TestPage.prototype.showQuestion = function () {
 
@@ -45,20 +47,21 @@ define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/cor
 		}
 	};
 	TestPage.prototype.end = function () {
-        this.trial.nextPage();
+		console.log("TestPage.end()");
+        this.task.nextPage();
     };
 
 	TestPage.prototype.next = function () {
 		clearTimeout(this.timeout);
 
-		
+		console.log("TestPage::next()");
 		if (_.isFunction(this.currentQuestion.reportAnswer)) {
 			this.currentQuestion.reportAnswer(this, this.trial.subject);
 		}
 		else {
 			console.log("Recording response for question: " +  this.currentQuestion.selectedAnswer());
-			console.log(this.trial);
-			this.trial.subject.report(this, this.currentQuestion, this.currentQuestion.selectedAnswer());
+			console.log(this.task);
+			this.task.subject.report(this, this.currentQuestion, this.currentQuestion.selectedAnswer());
 		}
 
 		this.currentQuestionIndex++;

@@ -6,7 +6,7 @@
 - [ ] Define conditions
 - [ ] Program how conditions work
 - [ ] Record subject's actions
-- [ ] Retina support for triangle
+- [x] Retina support for triangle
 - [ ] Make all pages support Time, and figure out a clean way to do it with test and countdown pages
 - [ ] Remove continue buttons from passages and add 9 min timer
 - [ ] Distractor page cleanup
@@ -26,3 +26,10 @@
 - [ ] Play with the triangle color palette
 - [ ] Modified YAML parser to support no {} style dictionaries
 - [ ] Observer pattern to bind events to view updates
+- [ ] Spaces in YAML Keys (like Show If)
+- [ ] Task/Page ids for reporting
+- [ ] Parser for statements like repeat across and show if/unless
+- [ ] Run content through handelbars
+- [ ] Repeat task n times and pick random from list.
+- [ ] % and %% variables should be available in templates?
+

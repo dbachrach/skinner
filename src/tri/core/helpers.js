@@ -1,15 +1,29 @@
 define (["jquery", "underscore"], function ($, _) {
 	"use strict";
 
-	function resolveData(data, subject) {
+	if (!String.prototype.endsWith) {
+        Object.defineProperty(String.prototype, 'endsWith', {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: function (searchString, position) {
+                position = position || this.length;
+                position = position - searchString.length;
+                var lastIndex = this.lastIndexOf(searchString);
+                return lastIndex !== -1 && lastIndex === position;
+            }
+        });
+    }
+
+	function resolveData(data, subject, additionalDimensionData, context) {
 		var resolvedData = {};
 		_.each(data, function (value, key) {
-			resolvedData[key] = resolveDimensions(value, subject);
+			resolvedData[key] = resolveDimensions(value, subject, additionalDimensionData, context);
 		});
 		return resolvedData;
 	}
 
-	function resolveDimensions(value, subject) {
+	function resolveDimensions(value, subject, additionalDimensionData, context) {
 		// TODO: Have to use a '>' cause of YAML for now
 		var re = />*{{(.*)}}/g;
 		var matches = re.exec(value); // TODO: Only matches once
@@ -18,16 +32,34 @@ define (["jquery", "underscore"], function ($, _) {
 			// console.log(matches);
 			// _.each(matches, function (match) {
 
+			var isInContext = false;
+			if (matches[1].startsWith("%") && !matches[1].startsWith("%%")) {
+				isInContext = true;
+				matches[1] = matches[1].substring(1); // Strip off the % character
+			}
+
 			var searchPath = matches[1].split(".");
+			console.log("searchPath");console.log(searchPath);
 			var x;
 			if (searchPath.length == 1) {
-				if (searchPath[0] == "NUM") x = "1"; // TODO: Remove this if statement
-				else x = subject.condition[searchPath[0]];
+				x = subject.condition[searchPath[0]];
+				if (!x) {
+					x = additionalDimensionData[searchPath[0]];
+				}
 			}
 			else if (searchPath.length == 2) {
 				x = subject.condition[searchPath[0]][searchPath[1]];
 			}
 			// TODO: Generic and support more than 2 parts in the search path
+
+			if (isInContext) {
+				console.log("x: " + x);
+				if (_.isUndefined(context)) {
+					console.log("ERROR: context must be defined when using %");
+				}
+				// TODO: Check for index property in context
+				x = x[context.index];
+			}
 			
 			value = value.replace(matches[0], x);
 			// });
@@ -36,7 +68,24 @@ define (["jquery", "underscore"], function ($, _) {
 		return value;
 	}
 
+	function readDimension(value, subject) {
+		// TODO: Handle across somewhere else
+		var re = /^across {{(.*)}}$/; // TODO: No 'the'
+		var matches = re.exec(value); // TODO: Only matches once
+		if (matches) {
+			var searchPath = matches[1].split(".");
+			// TODO: other lengths
+			if (searchPath.length == 2) {
+				return subject.condition[searchPath[0]][searchPath[1]];
+			}
+		}
+		else {
+			return undefined;
+		}
+	}
+
 	return {
-		resolveData: resolveData
+		"resolveData": resolveData,
+		"readDimension": readDimension
 	}
 });

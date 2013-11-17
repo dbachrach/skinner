@@ -1,4 +1,4 @@
-define (["jquery", "underscore", "src/tri/core/subject"], function($, _, Subject) {
+define (["jquery"], function($) {
 	"use strict";
 
 	function BasicLogin(data) {
@@ -6,8 +6,8 @@ define (["jquery", "underscore", "src/tri/core/subject"], function($, _, Subject
 	}
 	BasicLogin.prototype.start = function(callback) {
 	    $("#loginButton").click(function () {
-	        var subject = new Subject($("#subjectNumber").val());
-	        callback(subject);
+	        var subjectNumber = $("#subjectNumber").val();
+	        callback(subjectNumber);
 	    });
 	};
 	

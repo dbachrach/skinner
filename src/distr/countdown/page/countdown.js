@@ -1,11 +1,10 @@
 define (["jquery", "underscore", "src/tri/core/intervals"], function($, _, intervals) {
 	"use strict";
 
-	function CountdownPage(data, trial) {
+	function CountdownPage(data, task) {
 		this.data = data;
 		this.time = intervals.parseTimeInterval(data.time);
-		this.trial = trial;
-		this.bindable = ["title", "content"];
+		this.task = task;
 	}
 	CountdownPage.prototype.show = function() {
 		console.log("Showing CountdownPage");
@@ -29,7 +28,7 @@ define (["jquery", "underscore", "src/tri/core/intervals"], function($, _, inter
 		});
 	};
 	CountdownPage.prototype.end = function () {
-        this.trial.nextPage();
+        this.task.next();
     };
 
 	return CountdownPage;
