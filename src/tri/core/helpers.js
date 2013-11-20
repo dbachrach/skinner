@@ -50,7 +50,9 @@ define (["jquery", "underscore"], function ($, _) {
 				x = subject.condition[searchPath[0]][searchPath[1]];
 			}
 			// TODO: Generic and support more than 2 parts in the search path
+			// TODO: Support {{x}}...{{y}}
 
+			// TODO: Only do this if x is an array
 			if (isInContext) {
 				console.log("x: " + x);
 				if (_.isUndefined(context)) {

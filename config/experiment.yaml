@@ -8,8 +8,8 @@ login:
 
 dimensions:
   Preparation:
-    - name: multipleChoice
-      questionType: multipleChoice
+    # - name: multipleChoice
+    #   questionType: multipleChoice
     - name: triangle
       questionType: triangle
 
@@ -37,6 +37,7 @@ steps:
   - task: exam
     repeat: across {{Order.passageId}}
 
+  - task: finish
 
 tasks:
   prepare:
@@ -45,11 +46,11 @@ tasks:
       content file: instructions-{{Preparation.name}}
       next button: Start
 
-    - show: if {{Preparation.name}} is "triangle"
-      type: test
-      style: triangle
-      question set: example
-      next button: I understand it!
+    # - show: if {{Preparation.name}} is "triangle"
+    #   type: test
+    #   style: triangle
+    #   question set: example
+    #   next button: I understand it!
 
   study:
     - type: text
@@ -59,21 +60,28 @@ tasks:
 
     - type: countdown
       title: You are about to start the test in...
-      time: 2 seconds
+      time: 3 seconds
 
     - type: test
       style: {{Preparation.questionType}}
-      question set: passage{{%Order.passageId}}-{{PracticeList.practice}}
-      time: 2 seconds
+      question set: passage{{%Order.passageId}}-a
+      # time: 2 seconds
+      next button: Next
 
   distract:
     - type: distractor
       exercise: tetris
-      time: 2 seconds
-      content: You are now going to play Tetris for 9 minutes.
+      time: 4 minutes
+      content: You are now going to play Tetris for 4 minutes.
+      next button: Go!
 
   exam:
     - type: test
       style: cuedRecall
-      questions set: passage{{%Order.passageId}}-{{PracticeList.exam}}
+      question set: passage{{%Order.passageId}}-a
       next button: Next
+
+  finish:
+    - type: text
+      title: Experiment completed
+      content: Your results have been recorded.

@@ -11,7 +11,6 @@ define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/cor
 		var questionData = YAML.load("config/questions.yaml");
 
 		this.style = data.style;
-
 		this.questionSet = data["question set"];
 		this.questions = questionData[this.questionSet];
 		this.time = intervals.parseTimeInterval(data.time);
