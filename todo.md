@@ -3,28 +3,28 @@
 - [ ] Semantic UI everywhere
 - [ ] Fill out instructions
 - [ ] Example triangle
-- [ ] Define conditions
-- [ ] Program how conditions work
+- [x] Define conditions
+- [x] Program how conditions work
 - [ ] Record subject's actions
 - [x] Retina support for triangle
 - [ ] Make all pages support Time, and figure out a clean way to do it with test and countdown pages
 - [ ] Remove continue buttons from passages and add 9 min timer
 - [ ] Distractor page cleanup
 - [x] Correct module loading
-- [ ] Condition options ({{}} in yaml, {{}} in txt files, yaml ifs)
+- [x] Condition options ({{}} in yaml, {{}} in txt files, yaml ifs)
 - [ ] Convert to CSV
 - [ ] Create helper apps (tri start app, tri start package)
 - [ ] Noconflict yaml parser
 - [x] Add distr to require map
 - [ ] Make page background white box
-- [ ] Add sections concept to experiment
+- [x] Add sections concept to experiment
 - [ ] Add tests
 - [x] Move layouts into package folders
 - [ ] pretty animations?
 - [ ] write docs
 - [ ] Allow specifying module namespace in yaml
 - [ ] Play with the triangle color palette
-- [ ] Modified YAML parser to support no {} style dictionaries
+- [x] Modified YAML parser to support no {} style dictionaries
 - [ ] Observer pattern to bind events to view updates
 - [ ] Spaces in YAML Keys (like Show If)
 - [ ] Task/Page ids for reporting
@@ -32,4 +32,8 @@
 - [ ] Run content through handelbars
 - [ ] Repeat task n times and pick random from list.
 - [ ] % and %% variables should be available in templates?
-
+- [ ] Figure out how finishing works
+- [ ] Gather all 3rd party liceneses
+- [ ] Figure out r.js and how to compile all of this into a single file
+- [ ] Notes about modified yaml parser to take out inline {} mapping.
+- [ ] Create requirejs-yaml-plugin

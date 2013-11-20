@@ -422,9 +422,9 @@ YamlInline.prototype =
 			case '[':
 				result = this.parseSequence(value);
 				break;
-			case '{':
-				result = this.parseMapping(value);
-				break;
+			// case '{':
+			// 	result = this.parseMapping(value);
+			// 	break;
 			default:
 				result = this.parseScalar(value);
 		}

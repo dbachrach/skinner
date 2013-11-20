@@ -8,9 +8,8 @@
         // baseUrl: "../src",
         baseUrl: "../src/tri/core/vendor",
         paths: {
-            app: "../../../app",
-            tri: "../../../tri",
-            distr: "../../../distr"
+            "src": "../../../",
+            "content": "../../../../content"
         },
         map: {
           "*": { "jquery": "jquery-private", "underscore": "underscore-private" },
@@ -26,6 +25,7 @@
     // the `baseUrl` value supplied above.
     var testModules = [
         "tri/core/intervalsTests.js",
+        "tri/core/experimentTests.js",
         // "example/model/PegiRatingsTests.js"
     ];
 

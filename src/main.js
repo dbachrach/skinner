@@ -6,7 +6,8 @@
             // tri: "../../../tri",
             // distr: "../../../distr"
             "src": "../../../",
-            "content": "../../../../content"
+            "content": "../../../../content",
+            "config": "../../../../config"
         },
         shim: {
             "Handlebars": {
@@ -17,15 +18,17 @@
             }
         },
         map: {
-          "*": { "jquery": "jquery-private", "underscore": "underscore-private" },
+          "*": { 
+            "jquery": "jquery-private",
+            "underscore": "underscore-private"
+          },
           "jquery-private": { "jquery": "jquery" },
           "underscore-private": { "underscore": "underscore" }
         },
         urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
     });
 
-    //"hbars!src/tri/contrib/login/layout/basic"
-    require(["jquery", "yaml", "src/tri/core/experiment"], function ($, YAML, Experiment) {
+    require(["jquery", "src/tri/core/experiment", "ryaml!config/experiment"], function ($, Experiment, expData) {
     	$.ajaxSetup ({
     	    cache: false // Disable caching of AJAX responses
     	});
@@ -36,7 +39,6 @@
         //     return "Are you sure you want to leave? The experiment is not completed yet.";
         // });
 
-        var expData = YAML.load("config/experiment.yaml");
         var exp = new Experiment(expData);
         exp.begin();
 

@@ -1,5 +1,5 @@
 define(function (require) {
-	var intervals = require("./intervals");
+	var intervals = require("src/tri/core/intervals");
 	
 	QUnit.module("tri/core/intervals");
 	

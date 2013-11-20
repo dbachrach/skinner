@@ -2,7 +2,6 @@
 name: Erin Sparck's Triangle Experiment
 authors: [Erin Sparck, Robert Bjork, Elizabeth Bjork]
 
-
 login: 
   type: basic
 
@@ -11,13 +10,20 @@ dimensions:
   Preparation:
     - name: multipleChoice
       questionType: multipleChoice
-
     - name: triangle
       questionType: triangle
 
   Order:
     - passageId: [1, 2]
     - passageId: [2, 1]
+
+  PracticeList:
+    - name: A then B
+      practice: A
+      exam: B
+    - name: B then A
+      practice: B
+      exam: A
 
 
 steps:
@@ -29,34 +35,35 @@ steps:
   - task: distract
 
   - task: exam
+    repeat: across {{Order.passageId}}
 
 
 tasks:
   prepare:
     - type: text
       title: Instructions
-      contentFile: instructions-{{Preparation.name}}
-      nextButton: Start
+      content file: instructions-{{Preparation.name}}
+      next button: Start
 
     - show: if {{Preparation.name}} is "triangle"
       type: test
       style: triangle
-      questionSet: example
-      nextButton: I understand it!
+      question set: example
+      next button: I understand it!
 
   study:
     - type: text
       title: Passage {{%%index}}
-      contentFile: passage{{%Order.passageId}}
-      nextButton: Continue
+      content file: passage{{%Order.passageId}}
+      next button: Continue
 
     - type: countdown
       title: You are about to start the test in...
       time: 2 seconds
 
     - type: test
-      style: >{{Preparation.questionType}}
-      questionSet: passage{{%Order.passageId}}-a
+      style: {{Preparation.questionType}}
+      question set: passage{{%Order.passageId}}-{{PracticeList.practice}}
       time: 2 seconds
 
   distract:
@@ -68,5 +75,5 @@ tasks:
   exam:
     - type: test
       style: cuedRecall
-      questionSet: passage1-a
-      nextButton: Next
+      questions set: passage{{%Order.passageId}}-{{PracticeList.exam}}
+      next button: Next

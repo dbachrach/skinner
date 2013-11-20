@@ -81,11 +81,12 @@ define (["require", "jquery", "underscore", "yaml"], function (require, $, _, YA
     }
 
     function loadPageLayout(name, bindings, callback) {
+        var fileSuffix = " file";
         function isFileBinding(/*value,*/ key) {
-            return key.endsWith("File"); 
+            return key.endsWith(fileSuffix); 
         }
         function removeFileSuffix(key) {
-            return key.slice(0, -("File".length));
+            return key.slice(0, -(fileSuffix.length));
         }
 
         var contents = [];

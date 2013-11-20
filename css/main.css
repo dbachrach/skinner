@@ -10,6 +10,10 @@ body {
     line-height: 1.5;
 }
 
+#timer {
+	margin-top: 100px;
+}
+
 .boxed {
 	background: #fff;
 	padding: 20px;
@@ -24,7 +28,6 @@ body {
 #title {
 	font-size: 30px;
 	font-style: bold;
-	border-bottom: 1px solid #eee;
 }
 #content {
 	margin-top: 20px;

@@ -95,15 +95,26 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/task", "src/tr
         this.currentStep = new Task(this, taskData, this.subject, additionalDimensionData, context);
         this.currentStep.begin();
     };
+
+    /**
+     * Moves to the previous step.
+     */
     Trial.prototype.previousStep = function () {
         this.currentStepIndex--;
         this.showStep();
     }
+
+    /**
+     * Moves to the next step.
+     */
     Trial.prototype.nextStep = function () {
-        console.log("Trial.nextStep()");
         this.currentStepIndex++;
         this.showStep();
     }
+
+    /**
+     * Ends the trial.
+     */
     Trial.prototype.end = function () {
         console.log("End trial");
     };

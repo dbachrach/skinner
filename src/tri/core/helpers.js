@@ -24,8 +24,7 @@ define (["jquery", "underscore"], function ($, _) {
 	}
 
 	function resolveDimensions(value, subject, additionalDimensionData, context) {
-		// TODO: Have to use a '>' cause of YAML for now
-		var re = />*{{(.*)}}/g;
+		var re = /{{(.*)}}/g;
 		var matches = re.exec(value); // TODO: Only matches once
 		if (matches) {
 			// console.log("matches:");

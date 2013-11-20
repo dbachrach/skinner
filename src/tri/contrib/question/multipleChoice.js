@@ -1,8 +1,10 @@
 define(["jquery", "underscore"], function($, _) {
 	"use strict";
 
-	function MultipleChoiceQuestion(question, data) {
+	function MultipleChoiceQuestion(question, id, data) {
 		this.question = question;
+		this.question.id = id;
+		console.log("Creating question with id " + id);
 	}
 	MultipleChoiceQuestion.prototype.show = function () {
 		console.log("Showing MultipleChoiceQuestion");

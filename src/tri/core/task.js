@@ -73,7 +73,6 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], fun
         }
     }
     Task.prototype.next = function () {
-        console.log("Task::next()");
         if (_.isFunction(this.currentPage.next)) {
              this.currentPage.next();
         }
@@ -82,12 +81,10 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], fun
         }
     }
     Task.prototype.nextPage = function () {
-        console.log("Task::nextPage()");
         this.currentPageIndex++;
         this.showPage();
     }
     Task.prototype.end = function () {
-        console.log("Task.end()");
         this.trial.nextStep();
     };
     Task.prototype.updateButtons = function (pageData) {

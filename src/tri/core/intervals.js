@@ -7,6 +7,12 @@ define (["underscore"], function (_) {
     var ONE_DAY    = 24 * ONE_HOUR;
     var ONE_YEAR   = 365 * ONE_DAY;
 
+    /**
+     * Parses a string for a timer interval.
+     * For example "2 minutes" returns a time interval of 120,000 milliseconds.
+     * @param interval The string that represents a time interval.
+     * @returns The time interval in milliseconds. Returns `undefined` if parsing fails.
+     */
     function parseTimeInterval(interval) {
         if (_.isUndefined(interval)) {
             return undefined;
