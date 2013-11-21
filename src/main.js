@@ -28,7 +28,7 @@
         urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
     });
 
-    require(["jquery", "src/skinner/core/experiment", "ryaml!config/experiment"], function ($, Experiment, expData) {
+    require(["jquery", "src/skinner/core/experiment", "ryaml!config/experiment", "domReady!"], function ($, Experiment, expData) {
     	$.ajaxSetup ({
     	    cache: false // Disable caching of AJAX responses
     	});
