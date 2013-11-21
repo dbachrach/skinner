@@ -21,8 +21,7 @@ define (["require", "jquery", "underscore", "yaml"], function (require, $, _, YA
 
         function savePack(packageName) {
             // TODO: Make this generic beyond question/page/login
-            // console.log("opening src/" + packageName + "/package.yaml");
-            var pack = YAML.load("src/" + packageName + "/package.yaml");
+            var pack = YAML.load("src/" + packageName + "/_package.yaml");
             // console.log(pack);
             _.each(pack.page, function(packagePage) {
                 modules.page[packagePage] = packageName;

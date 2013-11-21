@@ -40,4 +40,4 @@
 - [x] put text focus in cued recall box
 - [ ] Make it so question classes don't have to implement id and correctAnswer parts
 - [ ] wait for document ready via requirejs
-- [ ] switch to _package.yaml
+- [x] switch to _package.yaml
