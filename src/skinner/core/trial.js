@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/task", "src/tri/core/helpers"], function ($, _, tri, Task, helpers) {
+define(["jquery", "underscore", "src/skinner/core/skinner", "src/skinner/core/task", "src/skinner/core/helpers"], function ($, _, skinner, Task, helpers) {
     "use strict";
 
     function Trial(steps, tasks, subject) {
@@ -10,7 +10,7 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/task", "src/tr
     Trial.prototype.begin = function () {
         var base = this;
 
-        tri.loadLayoutInPackage("trial", "src/tri/core/", {}, "#main", function () {
+        skinner.loadLayoutInPackage("trial", "src/skinner/core/", {}, "#main", function () {
             $("#main").on("click", "#prevButton", function () {
                 base.currentStep.previous();
             });
@@ -117,6 +117,7 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/task", "src/tr
      */
     Trial.prototype.end = function () {
         console.log("End trial");
+        this.subject.export();
     };
 
     return Trial;

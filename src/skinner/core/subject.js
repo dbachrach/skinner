@@ -24,13 +24,32 @@ define (["underscore", "yaml"], function (_, YAML) {
 
 		this.reports = {};
 	}
-	Subject.prototype.report = function(page, key, value, tags) {
-		if (!_.contains(this.reports, page)) {
+
+	/**
+	 */
+	Subject.prototype.report = function (page, id, name, value) {
+		if (!this.reports.hasOwnProperty(page)) {
 			this.reports[page] = {};
 		}
-		this.reports[page][key] = { "value": value, "tags": tags };
-		console.log("reports." + page + "." + key + " = " + value + ", tags= " + tags);
+		if (!this.reports[page].hasOwnProperty(id)) {
+			this.reports[page][id] = {};
+		}
+		this.reports[page][id][name] = value;
+		console.log("reports." + page + "." + id + "." + name + " = " + value);
 	};
+	Subject.prototype.export = function () {
+		// console.log("EXPORTS");console.log(this.reports);
+		_.each(this.reports, function (ids, page) {
+			_.each(ids, function (report, id) {
+				// console.log(report);
+				var reportString = _.reduce(report, function (memo, value, name) {
+					// console.log("reduce with " + memo + " " + value + " " + name);
+					return memo + " | " + name.toString() + ":" + value.toString();
+				}, "");
+				console.log(page.toString() + " | " + id.toString() + reportString);
+			});
+		});
+	}
 
 	return Subject;
 });

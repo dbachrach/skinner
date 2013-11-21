@@ -2,10 +2,10 @@
 example:
   - question: What is the capital of British Columbia, Canada?
     answers:
-      - Toronto
+      - Victoria
       - Vancouver
       - Berlin
-    correctAnswer: b
+    correctAnswer: a
 
 passage1-a:
   - question: What is the scientific name (genus and species) for the common domestic ferret?
@@ -29,8 +29,8 @@ passage1-a:
 passage2-a:
   - question: What is the capital of British Columbia, Canada?
     answers:
-      - Toronto
+      - Victoria
       - Vancouver
       - Berlin
-    correctAnswer: b
+    correctAnswer: a
 

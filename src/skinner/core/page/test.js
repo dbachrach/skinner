@@ -1,4 +1,4 @@
-define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/core/tri"], function(require, _, YAML, intervals, tri) {
+define (["require", "jquery", "underscore", "yaml", "src/skinner/core/intervals", "src/skinner/core/skinner"], function(require, $, _, YAML, intervals, skinner) {
 	"use strict";
 
 	function applyQuestionIds(questions) {
@@ -30,7 +30,7 @@ define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/cor
 		console.log("Showing TestPage: " + this.style);
 
 		var base = this;
-		tri.loadLayout(this.style, "question", this.data, "#test", function () {
+		skinner.loadLayout(this.style, "question", this.data, "#test", function () {
 			base.currentQuestionIndex = 0;
 			base.showQuestion();
 		});	
@@ -42,9 +42,12 @@ define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/cor
 		}
 
 		var base = this;
-		tri.loadModule(this.style, "question", function (Question) {
+		skinner.loadModule(this.style, "question", function (Question) {
 			base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.questions[base.currentQuestionIndex].id, base.data);
+			console.log("created new question"); console.log(base.currentQuestion);
+			console.log("id craeted: " + base.questions[base.currentQuestionIndex].id);
 			base.currentQuestion.show();
+			base.questionStartTime = $.now();
 		});
 
 		if (_.isNumber(this.time)) {
@@ -59,16 +62,22 @@ define (["require", "underscore", "yaml", "src/tri/core/intervals", "src/tri/cor
     };
 
 	TestPage.prototype.next = function () {
+		var questionEndTime = $.now();
+
 		clearTimeout(this.timeout);
+
+		var questionTime = questionEndTime - this.questionStartTime;
 
 		console.log("TestPage::next()");
 		if (_.isFunction(this.currentQuestion.reportAnswer)) {
-			this.currentQuestion.reportAnswer(this.id, this.trial.subject, this);
+			this.currentQuestion.reportAnswer(this.id, this.trial.subject, this, questionTime);
 		}
 		else {
 			console.log("Recording response for question: " +  this.currentQuestion.selectedAnswer());
 			console.log(this.task);
-			this.task.subject.report(this.id, this.currentQuestion.id, this.currentQuestion.selectedAnswer());
+			this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
+			this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
+			this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer);
 		}
 
 		this.currentQuestionIndex++;

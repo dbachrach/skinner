@@ -1,4 +1,4 @@
-define(["src/tri/core/subject", "src/tri/core/trial", "src/tri/core/tri"], function (Subject, Trial, tri) {
+define(["src/skinner/core/subject", "src/skinner/core/trial", "src/skinner/core/skinner"], function (Subject, Trial, skinner) {
     "use strict";
 
     /**
@@ -29,10 +29,10 @@ define(["src/tri/core/subject", "src/tri/core/trial", "src/tri/core/tri"], funct
      */
     Experiment.prototype.startLogin = function (callback) {
         var base = this;
-        tri.loadModule(this.data.login.type, "login", function (Login) {
+        skinner.loadModule(this.data.login.type, "login", function (Login) {
             var loginProcess = new Login(base.data.login);
 
-            tri.loadLayout(base.data.login.type, "login", {}, "#main", function () {
+            skinner.loadLayout(base.data.login.type, "login", {}, "#main", function () {
                 loginProcess.start(callback);
             });
         });

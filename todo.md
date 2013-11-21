@@ -37,3 +37,7 @@
 - [ ] Figure out r.js and how to compile all of this into a single file
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] Create requirejs-yaml-plugin
+- [x] put text focus in cued recall box
+- [ ] Make it so question classes don't have to implement id and correctAnswer parts
+- [ ] wait for document ready via requirejs
+- [ ] switch to _package.yaml

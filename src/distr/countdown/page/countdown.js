@@ -1,4 +1,4 @@
-define (["jquery", "underscore", "src/tri/core/intervals"], function($, _, intervals) {
+define (["jquery", "underscore", "src/skinner/core/intervals"], function($, _, intervals) {
 	"use strict";
 
 	function CountdownPage(data, task) {

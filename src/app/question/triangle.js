@@ -277,8 +277,10 @@ define (["jquery"], function($) {
 		return selectedCircles[0].answerId;
 	}
 
-	function TriangleQuestion(question, data) {
+	function TriangleQuestion(question, id, data) {
 		this.question = question;
+		this.id = id;
+		this.correctAnswer = question.correctAnswer;
 		this.pointsPerEdge = data.pointsPerEdge || 3;
 	}
 	TriangleQuestion.prototype.show = function () {

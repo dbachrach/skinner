@@ -1,11 +1,11 @@
 (function () {
     requirejs.config({
-        baseUrl: "src/tri/core/vendor",
+        baseUrl: "src/skinner/core/vendor",
         paths: {
             // app: "../../../app",
-            // tri: "../../../tri",
+            // skinner: "../../../skinner",
             // distr: "../../../distr"
-            "src": "../../../",
+            "src": "../../..",
             "content": "../../../../content",
             "config": "../../../../config"
         },
@@ -28,7 +28,7 @@
         urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
     });
 
-    require(["jquery", "src/tri/core/experiment", "ryaml!config/experiment"], function ($, Experiment, expData) {
+    require(["jquery", "src/skinner/core/experiment", "ryaml!config/experiment"], function ($, Experiment, expData) {
     	$.ajaxSetup ({
     	    cache: false // Disable caching of AJAX responses
     	});

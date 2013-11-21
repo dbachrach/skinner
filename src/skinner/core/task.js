@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], function ($, _, tri, helpers) {
+define(["jquery", "underscore", "src/skinner/core/skinner", "src/skinner/core/helpers"], function ($, _, skinner, helpers) {
     "use strict";
 
     function Task(trial, pages, subject, additionalDimensionData, context) {
@@ -45,14 +45,14 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], fun
             return;
         }
 
-        tri.loadModule(pageData.type, "page", function (Page) {
+        skinner.loadModule(pageData.type, "page", function (Page) {
             base.currentPage = new Page(pageData, base);
 
             // Load layout on the page's behalf
             var layoutName = base.currentPage.layoutName || base.currentPage.data.type;
 
             var bindContent = _.extend({}, base.currentPage.data, base.currentPage.extendedBindContent);
-            tri.loadPageLayout(layoutName, bindContent, function () {
+            skinner.loadPageLayout(layoutName, bindContent, function () {
 
                 base.updateButtons(pageData);
 
@@ -88,7 +88,7 @@ define(["jquery", "underscore", "src/tri/core/tri", "src/tri/core/helpers"], fun
         this.trial.nextStep();
     };
     Task.prototype.updateButtons = function (pageData) {
-        tri.loadLayoutInPackage("buttons", "src/tri/core/", pageData, "#buttons");
+        skinner.loadLayoutInPackage("buttons", "src/skinner/core/", pageData, "#buttons");
     }
 
     return Task;

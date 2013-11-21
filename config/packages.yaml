@@ -1,6 +1,6 @@
 packages:
   - app
-  - tri:
+  - skinner:
     - core
     - contrib
   - distr:
