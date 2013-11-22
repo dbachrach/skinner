@@ -35,7 +35,7 @@ define (["underscore", "yaml"], function (_, YAML) {
 			this.reports[page][id] = {};
 		}
 		this.reports[page][id][name] = value;
-		console.log("reports." + page + "." + id + "." + name + " = " + value);
+		// console.log("reports." + page + "." + id + "." + name + " = " + value);
 	};
 	Subject.prototype.export = function () {
 		// console.log("EXPORTS");console.log(this.reports);

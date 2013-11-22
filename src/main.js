@@ -41,7 +41,5 @@
 
         var exp = new Experiment(expData);
         exp.begin();
-
-
     });
 }());

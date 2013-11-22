@@ -1,4 +1,4 @@
-define (["require", "jquery", "underscore", "yaml", "src/skinner/core/intervals", "src/skinner/core/skinner"], function(require, $, _, YAML, intervals, skinner) {
+define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/skinner/core/skinner", "ryaml!config/questions"], function(require, $, _, intervals, skinner, questionData) {
 	"use strict";
 
 	function applyQuestionIds(questions) {
@@ -8,9 +8,10 @@ define (["require", "jquery", "underscore", "yaml", "src/skinner/core/intervals"
 	}
 
 	function TestPage(data, task) {
-		var questionData = YAML.load("config/questions.yaml");
-
-		this.style = data.style;
+		if (_.isUndefined(data)) {
+			data = {};
+		}
+		this.style = data.style || "multipleChoice";
 		this.questionSet = data["question set"];
 		this.questions = questionData[this.questionSet];
 		this.time = intervals.parseTimeInterval(data.time);
@@ -18,6 +19,7 @@ define (["require", "jquery", "underscore", "yaml", "src/skinner/core/intervals"
 		this.data = data;
 		this.task = task;
 		this.id = this.style + "-" + this.questionSet;
+		this.currentScore = 0;
 
 		applyQuestionIds(this.questions);
 		console.log("questions");console.log(this.questions);
@@ -68,6 +70,11 @@ define (["require", "jquery", "underscore", "yaml", "src/skinner/core/intervals"
 
 		var questionTime = questionEndTime - this.questionStartTime;
 
+
+		var currentQuestionScore = calculateCurrentQuestionScore();
+
+		this.currentScore += currentQuestionScore;
+
 		console.log("TestPage::next()");
 		if (_.isFunction(this.currentQuestion.reportAnswer)) {
 			this.currentQuestion.reportAnswer(this.id, this.trial.subject, this, questionTime);
@@ -76,6 +83,7 @@ define (["require", "jquery", "underscore", "yaml", "src/skinner/core/intervals"
 			console.log("Recording response for question: " +  this.currentQuestion.selectedAnswer());
 			console.log(this.task);
 			this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
+			this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
 			this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
 			this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer);
 		}
@@ -83,6 +91,22 @@ define (["require", "jquery", "underscore", "yaml", "src/skinner/core/intervals"
 		this.currentQuestionIndex++;
 		this.showQuestion();
 	}
+	TestPage.prototype.calculateCurrentQuestionScore = function() {
+		var score = undefined;
+		var question = this.currentQuestion;
+		if (_.isFunction(question.tallyScore)) {
+			score = question.tallyScore();
+		}
+		else {
+			if (question.selectedAnswer() === question.correctAnswer) {
+				score = 1;
+			}
+			else {
+				score = 0;
+			}
+		}
+		return score;
+	};
 
 	return TestPage;
 });

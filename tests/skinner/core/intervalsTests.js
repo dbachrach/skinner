@@ -1,7 +1,7 @@
 define(function (require) {
-	var intervals = require("src/tri/core/intervals");
+	var intervals = require("src/skinner/core/intervals");
 	
-	QUnit.module("tri/core/intervals");
+	QUnit.module("skinner/core/intervals");
 	
 	QUnit.test("parseTimeInterval - undefined", function () { 
 		QUnit.equal(intervals.parseTimeInterval(), undefined);

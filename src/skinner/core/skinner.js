@@ -1,4 +1,4 @@
-define (["require", "jquery", "underscore", "yaml"], function (require, $, _, YAML) {
+define (["require", "jquery", "underscore", "ryaml!config/packages"], function (require, $, _, packageData) {
     "use strict";
 
     if (!String.prototype.startsWith) {
@@ -13,45 +13,51 @@ define (["require", "jquery", "underscore", "yaml"], function (require, $, _, YA
       });
     }
 
-    function getModulePackage(name, type) {
-        // TODO: Cache this
-        var modules = {"page": {}, "question": {}, "login": {}};
-        var packages = YAML.load("config/packages.yaml").packages;
+    function loadModuleDefinitions(callback) {
         // TODO: This code should be cleaned up
 
-        function savePack(packageName) {
-            // TODO: Make this generic beyond question/page/login
-            var pack = YAML.load("src/" + packageName + "/_package.yaml");
-            // console.log(pack);
-            _.each(pack.page, function(packagePage) {
-                modules.page[packagePage] = packageName;
-            });
-            _.each(pack.question, function(packageQuestion) {
-                modules.question[packageQuestion] = packageName;
-            });
-            _.each(pack.login, function(packageLogin) {
-                modules.login[packageLogin] = packageName;
-            });
-        }
-
-        _.each(packages, function (pack) {
+        var packs = [];
+        _.each(packageData.packages, function (pack) {
             if (_.isObject(pack)) {
                 _.each(pack, function (packageNames, parentPackageName) {
-                    // console.log(parentPackageName);
-                    // console.log(packageNames);
                     _.each(packageNames, function (packageName) {
-                        savePack(parentPackageName + "/" + packageName);
+                        packs.push(parentPackageName + "/" + packageName);
                     });
                 });
             }
             else {
-                savePack(pack);
+                packs.push(pack);
             }
         });
-        // console.log("searching modules for `" + type + "` `" + name + "`");
-        // console.log("modules");
-        // console.log(modules);
-        return "src" + "/" + modules[type][name] + "/" +  type + "/";
+
+        function ryamlify(p) {
+            return "ryaml!src/" + p + "/_package";
+        }
+
+        require(_.map(packs, ryamlify), function () {
+            var modules = {"page": {}, "question": {}, "login": {}};
+            _.each(arguments, function (pack, index) {
+                var packageName = packs[index];
+                _.each(pack.page, function(packagePage) {
+                    modules.page[packagePage] = packageName;
+                });
+                _.each(pack.question, function(packageQuestion) {
+                    modules.question[packageQuestion] = packageName;
+                });
+                _.each(pack.login, function(packageLogin) {
+                    modules.login[packageLogin] = packageName;
+                });
+            });
+
+            callback(modules);
+        });
+    }
+
+    function getModulePackage(name, type, callback) {
+        loadModuleDefinitions(function (modules) {
+            var modulePackage = "src" + "/" + modules[type][name] + "/" +  type + "/";
+            callback(modulePackage);
+        });
     }
 
     function loadModuleInPackage(name, pkg, callback) {
@@ -60,9 +66,10 @@ define (["require", "jquery", "underscore", "yaml"], function (require, $, _, YA
     }
 
     function loadModule(name, type, callback) {
-        var modulePackage = getModulePackage(name, type);
-        console.log("looking for `" + name + "` module in module package `", modulePackage + "`");
-        return loadModuleInPackage(name, modulePackage, callback);
+        getModulePackage(name, type, function (modulePackage) {
+            console.log("looking for `" + name + "` module in module package `", modulePackage + "`");
+            loadModuleInPackage(name, modulePackage, callback);
+        });
     }
 
     function srcPathForModule(modulePackage, moduleName) {
@@ -74,9 +81,10 @@ define (["require", "jquery", "underscore", "yaml"], function (require, $, _, YA
     }
 
     function loadLayout(name, type, bindings, selector, callback) {
-        var modulePackage = getModulePackage(name, type);
-        console.log("looking for layout `" + name + "` in module package `", modulePackage + "`");
-        return loadLayoutInPackage(name, modulePackage, bindings, selector, callback);
+        getModulePackage(name, type, function (modulePackage) {
+            console.log("looking for layout `" + name + "` in module package `", modulePackage + "`");
+            loadLayoutInPackage(name, modulePackage, bindings, selector, callback);
+        });
     }
 
     function loadPageLayout(name, bindings, callback) {
@@ -118,9 +126,9 @@ define (["require", "jquery", "underscore", "yaml"], function (require, $, _, YA
     }
 
     return {
-        "loadModule": loadModule,
-        "loadLayout": loadLayout,
-        "loadPageLayout": loadPageLayout,
-        "loadLayoutInPackage" : loadLayoutInPackage
+        loadModule: loadModule,
+        loadLayout: loadLayout,
+        loadPageLayout: loadPageLayout,
+        loadLayoutInPackage: loadLayoutInPackage
     };
 });

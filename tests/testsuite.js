@@ -6,13 +6,25 @@
     // folder.
     requirejs.config({
         // baseUrl: "../src",
-        baseUrl: "../src/tri/core/vendor",
+        baseUrl: "../src/skinner/core/vendor",
         paths: {
-            "src": "../../../",
-            "content": "../../../../content"
+            "src": "../../..",
+            "content": "../../../../content",
+            "config": "../../../../config"
+        },
+        shim: {
+            "Handlebars": {
+                exports: "Handlebars"
+            },
+            "yaml": {
+                exports: "YAML"
+            }
         },
         map: {
-          "*": { "jquery": "jquery-private", "underscore": "underscore-private" },
+          "*": { 
+            "jquery": "jquery-private",
+            "underscore": "underscore-private"
+          },
           "jquery-private": { "jquery": "jquery" },
           "underscore-private": { "underscore": "underscore" }
         },
@@ -24,8 +36,9 @@
     // extension so RequireJS resolves them as relative paths rather than using
     // the `baseUrl` value supplied above.
     var testModules = [
-        "tri/core/intervalsTests.js",
-        "tri/core/experimentTests.js",
+        "skinner/core/intervalsTests.js",
+        "skinner/core/experimentTests.js",
+        "skinner/core/testPageTests.js",
         // "example/model/PegiRatingsTests.js"
     ];
 

@@ -5,7 +5,7 @@
 - [ ] Example triangle
 - [x] Define conditions
 - [x] Program how conditions work
-- [ ] Record subject's actions
+- [x] Record subject's actions
 - [x] Retina support for triangle
 - [ ] Make all pages support Time, and figure out a clean way to do it with test and countdown pages
 - [ ] Remove continue buttons from passages and add 9 min timer
@@ -41,3 +41,8 @@
 - [ ] Make it so question classes don't have to implement id and correctAnswer parts
 - [x] wait for document ready via requirejs
 - [x] switch to _package.yaml
+- [ ] feedback: final score
+- [ ] different question types for a question set
+- [ ] only load package layout at startup
+- [ ] skinner.js to loader.js
+- [ ] make loadmoduledefinitions remember its state

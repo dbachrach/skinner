@@ -27,6 +27,8 @@ define(["text", "yaml"], function (text, YAML) {
                         onload();
                     } else {
                         // We store the compiled template for reuse
+                        console.log("Yaml");console.log(YAML);
+                        console.log("Source " + source);
                         buildMap[moduleName] = YAML.parse(source);
                         onload(buildMap[moduleName]);
                     }
