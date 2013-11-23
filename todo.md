@@ -45,4 +45,4 @@
 - [ ] different question types for a question set
 - [ ] only load package layout at startup
 - [ ] skinner.js to loader.js
-- [ ] make loadmoduledefinitions remember its state
+- [x] make loadmoduledefinitions remember its state

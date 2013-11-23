@@ -13,45 +13,57 @@ define (["require", "jquery", "underscore", "ryaml!config/packages"], function (
       });
     }
 
-    function loadModuleDefinitions(callback) {
-        // TODO: This code should be cleaned up
-
-        var packs = [];
-        _.each(packageData.packages, function (pack) {
-            if (_.isObject(pack)) {
-                _.each(pack, function (packageNames, parentPackageName) {
-                    _.each(packageNames, function (packageName) {
-                        packs.push(parentPackageName + "/" + packageName);
-                    });
-                });
-            }
-            else {
-                packs.push(pack);
-            }
-        });
+    var loadModuleDefinitions = function () {
+        var modules = undefined;
 
         function ryamlify(p) {
             return "ryaml!src/" + p + "/_package";
         }
 
-        require(_.map(packs, ryamlify), function () {
-            var modules = {"page": {}, "question": {}, "login": {}};
-            _.each(arguments, function (pack, index) {
-                var packageName = packs[index];
-                _.each(pack.page, function(packagePage) {
-                    modules.page[packagePage] = packageName;
+        function internalLoadModuleDefinitions(callback) {
+            if (!_.isUndefined(modules)) {
+                console.log("Early finding modules");
+                callback(modules);
+            }
+            else {
+                var packs = [];
+                _.each(packageData.packages, function (pack) {
+                    if (_.isObject(pack)) {
+                        _.each(pack, function (packageNames, parentPackageName) {
+                            _.each(packageNames, function (packageName) {
+                                packs.push(parentPackageName + "/" + packageName);
+                            });
+                        });
+                    }
+                    else {
+                        packs.push(pack);
+                    }
                 });
-                _.each(pack.question, function(packageQuestion) {
-                    modules.question[packageQuestion] = packageName;
-                });
-                _.each(pack.login, function(packageLogin) {
-                    modules.login[packageLogin] = packageName;
-                });
-            });
 
-            callback(modules);
-        });
-    }
+                require(_.map(packs, ryamlify), function () {
+                    var createdModules = {"page": {}, "question": {}, "login": {}};
+                    _.each(arguments, function (pack, index) {
+                        var packageName = packs[index];
+                        _.each(pack.page, function(packagePage) {
+                            createdModules.page[packagePage] = packageName;
+                        });
+                        _.each(pack.question, function(packageQuestion) {
+                            createdModules.question[packageQuestion] = packageName;
+                        });
+                        _.each(pack.login, function(packageLogin) {
+                            createdModules.login[packageLogin] = packageName;
+                        });
+                    });
+
+                    modules = createdModules;
+
+                    callback(modules);
+                });
+            }
+        }
+
+        return internalLoadModuleDefinitions;
+    }();
 
     function getModulePackage(name, type, callback) {
         loadModuleDefinitions(function (modules) {

@@ -71,7 +71,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 		var questionTime = questionEndTime - this.questionStartTime;
 
 
-		var currentQuestionScore = calculateCurrentQuestionScore();
+		var currentQuestionScore = this.calculateCurrentQuestionScore();
 
 		this.currentScore += currentQuestionScore;
 
