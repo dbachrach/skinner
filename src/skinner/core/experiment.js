@@ -1,5 +1,5 @@
-// `experiment` dependencies: subject, trial, skinner
-define(["src/skinner/core/subject", "src/skinner/core/trial", "src/skinner/core/skinner"], function (Subject, Trial, skinner) {
+// `experiment` dependencies: subject, trial, loader
+define(["src/skinner/core/subject", "src/skinner/core/trial", "src/skinner/core/loader"], function (Subject, Trial, loader) {
     "use strict";
 
     // ## Experiment
@@ -35,10 +35,10 @@ define(["src/skinner/core/subject", "src/skinner/core/trial", "src/skinner/core/
      */
     Experiment.prototype.startLogin = function (callback) {
         var base = this;
-        skinner.loadModule(this.data.login.type, "login", function (Login) {
+        loader.loadModule(this.data.login.type, "login", function (Login) {
             var loginProcess = new Login(base.data.login);
 
-            skinner.loadLayout(base.data.login.type, "login", {}, "#main", function () {
+            loader.loadLayout(base.data.login.type, "login", {}, "#main", function () {
                 loginProcess.start(callback);
             });
         });

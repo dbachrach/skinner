@@ -1,4 +1,4 @@
-define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/skinner/core/skinner", "ryaml!config/questions"], function(require, $, _, intervals, skinner, questionData) {
+define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/skinner/core/loader", "ryaml!config/questions"], function(require, $, _, intervals, loader, questionData) {
 	"use strict";
 
 	function applyQuestionIds(questions) {
@@ -32,7 +32,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 		console.log("Showing TestPage: " + this.style);
 
 		var base = this;
-		skinner.loadLayout(this.style, "question", this.data, "#test", function () {
+		loader.loadLayout(this.style, "question", this.data, "#test", function () {
 			base.currentQuestionIndex = 0;
 			base.showQuestion();
 		});	
@@ -44,7 +44,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 		}
 
 		var base = this;
-		skinner.loadModule(this.style, "question", function (Question) {
+		loader.loadModule(this.style, "question", function (Question) {
 			base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.questions[base.currentQuestionIndex].id, base.data);
 			console.log("created new question"); console.log(base.currentQuestion);
 			console.log("id craeted: " + base.questions[base.currentQuestionIndex].id);

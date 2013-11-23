@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "src/skinner/core/skinner", "src/skinner/core/helpers"], function ($, _, skinner, helpers) {
+define(["jquery", "underscore", "src/skinner/core/loader", "src/skinner/core/helpers"], function ($, _, loader, helpers) {
     "use strict";
 
     function Task(trial, pages, subject, additionalDimensionData, context) {
@@ -45,14 +45,14 @@ define(["jquery", "underscore", "src/skinner/core/skinner", "src/skinner/core/he
             return;
         }
 
-        skinner.loadModule(pageData.type, "page", function (Page) {
+        loader.loadModule(pageData.type, "page", function (Page) {
             base.currentPage = new Page(pageData, base);
 
             // Load layout on the page's behalf
             var layoutName = base.currentPage.layoutName || base.currentPage.data.type;
 
             var bindContent = _.extend({}, base.currentPage.data, base.currentPage.extendedBindContent);
-            skinner.loadPageLayout(layoutName, bindContent, function () {
+            loader.loadPageLayout(layoutName, bindContent, function () {
 
                 base.updateButtons(pageData);
 
@@ -88,7 +88,7 @@ define(["jquery", "underscore", "src/skinner/core/skinner", "src/skinner/core/he
         this.trial.nextStep();
     };
     Task.prototype.updateButtons = function (pageData) {
-        skinner.loadLayoutInPackage("buttons", "src/skinner/core/", pageData, "#buttons");
+        loader.loadLayoutInPackage("buttons", "src/skinner/core/", pageData, "#buttons");
     }
 
     return Task;

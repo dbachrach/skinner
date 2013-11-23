@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "src/skinner/core/skinner", "src/skinner/core/task", "src/skinner/core/helpers"], function ($, _, skinner, Task, helpers) {
+define(["jquery", "underscore", "src/skinner/core/loader", "src/skinner/core/task", "src/skinner/core/helpers"], function ($, _, loader, Task, helpers) {
     "use strict";
 
     function Trial(steps, tasks, subject) {
@@ -10,7 +10,7 @@ define(["jquery", "underscore", "src/skinner/core/skinner", "src/skinner/core/ta
     Trial.prototype.begin = function () {
         var base = this;
 
-        skinner.loadLayoutInPackage("trial", "src/skinner/core/", {}, "#main", function () {
+        loader.loadLayoutInPackage("trial", "src/skinner/core/", {}, "#main", function () {
             $("#main").on("click", "#prevButton", function () {
                 base.currentStep.previous();
             });

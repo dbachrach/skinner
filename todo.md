@@ -44,5 +44,5 @@
 - [ ] feedback: final score
 - [ ] different question types for a question set
 - [ ] only load package layout at startup
-- [ ] skinner.js to loader.js
+- [x] skinner.js to loader.js
 - [x] make loadmoduledefinitions remember its state

@@ -22,12 +22,12 @@ define(["text", "yaml"], function (text, YAML) {
                         // TODO: ???
                         // We store the precompiled template so we can use the
                         // handlebars.runtime after build.
-                        buildMap[moduleName] = YAML.parse(source);
+                        // buildMap[moduleName] = YAML.parse(source);
                         // Don't bother doing anything else during build.
                         onload();
                     } else {
                         // We store the compiled template for reuse
-                        console.log("Yaml");console.log(YAML);
+                        // console.log("Yaml");console.log(YAML);
                         console.log("Source " + source);
                         buildMap[moduleName] = YAML.parse(source);
                         onload(buildMap[moduleName]);
