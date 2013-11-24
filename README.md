@@ -11,6 +11,6 @@ Created by Dustin Bachrach and Erin Sparck.
 - [Underscore.js](http://underscorejs.org)
 - [Handlebars](http://handlebarsjs.com)
 - [yaml.js](https://github.com/jeremyfa/yaml.js) by Jérémy Faivre
-- [require-css](https://github.com/martinsb/require-css) by Martins Barinskis
+- [simple-require-css](https://github.com/dbachrach/simple-require-css) by Dustin Bachrach
 - [require-yaml](https://github.com/dbachrach/require-yaml) by Dustin Bachrach
 - [requirejs-handlebars](https://github.com/jfparadis/requirejs-handlebars)
