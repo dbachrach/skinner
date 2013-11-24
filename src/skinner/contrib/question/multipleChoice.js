@@ -15,7 +15,8 @@ define(["jquery", "underscore"], function($, _) {
 
 	    _.each(this.question.answers, function (answer, i) {
 	    	var answerText = String.fromCharCode(65 + i) + ") " + answer;
-	    	$("#answers").append("<input class='ui radio checkbox' type='radio' name='questionAnswer' id='questionAnswer-" + i + "' value='" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label><br />");
+	    	//$("#answers").append("<input class='ui radio checkbox' type='radio' name='questionAnswer' id='questionAnswer-" + i + "' value='" + i + "' /><label for='questionAnswer-" + i + "'>" + answerText + "</label><br />");
+	    	$("#answers").append("<div class='field'><div class='ui large radio checkbox'><input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' value='" + i + "'><label>" + answerText + "</label></div></div>");
 	    });
 	}
 	MultipleChoiceQuestion.prototype.selectedAnswer = function() {

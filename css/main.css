@@ -1,72 +1,22 @@
+
 body {
 	background-color: #f8f8f8;
 }
+
 #main {
-	width: 600px;
-	margin: 0 auto;
+	width: 750px;
+	margin: 50px auto;
 	text-align: center;
 	color: #222;
 	font-family: "PT Serif", Georgia, Times, "Times New Roman", serif;
-    line-height: 1.5;
+    line-height: 1.4;
 }
 
-#timer {
-	margin-top: 100px;
-}
-
-.boxed {
-	background: #fff;
-	padding: 20px;
-	box-shadow: 0px 0px 15px 0px rgba(0,0,0, .2);
-	border-radius: 6px;
-	margin-top: 20px;
-}
-
-/*
-	TextPage
-*/
-#title {
-	font-size: 30px;
-	font-style: bold;
-}
-#content {
-	margin-top: 20px;
+/**
+ * Styling for rendered content from a file or from YAML.
+ * Maintains line spacing.
+ */
+.rendered-content {
 	text-align: left;
 	white-space: pre-line;
-}
-#buttons {
-	margin-top: 20px;
-}
-
-input[type=button] {
-	font-size: 20px;
-}
-
-#question {
-	margin-top: 50px;
-	font-size: 30px;
-	font-style: italic;
-}
-
-#triangleCanvas {
-    margin: 20px auto;
-}
-
-#answers {
-	margin-top: 20px;
-	text-align: left;
-}
-#answers label {
-	margin-left: 4px;
-	margin-right: 20px;
-}
-
-#cuedRecallAnswer {
-	margin-top: 20px;
-	font-size: 40px;
-	width: 500px;
-}
-
-#countdown {
-	font-size: 100px;
 }

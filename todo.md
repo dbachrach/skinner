@@ -43,6 +43,11 @@
 - [x] switch to _package.yaml
 - [ ] feedback: final score
 - [ ] different question types for a question set
-- [ ] only load package layout at startup
+- [x] only load package layout at startup
 - [x] skinner.js to loader.js
 - [x] make loadmoduledefinitions remember its state
+- [ ] load css for modules
+- [ ] turn off reporting for an individual tests
+- [ ] Multiple choice option: Show A/B/C/etc
+- [ ] Modify css.js
+- [ ] Test questions should use handlebars

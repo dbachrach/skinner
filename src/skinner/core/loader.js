@@ -92,6 +92,10 @@ define (["require", "jquery", "underscore", "ryaml!config/packages"], function (
         return "hbars!" + modulePackage + "layout/" + name;
     }
 
+    function cssPathForModule(modulePackage, name) {
+        return "css!" + modulePackage + "layout/" + name + ".css";
+    }
+
     function loadLayout(name, type, bindings, selector, callback) {
         getModulePackage(name, type, function (modulePackage) {
             console.log("looking for layout `" + name + "` in module package `", modulePackage + "`");
@@ -129,8 +133,9 @@ define (["require", "jquery", "underscore", "ryaml!config/packages"], function (
 
     function loadLayoutInPackage(name, pkg, bindings, selector, callback) {
         var layoutPath = layoutPathForModule(pkg, name);
+        var cssPath = cssPathForModule(pkg, name);
 
-        require([layoutPath], function (template) {
+        require([layoutPath, cssPath], function (template) {
             var result = template(bindings);
             $(selector).html(result);
             if (callback) callback();
