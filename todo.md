@@ -1,6 +1,6 @@
 # TODO
 
-- [ ] Semantic UI everywhere
+- [x] Semantic UI everywhere
 - [ ] Fill out instructions
 - [ ] Example triangle
 - [x] Define conditions
@@ -46,8 +46,9 @@
 - [x] only load package layout at startup
 - [x] skinner.js to loader.js
 - [x] make loadmoduledefinitions remember its state
-- [ ] load css for modules
+- [x] load css for modules
 - [ ] turn off reporting for an individual tests
-- [ ] Multiple choice option: Show A/B/C/etc
+- [x] Multiple choice option: Show A/B/C/etc
 - [ ] Modify css.js
 - [ ] Test questions should use handlebars
+- [ ] non bold headers
