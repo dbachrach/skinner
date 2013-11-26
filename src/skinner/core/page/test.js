@@ -25,6 +25,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 		this.data = data;
 		this.task = task;
 		this.id = this.style + "-" + this.questionSet;
+		this.reportResults = data.reportResults || true;
 		this.currentScore = 0;
 		this.currentMaxScore = 0;
 
@@ -79,11 +80,13 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 		this.currentScore += currentQuestionScore;
 		this.currentMaxScore += currentQuestionMaxScore;
 
-		this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
-		this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer());
-		this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
-		this.task.subject.report(this.id, this.currentQuestion.id, "max score", currentQuestionMaxScore);
-		this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
+		if (this.reportResults) {
+			this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
+			this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer());
+			this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
+			this.task.subject.report(this.id, this.currentQuestion.id, "max score", currentQuestionMaxScore);
+			this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
+		}
 
 		this.currentQuestionIndex++;
 		this.showQuestion();

@@ -47,7 +47,7 @@
 - [x] skinner.js to loader.js
 - [x] make loadmoduledefinitions remember its state
 - [x] load css for modules
-- [ ] turn off reporting for an individual tests
+- [x] turn off reporting for an individual tests
 - [x] Multiple choice option: Show A/B/C/etc
 - [ ] Modify css.js
 - [x] Test questions should use handlebars
