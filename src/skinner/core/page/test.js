@@ -1,6 +1,12 @@
 define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/skinner/core/loader", "ryaml!config/questions"], function(require, $, _, intervals, loader, questionData) {
 	"use strict";
 
+	var states = {
+		PreTest: 0,
+		Test: 1,
+		PostTest: 2
+	}
+
 	function applyQuestionIds(questions) {
 		_.each(questions, function (question, index) {
 			question.id = index.toString();
@@ -20,6 +26,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 		this.task = task;
 		this.id = this.style + "-" + this.questionSet;
 		this.currentScore = 0;
+		this.currentMaxScore = 0;
 
 		applyQuestionIds(this.questions);
 		console.log("questions");console.log(this.questions);
@@ -31,11 +38,9 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 	TestPage.prototype.show = function () {
 		console.log("Showing TestPage: " + this.style);
 
-		var base = this;
-		loader.loadLayout(this.style, "question", this.data, "#test", function () {
-			base.currentQuestionIndex = 0;
-			base.showQuestion();
-		});	
+		// base.state = states.Test;
+		this.currentQuestionIndex = 0;
+		this.showQuestion();
 	};
 	TestPage.prototype.showQuestion = function () {
 
@@ -45,9 +50,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 
 		var base = this;
 		loader.loadModule(this.style, "question", function (Question) {
-			base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.questions[base.currentQuestionIndex].id, base.data);
-			console.log("created new question"); console.log(base.currentQuestion);
-			console.log("id craeted: " + base.questions[base.currentQuestionIndex].id);
+			base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.questions[base.currentQuestionIndex].id, base.data, base.style);
 			base.currentQuestion.show();
 			base.questionStartTime = $.now();
 		});
@@ -59,7 +62,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 		}
 	};
 	TestPage.prototype.end = function () {
-		console.log("TestPage.end()");
+		console.log("Scored " + this.currentScore + " out of " + this.currentMaxScore);
         this.task.nextPage();
     };
 
@@ -70,43 +73,22 @@ define (["require", "jquery", "underscore", "src/skinner/core/intervals", "src/s
 
 		var questionTime = questionEndTime - this.questionStartTime;
 
-
-		var currentQuestionScore = this.calculateCurrentQuestionScore();
+		var currentQuestionScore = this.currentQuestion.tallyScore();
+		var currentQuestionMaxScore = this.currentQuestion.maxScore();
 
 		this.currentScore += currentQuestionScore;
+		this.currentMaxScore += currentQuestionMaxScore;
 
-		console.log("TestPage::next()");
-		if (_.isFunction(this.currentQuestion.reportAnswer)) {
-			this.currentQuestion.reportAnswer(this.id, this.trial.subject, this, questionTime);
-		}
-		else {
-			console.log("Recording response for question: " +  this.currentQuestion.selectedAnswer());
-			console.log(this.task);
-			this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
-			this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
-			this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
-			this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer);
-		}
+		this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
+		this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer());
+		this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
+		this.task.subject.report(this.id, this.currentQuestion.id, "max score", currentQuestionMaxScore);
+		this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
 
 		this.currentQuestionIndex++;
 		this.showQuestion();
 	}
-	TestPage.prototype.calculateCurrentQuestionScore = function() {
-		var score = undefined;
-		var question = this.currentQuestion;
-		if (_.isFunction(question.tallyScore)) {
-			score = question.tallyScore();
-		}
-		else {
-			if (question.selectedAnswer() === question.correctAnswer) {
-				score = 1;
-			}
-			else {
-				score = 0;
-			}
-		}
-		return score;
-	};
+
 
 	return TestPage;
 });

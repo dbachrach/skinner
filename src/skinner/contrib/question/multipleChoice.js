@@ -1,29 +1,22 @@
-define(["jquery", "underscore"], function($, _) {
+define(["jquery", "src/skinner/core/question", "Handlebars"], function($, Question, Handlebars) {
 	"use strict";
 
-	function MultipleChoiceQuestion(question, id, data) {
-		this.question = question;
-		this.id = id;
-		this.correctAnswer = question.correctAnswer;
-		this.showAnswerLabels = data.showAnswerLabels || true;
-		console.log("Creating question with id " + id);
-	}
-	MultipleChoiceQuestion.prototype.show = function () {
-		console.log("Showing MultipleChoiceQuestion");
-	    $("#question").text(this.question.question);
+	var MultipleChoiceQuestion = Question.extend({
+		init: function (data, id, testData, style) {
+			this._super(data, id, testData, style);
 
-	    $("#answers").empty();
-
-	    var base = this;
-	    _.each(this.question.answers, function (answer, i) {
-	    	var answerLabel = base.showAnswerLabels ? String.fromCharCode(65 + i) + ") " : "";
-	    	var answerText = answerLabel + answer;
-	    	$("#answers").append("<div class='field'><div class='ui large radio checkbox'><input type='radio' name='questionAnswer' id='questionAnswer-" + i + "' value='" + i + "'><label for='questionAnswer-" + i + "'>" + answerText + "</label></div></div>");
-	    });
-	}
-	MultipleChoiceQuestion.prototype.selectedAnswer = function() {
-		return $("input[name=questionAnswer]:checked").val();
-	};
+			// Create an `answerLabel` handlebars helper.
+			// Takes the loop index (`@index`) and turns it into an answer label.
+			// Example: `{{answerLabel 0 }}` -> `"A) "`.
+			//          `{{answerLabel 2 }}` -> `"C) "`.
+			Handlebars.registerHelper('answerLabel', function(index) {
+              return String.fromCharCode(65 + index) + ") ";
+            });
+		},
+		selectedAnswer: function() {
+			return $("input[name=questionAnswer]:checked").val();
+		}
+	});
 	
 	return MultipleChoiceQuestion;
 });

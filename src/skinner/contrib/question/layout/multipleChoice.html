@@ -1,4 +1,16 @@
 <div class="ui form">
-	<div id="question" class="default_question"></div>
-    <div id="answers" class="grouped inline fields"></div>
+	<div class="default_question">{{data.question}}</div>
+    <div id="answers" class="grouped inline fields">
+        {{#each data.answers}}
+        <div class="field">
+            <div class="ui large radio checkbox">
+                <input type="radio" name="questionAnswer" id="questionAnswer-{{@index}}" value="{{@index}}" />
+                <label for="questionAnswer-{{@index}}">
+                    {{#if ../showAnswerLabels}} {{answerLabel @index}} {{/if}}
+                    {{this}}
+                </label>
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </div>

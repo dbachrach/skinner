@@ -1,10 +1,9 @@
-define (["underscore", "yaml"], function (_, YAML) {
+define (["underscore"], function (_) {
 	"use strict";
 
 	function Subject(number, dimensions) {
 		this.number = number;
 		
-		// var dimensions = YAML.load("config/dimensions.yaml")["dimensions"];
 		this.condition = {};
 		var base = this;
 		_.each(dimensions, function (options, dimension) {

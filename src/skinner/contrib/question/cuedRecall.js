@@ -1,19 +1,17 @@
-define(["jquery"], function($) {
+define(["jquery", "src/skinner/core/question"], function($, Question) {
 	"use strict";
 
-	function CuedRecallQuestion(question, id, data) {
-		this.question = question;
-		this.id = id;
-		this.correctAnswer = question.correctAnswer;
-	}
-	CuedRecallQuestion.prototype.show = function () {
-		console.log("Showing CuedRecallQuestion");
-	    $("#question").text(this.question.question);
-	    $("#cuedRecallAnswer").val("").focus();
-	}
-	CuedRecallQuestion.prototype.selectedAnswer = function() {
-		return $("#cuedRecallAnswer").val();
-	};
+	var CuedRecallQuestion = Question.extend({
+		init: function (data, id, testData, style) {
+			this._super(data, id, testData, style);
+		},
+		postShow: function () {
+			$("#cuedRecallAnswer").focus();
+		},
+		selectedAnswer: function() {
+			return $("#cuedRecallAnswer").val();
+		}
+	});
 	
 	return CuedRecallQuestion;
 });

@@ -93,7 +93,7 @@ define (["require", "jquery", "underscore", "ryaml!config/packages"], function (
     }
 
     function cssPathForModule(modulePackage, name) {
-        return "css!" + modulePackage + "layout/" + name + ".css";
+        return "css!" + modulePackage + "layout/" + name;
     }
 
     function loadLayout(name, type, bindings, selector, callback) {

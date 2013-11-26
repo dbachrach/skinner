@@ -38,7 +38,7 @@
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] Create requirejs-yaml-plugin
 - [x] put text focus in cued recall box
-- [ ] Make it so question classes don't have to implement id and correctAnswer parts
+- [x] Make it so question classes don't have to implement id and correctAnswer parts
 - [x] wait for document ready via requirejs
 - [x] switch to _package.yaml
 - [ ] feedback: final score
@@ -50,5 +50,6 @@
 - [ ] turn off reporting for an individual tests
 - [x] Multiple choice option: Show A/B/C/etc
 - [ ] Modify css.js
-- [ ] Test questions should use handlebars
+- [x] Test questions should use handlebars
 - [ ] non bold headers
+- [ ] better way to load handlebars helpers?
