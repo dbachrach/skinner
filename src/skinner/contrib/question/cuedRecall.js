@@ -1,4 +1,4 @@
-define(["jquery", "src/skinner/core/question"], function($, Question) {
+define(["jquery", "src/skinner/core/question", "levenshtein"], function($, Question, Levenshtein) {
 	"use strict";
 
     // ## CuedRecallQuestion
@@ -15,7 +15,11 @@ define(["jquery", "src/skinner/core/question"], function($, Question) {
 		selectedAnswer: function() {
 			// Return the answer text box's value.
 			return $("#cuedRecallAnswer").val();
-		}
+		},
+		reportResults: function (subject, testId) {
+            var levenshtein = new Levenshtein($("#cuedRecallAnswer").val(), this.correctAnswer());
+            subject.report(testId, this.id, "Spelling Distance", levenshtein.distance);
+        }
 	});
 	
 	return CuedRecallQuestion;

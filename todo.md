@@ -6,6 +6,7 @@
 - [ ] Example triangle
 - [ ] Remove continue buttons from passages and add 9 min timer
 - [ ] Play with the triangle color palette
+- [ ] scoring for triangle
 
 
 ## Skinner Core
@@ -15,10 +16,8 @@
 - [ ] Convert to CSV
 - [ ] Add tests
 - [ ] write docs
-- [ ] Allow specifying module namespace in yaml
 - [ ] Spaces in YAML Keys (like Show If)
 - [ ] Task/Page ids for reporting
-- [ ] Parser for statements like repeat across and show if/unless
 - [ ] Repeat task n times and pick random from list.
 - [ ] % and %% variables should be available in templates?
 - [ ] Figure out how finishing works
@@ -32,13 +31,14 @@
 - [ ] pages should use inheritance
 - [ ] rename helpers.js
 - [ ] use handlebars for resolving dimensions and data
+- [ ] jslint it all
 
 
 ## Postponed
 
 - [ ] pretty animations?
 - [ ] Create helper apps (tri start app, tri start package)
-- 
+- [ ] Allow specifying module namespace in yaml
 
 ## Finished
 
@@ -65,3 +65,6 @@
 - [x] turn off reporting for an individual tests
 - [x] Multiple choice option: Show A/B/C/etc
 - [x] Test questions should use handlebars
+- [x] Parser for statements like repeat across and show if/unless
+- [x] spell check for cuedrecall
+- [x] Case insensitive answer scoring

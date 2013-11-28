@@ -12,6 +12,7 @@ Created by Dustin Bachrach and Erin Sparck.
 - [Handlebars](http://handlebarsjs.com)
 - [Simple Javascript Inheritance](http://ejohn.org/blog/simple-javascript-inheritance/) by John Resig
 - [yaml.js](https://github.com/jeremyfa/yaml.js) by Jérémy Faivre
+- [Levenshtein](https://github.com/gf3/Levenshtein) by Gianni Chiappetta
 - [simple-require-css](https://github.com/dbachrach/simple-require-css) by Dustin Bachrach
 - [require-yaml](https://github.com/dbachrach/require-yaml) by Dustin Bachrach
 - [requirejs-handlebars](https://github.com/jfparadis/requirejs-handlebars)

@@ -78,6 +78,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/page", "src/skinne
                 this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
                 this.task.subject.report(this.id, this.currentQuestion.id, "max score", currentQuestionMaxScore);
                 this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
+                this.currentQuestion.reportResults(this.task.subject, this.id)
             }
 
             this.currentQuestionIndex++;

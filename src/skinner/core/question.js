@@ -7,6 +7,7 @@ define (["underscore", "class", "src/skinner/core/loader"], function (_, Class, 
             this.id = id;
             this.testData = testData;
             this.style = style;
+            this.caseSensitiveScoring = this.testData["case sensitive scoring"] || false;
         },
         show: function () {
             var base = this;
@@ -30,7 +31,13 @@ define (["underscore", "class", "src/skinner/core/loader"], function (_, Class, 
             return this.data.correctAnswer;
         },
         tallyScore: function () {
-            if (this.selectedAnswer() === this.correctAnswer()) {
+            var selectedAnswer = this.selectedAnswer().toString();
+            var correctAnswer = this.correctAnswer().toString();
+            if (!this.caseSensitiveScoring) {
+                selectedAnswer = selectedAnswer.toLowerCase();
+                correctAnswer = correctAnswer.toLowerCase();
+            }
+            if (selectedAnswer === correctAnswer) {
                 return 1;
             }
             else {
@@ -39,6 +46,9 @@ define (["underscore", "class", "src/skinner/core/loader"], function (_, Class, 
         },
         maxScore: function () {
             return 1;
+        },
+        reportResults: function (subject, testId) {
+            // Override
         }
     });
 
