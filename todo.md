@@ -18,7 +18,7 @@
 - [ ] write docs
 - [ ] Spaces in YAML Keys (like Show If)
 - [ ] Task/Page ids for reporting
-- [ ] Repeat task n times and pick random from list.
+- [ ] Pick statement: random from list.
 - [ ] % and %% variables should be available in templates?
 - [ ] Figure out how finishing works
 - [ ] Gather all 3rd party liceneses
@@ -68,3 +68,4 @@
 - [x] Parser for statements like repeat across and show if/unless
 - [x] spell check for cuedrecall
 - [x] Case insensitive answer scoring
+- [x] Repeat task n times

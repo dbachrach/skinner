@@ -47,6 +47,9 @@ define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner
                     if (!_.isUndefined(repeatStructure.path)) {
                         return base.subject.conditionForPath(repeatStructure.path).length;
                     }
+                    else if (!_.isUndefined(repeatStructure.times)) {
+                        return repeatStructure.times;
+                    }
                 }
                 else {
                     return 1;
