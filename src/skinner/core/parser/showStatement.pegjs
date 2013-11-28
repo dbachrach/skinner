@@ -14,7 +14,8 @@ operator
   / "is" { return function (a, b) { return a === b; } }
 
 value
-  = chars:[^ \t\n\r]+ { return chars.join(""); }
+  = '"' chars:[^\n\r\f\\"]* '"' { return chars.join(""); }
+  / chars:[^ \t\n\r]+ { return chars.join(""); }
 
 _ "whitespace"
   = [ \t\n\r]*
