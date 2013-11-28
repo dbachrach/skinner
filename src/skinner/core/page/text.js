@@ -1,9 +1,11 @@
-define ([], function() {
+define (["src/skinner/core/page"], function(Page) {
 	"use strict";
 
-	function TextPage(data, task) {
-		this.data = data;
-	}
-	
-	return TextPage;
+    var TextPage = Page.extend({
+        init: function (data, task) {
+            this._super(data, task);
+        },
+    });
+    
+    return TextPage;
 });

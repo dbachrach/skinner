@@ -69,24 +69,7 @@ define (["jquery", "underscore"], function ($, _) {
 		return value;
 	}
 
-	function readDimension(value, subject) {
-		// TODO: Handle across somewhere else
-		var re = /^across {{(.*)}}$/; // TODO: No 'the'
-		var matches = re.exec(value); // TODO: Only matches once
-		if (matches) {
-			var searchPath = matches[1].split(".");
-			// TODO: other lengths
-			if (searchPath.length == 2) {
-				return subject.condition[searchPath[0]][searchPath[1]];
-			}
-		}
-		else {
-			return undefined;
-		}
-	}
-
 	return {
-		"resolveData": resolveData,
-		"readDimension": readDimension
+		"resolveData": resolveData
 	}
 });

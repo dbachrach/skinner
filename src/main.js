@@ -14,6 +14,9 @@
             },
             "yaml": {
                 exports: "YAML"
+            },
+            "pegjs": {
+                exports: "PEG"
             }
         },
         map: {
@@ -32,6 +35,8 @@
     	$.ajaxSetup ({
     	    cache: false // Disable caching of AJAX responses
     	});
+
+        
 
         // TODO: This should go somewhere else, 
         // and also check the state of the experiment to let people leave when they are done

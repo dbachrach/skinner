@@ -8,20 +8,16 @@ login:
 
 dimensions:
   Preparation:
-    # - name: multipleChoice
-    #   questionType: multipleChoice
-    - name: triangle
-      questionType: triangle
+    - questionType: multipleChoice
+    - questionType: triangle
 
   Order:
     - passageId: [1, 2]
     - passageId: [2, 1]
 
   PracticeList:
-    - name: A then B
       practice: A
       exam: B
-    - name: B then A
       practice: B
       exam: A
 
@@ -30,12 +26,12 @@ steps:
   - task: prepare
 
   - task: study
-    repeat: across {{Order.passageId}}
+    repeat: across Order.passageId
 
   - task: distract
 
   - task: exam
-    repeat: across {{Order.passageId}}
+    repeat: across Order.passageId
 
   - task: finish
 
@@ -43,14 +39,14 @@ tasks:
   prepare:
     - type: text
       title: Instructions
-      content file: instructions-{{Preparation.name}}
+      content file: instructions-{{Preparation.questionType}}
       next button: Start
 
-    # - show: if {{Preparation.name}} is "triangle"
-    #   type: test
-    #   style: triangle
-    #   question set: example
-    #   next button: I understand it!
+    - show: if {{Preparation.questionType}} is "triangle"
+      type: test
+      style: triangle
+      question set: example
+      next button: I understand it!
 
   study:
     - type: text
@@ -67,6 +63,8 @@ tasks:
       question set: passage{{%Order.passageId}}-a
       # time: 2 seconds
       next button: Next
+      feedback: final score
+      showAnswerLabels: true
 
   distract:
     - type: distractor
@@ -84,4 +82,5 @@ tasks:
   finish:
     - type: text
       title: Experiment completed
-      content: Your results have been recorded.
+      content: Submit your results.
+      next button: submit

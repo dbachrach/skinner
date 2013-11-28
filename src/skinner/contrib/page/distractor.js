@@ -1,11 +1,11 @@
-define ([], function() {
+define (["src/skinner/core/page"], function(Page) {
 	"use strict";
 
-	function DistractorPage(data, task) {
-		this.data = data;
-		this.task = task;
-		this.exercise = this.data.exercise;
-	}
-	
-	return DistractorPage;
+    var DistractorPage = Page.extend({
+        init: function (data, task) {
+            this._super(data, task);
+        },
+    });
+    
+    return DistractorPage;
 });

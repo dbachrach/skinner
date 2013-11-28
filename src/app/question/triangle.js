@@ -1,4 +1,4 @@
-define (["jquery"], function($) {
+define (["jquery", "src/skinner/core/question"], function($, Question) {
 	"use strict";
 
 	var LabelLocation = {
@@ -277,66 +277,63 @@ define (["jquery"], function($) {
 		return selectedCircles[0].answerId;
 	}
 
-	function TriangleQuestion(question, id, data) {
-		this.question = question;
-		this.id = id;
-		this.correctAnswer = question.correctAnswer;
-		this.pointsPerEdge = data.pointsPerEdge || 3;
-	}
-	TriangleQuestion.prototype.show = function () {
-		console.log("Showing TriangleQuestion");
-	    $("#question").text(this.question.question);
 
-	    var canvas = $("#questionCanvas"); console.log(canvas);
-	    canvas[0].style.width = "600px";
-	    canvas[0].style.height = "450px";
-	    if(window.devicePixelRatio == 2) {
-		    canvas[0].width = 1200;
-	    	canvas[0].height = 900;
+	var TriangleQuestion = Question.extend({
+		init: function (data, id, testData, style) {
+			this._super(data, id, testData, style);
+
+			this.pointsPerEdge = testData.pointsPerEdge || 3;
+		},
+		postShow: function () {
+			var canvas = $("#questionCanvas");
+		    canvas[0].style.width = "600px";
+		    canvas[0].style.height = "450px";
+		    if(window.devicePixelRatio == 2) {
+			    canvas[0].width = 1200;
+		    	canvas[0].height = 900;
+			}
+			else {
+				canvas[0].width = 600;
+				canvas[0].height = 450;
+			}
+		    this.qboard = this.buildBoard(canvas);
+			this.qboard.redraw();
+		},
+		selectedAnswer: function() {
+			return this.qboard.selectedAnswer();
+		},
+		buildBoard: function (canvas) {
+		    var edge = 400.0;
+		    var xOffset = (600 - edge) / 2;
+		    var yOffset = 50.0;
+
+		    var triangleHeight = Math.sqrt((Math.pow(edge, 2) - (Math.pow(edge / 2, 2))));
+
+		    var a = new Point(xOffset + (edge / 2), yOffset, "rgb(255,0,0)");
+		    var b = new Point(xOffset, yOffset + triangleHeight, "rgb(255,255,0)");
+		    var c = new Point(b.x + edge, b.y, "rgb(0,0,255)")
+
+		    var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge/2)));
+
+		    var aCircle = new Circle(a, "a");
+		    aCircle.addLabel(this.data.answers[0], LabelLocation.ABOVE);
+		    var bCircle = new Circle(b, "b");
+		    bCircle.addLabel(this.data.answers[1], LabelLocation.BELOW);
+		    var cCircle = new Circle(c, "c");
+		    cCircle.addLabel(this.data.answers[2], LabelLocation.BELOW);
+
+		    var centerCircle = new Circle(center, "none");
+		    centerCircle.addLabel("Don't know", LabelLocation.ABOVE);
+
+		    var qboard = new QuestionBoard(canvas);
+		    qboard.addElement(new Triangle(a, b, c))
+		    qboard.addElements([aCircle, bCircle, cCircle, centerCircle]);
+		    qboard.addElements(GenerateCirclesBetweenCircles(aCircle, bCircle, this.pointsPerEdge));
+		    qboard.addElements(GenerateCirclesBetweenCircles(bCircle, cCircle, this.pointsPerEdge));
+		    qboard.addElements(GenerateCirclesBetweenCircles(cCircle, aCircle, this.pointsPerEdge));
+		    return qboard;
 		}
-		else {
-			canvas[0].width = 600;
-			canvas[0].height = 450;
-		}
-	    this.qboard = this.buildBoard(canvas);
-		this.qboard.redraw();
-	}
-	TriangleQuestion.prototype.selectedAnswer = function () {
-		var answerId =  this.qboard.selectedAnswer();
-		console.log("answerId");console.log(answerId);
-		return answerId;
-	}
-	TriangleQuestion.prototype.buildBoard = function (canvas) {
-	    var edge = 400.0;
-	    var xOffset = (600 - edge) / 2;
-	    var yOffset = 50.0;
-
-	    var triangleHeight = Math.sqrt((Math.pow(edge, 2) - (Math.pow(edge / 2, 2))));
-
-	    var a = new Point(xOffset + (edge / 2), yOffset, "rgb(255,0,0)");
-	    var b = new Point(xOffset, yOffset + triangleHeight, "rgb(255,255,0)");
-	    var c = new Point(b.x + edge, b.y, "rgb(0,0,255)")
-
-	    var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge/2)));
-
-	    var aCircle = new Circle(a, "a");
-	    aCircle.addLabel(this.question["answers"][0], LabelLocation.ABOVE);
-	    var bCircle = new Circle(b, "b");
-	    bCircle.addLabel(this.question["answers"][1], LabelLocation.BELOW);
-	    var cCircle = new Circle(c, "c");
-	    cCircle.addLabel(this.question["answers"][2], LabelLocation.BELOW);
-
-	    var centerCircle = new Circle(center, "none");
-	    centerCircle.addLabel("Don't know", LabelLocation.ABOVE);
-
-	    var qboard = new QuestionBoard(canvas);
-	    qboard.addElement(new Triangle(a, b, c))
-	    qboard.addElements([aCircle, bCircle, cCircle, centerCircle]);
-	    qboard.addElements(GenerateCirclesBetweenCircles(aCircle, bCircle, this.pointsPerEdge));
-	    qboard.addElements(GenerateCirclesBetweenCircles(bCircle, cCircle, this.pointsPerEdge));
-	    qboard.addElements(GenerateCirclesBetweenCircles(cCircle, aCircle, this.pointsPerEdge));
-	    return qboard;
-	}
-
+	});
+	
 	return TriangleQuestion;
 });
