@@ -31,13 +31,11 @@
 - [ ] pages should use inheritance
 - [ ] rename helpers.js
 - [ ] use handlebars for resolving dimensions and data
-- [ ] jslint it all
 - [ ] report spelling distance option
 - [ ] pressing enter submits questions
 - [ ] keyboard for next/prev
 - [ ] move css into new folders
 - [ ] lib folder for vendor stuff
-- [ ] EditorConfig
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 
 
@@ -76,3 +74,5 @@
 - [x] spell check for cuedrecall
 - [x] Case insensitive answer scoring
 - [x] Repeat task n times
+- [x] jslint it all
+- [x] EditorConfig
