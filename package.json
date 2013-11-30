@@ -1,0 +1,15 @@
+{
+    "name": "skinner",
+    "version": "0.1.0",
+    "contributors": [
+        "Dustin Bachrach <ahdustin@gmail.com>",
+        "Erin Sparck <emsparck@gmail.com>"
+    ],
+    "license" : "MIT",
+    "devDependencies": {
+        "grunt": "~0.4.2",
+        "grunt-contrib-jshint": "~0.7.2",
+        "grunt-contrib-requirejs": "~0.4.1",
+        "grunt-contrib-csslint": "~0.1.2"
+    }
+}

@@ -14,7 +14,7 @@ define (["require", "jquery", "underscore", "ryaml!config/packages"], function (
     }
 
     var loadModuleDefinitions = function () {
-        var modules = undefined;
+        var modules;
 
         function ryamlify(p) {
             return "ryaml!src/" + p + "/_package";
@@ -138,7 +138,9 @@ define (["require", "jquery", "underscore", "ryaml!config/packages"], function (
         require([layoutPath, cssPath], function (template) {
             var result = template(bindings);
             $(selector).html(result);
-            if (callback) callback();
+            if (callback) {
+                callback();
+            }
         });
     }
 

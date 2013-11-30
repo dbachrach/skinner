@@ -69,10 +69,10 @@ define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner
                     break;
                 }
                 accl = accl + stepSizes[i];
-            };
+            }
 
             console.log("got step index of " + stepIndex);
-            if (stepIndex == -1) {
+            if (stepIndex === -1) {
                 return this.end();
             }
 
@@ -88,9 +88,9 @@ define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner
             console.log(stepData);
 
             var additionalDimensionData = {};
-            var context = undefined
+            var context;
 
-            if (repeatIndex != -1) {
+            if (repeatIndex !== -1) {
                 additionalDimensionData["%%index"] = repeatIndex + 1; // adding one to make it 1 based indexing
                 context = { "index" : repeatIndex };
             }

@@ -32,9 +32,9 @@
 
     // `main` dependencies: experiment
     require(["jquery", "src/skinner/core/experiment", "ryaml!config/experiment", "domReady!"], function ($, Experiment, expData, domReady) {
-    	$.ajaxSetup ({
-    	    cache: false // Disable caching of AJAX responses
-    	});
+        $.ajaxSetup ({
+            cache: false // Disable caching of AJAX responses
+        });
 
         
 

@@ -3,7 +3,7 @@ body {
 	background-color: #f8f8f8;
 }
 
-#main {
+.main {
 	width: 750px;
 	margin: 50px auto;
 	text-align: center;

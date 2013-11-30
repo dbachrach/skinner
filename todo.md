@@ -16,7 +16,7 @@
 - [ ] Convert to CSV
 - [ ] Add tests
 - [ ] write docs
-- [ ] Spaces in YAML Keys (like Show If)
+- [ ] Spaces in handlebar Keys (like Show If)
 - [ ] Task/Page ids for reporting
 - [ ] Pick statement: random from list.
 - [ ] % and %% variables should be available in templates?
@@ -32,6 +32,13 @@
 - [ ] rename helpers.js
 - [ ] use handlebars for resolving dimensions and data
 - [ ] jslint it all
+- [ ] report spelling distance option
+- [ ] pressing enter submits questions
+- [ ] keyboard for next/prev
+- [ ] move css into new folders
+- [ ] lib folder for vendor stuff
+- [ ] EditorConfig
+- [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 
 
 ## Postponed

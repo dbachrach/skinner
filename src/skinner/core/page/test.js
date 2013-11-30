@@ -5,7 +5,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/page", "src/skinne
         PreTest: 0,
         Test: 1,
         PostTest: 2
-    }
+    };
 
     function applyQuestionIds(questions) {
         _.each(questions, function (question, index) {
@@ -23,7 +23,7 @@ define (["require", "jquery", "underscore", "src/skinner/core/page", "src/skinne
             this.time = intervals.parseTimeInterval(data.time);
             this.order = this.data.order;
             this.id = this.style + "-" + this.questionSet;
-            this.reportResults = this.data.reportResults || true;
+            // this.reportResults = this.data.reportResults || true;
             this.currentScore = 0;
             this.currentMaxScore = 0;
 
@@ -72,14 +72,14 @@ define (["require", "jquery", "underscore", "src/skinner/core/page", "src/skinne
             this.currentScore += currentQuestionScore;
             this.currentMaxScore += currentQuestionMaxScore;
 
-            if (this.reportResults) {
+            // if (this.reportResults) {
                 this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
                 this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer());
                 this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
                 this.task.subject.report(this.id, this.currentQuestion.id, "max score", currentQuestionMaxScore);
                 this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
-                this.currentQuestion.reportResults(this.task.subject, this.id)
-            }
+                this.currentQuestion.reportResults(this.task.subject, this.id);
+            // }
 
             this.currentQuestionIndex++;
             this.showQuestion();
