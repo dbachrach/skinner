@@ -1,6 +1,8 @@
 {
     "name": "skinner",
+    "description": "A framework for creating pyschology experiments.",
     "version": "0.1.0",
+    "author": "Dustin Bachrach <ahdustin@gmail.com>",
     "contributors": [
         "Dustin Bachrach <ahdustin@gmail.com>",
         "Erin Sparck <emsparck@gmail.com>"
