@@ -30,9 +30,9 @@
 - [ ] rename helpers.js
 - [ ] use handlebars for resolving dimensions and data
 - [ ] pressing enter submits questions
-- [ ] move css into new folders
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
-- []  PathFind has 3 copies. make one.
+- [ ]  PathFind has 3 copies. make one.
+- [ ] Single place for polyfills
 
 
 ## Postponed
@@ -76,3 +76,4 @@
 - [x] lib folder for vendor stuff
 - [x] report spelling distance option
 - [x] keyboard for next/prev
+- [x] move css into new folders
