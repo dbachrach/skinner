@@ -2,7 +2,7 @@
 name: Erin Sparck's Triangle Experiment
 authors: [Erin Sparck, Robert Bjork, Elizabeth Bjork]
 
-login: 
+login:
   type: basic
 
 
@@ -40,19 +40,23 @@ tasks:
     - type: text
       title: Instructions
       content file: instructions-{{Preparation.questionType}}
-      next button: Start
+      next:
+        button: Start
+        keys: [space, right]
 
     - show: if {{Preparation.questionType}} is "triangle"
       type: test
       style: triangle
       question set: example
-      next button: I understand it!
+      next:
+        button: I understand it!
 
   study:
     - type: text
       title: Passage {{%%index}}
       content file: passage{{%Order.passageId}}
-      next button: Continue
+      next:
+        button: Continue
 
     - type: countdown
       title: You are about to start the test in...
@@ -62,7 +66,8 @@ tasks:
       style: {{Preparation.questionType}}
       question set: passage{{%Order.passageId}}-a
       # time: 2 seconds
-      next button: Next
+      next:
+        button: Next
       feedback: final score
       showAnswerLabels: true
 
@@ -71,16 +76,19 @@ tasks:
       exercise: tetris
       time: 4 minutes
       content: You are now going to play Tetris for 4 minutes.
-      next button: Go!
+      next:
+        button: Go!
 
   exam:
     - type: test
       style: cuedRecall
       question set: passage{{%Order.passageId}}-a
-      next button: Next
+      next:
+        button: Next
 
   finish:
     - type: text
       title: Experiment completed
       content: Submit your results.
-      next button: submit
+      next:
+        button: submit

@@ -1,4 +1,4 @@
-define (["require", "jquery", "underscore", "src/skinner/core/page", "src/skinner/core/intervals", "src/skinner/core/loader", "ryaml!config/questions"], function(require, $, _, Page, intervals, loader, questionData) {
+define (["require", "lib/jquery", "lib/underscore", "src/skinner/core/page", "src/skinner/core/intervals", "src/skinner/core/loader", "lib/ryaml!config/questions"], function(require, $, _, Page, intervals, loader, questionData) {
     "use strict";
 
     var states = {
@@ -85,6 +85,6 @@ define (["require", "jquery", "underscore", "src/skinner/core/page", "src/skinne
             this.showQuestion();
         }
     });
-    
+
     return TestPage;
 });

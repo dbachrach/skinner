@@ -1,4 +1,4 @@
-define (["jquery", "src/skinner/core/question"], function($, Question) {
+define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
     "use strict";
 
     var LabelLocation = {
@@ -44,10 +44,10 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
 
         var unselectedColor = "white";
         var fillColor = unselectedColor;
-        
+
         if (this.highlighted) { fillColor = this.center.color; }
         if (this.selected) { fillColor =  this.center.color; }
-        
+
         ctx.fillStyle = fillColor;
         ctx.beginPath();
         ctx.arc(this.center.x, this.center.y, this.radius, 0, 2 * Math.PI);
@@ -101,7 +101,7 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
     Triangle.prototype.draw = function (ctx) {
         this.drawLine(ctx, this.d, this.e);
         this.drawLine(ctx, this.e, this.f);
-        this.drawLine(ctx, this.f, this.d);    
+        this.drawLine(ctx, this.f, this.d);
     };
     Triangle.prototype.drawLine = function (ctx, p1, p2) {
         ctx.lineWidth = 8;
@@ -114,7 +114,7 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
         ctx.strokeStyle = gradient;
-        ctx.stroke(); 
+        ctx.stroke();
     };
 
 
@@ -134,7 +134,7 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
         this.elements.push(element);
     };
     QuestionBoard.prototype.addElements = function (elements) {
-        this.elements = this.elements.concat(elements); 
+        this.elements = this.elements.concat(elements);
     };
     QuestionBoard.prototype.interactiveElements = function () {
         return this.elements.filter(function(e) {
@@ -143,7 +143,7 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
     };
     QuestionBoard.prototype.redraw = function () {
         this.ctx.clearRect(0, 0, 600, 450);
-        
+
      //    ctx.beginPath();
      //    ctx.moveTo(a.x, a.y);
      //    ctx.arc(a.x, a.y, 3 * edge / 4, Math.PI / 3, 2 * Math.PI / 3);
@@ -178,7 +178,7 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
             e.draw(this.ctx);
         }, this);
     };
-    QuestionBoard.prototype.hitTest = function (p) { 
+    QuestionBoard.prototype.hitTest = function (p) {
         var hit = this.interactiveElements().filter(function (e) {
             return (e.hitTest(p));
         });
@@ -198,7 +198,7 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
 
     function generateCirclesBetweenCircles(d, e, pointsPerEdge) {
         var midval = function(v1, v2, percent) {
-            return v1 + ((v2 - v1) * percent); 
+            return v1 + ((v2 - v1) * percent);
         };
 
         var midcolor = function (color1, color2, percent) {
@@ -333,6 +333,6 @@ define (["jquery", "src/skinner/core/question"], function($, Question) {
             return qboard;
         }
     });
-    
+
     return TriangleQuestion;
 });

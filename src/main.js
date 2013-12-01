@@ -2,43 +2,44 @@
 
     // Configure RequireJS
     requirejs.config({
-        baseUrl: "src/skinner/core/vendor",
-        paths: {
-            "src": "../../..",
-            "content": "../../../../content",
-            "config": "../../../../config"
-        },
+        baseUrl: "./",
         shim: {
-            "Handlebars": {
+            "lib/Handlebars": {
                 exports: "Handlebars"
             },
-            "yaml": {
+            "lib/yaml": {
                 exports: "YAML"
             },
-            "pegjs": {
+            "lib/pegjs": {
                 exports: "PEG"
             }
         },
         map: {
-          "*": { 
-            "jquery": "jquery-private",
-            "underscore": "underscore-private"
+          "*": {
+            "lib/jquery": "lib/jquery-private",
+            "lib/underscore": "lib/underscore-private",
+
+            // Map loader plugins, so you don't have to include "lib/" prefix.
+            "ryaml": "lib/ryaml",
+            "domReady": "lib/domReady",
+            "text": "lib/text",
+            "css": "lib/css",
+            "peg": "lib/peg",
+            "hbars": "lib/hbars"
           },
-          "jquery-private": { "jquery": "jquery" },
-          "underscore-private": { "underscore": "underscore" }
+          "lib/jquery-private": { "lib/jquery": "lib/jquery" },
+          "lib/underscore-private": { "lib/underscore": "lib/underscore" },
         },
         urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
     });
 
     // `main` dependencies: experiment
-    require(["jquery", "src/skinner/core/experiment", "ryaml!config/experiment", "domReady!"], function ($, Experiment, expData, domReady) {
+    require(["lib/jquery", "src/skinner/core/experiment", "ryaml!config/experiment", "domReady!"], function ($, Experiment, expData, domReady) {
         $.ajaxSetup ({
             cache: false // Disable caching of AJAX responses
         });
 
-        
-
-        // TODO: This should go somewhere else, 
+        // TODO: This should go somewhere else,
         // and also check the state of the experiment to let people leave when they are done
         // $(window).bind("beforeunload", function () {
         //     return "Are you sure you want to leave? The experiment is not completed yet.";

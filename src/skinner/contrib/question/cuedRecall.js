@@ -1,8 +1,8 @@
-define(["jquery", "underscore", "src/skinner/core/question", "levenshtein"], function($, _, Question, Levenshtein) {
+define(["lib/jquery", "lib/underscore", "src/skinner/core/question", "lib/levenshtein"], function($, _, Question, Levenshtein) {
     "use strict";
 
     function pathFind(obj, path, defaultValue) {
-        var foundValue = _.reduce(path.split("."), function (o, val) { 
+        var foundValue = _.reduce(path.split("."), function (o, val) {
             if (!_.isUndefined(o) && o.hasOwnProperty(val)) {
                 return o[val];
             }
@@ -48,6 +48,6 @@ define(["jquery", "underscore", "src/skinner/core/question", "levenshtein"], fun
             }
         }
     });
-    
+
     return CuedRecallQuestion;
 });

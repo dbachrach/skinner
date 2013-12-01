@@ -1,4 +1,4 @@
-define (["underscore"], function (_) {
+define (["lib/underscore"], function (_) {
     "use strict";
 
     var ONE_SECOND = 1000;

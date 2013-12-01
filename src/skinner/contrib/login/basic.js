@@ -1,4 +1,4 @@
-define (["jquery"], function($) {
+define (["lib/jquery"], function($) {
     "use strict";
 
     function BasicLogin(data) {
@@ -10,6 +10,6 @@ define (["jquery"], function($) {
             callback(subjectNumber);
         });
     };
-    
+
     return BasicLogin;
 });

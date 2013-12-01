@@ -1,4 +1,4 @@
-define (["jquery", "underscore"], function ($, _) {
+define (["lib/jquery", "lib/underscore"], function ($, _) {
     "use strict";
 
     if (!String.prototype.endsWith) {
@@ -61,7 +61,7 @@ define (["jquery", "underscore"], function ($, _) {
                 // TODO: Check for index property in context
                 x = x[context.index];
             }
-            
+
             value = value.replace(matches[0], x);
             // });
             // console.log(matches);

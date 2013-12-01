@@ -1,8 +1,8 @@
-define (["underscore", "class"], function (_, Class) {
+define (["lib/underscore", "lib/class"], function (_, Class) {
     "use strict";
 
     function pathFind(obj, path, defaultValue) {
-        var foundValue = _.reduce(path.split("."), function (o, val) { 
+        var foundValue = _.reduce(path.split("."), function (o, val) {
             if (!_.isUndefined(o) && o.hasOwnProperty(val)) {
                 return o[val];
             }
@@ -24,7 +24,7 @@ define (["underscore", "class"], function (_, Class) {
 
         init: function (number, dimensions) {
             this.number = number;
-            
+
             this.condition = {};
             var base = this;
             _.each(dimensions, function (options, dimension) {
@@ -34,12 +34,12 @@ define (["underscore", "class"], function (_, Class) {
                 console.log(base.condition[dimension]);
             });
             // this.condition = _.map(dimensions, function (options, dimension) {
-            //  return 
+            //  return
             // });
             // this.condition = _.reduce(dimensions, function (memo, options, dimension) {
             //  console.log("dim " + dimension + ": " + options);
             //  // memo[dimension] = _.sample(options); // TODO: This is random, it should be deterministic
-            //  return 
+            //  return
             // }, {});
 
             this.reports = {};

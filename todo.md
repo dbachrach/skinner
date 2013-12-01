@@ -16,7 +16,6 @@
 - [ ] Convert to CSV
 - [ ] Add tests
 - [ ] write docs
-- [ ] Spaces in handlebar Keys (like Show If)
 - [ ] Task/Page ids for reporting
 - [ ] Pick statement: random from list.
 - [ ] % and %% variables should be available in templates?
@@ -28,15 +27,12 @@
 - [ ] feedback: final score
 - [ ] different question types for a question set
 - [ ] better way to load handlebars helpers?
-- [ ] pages should use inheritance
 - [ ] rename helpers.js
 - [ ] use handlebars for resolving dimensions and data
-- [ ] report spelling distance option
 - [ ] pressing enter submits questions
-- [ ] keyboard for next/prev
 - [ ] move css into new folders
-- [ ] lib folder for vendor stuff
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
+- []  PathFind has 3 copies. make one.
 
 
 ## Postponed
@@ -76,3 +72,7 @@
 - [x] Repeat task n times
 - [x] jslint it all
 - [x] EditorConfig
+- [x] pages should use inheritance
+- [x] lib folder for vendor stuff
+- [x] report spelling distance option
+- [x] keyboard for next/prev

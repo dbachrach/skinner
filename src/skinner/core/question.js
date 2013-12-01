@@ -1,4 +1,4 @@
-define (["underscore", "class", "src/skinner/core/loader"], function (_, Class, loader) {
+define (["lib/underscore", "lib/class", "src/skinner/core/loader"], function (_, Class, loader) {
     "use strict";
 
     var Question = Class.extend({
@@ -16,7 +16,7 @@ define (["underscore", "class", "src/skinner/core/loader"], function (_, Class, 
 
             loader.loadLayout(this.style, "question", _.extend({}, this.testData, { "data": this.data }), "#test", function () {
                 base.postShow();
-            }); 
+            });
         },
         preShow: function() {
             // Override

@@ -1,4 +1,4 @@
-define (["jquery", "underscore", "src/skinner/core/page", "src/skinner/core/intervals"], function($, _, Page, intervals) {
+define (["lib/jquery", "lib/underscore", "src/skinner/core/page", "src/skinner/core/intervals"], function($, _, Page, intervals) {
 	"use strict";
 
 	var CountdownPage = Page.extend({
@@ -10,7 +10,7 @@ define (["jquery", "underscore", "src/skinner/core/page", "src/skinner/core/inte
 		},
 		postShow: function() {
 			var base = this;
-			
+
 			function countdown(val, completion) {
 				if (val === 0) {
 					completion();

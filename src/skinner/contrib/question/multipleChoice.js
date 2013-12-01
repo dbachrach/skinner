@@ -1,4 +1,4 @@
-define(["jquery", "src/skinner/core/question", "Handlebars"], function($, Question, Handlebars) {
+define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars"], function($, Question, Handlebars) {
 	"use strict";
 
 	var MultipleChoiceQuestion = Question.extend({
@@ -17,6 +17,6 @@ define(["jquery", "src/skinner/core/question", "Handlebars"], function($, Questi
 			return $("input[name=questionAnswer]:checked").val();
 		}
 	});
-	
+
 	return MultipleChoiceQuestion;
 });

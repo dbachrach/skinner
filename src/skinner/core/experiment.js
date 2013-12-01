@@ -1,11 +1,11 @@
 // `experiment` dependencies: subject, trial, loader
-define(["class", "src/skinner/core/subject", "src/skinner/core/trial", "src/skinner/core/loader"], function (Class, Subject, Trial, loader) {
+define(["lib/class", "src/skinner/core/subject", "src/skinner/core/trial", "src/skinner/core/loader"], function (Class, Subject, Trial, loader) {
     "use strict";
 
     // ## Experiment
     var Experiment = Class.extend({
 
-        /** 
+        /**
          * ### Experiment()
          * An Experiment encompasses all information: data, steps, subject, dimensions, etc.
          * @param data The properties of the experiment. Typically read from an experiment.yaml file.

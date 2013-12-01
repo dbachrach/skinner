@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner/core/task", "src/skinner/core/helpers", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, Task, helpers, RepeatStatementParser) {
+define(["lib/jquery", "lib/underscore", "lib/class", "src/skinner/core/loader", "src/skinner/core/task", "src/skinner/core/helpers", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, Task, helpers, RepeatStatementParser) {
     "use strict";
 
     var Trial = Class.extend({
@@ -53,7 +53,7 @@ define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner
                 }
                 else {
                     return 1;
-                }                    
+                }
             });
             console.log("stepsizes:"); console.log(stepSizes);
 

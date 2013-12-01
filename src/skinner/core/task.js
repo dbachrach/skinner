@@ -1,4 +1,4 @@
-define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner/core/helpers", "peg!src/skinner/core/parser/showStatement"], function ($, _, Class, loader, helpers, ShowStatementParser) {
+define(["lib/jquery", "lib/underscore", "lib/class", "src/skinner/core/loader", "src/skinner/core/helpers", "peg!src/skinner/core/parser/showStatement"], function ($, _, Class, loader, helpers, ShowStatementParser) {
     "use strict";
 
     var Task = Class.extend({
@@ -31,7 +31,7 @@ define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner
                     return;
                 }
             }
-            
+
             loader.loadModule(pageData.type, "page", function (Page) {
                 base.currentPage = new Page(pageData, base);
                 base.currentPage.show();
@@ -56,6 +56,6 @@ define(["jquery", "underscore", "class", "src/skinner/core/loader", "src/skinner
             this.trial.nextStep();
         }
     });
-    
+
     return Task;
 });
