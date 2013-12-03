@@ -122,7 +122,7 @@ define(["lib/jquery", "lib/underscore", "lib/class", "src/skinner/core/loader", 
          * Ends the trial.
          */
         end: function () {
-            this.subject.export();
+            this.subject.exportToCSV();
         }
     });
 

@@ -13,7 +13,6 @@
 
 - [ ] Make all pages support Time, and figure out a clean way to do it with test and countdown pages
 - [ ] Distractor page cleanup
-- [ ] Convert to CSV
 - [ ] Add tests
 - [ ] write docs
 - [ ] Task/Page ids for reporting
@@ -32,7 +31,7 @@
 - [ ] pressing enter submits questions
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] PathFind has 3 copies. make one.
-
+- [ ] consider moving to lodash
 
 ## Postponed
 
@@ -76,3 +75,4 @@
 - [x] report spelling distance option
 - [x] keyboard for next/prev
 - [x] move css into new folders
+- [x] Convert to CSV

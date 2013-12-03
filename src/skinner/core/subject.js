@@ -1,4 +1,4 @@
-define (["lib/underscore", "lib/class"], function (_, Class) {
+define (["lib/underscore", "lib/class", "lib/underscore.string"], function (_, Class) {
     "use strict";
 
     function pathFind(obj, path, defaultValue) {
@@ -42,30 +42,44 @@ define (["lib/underscore", "lib/class"], function (_, Class) {
             //  return
             // }, {});
 
-            this.reports = {};
+            this.reports = [];
         },
 
         /**
          */
         report: function (page, id, name, value) {
-            if (!this.reports.hasOwnProperty(page)) {
-                this.reports[page] = {};
+            var report = _.findWhere(this.reports, { page: page, id: id});
+            if (_.isUndefined(report)) {
+                report = {
+                    page: page,
+                    id: id
+                };
+                this.reports.push(report);
             }
-            if (!this.reports[page].hasOwnProperty(id)) {
-                this.reports[page][id] = {};
-            }
-            this.reports[page][id][name] = value;
+
+            report[name] = value;
         },
 
-        export: function () {
-            _.each(this.reports, function (ids, page) {
-                _.each(ids, function (report, id) {
-                    var reportString = _.reduce(report, function (memo, value, name) {
-                        return memo + " | " + name.toString() + ":" + value.toString();
-                    }, "");
-                    console.log(page.toString() + " | " + id.toString() + reportString);
+        exportToCSV: function () {
+            function quoter (str) {
+                return _.quote(str);
+            }
+
+            var headers = _.union.apply(this, _.map(this.reports, function (report) {
+                return _.keys(report);
+            }));
+
+            var rows = _.map(this.reports, function (report) {
+                var row = _.map(headers, function (key) {
+                    var value = report[key];
+                    if (_.isUndefined(value)) {
+                        value = "";
+                    }
+                    return value.toString();
                 });
+                return _.map(row, quoter).join(",");
             });
+            return _.map(headers, quoter).join(",") + "\n" + rows.join("\n");
         },
 
         conditionForPath: function (path) {
