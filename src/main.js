@@ -4,6 +4,15 @@
     requirejs.config({
         baseUrl: "./",
         shim: {
+            "lib/underscore": {
+                exports: "_"
+            },
+            "lib/underscore.string": {
+                deps: ["lib/underscore"],
+                init: function(_) {
+                    _.mixin(_.str.exports());
+                }
+            },
             "lib/Handlebars": {
                 exports: "Handlebars"
             },
@@ -17,7 +26,6 @@
         map: {
           "*": {
             "lib/jquery": "lib/jquery-private",
-            "lib/underscore": "lib/underscore-private",
 
             // Map loader plugins, so you don't have to include "lib/" prefix.
             "ryaml": "lib/ryaml",
@@ -28,7 +36,6 @@
             "hbars": "lib/hbars"
           },
           "lib/jquery-private": { "lib/jquery": "lib/jquery" },
-          "lib/underscore-private": { "lib/underscore": "lib/underscore" },
         },
         urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
     });

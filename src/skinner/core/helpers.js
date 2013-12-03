@@ -1,19 +1,5 @@
-define (["lib/jquery", "lib/underscore"], function ($, _) {
+define (["lib/jquery", "lib/underscore", "lib/underscore.string"], function ($, _) {
     "use strict";
-
-    if (!String.prototype.endsWith) {
-        Object.defineProperty(String.prototype, 'endsWith', {
-            enumerable: false,
-            configurable: false,
-            writable: false,
-            value: function (searchString, position) {
-                position = position || this.length;
-                position = position - searchString.length;
-                var lastIndex = this.lastIndexOf(searchString);
-                return lastIndex !== -1 && lastIndex === position;
-            }
-        });
-    }
 
     function resolveData(data, subject, additionalDimensionData, context) {
         var resolvedData = {};
@@ -32,7 +18,7 @@ define (["lib/jquery", "lib/underscore"], function ($, _) {
             // _.each(matches, function (match) {
 
             var isInContext = false;
-            if (matches[1].startsWith("%") && !matches[1].startsWith("%%")) {
+            if (_.startsWith(matches[1], ("%")) && !_.startsWith(matches[1], "%%")) {
                 isInContext = true;
                 matches[1] = matches[1].substring(1); // Strip off the % character
             }

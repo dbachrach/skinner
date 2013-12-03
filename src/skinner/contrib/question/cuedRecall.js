@@ -1,4 +1,4 @@
-define(["lib/jquery", "lib/underscore", "src/skinner/core/question", "lib/levenshtein"], function($, _, Question, Levenshtein) {
+define(["lib/jquery", "lib/underscore", "src/skinner/core/question", "lib/underscore.string"], function($, _, Question) {
     "use strict";
 
     function pathFind(obj, path, defaultValue) {
@@ -43,8 +43,8 @@ define(["lib/jquery", "lib/underscore", "src/skinner/core/question", "lib/levens
         reportResults: function (subject, testId) {
             var reportSpellingDistance = pathFind(this.testData, "report.spelling distance", true);
             if (reportSpellingDistance) {
-                var levenshtein = new Levenshtein($("#cuedRecallAnswer").val(), this.correctAnswer());
-                subject.report(testId, this.id, "Spelling Distance", levenshtein.distance);
+                var levenshtein = _.levenshtein($("#cuedRecallAnswer").val(), this.correctAnswer());
+                subject.report(testId, this.id, "Spelling Distance", levenshtein);
             }
         }
     });

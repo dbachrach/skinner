@@ -1,17 +1,5 @@
-define (["require", "lib/jquery", "lib/underscore", "ryaml!config/packages"], function (require, $, _, packageData) {
+define (["require", "lib/jquery", "lib/underscore", "ryaml!config/packages", "lib/underscore.string"], function (require, $, _, packageData) {
     "use strict";
-
-    if (!String.prototype.startsWith) {
-      Object.defineProperty(String.prototype, 'startsWith', {
-        enumerable: false,
-        configurable: false,
-        writable: false,
-        value: function (searchString, position) {
-          position = position || 0;
-          return this.indexOf(searchString, position) === position;
-        }
-      });
-    }
 
     var loadModuleDefinitions = function () {
         var modules;
@@ -106,7 +94,7 @@ define (["require", "lib/jquery", "lib/underscore", "ryaml!config/packages"], fu
     function loadPageLayout(name, bindings, callback) {
         var fileSuffix = " file";
         function isFileBinding(/*value,*/ key) {
-            return key.endsWith(fileSuffix);
+            return _.endsWith(key, fileSuffix);
         }
         function removeFileSuffix(key) {
             return key.slice(0, -(fileSuffix.length));

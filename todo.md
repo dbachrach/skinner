@@ -31,8 +31,7 @@
 - [ ] use handlebars for resolving dimensions and data
 - [ ] pressing enter submits questions
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
-- [ ]  PathFind has 3 copies. make one.
-- [ ] Single place for polyfills
+- [ ] PathFind has 3 copies. make one.
 
 
 ## Postponed
