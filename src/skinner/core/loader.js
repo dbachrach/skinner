@@ -1,4 +1,4 @@
-define (["require", "lib/jquery", "lib/underscore", "ryaml!config/packages", "lib/underscore.string"], function (require, $, _, packageData) {
+define (["require", "lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/packages"], function (require, $, _, _s, packageData) {
     "use strict";
 
     var loadModuleDefinitions = function () {
@@ -94,7 +94,7 @@ define (["require", "lib/jquery", "lib/underscore", "ryaml!config/packages", "li
     function loadPageLayout(name, bindings, callback) {
         var fileSuffix = " file";
         function isFileBinding(/*value,*/ key) {
-            return _.endsWith(key, fileSuffix);
+            return _s.endsWith(key, fileSuffix);
         }
         function removeFileSuffix(key) {
             return key.slice(0, -(fileSuffix.length));

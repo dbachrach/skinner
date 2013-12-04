@@ -1,4 +1,4 @@
-define (["lib/underscore", "lib/class", "src/skinner/core/loader"], function (_, Class, loader) {
+define (["lib/lodash", "lib/class", "src/skinner/core/loader"], function (_, Class, loader) {
     "use strict";
 
     var Question = Class.extend({

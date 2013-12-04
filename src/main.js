@@ -4,15 +4,6 @@
     requirejs.config({
         baseUrl: "./",
         shim: {
-            "lib/underscore": {
-                exports: "_"
-            },
-            "lib/underscore.string": {
-                deps: ["lib/underscore"],
-                init: function(_) {
-                    _.mixin(_.str.exports());
-                }
-            },
             "lib/Handlebars": {
                 exports: "Handlebars"
             },

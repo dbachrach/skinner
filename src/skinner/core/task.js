@@ -1,4 +1,4 @@
-define(["lib/jquery", "lib/underscore", "lib/class", "src/skinner/core/loader", "src/skinner/core/helpers", "peg!src/skinner/core/parser/showStatement"], function ($, _, Class, loader, helpers, ShowStatementParser) {
+define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/helpers", "peg!src/skinner/core/parser/showStatement"], function ($, _, Class, loader, helpers, ShowStatementParser) {
     "use strict";
 
     var Task = Class.extend({

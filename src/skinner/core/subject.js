@@ -1,4 +1,4 @@
-define (["lib/underscore", "lib/class", "lib/underscore.string"], function (_, Class) {
+define (["lib/lodash", "lib/underscore.string", "lib/class"], function (_, _s, Class) {
     "use strict";
 
     function pathFind(obj, path, defaultValue) {
@@ -62,13 +62,14 @@ define (["lib/underscore", "lib/class", "lib/underscore.string"], function (_, C
 
         exportToCSV: function () {
             function quoter (str) {
-                return _.quote(str);
+                return _s.quote(str);
             }
 
             var headers = _.union.apply(this, _.map(this.reports, function (report) {
                 return _.keys(report);
             }));
 
+            // todo: sort this.reports use _.sort based on page, then id.
             var rows = _.map(this.reports, function (report) {
                 var row = _.map(headers, function (key) {
                     var value = report[key];

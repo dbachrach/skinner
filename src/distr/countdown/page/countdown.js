@@ -1,4 +1,4 @@
-define (["lib/jquery", "lib/underscore", "src/skinner/core/page", "src/skinner/core/intervals"], function($, _, Page, intervals) {
+define (["lib/jquery", "lib/lodash", "src/skinner/core/page", "src/skinner/core/intervals"], function($, _, Page, intervals) {
 	"use strict";
 
 	var CountdownPage = Page.extend({

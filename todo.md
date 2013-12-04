@@ -31,7 +31,8 @@
 - [ ] pressing enter submits questions
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] PathFind has 3 copies. make one.
-- [ ] consider moving to lodash
+- [ ] use npm for all dependencies
+- [ ] use a amd build of handlebars
 
 ## Postponed
 
@@ -76,3 +77,4 @@
 - [x] keyboard for next/prev
 - [x] move css into new folders
 - [x] Convert to CSV
+- [x] consider moving to lodash

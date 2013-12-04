@@ -1,4 +1,4 @@
-define (["lib/jquery", "lib/underscore", "lib/underscore.string"], function ($, _) {
+define (["lib/jquery", "lib/lodash", "lib/underscore.string"], function ($, _, _s) {
     "use strict";
 
     function resolveData(data, subject, additionalDimensionData, context) {
@@ -18,7 +18,7 @@ define (["lib/jquery", "lib/underscore", "lib/underscore.string"], function ($, 
             // _.each(matches, function (match) {
 
             var isInContext = false;
-            if (_.startsWith(matches[1], ("%")) && !_.startsWith(matches[1], "%%")) {
+            if (_s.startsWith(matches[1], ("%")) && !_s.startsWith(matches[1], "%%")) {
                 isInContext = true;
                 matches[1] = matches[1].substring(1); // Strip off the % character
             }

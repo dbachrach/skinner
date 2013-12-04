@@ -1,4 +1,4 @@
-define (["lib/underscore", "lib/class", "lib/mousetrap", "src/skinner/core/loader"], function (_, Class, Mousetrap, loader) {
+define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader"], function (_, Class, Mousetrap, loader) {
     "use strict";
 
     function pathFind(obj, path, defaultValue) {

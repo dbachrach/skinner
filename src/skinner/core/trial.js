@@ -1,4 +1,4 @@
-define(["lib/jquery", "lib/underscore", "lib/class", "src/skinner/core/loader", "src/skinner/core/task", "src/skinner/core/helpers", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, Task, helpers, RepeatStatementParser) {
+define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/task", "src/skinner/core/helpers", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, Task, helpers, RepeatStatementParser) {
     "use strict";
 
     var Trial = Class.extend({
@@ -122,7 +122,8 @@ define(["lib/jquery", "lib/underscore", "lib/class", "src/skinner/core/loader", 
          * Ends the trial.
          */
         end: function () {
-            this.subject.exportToCSV();
+            var csv = this.subject.exportToCSV();
+            console.log(csv);
         }
     });
 
