@@ -30,7 +30,6 @@
 - [ ] use handlebars for resolving dimensions and data
 - [ ] pressing enter submits questions
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
-- [ ] PathFind has 3 copies. make one.
 - [ ] use npm for all dependencies
 - [ ] use a amd build of handlebars
 
@@ -78,3 +77,4 @@
 - [x] move css into new folders
 - [x] Convert to CSV
 - [x] consider moving to lodash
+- [x] PathFind has 3 copies. make one.

@@ -1,24 +1,5 @@
-define (["lib/lodash", "lib/underscore.string", "lib/class"], function (_, _s, Class) {
+define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/keyPath"], function (_, _s, Class, keyPath) {
     "use strict";
-
-    function pathFind(obj, path, defaultValue) {
-        var foundValue = _.reduce(path.split("."), function (o, val) {
-            if (!_.isUndefined(o) && o.hasOwnProperty(val)) {
-                return o[val];
-            }
-            else {
-                return undefined;
-            }
-            return o[val];
-        }, obj);
-
-        if (_.isUndefined(foundValue)) {
-            return defaultValue;
-        }
-        else {
-            return foundValue;
-        }
-    }
 
     var Subject = Class.extend({
 
@@ -84,7 +65,7 @@ define (["lib/lodash", "lib/underscore.string", "lib/class"], function (_, _s, C
         },
 
         conditionForPath: function (path) {
-            return pathFind(this.condition, path, undefined);
+            return keyPath(this.condition, path, undefined);
         }
     });
 

@@ -1,24 +1,5 @@
-define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/question"], function($, _, _s, Question) {
+define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/question", "src/skinner/core/keypath"], function($, _, _s, Question, keyPath) {
     "use strict";
-
-    function pathFind(obj, path, defaultValue) {
-        var foundValue = _.reduce(path.split("."), function (o, val) {
-            if (!_.isUndefined(o) && o.hasOwnProperty(val)) {
-                return o[val];
-            }
-            else {
-                return undefined;
-            }
-            return o[val];
-        }, obj);
-
-        if (_.isUndefined(foundValue)) {
-            return defaultValue;
-        }
-        else {
-            return foundValue;
-        }
-    }
 
     // ## CuedRecallQuestion
     // A CuedRecallQuestion is a fill-in-the-blank style question.
@@ -41,7 +22,7 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
         },
 
         reportResults: function (subject, testId) {
-            var reportSpellingDistance = pathFind(this.testData, "report.spelling distance", true);
+            var reportSpellingDistance = keyPath(this.testData, "report.spelling distance", true);
             if (reportSpellingDistance) {
                 var levenshtein = _s.levenshtein($("#cuedRecallAnswer").val(), this.correctAnswer());
                 subject.report(testId, this.id, "Spelling Distance", levenshtein);

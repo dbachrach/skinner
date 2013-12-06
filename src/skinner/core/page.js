@@ -1,24 +1,5 @@
-define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader"], function (_, Class, Mousetrap, loader) {
+define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", "src/skinner/core/keyPath"], function (_, Class, Mousetrap, loader, keyPath) {
     "use strict";
-
-    function pathFind(obj, path, defaultValue) {
-        var foundValue = _.reduce(path.split("."), function (o, val) {
-            if (!_.isUndefined(o) && o.hasOwnProperty(val)) {
-                return o[val];
-            }
-            else {
-                return undefined;
-            }
-            return o[val];
-        }, obj);
-
-        if (_.isUndefined(foundValue)) {
-            return defaultValue;
-        }
-        else {
-            return foundValue;
-        }
-    }
 
     var Page = Class.extend({
         init: function (data, task) {
@@ -85,7 +66,7 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader"],
         updateKeys: function(enable) {
             // Update keys
             var base = this;
-            var nextKey = pathFind(this.data, "next.keys", []);
+            var nextKey = keyPath(this.data, "next.keys", []);
             if (nextKey) {
                 if (enable) {
                     Mousetrap.bind(nextKey, function (e) {
@@ -97,7 +78,7 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader"],
                 }
             }
 
-            var previousKeys = pathFind(this.data, "previous.keys", []);
+            var previousKeys = keyPath(this.data, "previous.keys", []);
             if (previousKeys) {
                 if (enable) {
                     Mousetrap.bind(previousKeys, function (e) {
