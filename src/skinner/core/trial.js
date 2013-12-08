@@ -91,7 +91,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
             var context;
 
             if (repeatIndex !== -1) {
-                additionalDimensionData["_index"] = repeatIndex + 1; // adding one to make it 1 based indexing
+                additionalDimensionData._index = repeatIndex + 1; // adding one to make it 1 based indexing
                 context = repeatIndex;
             }
             // console.log("additional dims");

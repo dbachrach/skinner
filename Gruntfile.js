@@ -34,6 +34,11 @@ module.exports = function(grunt) {
                     useStrict: true
                 }
             }
+        },
+
+        // QUnit settings
+        qunit: {
+            all: ['tests/**/*.html']
         }
     });
 
@@ -41,8 +46,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-csslint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-qunit');
 
     // Tasks
-    grunt.registerTask('default', ['jshint', 'csslint', 'requirejs']);
     grunt.registerTask('lint', ['jshint', 'csslint']);
+    grunt.registerTask('test', ['lint', 'qunit']);
+    grunt.registerTask('default', ['test', 'requirejs']);
 };
