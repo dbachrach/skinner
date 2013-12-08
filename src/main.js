@@ -7,9 +7,6 @@
             "lib/Handlebars": {
                 exports: "Handlebars"
             },
-            "lib/yaml": {
-                exports: "YAML"
-            },
             "lib/pegjs": {
                 exports: "PEG"
             }

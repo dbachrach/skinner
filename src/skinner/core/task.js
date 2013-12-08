@@ -1,7 +1,8 @@
-define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/helpers", "peg!src/skinner/core/parser/showStatement"], function ($, _, Class, loader, helpers, ShowStatementParser) {
+define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/resolver", "peg!src/skinner/core/parser/showStatement"], function ($, _, Class, loader, resolver, ShowStatementParser) {
     "use strict";
 
     var Task = Class.extend({
+        // TODO: Rename context parameter
         init: function (trial, pages, subject, additionalDimensionData, context) {
             this.trial = trial;
             this.pages = pages;
@@ -20,8 +21,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
             // TODO: Handle back button reloads a new page rather than using the old one
             var base = this;
 
-            var pageData = helpers.resolveData(this.pages[this.currentPageIndex], this.subject, this.additionalDimensionData, this.context);
-
+            var pageData = resolver.resolveData(this.pages[this.currentPageIndex], this.subject, this.additionalDimensionData, this.context);
             var showStatement = pageData.show;
             if (showStatement) {
                 var showPage = ShowStatementParser.parse(showStatement);

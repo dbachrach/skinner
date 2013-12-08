@@ -1,4 +1,4 @@
-define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/task", "src/skinner/core/helpers", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, Task, helpers, RepeatStatementParser) {
+define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/task", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, Task, RepeatStatementParser) {
     "use strict";
 
     var Trial = Class.extend({
@@ -91,8 +91,8 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
             var context;
 
             if (repeatIndex !== -1) {
-                additionalDimensionData["%%index"] = repeatIndex + 1; // adding one to make it 1 based indexing
-                context = { "index" : repeatIndex };
+                additionalDimensionData["_index"] = repeatIndex + 1; // adding one to make it 1 based indexing
+                context = repeatIndex;
             }
             // console.log("additional dims");
             // console.log(additionalDimensionData);

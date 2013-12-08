@@ -5,6 +5,9 @@ authors: [Erin Sparck, Robert Bjork, Elizabeth Bjork]
 login:
   type: basic
 
+reporting:
+  type: download
+
 
 dimensions:
   Preparation:
@@ -53,8 +56,8 @@ tasks:
 
   study:
     - type: text
-      title: Passage {{%%index}}
-      content file: passage{{%Order.passageId}}
+      title: Passage {{_index}}
+      content file: passage{{indexed Order.passageId}}
       next:
         button: Continue
 
@@ -64,7 +67,7 @@ tasks:
 
     - type: test
       style: {{Preparation.questionType}}
-      question set: passage{{%Order.passageId}}-a
+      question set: passage{{indexed Order.passageId}}-a
       # time: 2 seconds
       next:
         button: Next
@@ -82,7 +85,7 @@ tasks:
   exam:
     - type: test
       style: cuedRecall
-      question set: passage{{%Order.passageId}}-a
+      question set: passage{{indexed Order.passageId}}-a
       next:
         button: Next
 

@@ -20,7 +20,7 @@ define (["require", "lib/jquery", "lib/lodash", "src/skinner/core/page", "src/sk
             this.style = this.data.style || "multipleChoice";
             this.questionSet = this.data["question set"];
             this.questions = questionData[this.questionSet];
-            this.time = intervals.parseTimeInterval(data.time);
+            this.time = intervals.parseTimeInterval(this.data.time);
             this.order = this.data.order;
             this.id = this.style + "-" + this.questionSet;
             // this.reportResults = this.data.reportResults || true;
@@ -50,7 +50,7 @@ define (["require", "lib/jquery", "lib/lodash", "src/skinner/core/page", "src/sk
             loader.loadModule(this.style, "question", function (Question) {
                 base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.questions[base.currentQuestionIndex].id, base.data, base.style);
                 base.currentQuestion.show();
-                base.questionStartTime = $.now();
+                base.questionStartTime = _.now();
             });
 
             if (_.isNumber(this.time)) {
@@ -60,7 +60,7 @@ define (["require", "lib/jquery", "lib/lodash", "src/skinner/core/page", "src/sk
             }
         },
         next: function () {
-            var questionEndTime = $.now();
+            var questionEndTime = _.now();
 
             clearTimeout(this.timeout);
 

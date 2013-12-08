@@ -26,12 +26,11 @@
 - [ ] feedback: final score
 - [ ] different question types for a question set
 - [ ] better way to load handlebars helpers?
-- [ ] rename helpers.js
-- [ ] use handlebars for resolving dimensions and data
 - [ ] pressing enter submits questions
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] use npm for all dependencies
-- [ ] use a amd build of handlebars
+- [ ] use an amd build of handlebars
+- [ ] set up package.json to have a test script that verifies code
 
 ## Postponed
 
@@ -78,3 +77,5 @@
 - [x] Convert to CSV
 - [x] consider moving to lodash
 - [x] PathFind has 3 copies. make one.
+- [x] use handlebars for resolving dimensions and data
+- [x] rename helpers.js
