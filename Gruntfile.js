@@ -19,13 +19,30 @@ module.exports = function(grunt) {
             strict: {
                 src: ['css/main.css', 'src/**/*.css']
             }
+        },
+
+        // RequireJS settings
+        requirejs: {
+            compile: {
+                options: {
+                    name: "src/main",
+                    include: ["src/skinner/core/question"],
+                    out: "release/main-built.js",
+                    mainConfigFile: 'src/main.js',
+                    baseUrl: "./",
+                    optimize: "uglify",
+                    useStrict: true
+                }
+            }
         }
     });
 
     // Load plugins
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-csslint');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
 
     // Tasks
-    grunt.registerTask('default', ['jshint', 'csslint']);
+    grunt.registerTask('default', ['jshint', 'csslint', 'requirejs']);
+    grunt.registerTask('lint', ['jshint', 'csslint']);
 };
