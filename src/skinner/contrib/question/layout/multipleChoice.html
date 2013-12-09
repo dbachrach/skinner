@@ -7,7 +7,7 @@
                 <div class="ui green large radio checkbox">
                     <input type="radio" name="questionAnswer" id="questionAnswer-{{@index}}" value="{{answerLabel @index}}" />
                     <label for="questionAnswer-{{@index}}">
-                        {{#if [../data.show answer labels]}}{{answerLabel @index}}) {{/if}}
+                        {{#if ../[show answer labels]}}{{answerLabel @index}}) {{/if}}
                         {{this}}
                     </label>
                 </div>

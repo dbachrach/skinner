@@ -1,4 +1,4 @@
-define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/intervals", "src/skinner/core/loader", "lib/ryaml!config/questions"], function(require, $, _, howler, Page, intervals, loader, questionData) {
+define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/intervals", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function(require, $, _, howler, Page, intervals, loader, keypath, allQuestionData) {
     "use strict";
 
     var states = {
@@ -17,20 +17,21 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
         init: function (data, task) {
             this._super(data, task);
 
-            this.style = this.data.style || "multipleChoice";
-            this.questionSet = this.data["question set"];
-            this.questions = questionData[this.questionSet];
-            this.time = intervals.parseTimeInterval(this.data.time);
-            this.order = this.data.order;
+            this.style = keypath(this.data, "style", "multipleChoice");
+            this.questionSet = keypath(this.data, "question set", {});
+            this.questionsData = allQuestionData[this.questionSet];
+            this.time = intervals.parseTimeInterval(keypath(this.data, "time"));
+            this.order = keypath(this.data, "order");
             this.id = this.style + "-" + this.questionSet;
             // this.reportResults = this.data.reportResults || true;
+
             this.currentScore = 0;
             this.currentMaxScore = 0;
 
-            applyQuestionIds(this.questions);
+            applyQuestionIds(this.questionsData);
 
             if (this.order === "random") {
-                this.questions = _.shuffle(this.questions);
+                this.questionsData = _.shuffle(this.questionsData);
             }
         },
         postShow: function () {
@@ -41,14 +42,17 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
             this.showQuestion();
         },
         showQuestion: function () {
-            if (this.questions.length <= this.currentQuestionIndex) {
+            if (this.questionsData.length <= this.currentQuestionIndex) {
                 console.log("Scored " + this.currentScore + " out of " + this.currentMaxScore);
                 return this.moveToNextPage();
             }
 
+            var currentQuestionData = this.questionsData[this.currentQuestionIndex];
+            var currentQuestionStyle = keypath(currentQuestionData, "style", this.style);
+
             var base = this;
-            loader.loadModule(this.style, "question", function (Question) {
-                base.currentQuestion = new Question(base.questions[base.currentQuestionIndex], base.questions[base.currentQuestionIndex].id, base.data, base.style);
+            loader.loadModule(currentQuestionStyle, "question", function (Question) {
+                base.currentQuestion = new Question(currentQuestionData, currentQuestionData.id, base.data, currentQuestionStyle);
                 base.currentQuestion.show();
                 base.questionStartTime = _.now();
             });
