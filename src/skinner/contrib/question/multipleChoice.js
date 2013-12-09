@@ -10,7 +10,7 @@ define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars"], function($
             // Example: `{{answerLabel 0 }}` -> `"A) "`.
             //          `{{answerLabel 2 }}` -> `"C) "`.
             Handlebars.registerHelper("answerLabel", function(index) {
-                return String.fromCharCode(65 + index) + ") ";
+                return String.fromCharCode(65 + index);
             });
 		},
 		selectedAnswer: function() {

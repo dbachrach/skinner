@@ -31,18 +31,21 @@ define (["lib/lodash", "lib/class", "src/skinner/core/loader"], function (_, Cla
             return this.data.correctAnswer;
         },
         tallyScore: function () {
+            if (this.isCorrect()) {
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        },
+        isCorrect: function () {
             var selectedAnswer = this.selectedAnswer().toString();
             var correctAnswer = this.correctAnswer().toString();
             if (!this.caseSensitiveScoring) {
                 selectedAnswer = selectedAnswer.toLowerCase();
                 correctAnswer = correctAnswer.toLowerCase();
             }
-            if (selectedAnswer === correctAnswer) {
-                return 1;
-            }
-            else {
-                return 0;
-            }
+            return (selectedAnswer === correctAnswer);
         },
         maxScore: function () {
             return 1;

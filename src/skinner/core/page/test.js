@@ -1,4 +1,4 @@
-define (["require", "lib/jquery", "lib/lodash", "src/skinner/core/page", "src/skinner/core/intervals", "src/skinner/core/loader", "lib/ryaml!config/questions"], function(require, $, _, Page, intervals, loader, questionData) {
+define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/intervals", "src/skinner/core/loader", "lib/ryaml!config/questions"], function(require, $, _, howler, Page, intervals, loader, questionData) {
     "use strict";
 
     var states = {
@@ -68,6 +68,23 @@ define (["require", "lib/jquery", "lib/lodash", "src/skinner/core/page", "src/sk
 
             var currentQuestionScore = this.currentQuestion.tallyScore();
             var currentQuestionMaxScore = this.currentQuestion.maxScore();
+
+            function playOptionalSound(soundFile) {
+                if (!_.isUndefined(soundFile)) {
+                    new howler.Howl({
+                        urls: ["content/sounds/" + soundFile]
+                    }).play();
+                }
+            }
+
+            if (this.currentQuestion.isCorrect()) {
+                console.log("correct");
+                playOptionalSound(this.data["correct sound"]);
+            }
+            else {
+                console.log("incorrect");
+                playOptionalSound(this.data["incorrect sound"]);
+            }
 
             this.currentScore += currentQuestionScore;
             this.currentMaxScore += currentQuestionMaxScore;

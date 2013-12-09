@@ -31,6 +31,7 @@
 - [ ] use npm for all dependencies
 - [ ] use an amd build of handlebars
 - [ ] set up package.json to have a test script that verifies code
+- [ ] Interrupters
 
 ## Postponed
 
@@ -79,3 +80,4 @@
 - [x] PathFind has 3 copies. make one.
 - [x] use handlebars for resolving dimensions and data
 - [x] rename helpers.js
+- [x] Sounds

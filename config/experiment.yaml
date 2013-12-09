@@ -69,10 +69,12 @@ tasks:
       style: {{Preparation.questionType}}
       question set: passage{{indexed Order.passageId}}-a
       # time: 2 seconds
+      correct sound: success.wav
+      incorrect sound: fail.wav
       next:
         button: Next
       feedback: final score
-      showAnswerLabels: true
+      show answer labels: true
 
   distract:
     - type: distractor
