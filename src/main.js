@@ -12,27 +12,27 @@
             }
         },
         map: {
-          "*": {
-            "lib/jquery": "lib/jquery-private",
+            "*": {
+                "lib/jquery": "lib/jquery-private",
 
-            // Map loader plugins, so you don't have to include "lib/" prefix.
-            "ryaml": "lib/ryaml",
-            "domReady": "lib/domReady",
-            "text": "lib/text",
-            "css": "lib/css",
-            "peg": "lib/peg",
-            "hbars": "lib/hbars"
-          },
-          "lib/jquery-private": { "lib/jquery": "lib/jquery" },
+                // Map loader plugins, so you don't have to include "lib/" prefix.
+                "ryaml": "lib/ryaml",
+                "domReady": "lib/domReady",
+                "text": "lib/text",
+                "css": "lib/css",
+                "peg": "lib/peg",
+                "hbars": "lib/hbars"
+            },
+            "lib/jquery-private": { "lib/jquery": "lib/jquery" },
         },
-        urlArgs: "time=" + (new Date()).getTime() // for development to not cache scripts
+
+        // Bust cache during development,
+        // so a refresh in the browser gets the latest code.
+        urlArgs: "bust=" + (new Date()).getTime()
     });
 
     // `main` dependencies: experiment
     require(["lib/jquery", "src/skinner/core/experiment", "ryaml!config/experiment", "domReady!"], function ($, Experiment, expData, domReady) {
-        $.ajaxSetup ({
-            cache: false // Disable caching of AJAX responses
-        });
 
         // TODO: This should go somewhere else,
         // and also check the state of the experiment to let people leave when they are done

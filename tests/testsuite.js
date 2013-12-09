@@ -33,10 +33,11 @@
     // extension so RequireJS resolves them as relative paths rather than using
     // the `baseUrl` value supplied above.
     var testModules = [
-        "skinner/core/intervalsTests.js",
         "skinner/core/experimentTests.js",
-        "skinner/core/testPageTests.js",
-        "skinner/core/resolverTests.js"
+        "skinner/core/intervalsTests.js",
+        "skinner/core/keypathTests.js",
+        "skinner/core/resolverTests.js",
+        "skinner/core/testPageTests.js"
     ];
 
     // Resolve all testModules and then start the Test Runner.
