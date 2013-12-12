@@ -1,4 +1,4 @@
-define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/intervals", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function(require, $, _, howler, Page, intervals, loader, keypath, allQuestionData) {
+define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function(require, $, _, howler, Page, loader, keyPath, allQuestionData) {
     "use strict";
 
     var states = {
@@ -17,13 +17,14 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
         init: function (data, task) {
             this._super(data, task);
 
-            this.style = keypath(this.data, "style", "multipleChoice");
-            this.questionSet = keypath(this.data, "question set", {});
+            this.style = keyPath(this.data, "style", "multipleChoice");
+            this.questionSet = keyPath(this.data, "question set", {});
             this.questionsData = allQuestionData[this.questionSet];
-            this.time = intervals.parseTimeInterval(keypath(this.data, "time"));
-            this.order = keypath(this.data, "order");
+            this.order = keyPath(this.data, "order");
             this.id = this.style + "-" + this.questionSet;
             // this.reportResults = this.data.reportResults || true;
+
+            this.autoStartPageTimer = false;
 
             this.currentScore = 0;
             this.currentMaxScore = 0;
@@ -48,25 +49,21 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
             }
 
             var currentQuestionData = this.questionsData[this.currentQuestionIndex];
-            var currentQuestionStyle = keypath(currentQuestionData, "style", this.style);
+            var currentQuestionStyle = keyPath(currentQuestionData, "style", this.style);
 
             var base = this;
             loader.loadModule(currentQuestionStyle, "question", function (Question) {
                 base.currentQuestion = new Question(currentQuestionData, currentQuestionData.id, base.data, currentQuestionStyle);
                 base.currentQuestion.show();
                 base.questionStartTime = _.now();
-            });
 
-            if (_.isNumber(this.time)) {
-                this.timeout = setTimeout(function () {
-                    base.next();
-                }, this.time);
-            }
+                base.startPageTimer();
+            });
         },
         next: function () {
-            var questionEndTime = _.now();
+            this.cancelPageTimer();
 
-            clearTimeout(this.timeout);
+            var questionEndTime = _.now();
 
             var questionTime = questionEndTime - this.questionStartTime;
 
@@ -82,11 +79,9 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
             }
 
             if (this.currentQuestion.isCorrect()) {
-                console.log("correct");
                 playOptionalSound(this.data["correct sound"]);
             }
             else {
-                console.log("incorrect");
                 playOptionalSound(this.data["incorrect sound"]);
             }
 

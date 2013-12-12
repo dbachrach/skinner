@@ -11,7 +11,6 @@
 
 ## Skinner Core
 
-- [ ] Make all pages support Time, and figure out a clean way to do it with test and countdown pages
 - [ ] Distractor page cleanup
 - [ ] Add tests
 - [ ] write docs
@@ -81,3 +80,4 @@
 - [x] use handlebars for resolving dimensions and data
 - [x] rename helpers.js
 - [x] Sounds
+- [x] Make all pages support Time, and figure out a clean way to do it with test and countdown pages

@@ -1,10 +1,13 @@
-define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", "src/skinner/core/keyPath"], function (_, Class, Mousetrap, loader, keyPath) {
+define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", "src/skinner/core/intervals", "src/skinner/core/keyPath"], function (_, Class, Mousetrap, loader, intervals, keyPath) {
     "use strict";
 
     var Page = Class.extend({
         init: function (data, task) {
             this.data = data || {};
             this.task = task;
+
+            this.time = intervals.parseTimeInterval(keyPath(this.data, "time"));
+            this.autoStartPageTimer = true;
         },
         show: function () {
             this.preShow();
@@ -17,6 +20,10 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
                 base.updateButtons();
                 base.updateKeys(true);
 
+                if (base.autoStartPageTimer) {
+                    base.startPageTimer();
+                }
+
                 base.postShow();
             });
         },
@@ -25,6 +32,22 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
         },
         postShow: function () {
             // Override
+        },
+        startPageTimer: function () {
+            if (_.isNumber(this.time)) {
+                var base = this;
+                this.timeout = setTimeout(function () {
+                    base.pageTimerFired();
+                }, this.time);
+            }
+        },
+        pageTimerFired: function () {
+            this.next();
+        },
+        cancelPageTimer: function () {
+            if (!_.isUndefined(this.timeout)) {
+                clearTimeout(this.timeout);
+            }
         },
         hide: function() {
             this.preHide();
@@ -40,9 +63,11 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
             // Override
         },
         next: function () {
+            this.cancelPageTimer();
             this.moveToNextPage();
         },
         previous: function () {
+            this.cancelPageTimer();
             this.moveToPreviousPage();
         },
         moveToNextPage: function () {
