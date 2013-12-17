@@ -27,13 +27,16 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
         },
 
         /**
+         * @param pageId The page id that is reporting data
+         * @param contextId An additional context id for the data being reported
+         *                For example, when a TestPage reports data, the contextId is the Question Id.
          */
-        report: function (page, id, name, value) {
-            var report = _.findWhere(this.reports, { page: page, id: id});
+        report: function (pageId, contextId, name, value) {
+            var report = _.findWhere(this.reports, { page: pageId, context: contextId});
             if (_.isUndefined(report)) {
                 report = {
-                    page: page,
-                    id: id
+                    page: pageId,
+                    id: contextId
                 };
                 this.reports.push(report);
             }

@@ -2,13 +2,17 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
     "use strict";
 
     var Task = Class.extend({
-        // TODO: Rename context parameter
-        init: function (trial, pages, subject, additionalDimensionData, context) {
+        // TODO: Rename context parameter, this is the repeat-index at the moment
+        init: function (name, trial, pages, subject, additionalDimensionData, context) {
+            this.name = name;
             this.trial = trial;
             this.pages = pages;
             this.subject = subject;
             this.additionalDimensionData = additionalDimensionData;
             this.context = context;
+        },
+        id: function () {
+            return this.name + "-" + this.context;
         },
         begin: function () {
             this.currentPageIndex = 0;

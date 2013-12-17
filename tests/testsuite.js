@@ -36,8 +36,11 @@
         "skinner/core/experimentTests.js",
         "skinner/core/intervalsTests.js",
         "skinner/core/keypathTests.js",
+        "skinner/core/pageTests.js",
+        "skinner/core/QuestionTests.js",
         "skinner/core/resolverTests.js",
-        "skinner/core/testPageTests.js"
+        "skinner/core/testPageTests.js",
+        "functional/functionalTests.js"
     ];
 
     // Resolve all testModules and then start the Test Runner.

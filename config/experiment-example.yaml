@@ -1,0 +1,108 @@
+---
+name: # Choose a name for your experiment
+authors: # List all authors. Enclose in brackets like:
+         # [Erin Sparck, Robert Bjork, Elizabeth Bjork]
+
+# Choose the type of login system you want to use.
+# Currently, the only login system is `basic`.
+login:
+  type: # Choose your login type. For example: basic
+
+reporting:
+  type: download
+
+
+dimensions:
+  Preparation:
+    # - questionType: multipleChoice
+    - questionType: triangle
+
+  Order:
+    - passageId: [1, 2]
+    - passageId: [2, 1]
+
+  PracticeList:
+      practice: A
+      exam: B
+      practice: B
+      exam: A
+
+# Describe the steps of your experiment.
+# Steps represent a high-level break up of your experiment.
+# For example, you may have an Introduction step where the experiment is described.
+# Then, you might have a Study step, followed by an Exam step, finished with a Debrief step.
+# Steps can be repeated by using specifying how they should be repeated.
+steps:
+  - task: # This is the name of the task, which you define below.
+
+  - task: # Another step
+    repeat: # Describes how the step should be repeated.
+            # Allowed values:
+            # repeat: across X
+            # repeat: X times
+
+  # etc...
+
+tasks:
+  prepare:
+    - type: text
+      title: Instructions
+      content file: instructions-{{Preparation.questionType}}
+      next:
+        button: Start
+        keys: [space, right]
+      time: 2 seconds
+
+    - show: if {{Preparation.questionType}} is "triangle"
+      type: test
+      style: triangle
+      question set: example
+      time: 1 second
+      next:
+        button: I understand it!
+
+  study:
+    # - type: text
+    #   title: Passage {{_index}}
+    #   content file: passage{{indexed Order.passageId}}
+    #   next:
+    #     button: Continue
+
+    # - type: countdown
+    #   title: You are about to start the test in...
+    #   time: 3 seconds
+
+    - type: test
+      style: {{Preparation.questionType}}
+      question set: passage{{indexed Order.passageId}}-a
+      # time: 2 seconds
+      correct sound: success.wav
+      incorrect sound: fail.wav
+      next:
+        button: Next
+      feedback: final score
+      show answer labels: true
+      time: 1 second
+
+  distract:
+    - type: distractor
+      exercise: tetris
+      time: 4 minutes
+      content: You are now going to play Tetris for 4 minutes.
+      next:
+        button: Go!
+      time: 5 seconds
+
+  exam:
+    - type: test
+      style: cuedRecall
+      question set: passage{{indexed Order.passageId}}-a
+      next:
+        button: Next
+
+  finish:
+    - type: text
+      title: Experiment completed
+      content: Submit your results.
+      next:
+        button: submit

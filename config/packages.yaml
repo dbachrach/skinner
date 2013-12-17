@@ -1,3 +1,8 @@
+---
+
+# This file lists all of the packages you use in your experiment.
+# You should typically keep what is here and only add to it.
+
 packages:
   - app
   - skinner:

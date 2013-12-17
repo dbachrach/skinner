@@ -1,16 +1,28 @@
 define(function (require) {
     var Test = require("src/skinner/core/page/test");
 
-    QUnit.module("skinner/core/page/test");
+    module("skinner/core/page/test");
 
-    QUnit.test("test - Defaults", function () {
+    test("test - Defaults", function () {
         var t = new Test();
-        QUnit.ok(t);
+        ok(t);
 
-        QUnit.equal(t.style, "multipleChoice");
+        equal(t.style, "multipleChoice");
     });
 
-    // QUnit.test("test - scoring - default - right", function () {
+    test("test - id()", function () {
+        var mockTask = { id: function () { return "MyTask"; } };
+
+        var testData = { "type": "test", "question set": "SampleQuestionSet"};
+        var t = new Test(testData, mockTask);
+        equal(t.id(), "MyTask-test-multipleChoice-SampleQuestionSet");
+
+        testData = { "type": "test", "style": "MyStyle", "question set": "SampleQuestionSet"};
+        t = new Test(testData, mockTask);
+        equal(t.id(), "MyTask-test-MyStyle-SampleQuestionSet");
+    });
+
+    // test("test - scoring - default - right", function () {
     //     var t = new Test();
 
     //     var mockQuestionRight = {
@@ -19,9 +31,9 @@ define(function (require) {
     //     };
 
     //     t.currentQuestion = mockQuestionRight;
-    //     QUnit.equal(t.calculateCurrentQuestionScore(), 1);
+    //     equal(t.calculateCurrentQuestionScore(), 1);
     // });
-    // QUnit.test("test - scoring - default - wrong", function () {
+    // test("test - scoring - default - wrong", function () {
     //     var t = new Test();
 
     //     var mockQuestionWrong = {
@@ -30,9 +42,9 @@ define(function (require) {
     //     };
 
     //     t.currentQuestion = mockQuestionWrong;
-    //     QUnit.equal(t.calculateCurrentQuestionScore(), 0);
+    //     equal(t.calculateCurrentQuestionScore(), 0);
     // });
-    // QUnit.test("test - scoring - custom", function () {
+    // test("test - scoring - custom", function () {
     //     var t = new Test();
 
     //     var mockQuestionCustom = {
@@ -42,14 +54,14 @@ define(function (require) {
     //     };
 
     //     t.currentQuestion = mockQuestionCustom;
-    //     QUnit.equal(t.calculateCurrentQuestionScore(), 5);
+    //     equal(t.calculateCurrentQuestionScore(), 5);
 
     //     var mockQuestionCustom2 = {
     //         tallyScore: function () { return -10; }
     //     };
 
     //     t.currentQuestion = mockQuestionCustom2;
-    //     QUnit.equal(t.calculateCurrentQuestionScore(), -10);
+    //     equal(t.calculateCurrentQuestionScore(), -10);
 
     // });
 });

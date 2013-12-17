@@ -9,7 +9,6 @@ module.exports = function(grunt) {
         jshint: {
             files: ['gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
             options: {
-                ignores: ['src/skinner/core/vendor/*.js'],
                 jshintrc: true
             }
         },

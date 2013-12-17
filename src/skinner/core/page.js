@@ -3,11 +3,15 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
 
     var Page = Class.extend({
         init: function (data, task) {
-            this.data = data || {};
+            this.data = data;
             this.task = task;
+            this.type = keyPath(this.data, "type");
 
             this.time = intervals.parseTimeInterval(keyPath(this.data, "time"));
             this.autoStartPageTimer = true;
+        },
+        id: function () {
+            return this.task.id() + "-" + this.type;
         },
         show: function () {
             this.preShow();
@@ -79,7 +83,7 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
             this.task.previousPage();
         },
         layoutName: function () {
-            return this.data.type;
+            return this.type;
         },
         extendedBindContent: function () {
             return {};

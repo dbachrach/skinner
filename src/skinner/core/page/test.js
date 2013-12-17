@@ -7,21 +7,14 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
         PostTest: 2
     };
 
-    function applyQuestionIds(questions) {
-        _.each(questions, function (question, index) {
-            question.id = index.toString();
-        });
-    }
-
     var TestPage = Page.extend({
         init: function (data, task) {
             this._super(data, task);
 
             this.style = keyPath(this.data, "style", "multipleChoice");
-            this.questionSet = keyPath(this.data, "question set", {});
+            this.questionSet = keyPath(this.data, "question set");
             this.questionsData = allQuestionData[this.questionSet];
             this.order = keyPath(this.data, "order");
-            this.id = this.style + "-" + this.questionSet;
             // this.reportResults = this.data.reportResults || true;
 
             this.autoStartPageTimer = false;
@@ -29,11 +22,17 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
             this.currentScore = 0;
             this.currentMaxScore = 0;
 
-            applyQuestionIds(this.questionsData);
+            // Assign Question Ids
+            _.each(this.questionsData, function (question, index) {
+                question.id = index.toString();
+            });
 
             if (this.order === "random") {
                 this.questionsData = _.shuffle(this.questionsData);
             }
+        },
+        id: function () {
+            return this._super() + "-" + this.style + "-" + this.questionSet;
         },
         postShow: function () {
             console.log("Showing TestPage: " + this.style);
@@ -89,12 +88,14 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
             this.currentMaxScore += currentQuestionMaxScore;
 
             // if (this.reportResults) {
-                this.task.subject.report(this.id, this.currentQuestion.id, "answer", this.currentQuestion.selectedAnswer());
-                this.task.subject.report(this.id, this.currentQuestion.id, "correct answer", this.currentQuestion.correctAnswer());
-                this.task.subject.report(this.id, this.currentQuestion.id, "score", currentQuestionScore);
-                this.task.subject.report(this.id, this.currentQuestion.id, "max score", currentQuestionMaxScore);
-                this.task.subject.report(this.id, this.currentQuestion.id, "time(ms)", questionTime);
-                this.currentQuestion.reportResults(this.task.subject, this.id);
+                var pageId = this.id();
+                var contextId = this.currentQuestion.id;
+                this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
+                this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswer());
+                this.task.subject.report(pageId, contextId, "score", currentQuestionScore);
+                this.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
+                this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+                this.currentQuestion.reportResults(this.task.subject, pageId);
             // }
 
             this.currentQuestionIndex++;

@@ -98,7 +98,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
             // console.log(additionalDimensionData);
             var taskData = this.tasks[stepData.task];
             console.log("Created context: ");console.log(context);
-            this.currentStep = new Task(this, taskData, this.subject, additionalDimensionData, context);
+            this.currentStep = new Task(stepData.task, this, taskData, this.subject, additionalDimensionData, context);
             this.currentStep.begin();
         },
 

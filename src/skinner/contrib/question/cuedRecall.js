@@ -21,11 +21,11 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
             return $("#cuedRecallAnswer").val();
         },
 
-        reportResults: function (subject, testId) {
+        reportResults: function (subject, pageId) {
             var reportSpellingDistance = keyPath(this.testData, "report.spelling distance", true);
             if (reportSpellingDistance) {
                 var levenshtein = _s.levenshtein($("#cuedRecallAnswer").val(), this.correctAnswer());
-                subject.report(testId, this.id, "Spelling Distance", levenshtein);
+                subject.report(pageId, this.id, "Spelling Distance", levenshtein);
             }
         }
     });

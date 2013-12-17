@@ -1,4 +1,4 @@
-define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/keypath"], function (_, Class, loader, keypath) {
+define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/keypath"], function (_, Class, loader, keyPath) {
     "use strict";
 
     var Question = Class.extend({
@@ -7,7 +7,7 @@ define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core
             this.id = id;
             this.testData = testData;
             this.style = style;
-            this.caseSensitiveScoring = keypath(this.testData, "case sensitive scoring", false);
+            this.caseSensitiveScoring = keyPath(this.testData, "case sensitive scoring", false);
         },
         show: function () {
             var base = this;
@@ -28,7 +28,7 @@ define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core
             throw "Question did not override selectedAnswer()";
         },
         correctAnswer: function () {
-            return this.data.correctAnswer;
+            return keyPath(this.data, "correct answer");
         },
         tallyScore: function () {
             if (this.isCorrect()) {
@@ -39,16 +39,19 @@ define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core
             }
         },
         isCorrect: function () {
+
             var selectedAnswer = this.selectedAnswer();
+            var correctAnswer = this.correctAnswer();
 
             // Undefined selectedAnswer() indicates no selection, which is always incorrect.
-            if (_.isUndefined(selectedAnswer)) {
+            // Undefined correctAnswer() indicates "No correct answer", so is always incorrect.
+            if (_.isUndefined(selectedAnswer) || _.isUndefined(correctAnswer)) {
                 return false;
             }
 
             // All answers are transformed to strings for comparison.
             selectedAnswer = selectedAnswer.toString();
-            var correctAnswer = this.correctAnswer().toString();
+            correctAnswer = correctAnswer.toString();
 
             // "case sensative scoring" can be configured on the question.
             if (!this.caseSensitiveScoring) {

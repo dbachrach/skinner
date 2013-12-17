@@ -5,7 +5,7 @@ example:
       - Victoria
       - Vancouver
       - Berlin
-    correctAnswer: a
+    correct answer: a
 
 passage1-a:
   - question: What is the scientific name (genus and species) for the common domestic ferret?
@@ -13,7 +13,8 @@ passage1-a:
       - Mustela putorius furo
       - Mustela eversmanii
       - Mustela putorius
-    correctAnswer: a
+    correct answer: a
+    # style: triangle
     metadata:
       competitive: yes
 
@@ -22,7 +23,7 @@ passage1-a:
       - Herpestidae
       - Mustelidae
       - Mephitidae
-    correctAnswer: b
+    correct answer: b
     metadata:
       competitive: yes
 
@@ -32,5 +33,5 @@ passage2-a:
       - Victoria
       - Vancouver
       - Berlin
-    correctAnswer: a
+    correct answer: a
 

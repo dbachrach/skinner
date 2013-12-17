@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Test Runner</title>
-        <link rel="stylesheet" href="vendor/qunit.css" />
+    <head>
+        <title>Test Runner</title>
+        <link rel="stylesheet" href="lib/qunit.css" />
 
-		<!-- QUnit includes -->
-	    <script src="vendor/qunit.js"></script>
+        <!-- QUnit includes -->
+        <script src="../lib/jquery.js"></script>
+        <script src="lib/qunit.js"></script>
+        <script src="lib/funcunit.js"></script>
 
         <!--Prevent Tests from auto starting-->
         <script>
@@ -13,11 +15,11 @@
         QUnit.config.autostart = false;
         </script>
 
-		<!-- Load RequireJS & the testsuite -->
-		<!--<script src="../src/require-config.js"></script>-->
-	    <script src="../lib/require.js" data-main="testsuite.js"></script>
-	</head>
-	<body>
-		<div id="qunit"></div>
-	</body>
+        <!-- Load RequireJS & the testsuite -->
+        <!--<script src="../src/require-config.js"></script>-->
+        <script src="../lib/require.js" data-main="testsuite.js"></script>
+    </head>
+    <body>
+        <div id="qunit"></div>
+    </body>
 </html>

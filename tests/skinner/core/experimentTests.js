@@ -1,11 +1,11 @@
 define(function (require) {
     var Experiment = require("src/skinner/core/experiment");
-    
-    QUnit.module("skinner/core/experiment");
-    
-    QUnit.test("experiment - Creation", function () { 
+
+    module("skinner/core/experiment");
+
+    test("experiment - Creation", function () {
         var e = new Experiment();
-        QUnit.ok(e);
+        ok(e);
     });
 
 });

@@ -14,20 +14,16 @@
 - [ ] Distractor page cleanup
 - [ ] Add tests
 - [ ] write docs
-- [ ] Task/Page ids for reporting
+- [ ] Task/Page ids for reporting, maybe add id() function to classes, and then reporting uses that
 - [ ] Pick statement: random from list.
 - [ ] % and %% variables should be available in templates?
 - [ ] Figure out how finishing works
-- [ ] Gather all 3rd party liceneses
 - [ ] Figure out r.js and how to compile all of this into a single file
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] Create requirejs-yaml-plugin
 - [ ] feedback: final score
 - [ ] different question types for a question set
-- [ ] better way to load handlebars helpers?
-- [ ] pressing enter submits questions
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
-- [ ] use npm for all dependencies
 - [ ] use an amd build of handlebars
 - [ ] set up package.json to have a test script that verifies code
 - [ ] Interrupters
@@ -37,6 +33,9 @@
 - [ ] pretty animations?
 - [ ] Create helper apps (tri start app, tri start package)
 - [ ] Allow specifying module namespace in yaml
+- [ ] pressing enter submits questions
+- [ ] better way to load handlebars helpers?
+- [ ] use npm for all dependencies
 
 ## Finished
 
