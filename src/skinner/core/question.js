@@ -1,4 +1,4 @@
-define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/keypath"], function (_, Class, loader, keyPath) {
+define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/loader", "src/skinner/core/keypath"], function (_, _s, Class, loader, keyPath) {
     "use strict";
 
     var Question = Class.extend({
@@ -8,6 +8,23 @@ define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core
             this.testData = testData;
             this.style = style;
             this.caseSensitiveScoring = keyPath(this.testData, "case sensitive scoring", false);
+
+            var base = this;
+
+            // Goes through the answers and finds the answer that ends with a *.
+            // This answer is considered the correct answer.
+            // We assign that answer to the _correctAnswer field.
+            // We also remove the * from the answer for displaying in UI.
+            this.data.answers = _.map(this.data.answers, function (answer) {
+                if (_s.endsWith(answer, "*")) {
+                    var trimmedAnswer = answer.substring(0, answer.length - 1);
+                    base._correctAnswer = trimmedAnswer;
+                    return trimmedAnswer;
+                }
+                else {
+                    return answer;
+                }
+            });
         },
         show: function () {
             var base = this;
@@ -28,7 +45,7 @@ define (["lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core
             throw "Question did not override selectedAnswer()";
         },
         correctAnswer: function () {
-            return keyPath(this.data, "correct answer");
+            return this._correctAnswer;
         },
         tallyScore: function () {
             if (this.isCorrect()) {

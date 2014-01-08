@@ -314,11 +314,11 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
 
             var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge/2)));
 
-            var aCircle = new Circle(a, "a");
+            var aCircle = new Circle(a, this.data.answers[0]);
             aCircle.addLabel(this.data.answers[0], LabelLocation.ABOVE);
-            var bCircle = new Circle(b, "b");
+            var bCircle = new Circle(b, this.data.answers[1]);
             bCircle.addLabel(this.data.answers[1], LabelLocation.BELOW);
-            var cCircle = new Circle(c, "c");
+            var cCircle = new Circle(c, this.data.answers[2]);
             cCircle.addLabel(this.data.answers[2], LabelLocation.BELOW);
 
             var centerCircle = new Circle(center, "none");

@@ -1,32 +1,33 @@
+
 # TODO
 
 ## For Triangle
 
+### Triangle Specific
 - [ ] Fill out instructions
 - [ ] Example triangle
 - [ ] Remove continue buttons from passages and add 9 min timer
 - [ ] Play with the triangle color palette
 - [ ] scoring for triangle
 
+### Core
+- [ ] Figure out how finishing works
+- [ ] feedback: final score
+- [ ] Choosing a condition
+- [ ] trim whitespace from answers in questions.yaml
 
 ## Skinner Core
 
 - [ ] Distractor page cleanup
-- [ ] Add tests
 - [ ] write docs
-- [ ] Task/Page ids for reporting, maybe add id() function to classes, and then reporting uses that
-- [ ] Pick statement: random from list.
 - [ ] % and %% variables should be available in templates?
-- [ ] Figure out how finishing works
-- [ ] Figure out r.js and how to compile all of this into a single file
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
-- [ ] Create requirejs-yaml-plugin
-- [ ] feedback: final score
-- [ ] different question types for a question set
-- [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
-- [ ] use an amd build of handlebars
-- [ ] set up package.json to have a test script that verifies code
+- [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per pagede2
+
+## Stretch Goals
 - [ ] Interrupters
+- [ ] Flasher
+- [ ] Pick statement: random from list.
 
 ## Postponed
 
@@ -36,6 +37,9 @@
 - [ ] pressing enter submits questions
 - [ ] better way to load handlebars helpers?
 - [ ] use npm for all dependencies
+- [ ] set up package.json to have a test script that verifies code
+- [ ] use an amd build of handlebars
+- [ ] Create requirejs-yaml-plugin
 
 ## Finished
 
@@ -80,3 +84,7 @@
 - [x] rename helpers.js
 - [x] Sounds
 - [x] Make all pages support Time, and figure out a clean way to do it with test and countdown pages
+- [x] different question types for a question set
+- [x] Figure out r.js and how to compile all of this into a single file
+- [x] Task/Page ids for reporting, maybe add id() function to classes, and then reporting uses that
+- [x] Add tests

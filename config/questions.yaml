@@ -2,18 +2,16 @@
 example:
   - question: What is the capital of British Columbia, Canada?
     answers:
-      - Victoria
+      - Victoria*
       - Vancouver
       - Berlin
-    correct answer: a
 
 passage1-a:
   - question: What is the scientific name (genus and species) for the common domestic ferret?
     answers:
-      - Mustela putorius furo
+      - Mustela putorius furo*
       - Mustela eversmanii
       - Mustela putorius
-    correct answer: a
     # style: triangle
     metadata:
       competitive: yes
@@ -21,17 +19,14 @@ passage1-a:
   - question: What family does the ferret belong to?
     answers:
       - Herpestidae
-      - Mustelidae
+      - Mustelidae*
       - Mephitidae
-    correct answer: b
     metadata:
       competitive: yes
 
 passage2-a:
   - question: What is the capital of British Columbia, Canada?
     answers:
-      - Victoria
+      - Victoria*
       - Vancouver
       - Berlin
-    correct answer: a
-
