@@ -14,7 +14,6 @@
 - [ ] Figure out how finishing works
 - [ ] feedback: final score
 - [ ] Choosing a condition
-- [ ] trim whitespace from answers in questions.yaml
 
 ## Skinner Core
 
@@ -88,3 +87,4 @@
 - [x] Figure out r.js and how to compile all of this into a single file
 - [x] Task/Page ids for reporting, maybe add id() function to classes, and then reporting uses that
 - [x] Add tests
+- [x] trim whitespace from answers in questions.yaml

@@ -25,6 +25,12 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
                     return answer;
                 }
             });
+
+            // Trim white space from answers.
+            // TODO: Write a test for this
+            this.data.answer = _.map(this.data.answers, function (answer) {
+                return _s.trim(answer);
+            });
         },
         show: function () {
             var base = this;
