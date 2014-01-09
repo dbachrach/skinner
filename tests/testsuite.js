@@ -39,6 +39,7 @@
         "skinner/core/pageTests.js",
         "skinner/core/QuestionTests.js",
         "skinner/core/resolverTests.js",
+        "skinner/core/subjectTests.js",
         "skinner/core/testPageTests.js",
         "functional/functionalTests.js"
     ];

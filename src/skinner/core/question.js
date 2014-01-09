@@ -11,26 +11,31 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
 
             var base = this;
 
-            // Goes through the answers and finds the answer that ends with a *.
-            // This answer is considered the correct answer.
-            // We assign that answer to the _correctAnswer field.
-            // We also remove the * from the answer for displaying in UI.
-            this.data.answers = _.map(this.data.answers, function (answer) {
-                if (_s.endsWith(answer, "*")) {
-                    var trimmedAnswer = answer.substring(0, answer.length - 1);
-                    base._correctAnswer = trimmedAnswer;
-                    return trimmedAnswer;
-                }
-                else {
-                    return answer;
-                }
-            });
+            if (!_.isUndefined(keyPath(this.data, "answers"))) {
 
-            // Trim white space from answers.
-            // TODO: Write a test for this
-            this.data.answer = _.map(this.data.answers, function (answer) {
-                return _s.trim(answer);
-            });
+                // Goes through the answers and finds the answer that ends with a *.
+                // This answer is considered the correct answer.
+                // We assign that answer to the _correctAnswer field.
+                // We also remove the * from the answer for displaying in UI.
+                this.data.answers = _.map(this.data.answers, function (answer) {
+                    if (_s.endsWith(answer, "*")) {
+                        var trimmedAnswer = answer.substring(0, answer.length - 1);
+                        base._correctAnswer = trimmedAnswer;
+                        return trimmedAnswer;
+                    }
+                    else {
+                        return answer;
+                    }
+                });
+
+                // Trim white space from answers.
+                // TODO: Write a test for this
+                this.data.answer = _.map(this.data.answers, function (answer) {
+                    return _s.trim(answer);
+                });
+
+                base._correctAnswer = _s.trim(base._correctAnswer);
+            }
         },
         show: function () {
             var base = this;

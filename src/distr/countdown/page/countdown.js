@@ -11,20 +11,15 @@ define (["lib/jquery", "lib/lodash", "src/skinner/core/page", "src/skinner/core/
 		postShow: function() {
 			var base = this;
 
-			function countdown(val, completion) {
-				if (val === 0) {
-					completion();
-				}
-				else {
+			function countdown(val) {
+				if (val > 0) {
 					$("#countdown").text(val);
-					_.delay(countdown, 1000, val - 1, completion);
+					_.delay(countdown, 1000, val - 1);
 				}
 			}
 
 			var count = this.time / 1000;
-			countdown(count, function () {
-				base.moveToNextPage();
-			});
+			countdown(count);
 		},
 	});
 

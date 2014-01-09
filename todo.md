@@ -3,17 +3,21 @@
 
 ## For Triangle
 
-### Triangle Specific
-- [ ] Fill out instructions
+### Erin
+- [x] Fill out instructions
+- [ ] Finalize Instructions
 - [ ] Example triangle
 - [ ] Remove continue buttons from passages and add 9 min timer
-- [ ] Play with the triangle color palette
-- [ ] scoring for triangle
+- [x] remove sounds
 
-### Core
+### Dustin
 - [ ] Figure out how finishing works
 - [ ] feedback: final score
-- [ ] Choosing a condition
+- [x] Choosing a condition
+- [ ] scoring for triangle
+- [ ] Survey
+- [ ] in between for repeats
+- [ ] only advance after correct answer
 
 ## Skinner Core
 
@@ -22,15 +26,18 @@
 - [ ] % and %% variables should be available in templates?
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per pagede2
+- [ ] git track changes to case name for content folder
 
 ## Stretch Goals
 - [ ] Interrupters
 - [ ] Flasher
 - [ ] Pick statement: random from list.
+- [ ] keyboard shortcuts for multiple choice's A/B/C/...
+- [ ] You're on question 3 of 10.
+- [ ] pretty animations?
 
 ## Postponed
 
-- [ ] pretty animations?
 - [ ] Create helper apps (tri start app, tri start package)
 - [ ] Allow specifying module namespace in yaml
 - [ ] pressing enter submits questions
@@ -39,6 +46,11 @@
 - [ ] set up package.json to have a test script that verifies code
 - [ ] use an amd build of handlebars
 - [ ] Create requirejs-yaml-plugin
+- [ ] reversed repetition
+- [ ] force an answer in multiple choice before allowing Next button press
+- [ ] Prescreened subjects assigned to specific conditions
+- [ ] subject/password pair
+- [ ] Specify assignment percentages to dimensions
 
 ## Finished
 

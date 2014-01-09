@@ -12,7 +12,7 @@ define(function (require) {
 
     test("qustion - correctAnswer()", function () {
         var correctAnswer = "Answer1";
-        var questionData = { "correct answer": correctAnswer };
+        var questionData = { "answers": [correctAnswer + " *"] };
         var q = new Question(questionData);
         equal(q.correctAnswer(), correctAnswer);
     });
@@ -20,7 +20,7 @@ define(function (require) {
     test("qustion - isCorrect() - string answers", function () {
         var correctAnswer = "Answer1";
         var incorrectAnswer = "Answer2";
-        var questionData = { "correct answer": correctAnswer };
+        var questionData = { "answers": [correctAnswer + " *"] };
         var q = new Question(questionData);
         q.selectedAnswer = function () {
             return correctAnswer;
@@ -36,7 +36,7 @@ define(function (require) {
     test("qustion - isCorrect() - number answers", function () {
         var correctAnswer = 25;
         var incorrectAnswer = 2.5;
-        var questionData = { "correct answer": correctAnswer };
+        var questionData = { "answers": [correctAnswer + " *"] };
         var q = new Question(questionData);
         q.selectedAnswer = function () {
             return correctAnswer;
@@ -52,7 +52,7 @@ define(function (require) {
     test("qustion - isCorrect() - mixed answers", function () {
         var correctAnswer = 25;
         var stringifiedCorrectAnswer = "25";
-        var questionData = { "correct answer": correctAnswer };
+        var questionData = { "answers": [correctAnswer + " *"] };
         var q = new Question(questionData);
         q.selectedAnswer = function () {
             return correctAnswer;
@@ -68,7 +68,7 @@ define(function (require) {
     test("qustion - isCorrect() - undefined answers", function () {
         var correctAnswer = undefined;
         var stringifiedCorrectAnswer = "Answer1";
-        var questionData = { "correct answer": correctAnswer };
+        var questionData = { "answers": [] };
         var q = new Question(questionData);
         q.selectedAnswer = function () {
             return correctAnswer;
@@ -84,7 +84,7 @@ define(function (require) {
     test("qustion - isCorrect() - case sensitivity", function () {
         var correctAnswer = "ANSWER1";
         var differentCaseCorrectAnswer = "Answer1";
-        var questionData = { "correct answer": correctAnswer };
+        var questionData = { "answers": [correctAnswer + " *"] };
         var q = new Question(questionData);
         q.selectedAnswer = function () {
             return differentCaseCorrectAnswer;
@@ -98,7 +98,7 @@ define(function (require) {
     test("qustion - tallyScore()", function () {
         var correctAnswer = "ANSWER1";
         var incorrectAnswer = "wrong answer";
-        var questionData = { "correct answer": correctAnswer };
+        var questionData = { "answers": [correctAnswer + " *"] };
         var q = new Question(questionData);
         q.selectedAnswer = function () {
             return correctAnswer;

@@ -31,8 +31,18 @@
         urlArgs: "bust=" + (new Date()).getTime()
     });
 
+    var configFile = "ryaml!config/experiment";
+    var isTestMode = true; // TODO: Get this from somewhere
+    if (isTestMode) {
+        var search = window.location.search;
+        var matches = search.match(/config=(.*)&*/);
+        if (matches && matches.length == 2) {
+            configFile = "ryaml!tests/functional/configs/" + matches[1];
+        }
+    }
+
     // `main` dependencies: experiment
-    require(["lib/jquery", "src/skinner/core/experiment", "ryaml!config/experiment", "domReady!"], function ($, Experiment, expData, domReady) {
+    require(["lib/jquery", "src/skinner/core/experiment", configFile, "domReady!"], function ($, Experiment, expData, domReady) {
 
         // TODO: This should go somewhere else,
         // and also check the state of the experiment to let people leave when they are done

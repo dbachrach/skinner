@@ -7,21 +7,21 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
             this.number = number;
 
             this.condition = {};
+
+            var conditionSize = _.reduce(dimensions, function (size, options) {
+                return size * options.length;
+            }, 1);
+
+            var conditionNumber = this.number % conditionSize;
+
             var base = this;
-            _.each(dimensions, function (options, dimension) {
-                // console.log("dim " + dimension + ": " + options);
-                base.condition[dimension] = _.sample(options); // TODO: This is random, it should be deterministic
-                console.log("Subject[" + dimension + "] = ");
-                console.log(base.condition[dimension]);
-            });
-            // this.condition = _.map(dimensions, function (options, dimension) {
-            //  return
-            // });
-            // this.condition = _.reduce(dimensions, function (memo, options, dimension) {
-            //  console.log("dim " + dimension + ": " + options);
-            //  // memo[dimension] = _.sample(options); // TODO: This is random, it should be deterministic
-            //  return
-            // }, {});
+            _.reduce(dimensions, function (previousOptionCount, options, dimension) {
+                var currentOptionCount = options.length;
+                var offset = (Math.floor(conditionNumber / previousOptionCount)) % currentOptionCount;
+
+                base.condition[dimension] = options[offset];
+                return previousOptionCount * currentOptionCount;
+            }, 1);
 
             this.reports = [];
         },
@@ -32,11 +32,12 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
          *                For example, when a TestPage reports data, the contextId is the Question Id.
          */
         report: function (pageId, contextId, name, value) {
-            var report = _.findWhere(this.reports, { page: pageId, context: contextId});
+            var report = _.findWhere(this.reports, { page: pageId, context: contextId, subject: this.number});
             if (_.isUndefined(report)) {
                 report = {
                     page: pageId,
-                    id: contextId
+                    id: contextId,
+                    subject: this.number
                 };
                 this.reports.push(report);
             }

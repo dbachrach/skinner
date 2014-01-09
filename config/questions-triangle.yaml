@@ -1,0 +1,244 @@
+---
+saturn-a:
+  - question: What planet lacks an internal magnetic field?
+    answers:
+      - Venus *
+      - Mercury
+      - Jupiter
+
+  - question: Saturn's rings were first observed in what year? (at the time, however, they were not known to be rings)
+    answers:
+      - 1610 *
+      - 1675
+      - 1789
+
+  - question: In 1655, who became the first scientist to suggest that Saturn is surrounded by a ring?
+    answers:
+      - Maxwell
+      - Huygens *
+      - Keeler
+
+  - question: The atmosphere of Saturn's rings is primarily composed of what element?
+    answers:
+      - Oxygen *
+      - Hydrogen
+      - Helium
+
+  - question: What is Saturn's second largest moon (a moon that is believed to have its own fragile ring system)?
+    answers:
+      - Titan
+      - Rhea *
+      - Mimas
+
+  - question: Saturn was first visited in September of 1979 by which space probe?
+    answers:
+      - Voyager 1
+      - Pioneer 11 *
+      - Voyager 2
+
+  - question: Only seven of Saturn's known ________ are massive enough to have collapsed into hydrostatic equilibrium.
+    answers:
+      - moons *
+      - rings
+      - spokes
+
+  - question: How long does it take Saturn to rotate once on its axis?
+    answers:
+      - 10 Earth hours *
+      - 88 Earth days
+      - 30 Earth years
+
+  - question: The area between the A ring and the F ring is known as the ________.
+    answers:
+      - Cassini Division
+      - Encke Gap
+      - Roche Division *
+
+  - question: Saturn gets its name from Saturnus, the ________ god of agriculture and harvest.
+    answers:
+      - Roman *
+      - Chinese
+      - Hindu
+
+saturn-b:
+  - question: On what planet is a day longer than a year?
+    answers:
+      - Venus
+      - Mercury *
+      - Jupiter
+
+  - question: In what year did William Herschel discover Mimas and Enceladus, two moons of Saturn?
+    answers:
+      - 1610
+      - 1675
+      - 1789 *
+
+  - question: Who first proposed that Saturn's rings aren't solid, but must instead be composed of many small particles?
+    answers:
+      - Maxwell *
+      - Huygens
+      - Keeler
+
+  - question: The body of Saturn is primarily composed of what element?
+    answers:
+      - Oxygen
+      - Hydrogen *
+      - Helium
+
+  - question: What is Saturn's largest moon?
+    answers:
+      - Titan *
+      - Rhea
+      - Mimas
+
+  - question: Which space probe collected data demonstrating wind speeds on Saturn exceeding 1,800 km/hour?
+    answers:
+      - Voyager 1 *
+      - Pioneer 11
+      - Voyager 2
+
+  - question: ________ appear to be a seasonal phenomenon, disappearing in the Saturnian midwinter and midsummer.
+    answers:
+      - moons
+      - rings
+      - spokes *
+
+  - question: How long does it take Saturn to revolve around the sun?
+    answers:
+      - 10 Earth hours
+      - 88 Earth days
+      - 30 Earth years *
+
+  - question: The area between the A ring and the B ring is known as the ________.
+    answers:
+      - Cassini Division *
+      - Encke Gap
+      - Roche Division
+
+  - question: What ancient culture designated Saturn as the 'earth star'?
+    answers:
+      - Roman
+      - Chinese *
+      - Hindu
+
+yellowstone-a:
+  - question: What explorer left the Lewis and Clark Expedition to explore the region with a group of fur trappers?
+    answers:
+      - Colter *
+      - Bridger
+      - Hayden
+
+  - question: About 600 of what threatened species live within the Greater Yellowstone Ecosystem?
+    answers:
+      - elk
+      - bison
+      - grizzly bears *
+
+  - question: Attacks by what tribe caused Colter to leave the Yellowstone region?
+    answers:
+      - Minnetaree
+      - Shoeshone
+      - Blackfeet *
+
+  - question: What is the tallest geyser in Yellowstone National Park?
+    answers:
+      - Old Faithful
+      - Steamboat Geyser *
+      - Castle Geyser
+
+  - question: In what year did Colter first explore Yellowstone with a group of fur trappers?
+    answers:
+      - 1806 *
+      - 1856
+      - 1872
+
+  - question: The majority of Yellowstone National Park resides in what state?
+    answers:
+      - South Dakota
+      - Wyoming *
+      - Montana
+
+  - question: What is the highest peak in Yellowstone National Park?
+    answers:
+      - Eagle Peak *
+      - Mt. Washburn
+      - Beartooth
+
+  - question: Who was Yellowstone National Park's first Superintendent, who served for five years devoid of salary, funding, and staffing?
+    answers:
+      - Mather
+      - Grant
+      - Langford *
+
+  - question: Which species of tree covers 80% of the total forested areas in Yellowstone National Park?
+    answers:
+      - Douglas Fir
+      - Lodgepole Pine *
+      - Whitebark Pine
+
+  - question: What type of geothermal feature is an opening in the earth's crust that emits steam and gasses?
+    answers:
+      - Geyser
+      - Hot Spring
+      - Fumarole *
+
+yellowstone-b:
+  - question: What mountain man reported observing boiling springs, sprouting water, and a mountain of yellow rock, but was largely ignored due to a reputation of being a 'spinner of yarns'?
+    answers:
+      - Colter
+      - Bridger *
+      - Hayden
+
+  - question: What species makes up the largest population of a large mammal species in Yellowstone National Park?
+    answers:
+      - elk *
+      - bison
+      - grizzly bears
+
+  - question: French trappers named Yellowstone River \"Roche Jaune,\" probably a translation of what Native American tribe's name for Yellow Rock River?
+    answers:
+      - Minnetaree *
+      - Shoeshone
+      - Blackfeet
+
+  - question: What geyser is thought to be the oldest in the world?
+    answers:
+      - Old Faithful
+      - Steamboat Geyser
+      - Castle Geyser *
+
+  - question: In what year did Yellowstone become a National Park?
+    answers:
+      - 1806
+      - 1856
+      - 1872 *
+
+  - question: The Black Hills region is found primarily in what state?
+    answers:
+      - South Dakota
+      - Wyoming *
+      - Montana
+
+  - question: At 10,243, what is the most prominent peak (but not the highest) in Yellowstone National Park?
+    answers:
+      - Eagle Peak
+      - Mt. Washburn *
+      - Beartooth
+
+  - question: Who signed a bill into law making Yellowstone the first national park?
+    answers:
+      - Mather
+      - Grant *
+      - Langford
+
+  - question: As of 2007, which tree, found only in scattered groves, is threatened by a specific fungus?
+    answers:
+      - Douglas Fir
+      - Lodgepole Pine
+      - Whitebark Pine *
+
+  - question: With only about 300 examples in the park, what is the least common type of hydrothermal feature in Yellowstone?
+    answers:
+      - Geyser *
+      - Hot Spring
+      - Fumarole

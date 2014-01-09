@@ -1,6 +1,6 @@
 ---
 name: Erin Sparck's Triangle Experiment
-authors: [Erin Sparck, Robert Bjork, Elizabeth Bjork]
+authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
   type: basic
@@ -11,43 +11,44 @@ reporting:
 
 dimensions:
   Preparation:
-    - questionType: multipleChoice
-    - questionType: triangle
+    - type: multipleChoice
+    - type: triangle
+    - type: studyOnly
 
   Order:
-    - passageId: [1, 2]
-    - passageId: [2, 1]
+    - passage: [saturn, yellowstone]
+    - passage: [yellowstone, saturn]
 
-  PracticeList:
-      practice: A
-      exam: B
-      practice: B
-      exam: A
+  Variation:
+    - practice: a
+      exam: b
+    - practice: b
+      exam: a
 
 
 steps:
   - task: prepare
 
   - task: study
-    repeat: across Order.passageId
+    repeat: across Order.passage
 
   - task: distract
 
   - task: exam
-    repeat: across Order.passageId
+    repeat: across Order.passage
 
   - task: finish
+
 
 tasks:
   prepare:
     - type: text
       title: Instructions
-      content file: instructions-{{Preparation.questionType}}
+      content file: instructions-{{Preparation.type}}
       next:
         button: Start
-        keys: [space, right]
 
-    - show: if {{Preparation.questionType}} is "triangle"
+    - show: if {{Preparation.type}} is "triangle"
       type: test
       style: triangle
       question set: example
@@ -57,7 +58,7 @@ tasks:
   study:
     - type: text
       title: Passage {{_index}}
-      content file: passage{{indexed Order.passageId}}
+      content file: passage-{{indexed Order.passage}}
       next:
         button: Continue
 
@@ -66,11 +67,10 @@ tasks:
       time: 3 seconds
 
     - type: test
-      style: {{Preparation.questionType}}
-      question set: passage{{indexed Order.passageId}}-a
-      # time: 2 seconds
-      correct sound: success.wav
-      incorrect sound: fail.wav
+      style: {{Preparation.type}}
+      question set: {{indexed Order.passage}}-{{Variation.practice}}
+      # TODO: This should be:
+      # time: 30 seconds
       next:
         button: Next
       feedback: final score
@@ -80,20 +80,22 @@ tasks:
     - type: distractor
       exercise: tetris
       time: 4 minutes
-      content: You are now going to play Tetris for 4 minutes.
+      # TODO: Can we use title? this content is not centered!
+      content: You are now going to play Tetris.
+      # TODO: Remove
       next:
         button: Go!
 
   exam:
     - type: test
       style: cuedRecall
-      question set: passage{{indexed Order.passageId}}-a
+      question set: {{indexed Order.passage}}-{{Variation.exam}}
       next:
         button: Next
 
   finish:
     - type: text
-      title: Experiment completed
-      content: Submit your results.
+      title: You have now completed the experiment on human memory and learning.
+      content file: finish
       next:
         button: submit
