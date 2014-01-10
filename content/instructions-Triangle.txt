@@ -1,15 +1,32 @@
 During this experiment, you will read two passages, take some multiple choice practice tests, followed by a final test. You will have nine minutes to read each passage and 30 seconds per question on the practice tests. If you finish reading before the 9 minutes is up, please continue to study the passage. Once you have answered each practice question, use the remaining time to check your answer. The final test will be self-paced.
+
 The formatting and scoring of the multiple choice questions may be unfamiliar to you, so you will be walked through how to answers these questions in the next pages. You will learn and practice how to answer these questions based on your confidence in the answer in order to maximize your score.
 
+<img src="content/images/example0.png" />
+
 Say you have just read a passage about the Canadian Province, British Columbia and are asked the question “What is the capital of British Columbia, Canada?”
-You remember the answer is Victoria and are highly confident, so you would mark the bubble beside the answer Victoria and receive 3 points for a correct answer. However, if you marked the bubble next to Berlin, indicating you are highly confident Berlin is the correct answer, and it is NOT, you would lose 10 points.
+You remember the answer is Victoria and are highly confident, so you would mark the bubble beside the answer Victoria and receive 3 points for a correct answer.
 
-Say you are easily able to eliminate Berlin as an incorrect answer since you know Berlin is in Germany, not Canada, but know that Victoria and Vancouver are both in British Columbia and cannot remember which is the capital. You are not highly confident in either answer, so you would mark one of the bubbles along the line between Victoria and Vancouver. If you each answer is equally attractive to you, you would mark the bubble directly in the middle and gain only 1 correct point. If you pick the bubble closer to the correct answer, Victoria, indicating you think that Victoria answer is more likely correct, you would 2 points towards your score. If you pick the bubble closer to the incorrect answer, Vancouver, you would lose 1 point. If you are completely unsure of the answer, you can mark “Don’t Know” in the center of the triangle, and you will not be penalized or rewarded. Please try to answer all questions to the best of your ability to maximize your score.
+<img src="content/images/example1.png" />
 
-Now we will test your ability to answer the questions in the proper manner. Read the question below.
-If you think the correct answer is vanilla and are mostly sure, where would you mark you answer?
-If the correct answer is vanilla, how many points would you get towards your score?
-If you were highly confident the answer is chocolate, where would you mark your answer?
-If the correct answer is vanilla, how many points would you lose?
-If you are equally torn between chocolate and vanilla, where would you mark your answer?
-If you have any questions, please contact the experiment administrator before proceeding.
+However, if you marked the bubble next to Berlin, indicating you are highly confident Berlin is the correct answer, and it is NOT, you would lose 10 points. You would also lose 10 points if you completely ruled out Victoria and selected a circle in between Vancouver and Berlin.
+
+<img src="content/images/example2.png" />
+
+Say you are easily able to eliminate Berlin as an incorrect answer since you know Berlin is in Germany, not Canada, but know that Victoria and Vancouver are both in British Columbia and cannot remember which is the capital. You are not highly confident in either answer, so you would mark one of the bubbles along the line between Victoria and Vancouver. If each answer is equally attractive to you, you would mark the bubble directly in the middle and gain only 1 correct point.
+
+<img src="content/images/example3.png" />
+
+If you pick the bubble closer to the correct answer, Victoria, indicating you think that Victoria answer is more likely correct, you would earn 2 points towards your score.
+
+<img src="content/images/example4.png" />
+
+If you pick the bubble closer to the incorrect answer, Vancouver, you would lose 1 point.
+
+<img src="content/images/example5.png" />
+
+If you are completely unsure of the answer, you can mark “Don’t Know” in the center of the triangle, and you will not be penalized or rewarded. Please try to answer all questions to the best of your ability to maximize your score.
+
+<img src="content/images/example6.png" />
+
+Now we will test your ability to answer the questions in the proper manner.

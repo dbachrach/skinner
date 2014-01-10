@@ -20,3 +20,8 @@ body {
 	text-align: left;
 	white-space: pre-line;
 }
+
+.rendered-content img {
+    display: block;
+    margin: 0 auto;
+}

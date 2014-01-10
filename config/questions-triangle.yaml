@@ -1,4 +1,43 @@
 ---
+
+example:
+  - question: If you think the correct answer is vanilla and are mostly sure, but are also considering chocolate, where would you mark you answer?
+    style: triangle
+    answers:
+      - Chocolate
+      - Vanilla
+      - Stawberry
+    correct answer: chocolate-3-vanilla
+
+  - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test1.png" class="ui right floated image" /> how many points would you get towards your score?
+    style: cuedRecall
+    correct answer: 2
+
+  - question: If you were highly confident the answer is chocolate, where would you mark your answer?
+    style: triangle
+    answers:
+      - Chocolate *
+      - Vanilla
+      - Stawberry
+
+  - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test2.png" class="ui right floated image" /> how many points would you lose?
+    style: cuedRecall
+    correct answers:
+      - 10
+      - -10
+
+  - question: If you are equally torn between chocolate and vanilla, where would you mark your answer?
+    style: triangle
+    answers:
+      - Chocolate
+      - Vanilla
+      - Stawberry
+    correct answer: chocolate-2-vanilla
+
+  - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test3.png" class="ui right floated image" /> how many points would you get?
+    style: cuedRecall
+    correct answer: 1
+
 saturn-a:
   - question: What planet lacks an internal magnetic field?
     answers:

@@ -11,9 +11,9 @@ reporting:
 
 dimensions:
   Preparation:
-    - type: multipleChoice
+    # - type: multipleChoice
     - type: triangle
-    - type: studyOnly
+    # - type: studyOnly
 
   Order:
     - passage: [saturn, yellowstone]
@@ -31,6 +31,7 @@ steps:
 
   - task: study
     repeat: across Order.passage
+    in between task: midstudy
 
   - task: distract
 
@@ -50,10 +51,16 @@ tasks:
 
     - show: if {{Preparation.type}} is "triangle"
       type: test
-      style: triangle
       question set: example
       next:
-        button: I understand it!
+        button: Next
+
+    - show: if {{Preparation.type}} is "triangle"
+      type: text
+      title: You're ready to begin
+      content: If you have any questions, please contact the experiment administrator before proceeding.
+      next:
+        button: Begin
 
   study:
     - type: text
@@ -75,6 +82,13 @@ tasks:
         button: Next
       feedback: final score
       show answer labels: true
+
+  midstudy:
+    - type: text
+      title: You are about to read the next passage
+      content: Click next when ready to begin.
+      next:
+        button: Next
 
   distract:
     - type: distractor

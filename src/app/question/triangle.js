@@ -3,8 +3,14 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
 
     var LabelLocation = {
         ABOVE: 0,
-        BELOW: 1
+        BELOW: 1,
+        LEFT: 2,
+        RIGHT: 3
     };
+
+    var correctAnswerScore = 3;
+    var incorrectAnswerScore = -10;
+    var noAnswerScore = 0;
 
     function Point(x, y, color) {
        this.x = x;
@@ -13,12 +19,14 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
        this.color = color;
     }
 
-    function Circle(center, answerId) {
+    function Circle(center, answerId, score) {
         var defaultRadius = 8;
 
         this.interactive = true;
         this.center = center;
         this.radius = defaultRadius;
+
+        this.score = score;
 
         this.hasLabel = false;
         this.labelText = null;
@@ -65,11 +73,25 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
         }
     };
     Circle.prototype.drawLabel = function (ctx) {
-        var labelOffset = 28 * ((this.labelLocation === LabelLocation.BELOW) ? 1 : -1);
+        var labelOffsetX = 0;
+        var labelOffsetY = 0;
+        if (this.labelLocation === LabelLocation.BELOW) {
+            labelOffsetY = 28;
+        }
+        else if (this.labelLocation == LabelLocation.ABOVE) {
+            labelOffsetY = -28;
+        }
+        else if (this.labelLocation === LabelLocation.LEFT) {
+            labelOffsetX = -28;
+        }
+        else if (this.labelLocation === LabelLocation.RIGHT) {
+            labelOffsetX = 28;
+        }
+
         ctx.fillStyle = "black";
         ctx.font = "16px Verdana";
         ctx.textAlign = "center";
-        ctx.fillText(this.labelText, this.center.x, this.center.y + labelOffset);
+        ctx.fillText(this.labelText, this.center.x + labelOffsetX, this.center.y + labelOffsetY);
     };
     Circle.prototype.hitTest = function (p) {
         var clickOffset = this.radius * 3;
@@ -196,7 +218,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
     };
 
 
-    function generateCirclesBetweenCircles(d, e, pointsPerEdge) {
+    function generateCirclesBetweenCircles(d, e, pointsPerEdge, labelLocation, showScore) {
         var midval = function(v1, v2, percent) {
             return v1 + ((v2 - v1) * percent);
         };
@@ -217,9 +239,41 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
             return new Point(xMid, yMid, colorMid);
         };
 
+        var scoreBetweenCircles = function (p1, p2, step) {
+            if (p1.score === incorrectAnswerScore && p2.score === incorrectAnswerScore) {
+                return incorrectAnswerScore;
+            }
+            else if (p1.score === correctAnswerScore) {
+                if (step == 1) {
+                    return 2;
+                }
+                else if (step == 2) {
+                    return 1
+                }
+                else if (step == 3) {
+                    return -1;
+                }
+            }
+            else if (p2.score === correctAnswerScore) {
+                if (step == 1) {
+                    return -1;
+                }
+                else if (step == 2) {
+                    return 1
+                }
+                else if (step == 3) {
+                    return 2;
+                }
+            }
+        }
+
         var circles = [];
         for (var i = 1; i <= pointsPerEdge; i++) {
-            circles[i-1] = new Circle(midpoint(d.center, e.center, i / (pointsPerEdge + 1)), d.answerId + "-" + i + "-" + e.answerId);
+            var percent = i / (pointsPerEdge + 1);
+            circles[i-1] = new Circle(midpoint(d.center, e.center, percent), d.answerId + "-" + i + "-" + e.answerId, scoreBetweenCircles(d, e, i));
+            if (showScore) {
+                circles[i-1].addLabel(" (" + circles[i-1].score + ")", labelLocation);
+            }
         }
         return circles;
     }
@@ -275,6 +329,15 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
         }
         return selectedCircles[0].answerId;
     };
+    QuestionBoard.prototype.selectedAnswerScore = function () {
+        var selectedCircles = this.interactiveElements().filter(function (e) {
+            return e.selected;
+        });
+        if (selectedCircles.length !== 1) {
+            return 0;
+        }
+        return selectedCircles[0].score;
+    };
 
 
     var TriangleQuestion = Question.extend({
@@ -295,13 +358,21 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
                 canvas[0].width = 600;
                 canvas[0].height = 450;
             }
-            this.qboard = this.buildBoard(canvas);
+            var showScore = false;
+            this.qboard = this.buildBoard(canvas, showScore);
             this.qboard.redraw();
         },
         selectedAnswer: function() {
             return this.qboard.selectedAnswer();
         },
-        buildBoard: function (canvas) {
+        maxScore: function () {
+            return 3;
+        },
+        tallyScore: function () {
+            console.log("Triangle Score: " + this.qboard.selectedAnswerScore());
+            return this.qboard.selectedAnswerScore();
+        },
+        buildBoard: function (canvas, showScore) {
             var edge = 400.0;
             var xOffset = (600 - edge) / 2;
             var yOffset = 50.0;
@@ -314,22 +385,24 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
 
             var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge/2)));
 
-            var aCircle = new Circle(a, this.data.answers[0]);
-            aCircle.addLabel(this.data.answers[0], LabelLocation.ABOVE);
-            var bCircle = new Circle(b, this.data.answers[1]);
-            bCircle.addLabel(this.data.answers[1], LabelLocation.BELOW);
-            var cCircle = new Circle(c, this.data.answers[2]);
-            cCircle.addLabel(this.data.answers[2], LabelLocation.BELOW);
+            var correctAnswer = this.correctAnswer();
 
-            var centerCircle = new Circle(center, "none");
-            centerCircle.addLabel("Don't know", LabelLocation.ABOVE);
+            var aCircle = new Circle(a, this.data.answers[0], (this.data.answers[0] === correctAnswer) ? correctAnswerScore : incorrectAnswerScore);
+            aCircle.addLabel(this.data.answers[0] + ((showScore) ? " (" + aCircle.score + ")" : ""), LabelLocation.ABOVE);
+            var bCircle = new Circle(b, this.data.answers[1], (this.data.answers[1] === correctAnswer) ? correctAnswerScore : incorrectAnswerScore);
+            bCircle.addLabel(this.data.answers[1] + ((showScore) ? " (" + bCircle.score + ")" : ""), LabelLocation.BELOW);
+            var cCircle = new Circle(c, this.data.answers[2], (this.data.answers[2] === correctAnswer) ? correctAnswerScore : incorrectAnswerScore);
+            cCircle.addLabel(this.data.answers[2] + ((showScore) ? " (" + cCircle.score + ")" : ""), LabelLocation.BELOW);
+
+            var centerCircle = new Circle(center, "none", noAnswerScore);
+            centerCircle.addLabel("Don't know" + ((showScore) ? " (" + noAnswerScore + ")" : ""), LabelLocation.ABOVE);
 
             var qboard = new QuestionBoard(canvas);
             qboard.addElement(new Triangle(a, b, c));
             qboard.addElements([aCircle, bCircle, cCircle, centerCircle]);
-            qboard.addElements(generateCirclesBetweenCircles(aCircle, bCircle, this.pointsPerEdge));
-            qboard.addElements(generateCirclesBetweenCircles(bCircle, cCircle, this.pointsPerEdge));
-            qboard.addElements(generateCirclesBetweenCircles(cCircle, aCircle, this.pointsPerEdge));
+            qboard.addElements(generateCirclesBetweenCircles(aCircle, bCircle, this.pointsPerEdge, LabelLocation.LEFT, showScore));
+            qboard.addElements(generateCirclesBetweenCircles(bCircle, cCircle, this.pointsPerEdge, LabelLocation.BELOW, showScore));
+            qboard.addElements(generateCirclesBetweenCircles(cCircle, aCircle, this.pointsPerEdge, LabelLocation.RIGHT, showScore));
             return qboard;
         }
     });

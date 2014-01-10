@@ -30,7 +30,7 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
 
                 // Trim white space from answers.
                 // TODO: Write a test for this
-                this.data.answer = _.map(this.data.answers, function (answer) {
+                this.data.answers = _.map(this.data.answers, function (answer) {
                     return _s.trim(answer);
                 });
 

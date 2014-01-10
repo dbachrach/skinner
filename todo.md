@@ -6,18 +6,22 @@
 ### Erin
 - [x] Fill out instructions
 - [ ] Finalize Instructions
-- [ ] Example triangle
+- [x] Example triangle
 - [ ] Remove continue buttons from passages and add 9 min timer
 - [x] remove sounds
 
 ### Dustin
 - [ ] Figure out how finishing works
-- [ ] feedback: final score
+- [ ] feedback: final score (1)
 - [x] Choosing a condition
-- [ ] scoring for triangle
-- [ ] Survey
-- [ ] in between for repeats
-- [ ] only advance after correct answer
+- [x] scoring for triangle
+- [ ] Survey (4)
+- [ ] in between for repeats (2)
+- [ ] only advance after correct answer (3)
+- [ ] support correct answer instead of only * based answers
+- [ ] support multiple correct answers
+- [x] images in pages
+- [ ] make example not report to CSV
 
 ## Skinner Core
 
@@ -27,6 +31,7 @@
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per pagede2
 - [ ] git track changes to case name for content folder
+- [ ] Should we use {{{ }}} everywhere so html can go everywhere??
 
 ## Stretch Goals
 - [ ] Interrupters
