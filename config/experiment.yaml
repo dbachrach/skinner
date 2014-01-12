@@ -11,9 +11,9 @@ reporting:
 
 dimensions:
   Preparation:
-    # - type: multipleChoice
+    - type: multipleChoice
     - type: triangle
-    # - type: studyOnly
+    - type: studyOnly
 
   Order:
     - passage: [saturn, yellowstone]
@@ -38,6 +38,8 @@ steps:
   - task: exam
     repeat: across Order.passage
 
+  - task: survey
+
   - task: finish
 
 
@@ -52,6 +54,8 @@ tasks:
     - show: if {{Preparation.type}} is "triangle"
       type: test
       question set: example
+      require correct answer: true
+      incorrect answer message: That's not correct. Try again.
       next:
         button: Next
 
@@ -82,6 +86,7 @@ tasks:
         button: Next
       feedback: final score
       show answer labels: true
+      show test results: on completion
 
   midstudy:
     - type: text
@@ -104,6 +109,14 @@ tasks:
     - type: test
       style: cuedRecall
       question set: {{indexed Order.passage}}-{{Variation.exam}}
+      next:
+        button: Next
+
+  survey:
+    - type: test
+      title: You're done with the test.
+      style: freeResponse
+      question set: survey
       next:
         button: Next
 

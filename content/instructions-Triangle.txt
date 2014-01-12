@@ -1,6 +1,6 @@
 During this experiment, you will read two passages, take some multiple choice practice tests, followed by a final test. You will have nine minutes to read each passage and 30 seconds per question on the practice tests. If you finish reading before the 9 minutes is up, please continue to study the passage. Once you have answered each practice question, use the remaining time to check your answer. The final test will be self-paced.
 
-The formatting and scoring of the multiple choice questions may be unfamiliar to you, so you will be walked through how to answers these questions in the next pages. You will learn and practice how to answer these questions based on your confidence in the answer in order to maximize your score.
+The formatting and scoring of the multiple choice questions may be unfamiliar to you, so you will be walked through how to answers these questions in the next pages. You will learn and practice how to answer these questions based on your confidence in the answer in order to maximize your score. The answers are not color-coded. The colors are just meant to illustrate relationships.z
 
 <img src="content/images/example0.png" />
 
@@ -29,4 +29,4 @@ If you are completely unsure of the answer, you can mark “Don’t Know” in t
 
 <img src="content/images/example6.png" />
 
-Now we will test your ability to answer the questions in the proper manner.
+Now we will test your ability to answer the questions in the proper manner. You will not be able to move on to the next question until you have answered correctly, so pay attention. If you encounter any issues, please contact the experimenter.

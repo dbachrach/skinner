@@ -9,17 +9,19 @@
 - [x] Example triangle
 - [ ] Remove continue buttons from passages and add 9 min timer
 - [x] remove sounds
+- [x] make erin's email clickable
+- [ ] rename content files to be .html
 
 ### Dustin
 - [ ] Figure out how finishing works
-- [ ] feedback: final score (1)
+- [x] feedback: final score (1)
 - [x] Choosing a condition
 - [x] scoring for triangle
-- [ ] Survey (4)
+- [x] Survey (4)
 - [ ] in between for repeats (2)
-- [ ] only advance after correct answer (3)
-- [ ] support correct answer instead of only * based answers
-- [ ] support multiple correct answers
+- [x] only advance after correct answer (3)
+- [x] support correct answer instead of only * based answers
+- [X] support multiple correct answers
 - [x] images in pages
 - [ ] make example not report to CSV
 
@@ -40,6 +42,9 @@
 - [ ] keyboard shortcuts for multiple choice's A/B/C/...
 - [ ] You're on question 3 of 10.
 - [ ] pretty animations?
+- [ ] markdown support in handlebars
+- [ ] show test questions on the same page
+- [ ] allow branching based on subject's answer
 
 ## Postponed
 

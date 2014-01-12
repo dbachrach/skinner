@@ -1,1 +1,1 @@
-If you have any questions, please ask the experimenter or contact emsparck@ucla.edu.
+If you have any questions, please ask the experimenter or contact <a href="mailto:emsparck@ucla.edu">emsparck@ucla.edu</a>.

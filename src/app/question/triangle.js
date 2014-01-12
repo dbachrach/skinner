@@ -385,7 +385,8 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
 
             var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge/2)));
 
-            var correctAnswer = this.correctAnswer();
+            // Assumes only one correct answer
+            var correctAnswer = this.correctAnswers()[0];
 
             var aCircle = new Circle(a, this.data.answers[0], (this.data.answers[0] === correctAnswer) ? correctAnswerScore : incorrectAnswerScore);
             aCircle.addLabel(this.data.answers[0] + ((showScore) ? " (" + aCircle.score + ")" : ""), LabelLocation.ABOVE);

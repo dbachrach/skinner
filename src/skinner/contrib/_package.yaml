@@ -9,6 +9,7 @@ page:
 
 question:
   - cuedRecall
+  - freeResponse
   - multipleChoice
 
 login:

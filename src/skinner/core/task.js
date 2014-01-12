@@ -12,7 +12,8 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
             this.context = context;
         },
         id: function () {
-            return this.name + "-" + this.context;
+            var contextString = (_.isUndefined(this.context)) ? "" : "(" + this.context + ")";
+            return this.name + contextString;
         },
         begin: function () {
             this.currentPageIndex = 0;

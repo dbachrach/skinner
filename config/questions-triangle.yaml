@@ -38,6 +38,9 @@ example:
     style: cuedRecall
     correct answer: 1
 
+survey:
+  - question: Do you have any comments?
+
 saturn-a:
   - question: What planet lacks an internal magnetic field?
     answers:

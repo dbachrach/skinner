@@ -10,11 +10,11 @@ define(function (require) {
         equal(q.caseSensitiveScoring, false);
     });
 
-    test("qustion - correctAnswer()", function () {
+    test("qustion - correctAnswers()", function () {
         var correctAnswer = "Answer1";
         var questionData = { "answers": [correctAnswer + " *"] };
         var q = new Question(questionData);
-        equal(q.correctAnswer(), correctAnswer);
+        deepEqual(q.correctAnswers(), [correctAnswer]);
     });
 
     test("qustion - isCorrect() - string answers", function () {

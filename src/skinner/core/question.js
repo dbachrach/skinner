@@ -9,33 +9,47 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
             this.style = style;
             this.caseSensitiveScoring = keyPath(this.testData, "case sensitive scoring", false);
 
+
+            this.data.answers = keyPath(this.data, "answers", []);
+
+
             var base = this;
 
-            if (!_.isUndefined(keyPath(this.data, "answers"))) {
-
+            var correctAnswerData = keyPath(this.data, "correct answer");
+            var correctAnswersData = keyPath(this.data, "correct answers");
+            if (!_.isUndefined(correctAnswerData)) {
+                base._correctAnswers = [correctAnswerData];
+            }
+            else if (!_.isUndefined(correctAnswersData)) {
+                base._correctAnswers = correctAnswersData;
+            }
+            else {
                 // Goes through the answers and finds the answer that ends with a *.
                 // This answer is considered the correct answer.
-                // We assign that answer to the _correctAnswer field.
+                // We assign that answer to the _correctAnswers field.
                 // We also remove the * from the answer for displaying in UI.
                 this.data.answers = _.map(this.data.answers, function (answer) {
+                    // TODO: Support multiple * correct answers
                     if (_s.endsWith(answer, "*")) {
                         var trimmedAnswer = answer.substring(0, answer.length - 1);
-                        base._correctAnswer = trimmedAnswer;
+                        base._correctAnswers = [trimmedAnswer];
                         return trimmedAnswer;
                     }
                     else {
                         return answer;
                     }
                 });
-
-                // Trim white space from answers.
-                // TODO: Write a test for this
-                this.data.answers = _.map(this.data.answers, function (answer) {
-                    return _s.trim(answer);
-                });
-
-                base._correctAnswer = _s.trim(base._correctAnswer);
             }
+
+            // Trim white space from answers.
+            // TODO: Write a test for this
+            this.data.answers = _.map(this.data.answers, function (answer) {
+                return _s.trim(answer);
+            });
+
+            base._correctAnswers = _.map(base._correctAnswers, function (answer) {
+                return _s.trim(answer);
+            });
         },
         show: function () {
             var base = this;
@@ -55,8 +69,8 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
         selectedAnswer: function () {
             throw "Question did not override selectedAnswer()";
         },
-        correctAnswer: function () {
-            return this._correctAnswer;
+        correctAnswers: function () {
+            return this._correctAnswers;
         },
         tallyScore: function () {
             if (this.isCorrect()) {
@@ -67,26 +81,29 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
             }
         },
         isCorrect: function () {
-
             var selectedAnswer = this.selectedAnswer();
-            var correctAnswer = this.correctAnswer();
+            var correctAnswers = this.correctAnswers();
 
             // Undefined selectedAnswer() indicates no selection, which is always incorrect.
-            // Undefined correctAnswer() indicates "No correct answer", so is always incorrect.
-            if (_.isUndefined(selectedAnswer) || _.isUndefined(correctAnswer)) {
+            // Undefined correctAnswers() indicates "No correct answer", so is always incorrect.
+            if (_.isUndefined(selectedAnswer) || _.isUndefined(correctAnswers)) {
                 return false;
             }
 
-            // All answers are transformed to strings for comparison.
-            selectedAnswer = selectedAnswer.toString();
-            correctAnswer = correctAnswer.toString();
+            var base = this;
 
-            // "case sensative scoring" can be configured on the question.
-            if (!this.caseSensitiveScoring) {
-                selectedAnswer = selectedAnswer.toLowerCase();
-                correctAnswer = correctAnswer.toLowerCase();
-            }
-            return (selectedAnswer === correctAnswer);
+            return _.any(correctAnswers, function (correctAnswer) {
+                // All answers are transformed to strings for comparison.
+                selectedAnswer = selectedAnswer.toString();
+                correctAnswer = correctAnswer.toString();
+
+                // "case sensative scoring" can be configured on the question.
+                if (!base.caseSensitiveScoring) {
+                    selectedAnswer = selectedAnswer.toLowerCase();
+                    correctAnswer = correctAnswer.toLowerCase();
+                }
+                return (selectedAnswer === correctAnswer);
+            });
         },
         maxScore: function () {
             return 1;

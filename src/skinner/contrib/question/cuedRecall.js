@@ -13,18 +13,19 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
 
         postShow: function () {
             // After loading the page, put the cursor focus on the answer text box.
-            $("#cuedRecallAnswer").focus();
+            $("#answer").focus();
         },
 
         selectedAnswer: function() {
             // Return the answer text box's value.
-            return $("#cuedRecallAnswer").val();
+            return $("#answer").val();
         },
 
         reportResults: function (subject, pageId) {
             var reportSpellingDistance = keyPath(this.testData, "report.spelling distance", true);
             if (reportSpellingDistance) {
-                var levenshtein = _s.levenshtein($("#cuedRecallAnswer").val(), this.correctAnswer());
+                // TODO: Iterate over all correct answers, and return the lowest distance
+                var levenshtein = _s.levenshtein($("#answer").val(), this.correctAnswers()[0]);
                 subject.report(pageId, this.id, "Spelling Distance", levenshtein);
             }
         }
