@@ -23,7 +23,7 @@
 - [x] support correct answer instead of only * based answers
 - [X] support multiple correct answers
 - [x] images in pages
-- [ ] make example not report to CSV
+- [x] make example not report to CSV
 
 ## Skinner Core
 

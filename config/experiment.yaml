@@ -56,6 +56,7 @@ tasks:
       question set: example
       require correct answer: true
       incorrect answer message: That's not correct. Try again.
+      report results: false
       next:
         button: Next
 
@@ -84,7 +85,6 @@ tasks:
       # time: 30 seconds
       next:
         button: Next
-      feedback: final score
       show answer labels: true
       show test results: on completion
 

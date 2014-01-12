@@ -80,7 +80,6 @@ tasks:
       incorrect sound: fail.wav
       next:
         button: Next
-      feedback: final score
       show answer labels: true
       time: 1 second
 

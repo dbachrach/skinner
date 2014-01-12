@@ -18,7 +18,6 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
             this.questionsData = allQuestionData[this.questionSet];
             this.order = keyPath(this.data, "order");
             this.requireCorrectAnswer = keyPath(this.data, "require correct answer", false);
-            // this.reportResults = this.data.reportResults || true;
 
             this.autoStartPageTimer = false;
 
@@ -148,7 +147,7 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
                 this.currentScore += currentQuestionScore;
                 this.currentMaxScore += currentQuestionMaxScore;
 
-                // if (this.reportResults) {
+                if (keyPath(this.data, "report results", true)) {
                     var pageId = this.id();
                     var contextId = this.currentQuestion.id;
                     this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
@@ -157,7 +156,7 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
                     this.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
                     this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
                     this.currentQuestion.reportResults(this.task.subject, pageId);
-                // }
+                }
             }
 
             this.nextState();
