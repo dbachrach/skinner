@@ -1,121 +1,170 @@
-define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/task", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, Task, RepeatStatementParser) {
+define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/keypath", "src/skinner/core/task", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, keyPath, Task, RepeatStatementParser) {
     "use strict";
+
+    var States = {
+        PreTrial: 0,
+        BeginStep: 1,
+        ShowStep: 2,
+        ShowRepeatedStep: 3,
+        ShowInBetween: 4,
+        RepeatedStepShown: 5,
+        RepeatedStepShownAfterInBetween: 6,
+        StepComplete: 7,
+        Exit: 8
+    };
 
     var Trial = Class.extend({
         init: function (steps, tasks, subject) {
             this.steps = steps;
             this.tasks = tasks;
             this.subject = subject;
+
+            var base = this;
+
+            this.repeatData = _.map(this.steps, function (step) {
+                return {
+                    "repeatCount": base.repeatCountForStep(step),
+                    "repeatIndex": 0
+                };
+            });
+
+            this.state = States.PreTrial;
+        },
+
+        repeatCountForStep: function (step) {
+            var repeatStatement = step.repeat;
+
+            if (repeatStatement) {
+                var repeatStructure = RepeatStatementParser.parse(repeatStatement);
+                if (!_.isUndefined(repeatStructure.path)) {
+                    return this.subject.conditionForPath(repeatStructure.path).length;
+                }
+                else if (!_.isUndefined(repeatStructure.times)) {
+                    return repeatStructure.times;
+                }
+            }
+            else {
+                return 1;
+            }
         },
 
         begin: function () {
             var base = this;
 
             loader.loadLayoutInPackage("trial", "src/skinner/core/", {}, "#main", function () {
-                $("#main").on("click", "#prevButton", function () {
-                    base.currentStep.previous();
-                });
-
                 $("#main").on("click", "#nextButton", function () {
                     base.currentStep.next();
                 });
 
-                base.currentStepIndex = 0;
-                base.showStep();
+                base.nextState();
             });
         },
-        showStep: function () {
-            console.log("Show step: " + (this.currentStepIndex + 1) + " of " + this.steps.length);
+        nextState: function () {
+            var repeatData = this.repeatData[this.currentStepIndex];
 
-            var base = this;
-            // var totatlStepCount = _.reduce(this.steps, function (memo, stepData) {
-            //     var repeatWith = stepData["repeat-with"];
-            //     console.log("repeat with " + repeatWith);
-            //     if (repeatWith) {
-            //         return memo + helpers.dimensionSize(repeatWith, base.subject);
-            //     }
-            //     else {
-            //         return memo + 1;
-            //     }
-            // }, 0);
-
-            var stepSizes = _.map(this.steps, function (step) {
-                var repeatStatement = step.repeat;
-
-                if (repeatStatement) {
-                    var repeatStructure = RepeatStatementParser.parse(repeatStatement);
-                    if (!_.isUndefined(repeatStructure.path)) {
-                        return base.subject.conditionForPath(repeatStructure.path).length;
-                    }
-                    else if (!_.isUndefined(repeatStructure.times)) {
-                        return repeatStructure.times;
-                    }
+            if (this.state === States.PreTrial) {
+                if (this.steps.length > 0) {
+                    this.state = States.BeginStep;
+                    this.currentStepIndex = 0;
+                    this.nextState();
                 }
                 else {
-                    return 1;
+                    this.state = States.Exit;
+                    this.nextState();
                 }
-            });
-            console.log("stepsizes:"); console.log(stepSizes);
-
-            var stepIndex = -1;
-            var repeatIndex = -1;
-            var accl = 0;
-            for (var i = 0; i < stepSizes.length; i++) {
-                if (this.currentStepIndex + 1 <= accl + stepSizes[i]) {
-                    stepIndex = i;
-                    if (stepSizes[i] > 1) {
-                        repeatIndex = (this.currentStepIndex) - (accl);
-                    }
-                    break;
+            }
+            else if (this.state === States.BeginStep) {
+                if (repeatData.repeatCount === 1) {
+                    this.state = States.ShowStep;
+                    this.nextState();
                 }
-                accl = accl + stepSizes[i];
+                else {
+                    this.state = States.ShowRepeatedStep;
+                    this.nextState();
+                }
             }
-
-            console.log("got step index of " + stepIndex);
-            if (stepIndex === -1) {
-                return this.end();
+            else if (this.state === States.ShowStep) {
+                this.showStep();
+                this.state = States.StepComplete;
             }
+            else if (this.state === States.ShowRepeatedStep) {
+                this.showStep(repeatData.repeatIndex);
+                this.state = States.RepeatedStepShown;
+            }
+            else if (this.state === States.RepeatedStepShown) {
+                repeatData.repeatIndex++;
 
-            console.log("Step index " + stepIndex + " repeat index " + repeatIndex);
+                var inBetweenTask = keyPath(this.steps[this.currentStepIndex], "in between task");
 
-            // console.log("Total step count: " + totatlStepCount);
-            // if (totatlStepCount <= this.currentStepIndex) {
-            //     return this.end();
-            // }
-            // TODO: Handle back button reloads a new page rather than using the old one
+                if (!_.isUndefined(inBetweenTask) && (repeatData.repeatIndex < repeatData.repeatCount)) {
+                    this.state = States.ShowInBetween;
+                    this.nextState();
+                }
+                else {
+                    this.state = States.RepeatedStepShownAfterInBetween;
+                    this.nextState();
+                }
+            }
+            else if (this.state === States.RepeatedStepShownAfterInBetween) {
+                if (repeatData.repeatIndex < repeatData.repeatCount) {
+                    this.state = States.ShowRepeatedStep;
+                    this.nextState();
+                }
+                else {
+                    this.state = States.StepComplete;
+                    this.nextState();
+                }
+            }
+            else if (this.state === States.ShowInBetween) {
+                this.showInBetweenTask(repeatData.repeatIndex);
+                this.state = States.RepeatedStepShownAfterInBetween;
+            }
+            else if (this.state === States.StepComplete) {
+                this.currentStepIndex++;
 
-            var stepData = this.steps[stepIndex];
-            console.log(stepData);
+                if (this.steps.length <= this.currentStepIndex) {
+                    this.state = States.Exit;
+                    this.nextState();
+                }
+                else {
+                    this.state = States.BeginStep;
+                    this.nextState();
+                }
+            }
+            else if (this.state === States.Exit) {
+                this.end();
+            }
+        },
+        showStep: function (repeatIndex) {
+            var stepData = this.steps[this.currentStepIndex];
 
+            this.showTask(stepData.task, repeatIndex);
+        },
+        showInBetweenTask: function (repeatIndex) {
+            var inBetweenTask = keyPath(this.steps[this.currentStepIndex], "in between task");
+
+            this.showTask(inBetweenTask, repeatIndex);
+        },
+
+        showTask: function (taskName, repeatIndex) {
             var additionalDimensionData = {};
             var context;
 
-            if (repeatIndex !== -1) {
+            if (!_.isUndefined(repeatIndex)) {
                 additionalDimensionData._index = repeatIndex + 1; // adding one to make it 1 based indexing
                 context = repeatIndex;
             }
-            // console.log("additional dims");
-            // console.log(additionalDimensionData);
-            var taskData = this.tasks[stepData.task];
-            console.log("Created context: ");console.log(context);
-            this.currentStep = new Task(stepData.task, this, taskData, this.subject, additionalDimensionData, context);
-            this.currentStep.begin();
-        },
 
-        /**
-         * Moves to the previous step.
-         */
-        previousStep: function () {
-            this.currentStepIndex--;
-            this.showStep();
+            var taskData = this.tasks[taskName];
+            this.currentStep = new Task(taskName, this, taskData, this.subject, additionalDimensionData, context);
+            this.currentStep.begin();
         },
 
         /**
          * Moves to the next step.
          */
         nextStep: function () {
-            this.currentStepIndex++;
-            this.showStep();
+            this.nextState();
         },
 
         /**

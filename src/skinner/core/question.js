@@ -4,11 +4,14 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
     var Question = Class.extend({
         init: function (data, id, testData, style) {
             this.data = data;
+            if (_.isUndefined(this.data)) {
+                this.data = {};
+            }
+
             this.id = id;
             this.testData = testData;
             this.style = style;
             this.caseSensitiveScoring = keyPath(this.testData, "case sensitive scoring", false);
-
 
             this.data.answers = keyPath(this.data, "answers", []);
 

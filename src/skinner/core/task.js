@@ -42,19 +42,11 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                 base.currentPage.show();
             });
         },
-        previous: function () {
-            this.currentPage.previous();
-        },
         next: function () {
             this.currentPage.next();
         },
         nextPage: function () {
             this.currentPageIndex++;
-            this.showPage();
-        },
-        previousPage: function () {
-            // TODO: Handle going back from one task to the previous task
-            this.currentPageIndex--;
             this.showPage();
         },
         moveToNextStep: function () {

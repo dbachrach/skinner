@@ -248,7 +248,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
                     return 2;
                 }
                 else if (step == 2) {
-                    return 1
+                    return 1;
                 }
                 else if (step == 3) {
                     return -1;
@@ -259,13 +259,13 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
                     return -1;
                 }
                 else if (step == 2) {
-                    return 1
+                    return 1;
                 }
                 else if (step == 3) {
                     return 2;
                 }
             }
-        }
+        };
 
         var circles = [];
         for (var i = 1; i <= pointsPerEdge; i++) {

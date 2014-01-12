@@ -44,7 +44,7 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
             this.nextState();
         },
         nextState: function () {
-            if (this.state == States.PreTest) {
+            if (this.state === States.PreTest) {
                 this.state = States.Test;
                 this.currentQuestionIndex = -1;
                 this.nextState();
@@ -110,7 +110,7 @@ define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/
 
             console.log("in next: with state===" + this.state);
             if (this.state === States.Test) {
-                console.log("in next: with state===test")
+                console.log("in next: with state===test");
                 var incorrectMessageId = "__incorrectAnswerMessage";
 
                 $("#" + "__incorrectAnswerMessage").remove();

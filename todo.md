@@ -18,7 +18,7 @@
 - [x] Choosing a condition
 - [x] scoring for triangle
 - [x] Survey (4)
-- [ ] in between for repeats (2)
+- [x] in between for repeats (2)
 - [x] only advance after correct answer (3)
 - [x] support correct answer instead of only * based answers
 - [X] support multiple correct answers

@@ -70,17 +70,9 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
             this.cancelPageTimer();
             this.moveToNextPage();
         },
-        previous: function () {
-            this.cancelPageTimer();
-            this.moveToPreviousPage();
-        },
         moveToNextPage: function () {
             this.hide();
             this.task.nextPage();
-        },
-        moveToPreviousPage: function () {
-            this.hide();
-            this.task.previousPage();
         },
         layoutName: function () {
             return this.type;
@@ -104,18 +96,6 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
                 }
                 else {
                     Mousetrap.unbind(nextKey);
-                }
-            }
-
-            var previousKeys = keyPath(this.data, "previous.keys", []);
-            if (previousKeys) {
-                if (enable) {
-                    Mousetrap.bind(previousKeys, function (e) {
-                        base.previous();
-                    });
-                }
-                else {
-                    Mousetrap.unbind(previousKeys);
                 }
             }
         }
