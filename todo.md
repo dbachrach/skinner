@@ -10,7 +10,7 @@
 - [ ] Remove continue buttons from passages and add 9 min timer
 - [x] remove sounds
 - [x] make erin's email clickable
-- [ ] rename content files to be .html
+- [x] rename content files to be .html
 
 ### Dustin
 - [ ] Figure out how finishing works

@@ -103,7 +103,7 @@ define (["require", "lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!
         var contents = [];
         _.each(bindings, function (value, key) {
             if (isFileBinding(key)) {
-                contents.push({ "path": "text!content/" + value + ".txt",
+                contents.push({ "path": "text!content/" + value + ".html",
                                 "binding": removeFileSuffix(key) });
             }
         });
