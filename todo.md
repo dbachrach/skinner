@@ -4,26 +4,9 @@
 ## For Triangle
 
 ### Erin
-- [x] Fill out instructions
 - [ ] Finalize Instructions
-- [x] Example triangle
 - [ ] Remove continue buttons from passages and add 9 min timer
-- [x] remove sounds
-- [x] make erin's email clickable
-- [x] rename content files to be .html
-
-### Dustin
-- [ ] Figure out how finishing works
-- [x] feedback: final score (1)
-- [x] Choosing a condition
-- [x] scoring for triangle
-- [x] Survey (4)
-- [x] in between for repeats (2)
-- [x] only advance after correct answer (3)
-- [x] support correct answer instead of only * based answers
-- [X] support multiple correct answers
-- [x] images in pages
-- [x] make example not report to CSV
+- [ ] Study only people tasks?
 
 ## Skinner Core
 
@@ -48,7 +31,7 @@
 
 ## Postponed
 
-- [ ] Create helper apps (tri start app, tri start package)
+- [ ] Create helper apps (skinner start app, skinner start package)
 - [ ] Allow specifying module namespace in yaml
 - [ ] pressing enter submits questions
 - [ ] better way to load handlebars helpers?
@@ -110,3 +93,19 @@
 - [x] Task/Page ids for reporting, maybe add id() function to classes, and then reporting uses that
 - [x] Add tests
 - [x] trim whitespace from answers in questions.yaml
+- [x] feedback: final score (1)
+- [x] Choosing a condition
+- [x] scoring for triangle
+- [x] Survey (4)
+- [x] in between for repeats (2)
+- [x] only advance after correct answer (3)
+- [x] support correct answer instead of only * based answers
+- [X] support multiple correct answers
+- [x] images in pages
+- [x] make example not report to CSV
+- [x] Fill out instructions
+- [x] Example triangle
+- [x] remove sounds
+- [x] make erin's email clickable
+- [x] rename content files to be .html
+- [x] Figure out how finishing works

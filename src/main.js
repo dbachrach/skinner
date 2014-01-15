@@ -43,13 +43,6 @@
 
     // `main` dependencies: experiment
     require(["lib/jquery", "src/skinner/core/experiment", configFile, "domReady!"], function ($, Experiment, expData, domReady) {
-
-        // TODO: This should go somewhere else,
-        // and also check the state of the experiment to let people leave when they are done
-        // $(window).bind("beforeunload", function () {
-        //     return "Are you sure you want to leave? The experiment is not completed yet.";
-        // });
-
         // Create a new experiment based on the data loaded from `experiment.yaml`, and begin.
         var exp = new Experiment(expData);
         exp.begin();

@@ -14,10 +14,11 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
     };
 
     var Trial = Class.extend({
-        init: function (steps, tasks, subject) {
-            this.steps = steps;
-            this.tasks = tasks;
+        init: function (data, subject) {
+            this.steps = keyPath(data, "steps");
+            this.tasks = keyPath(data, "tasks");
             this.subject = subject;
+            this.dataCollection = keyPath(data, "data collection", {});
 
             var base = this;
 
@@ -49,6 +50,11 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
         },
 
         begin: function () {
+            $(window).on("beforeunload", function () {
+                return "Are you sure you want to leave? The experiment is not completed yet.";
+            });
+
+
             var base = this;
 
             loader.loadLayoutInPackage("trial", "src/skinner/core/", {}, "#main", function () {
@@ -59,19 +65,69 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                 base.nextState();
             });
         },
+
+        /**
+         * Ends the trial.
+         */
+        end: function (callback) {
+            this._endCallback = callback;
+            this.state = States.Exit;
+            this.nextState();
+        },
+
+        complete: function () {
+            var csv = this.subject.exportToCSV();
+
+            var base = this;
+
+            function onDone() {
+                _.delay(function () {
+                    $(window).off("beforeunload");
+                    base._endCallback();
+                }, 1000);
+            }
+
+            console.log("---- COMPLETED CSV ----");
+            console.log(csv);
+            console.log("---- END CSV ----");
+
+
+            if (keyPath(this.dataCollection, "type") === "upload to server") {
+                var server = keyPath(this.dataCollection, "server");
+
+                if (!_.isUndefined(server)) {
+                    var uploadData = {
+                        subject: this.subject.number,
+                        data: csv
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: server,
+                        processData: false,
+                        contentType: "application/json",
+                        data: JSON.stringify(uploadData),
+                        success: function (response, text) {
+                            onDone();
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Failed to upload -- " + textStatus + " -- " + errorThrown);
+                            // TODO: Handle better?
+                        }
+                    });
+                }
+            }
+            else {
+                onDone();
+            }
+        },
+
         nextState: function () {
             var repeatData = this.repeatData[this.currentStepIndex];
 
             if (this.state === States.PreTrial) {
-                if (this.steps.length > 0) {
-                    this.state = States.BeginStep;
-                    this.currentStepIndex = 0;
-                    this.nextState();
-                }
-                else {
-                    this.state = States.Exit;
-                    this.nextState();
-                }
+                this.state = States.BeginStep;
+                this.currentStepIndex = 0;
+                this.nextState();
             }
             else if (this.state === States.BeginStep) {
                 if (repeatData.repeatCount === 1) {
@@ -123,8 +179,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                 this.currentStepIndex++;
 
                 if (this.steps.length <= this.currentStepIndex) {
-                    this.state = States.Exit;
-                    this.nextState();
+                    // TODO: Throw error
                 }
                 else {
                     this.state = States.BeginStep;
@@ -132,7 +187,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                 }
             }
             else if (this.state === States.Exit) {
-                this.end();
+                this.complete();
             }
         },
         showStep: function (repeatIndex) {
@@ -165,14 +220,6 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
          */
         nextStep: function () {
             this.nextState();
-        },
-
-        /**
-         * Ends the trial.
-         */
-        end: function () {
-            var csv = this.subject.exportToCSV();
-            console.log(csv);
         }
     });
 

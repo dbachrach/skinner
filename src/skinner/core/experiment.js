@@ -51,7 +51,7 @@ define(["lib/class", "src/skinner/core/subject", "src/skinner/core/trial", "src/
          * @param subject The subject of this experiment.
          */
         startTrial: function (subject) {
-            var trial = new Trial(this.data.steps, this.data.tasks, subject);
+            var trial = new Trial(this.data, subject);
             trial.begin();
         }
     });

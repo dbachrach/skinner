@@ -5,8 +5,9 @@ authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 login:
   type: basic
 
-reporting:
-  type: download
+data collection:
+  type: upload to server
+  server: http://skinnerweb.azurewebsites.net/
 
 
 dimensions:
@@ -121,8 +122,6 @@ tasks:
         button: Next
 
   finish:
-    - type: text
+    - type: finish
       title: You have now completed the experiment on human memory and learning.
       content file: finish
-      next:
-        button: submit

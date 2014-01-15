@@ -4,5 +4,6 @@ name: core
 author: skinner
 
 page:
+  - finish
   - test
   - text

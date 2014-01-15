@@ -91,7 +91,7 @@ define (["require", "lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!
         });
     }
 
-    function loadPageLayout(name, bindings, callback) {
+    function expandBindings(bindings, callback) {
         var fileSuffix = " file";
         function isFileBinding(/*value,*/ key) {
             return _s.endsWith(key, fileSuffix);
@@ -100,6 +100,7 @@ define (["require", "lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!
             return key.slice(0, -(fileSuffix.length));
         }
 
+        // TODO: This is actually a filter() followed by a map()
         var contents = [];
         _.each(bindings, function (value, key) {
             if (isFileBinding(key)) {
@@ -108,27 +109,33 @@ define (["require", "lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!
             }
         });
 
+        // TODO: Create a new instance of bindings
         require(_.pluck(contents, "path"), function () {
             _.each(arguments, function (a, index) {
                 bindings[contents[index].binding] = a;
             });
 
-            loadLayout(name, "page", bindings, "#page", function () {
-                if (callback) { callback(); }
-            });
+            callback(bindings);
         });
+    }
+
+    function loadPageLayout(name, bindings, callback) {
+        loadLayout(name, "page", bindings, "#page", callback);
     }
 
     function loadLayoutInPackage(name, pkg, bindings, selector, callback) {
         var layoutPath = layoutPathForModule(pkg, name);
+        console.log(layoutPath);
         var cssPath = cssPathForModule(pkg, name);
 
         require([layoutPath, cssPath], function (template) {
-            var result = template(bindings);
-            $(selector).html(result);
-            if (callback) {
-                callback();
-            }
+            expandBindings(bindings, function (expandedBinds) {
+                var result = template(expandedBinds);
+                $(selector).html(result);
+                if (callback) {
+                    callback();
+                }
+            });
         });
     }
 
