@@ -1,4 +1,4 @@
-define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", "src/skinner/core/intervals", "src/skinner/core/keyPath"], function (_, Class, Mousetrap, loader, intervals, keyPath) {
+define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", "src/skinner/core/intervals", "src/skinner/core/keypath"], function (_, Class, Mousetrap, loader, intervals, keyPath) {
     "use strict";
 
     var Page = Class.extend({

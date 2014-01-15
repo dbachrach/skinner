@@ -1,4 +1,4 @@
-define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/keyPath"], function (_, _s, Class, keyPath) {
+define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/keypath"], function (_, _s, Class, keyPath) {
     "use strict";
 
     var Subject = Class.extend({
