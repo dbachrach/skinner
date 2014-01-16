@@ -15,7 +15,6 @@
 - [ ] % and %% variables should be available in templates?
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per pagede2
-- [ ] git track changes to case name for content folder
 - [ ] Should we use {{{ }}} everywhere so html can go everywhere??
 
 ## Stretch Goals
@@ -28,6 +27,10 @@
 - [ ] markdown support in handlebars
 - [ ] show test questions on the same page
 - [ ] allow branching based on subject's answer
+- [ ] better packaging with server component
+- [ ] gather up all licenses
+- [ ] r optimize
+- [ ] disable console logs
 
 ## Postponed
 
@@ -109,3 +112,6 @@
 - [x] make erin's email clickable
 - [x] rename content files to be .html
 - [x] Figure out how finishing works
+- [x] git track changes to case name for content folder
+- [x] make sure csv has new lines in email
+
