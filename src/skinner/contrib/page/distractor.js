@@ -1,4 +1,4 @@
-define (["src/skinner/core/page", "src/skinner/core/keypath"], function(Page, keyPath) {
+define (["src/skinner/core/page", "src/skinner/core/keypath"], function (Page, keyPath) {
 	"use strict";
 
     var DistractorPage = Page.extend({

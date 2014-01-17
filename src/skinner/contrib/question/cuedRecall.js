@@ -1,4 +1,4 @@
-define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/question", "src/skinner/core/keypath"], function($, _, _s, Question, keyPath) {
+define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/question", "src/skinner/core/keypath"], function ($, _, _s, Question, keyPath) {
     "use strict";
 
     // ## CuedRecallQuestion
@@ -16,7 +16,7 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
             $("#answer").focus();
         },
 
-        selectedAnswer: function() {
+        selectedAnswer: function () {
             // Return the answer text box's value.
             return $("#answer").val();
         },

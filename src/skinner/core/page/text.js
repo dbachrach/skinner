@@ -1,4 +1,4 @@
-define (["src/skinner/core/page"], function(Page) {
+define (["src/skinner/core/page"], function (Page) {
 	"use strict";
 
     // ## Description

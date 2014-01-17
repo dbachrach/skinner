@@ -1,4 +1,4 @@
-define(["src/skinner/contrib/question/cuedRecall"], function(CuedRecallQuestion) {
+define(["src/skinner/contrib/question/cuedRecall"], function (CuedRecallQuestion) {
     "use strict";
 
     var FreeResponseQuestion = CuedRecallQuestion.extend({

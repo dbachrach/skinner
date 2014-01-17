@@ -1,15 +1,17 @@
-define (["lib/jquery"], function($) {
+define (["lib/jquery", "lib/class"], function ($, Class) {
     "use strict";
 
-    function BasicLogin(data) {
-        this.data = data;
-    }
-    BasicLogin.prototype.start = function(callback) {
-        $("#loginButton").click(function () {
-            var subjectNumber = $("#subjectNumber").val();
-            callback(subjectNumber);
-        });
-    };
+    var BasicLogin = Class.extend({
+        init: function (data) {
+            this.data = data;
+        },
+        start: function (callback) {
+            $("#loginButton").click(function () {
+                var subjectNumber = $("#subjectNumber").val();
+                callback(subjectNumber);
+            });
+        }
+    });
 
     return BasicLogin;
 });

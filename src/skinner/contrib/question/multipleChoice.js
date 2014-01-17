@@ -1,4 +1,4 @@
-define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars"], function($, Question, Handlebars) {
+define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars"], function ($, Question, Handlebars) {
 	"use strict";
 
 	var MultipleChoiceQuestion = Question.extend({
@@ -9,11 +9,11 @@ define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars"], function($
             // Takes the loop index (`@index`) and turns it into an answer label.
             // Example: `{{answerLabel 0 }}` -> `"A) "`.
             //          `{{answerLabel 2 }}` -> `"C) "`.
-            Handlebars.registerHelper("answerLabel", function(index) {
+            Handlebars.registerHelper("answerLabel", function (index) {
                 return String.fromCharCode(65 + index);
             });
 		},
-		selectedAnswer: function() {
+		selectedAnswer: function () {
 			return $("input[name=questionAnswer]:checked").val();
 		}
 	});

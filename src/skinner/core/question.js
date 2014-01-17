@@ -63,10 +63,10 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
                 base.postShow();
             });
         },
-        preShow: function() {
+        preShow: function () {
             // Override
         },
-        postShow: function() {
+        postShow: function () {
             // Override
         },
         selectedAnswer: function () {

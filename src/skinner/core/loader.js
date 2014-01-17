@@ -29,16 +29,16 @@ define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/pack
                 });
 
                 require(_.map(packs, ryamlify), function () {
-                    var createdModules = {"page": {}, "question": {}, "login": {}};
+                    var createdModules = { "page": {}, "question": {}, "login": {} };
                     _.each(arguments, function (pack, index) {
                         var packageName = packs[index];
-                        _.each(pack.page, function(packagePage) {
+                        _.each(pack.page, function (packagePage) {
                             createdModules.page[packagePage] = packageName;
                         });
-                        _.each(pack.question, function(packageQuestion) {
+                        _.each(pack.question, function (packageQuestion) {
                             createdModules.question[packageQuestion] = packageName;
                         });
-                        _.each(pack.login, function(packageLogin) {
+                        _.each(pack.login, function (packageLogin) {
                             createdModules.login[packageLogin] = packageName;
                         });
                     });
@@ -93,7 +93,7 @@ define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/pack
 
     function expandBindings(bindings, callback) {
         var fileSuffix = " file";
-        function isFileBinding(/*value,*/ key) {
+        function isFileBinding(key) {
             return _s.endsWith(key, fileSuffix);
         }
         function removeFileSuffix(key) {

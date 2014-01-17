@@ -1,6 +1,6 @@
 var walk = require("walk");
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
                     optimize: "none",
                     useStrict: true,
                     findNestedDependencies: true,
-                    onBuildWrite: function(name, path, contents) {
+                    onBuildWrite: function (name, path, contents) {
                         contents = contents.replace(/\/\*\! __BEGIN_REMOVE_FROM_PRODUCTION__ \*\/[\s\S]*?\/\*\! __END_REMOVE_FROM_PRODUCTION__ \*\//, "");
                         return contents;
                     }
@@ -105,8 +105,8 @@ module.exports = function(grunt) {
     grunt.registerTask("build", ["initBuild", "copy", "requirejs", "removelogging", "uglify"]);
     grunt.registerTask("default", ["test", "build"]);
 
-    // TODO: Optimize further to parse experiment.yaml and include page types and content and html
-    grunt.registerTask("initBuild", function() {
+    // TODO: Optimize further to parse experiment.yaml and include page types and content and html and maybe css.js and hbars.js?
+    grunt.registerTask("initBuild", function () {
         var done = this.async();
         var files = [];
 
@@ -121,7 +121,7 @@ module.exports = function(grunt) {
             }
             next();
         });
-        walker.on("end", function() {
+        walker.on("end", function () {
             grunt.config(["initBuildData"], files);
             done();
         });

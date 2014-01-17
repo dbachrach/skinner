@@ -1,4 +1,4 @@
-define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
+define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
     "use strict";
 
     var LabelLocation = {
@@ -144,7 +144,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
         this.canvas = canvas;
         this.ctx = this.canvas[0].getContext('2d');
 
-        if(window.devicePixelRatio === 2) {
+        if (window.devicePixelRatio === 2) {
             this.ctx.scale(2, 2);
         }
 
@@ -159,7 +159,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
         this.elements = this.elements.concat(elements);
     };
     QuestionBoard.prototype.interactiveElements = function () {
-        return this.elements.filter(function(e) {
+        return this.elements.filter(function (e) {
             return e.interactive;
         });
     };
@@ -219,7 +219,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
 
 
     function generateCirclesBetweenCircles(d, e, pointsPerEdge, labelLocation, showScore) {
-        var midval = function(v1, v2, percent) {
+        var midval = function (v1, v2, percent) {
             return v1 + ((v2 - v1) * percent);
         };
 
@@ -270,9 +270,9 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
         var circles = [];
         for (var i = 1; i <= pointsPerEdge; i++) {
             var percent = i / (pointsPerEdge + 1);
-            circles[i-1] = new Circle(midpoint(d.center, e.center, percent), d.answerId + "-" + i + "-" + e.answerId, scoreBetweenCircles(d, e, i));
+            circles[i - 1] = new Circle(midpoint(d.center, e.center, percent), d.answerId + "-" + i + "-" + e.answerId, scoreBetweenCircles(d, e, i));
             if (showScore) {
-                circles[i-1].addLabel(" (" + circles[i-1].score + ")", labelLocation);
+                circles[i - 1].addLabel(" (" + circles[i - 1].score + ")", labelLocation);
             }
         }
         return circles;
@@ -350,7 +350,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
             var canvas = $("#questionCanvas");
             canvas[0].style.width = "600px";
             canvas[0].style.height = "450px";
-            if(window.devicePixelRatio === 2) {
+            if (window.devicePixelRatio === 2) {
                 canvas[0].width = 1200;
                 canvas[0].height = 900;
             }
@@ -362,7 +362,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
             this.qboard = this.buildBoard(canvas, showScore);
             this.qboard.redraw();
         },
-        selectedAnswer: function() {
+        selectedAnswer: function () {
             return this.qboard.selectedAnswer();
         },
         maxScore: function () {
@@ -383,7 +383,7 @@ define (["lib/jquery", "src/skinner/core/question"], function($, Question) {
             var b = new Point(xOffset, yOffset + triangleHeight, "rgb(255,255,0)");
             var c = new Point(b.x + edge, b.y, "rgb(0,0,255)");
 
-            var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge/2)));
+            var center = new Point(a.x, b.y - (Math.tan(Math.PI / 6) * (edge / 2)));
 
             // Assumes only one correct answer
             var correctAnswer = this.correctAnswers()[0];

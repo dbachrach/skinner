@@ -1,4 +1,4 @@
-define (["src/skinner/core/page", "src/skinner/core/loader"], function(Page, loader) {
+define (["src/skinner/core/page", "src/skinner/core/loader"], function (Page, loader) {
     "use strict";
 
     var FinishPage = Page.extend({

@@ -1,4 +1,4 @@
-define (["lib/jquery", "lib/lodash", "src/skinner/core/page", "src/skinner/core/intervals"], function($, _, Page, intervals) {
+define (["lib/jquery", "lib/lodash", "src/skinner/core/page", "src/skinner/core/intervals"], function ($, _, Page, intervals) {
 	"use strict";
 
 	var CountdownPage = Page.extend({
@@ -8,7 +8,7 @@ define (["lib/jquery", "lib/lodash", "src/skinner/core/page", "src/skinner/core/
 
 			this.time = intervals.parseTimeInterval(this.data.time);
 		},
-		postShow: function() {
+		postShow: function () {
 			var base = this;
 
 			function countdown(val) {

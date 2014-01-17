@@ -53,7 +53,7 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
                 clearTimeout(this.timeout);
             }
         },
-        hide: function() {
+        hide: function () {
             this.preHide();
 
             this.updateKeys(false);
@@ -84,7 +84,7 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
             // Update UI Buttons
             loader.loadLayoutInPackage("buttons", "src/skinner/core/", this.data, "#buttons");
         },
-        updateKeys: function(enable) {
+        updateKeys: function (enable) {
             // Update keys
             var base = this;
             var nextKey = keyPath(this.data, "next.keys", []);

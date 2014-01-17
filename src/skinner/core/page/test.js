@@ -1,4 +1,4 @@
-define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function($, _, howler, Page, loader, keyPath, allQuestionData) {
+define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function ($, _, howler, Page, loader, keyPath, allQuestionData) {
     "use strict";
 
     var States = {
@@ -91,11 +91,11 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 base.startPageTimer();
             });
         },
-        showTestScore: function() {
+        showTestScore: function () {
             // TODO: These should be exposed in experiment.yaml
             var bindings = {
-                "title" : "Practice Test Score",
-                "content" : "<p>Your score: <strong>" + this.currentScore + "</strong></p><p>Max score: <strong>" + this.currentMaxScore + "</strong></p>"
+                "title": "Practice Test Score",
+                "content": "<p>Your score: <strong>" + this.currentScore + "</strong></p><p>Max score: <strong>" + this.currentMaxScore + "</strong></p>"
             };
             loader.loadLayoutInPackage("testresults", "src/skinner/core/", bindings, "#test");
         },
