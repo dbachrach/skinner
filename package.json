@@ -13,6 +13,11 @@
         "grunt-contrib-jshint": "~0.7.2",
         "grunt-contrib-requirejs": "~0.4.1",
         "grunt-contrib-csslint": "~0.1.2",
-        "grunt-contrib-qunit": "~0.3.0"
+        "grunt-contrib-qunit": "~0.3.0",
+        "grunt-remove-logging": "~0.2.0",
+        "grunt-contrib-uglify": "~0.3.0",
+        "walk": "~2.2.1",
+        "grunt-jscs-checker": "~0.3.2",
+        "grunt-contrib-copy": "~0.5.0"
     }
 }

@@ -26,10 +26,11 @@
             "lib/jquery-private": { "lib/jquery": "lib/jquery" },
         },
 
+        /*! __BEGIN_REMOVE_FROM_PRODUCTION__ */
         // Bust cache during development,
         // so a refresh in the browser gets the latest code.
-        // TODO: Strip in production
         urlArgs: "bust=" + (new Date()).getTime()
+        /*! __END_REMOVE_FROM_PRODUCTION__ */
     });
 
 
