@@ -1,0 +1,31 @@
+---
+name: test
+authors: [me]
+
+login:
+  type: basic
+
+steps:
+  - task: A
+  - task: B
+  - task: C
+
+tasks:
+  A:
+    - type: text
+      title: Test
+      content: A Simple Test
+      next:
+        button: Next
+
+  B:
+    - type: text
+      title: Test 2
+      content: A Simple Test 2
+      next:
+        button: Next 2
+
+  C:
+    - type: finish
+      title: Finished
+      content: Finished the test

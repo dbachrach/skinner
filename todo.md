@@ -14,7 +14,7 @@
 - [ ] write docs
 - [ ] % and %% variables should be available in templates?
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
-- [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per pagede2
+- [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] Should we use {{{ }}} everywhere so html can go everywhere??
 
 ## Stretch Goals
@@ -22,6 +22,7 @@
 - [ ] Flasher
 - [ ] Pick statement: random from list.
 - [ ] keyboard shortcuts for multiple choice's A/B/C/...
+- [ ] question, on selecting an answer move to next question
 - [ ] You're on question 3 of 10.
 - [ ] pretty animations?
 - [ ] markdown support in handlebars

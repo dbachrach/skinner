@@ -1,4 +1,4 @@
-define (["require", "lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/packages"], function (require, $, _, _s, packageData) {
+define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/packages", "src/skinner/core/mode"], function ($, _, _s, packageData, mode) {
     "use strict";
 
     var loadModuleDefinitions = function () {
@@ -104,7 +104,11 @@ define (["require", "lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!
         var contents = [];
         _.each(bindings, function (value, key) {
             if (isFileBinding(key)) {
-                contents.push({ "path": "text!content/" + value + ".html",
+                var contentPath = "content";
+                if (mode.isTestMode()) {
+                    contentPath = "tests/functional/content";
+                }
+                contents.push({ "path": "text!" + contentPath + "/" + value + ".html",
                                 "binding": removeFileSuffix(key) });
             }
         });

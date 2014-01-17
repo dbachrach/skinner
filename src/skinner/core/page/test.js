@@ -1,4 +1,4 @@
-define (["require", "lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function(require, $, _, howler, Page, loader, keyPath, allQuestionData) {
+define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function($, _, howler, Page, loader, keyPath, allQuestionData) {
     "use strict";
 
     var States = {

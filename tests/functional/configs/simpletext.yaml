@@ -5,9 +5,6 @@ authors: [me]
 login:
   type: basic
 
-reporting:
-  type: download
-
 steps:
   - task: A
 
@@ -16,3 +13,9 @@ tasks:
     - type: text
       title: Test
       content: A Simple Test
+      next:
+        button: Next
+
+    - type: finish
+      title: Finished
+      content: Finished the test

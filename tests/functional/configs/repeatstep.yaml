@@ -1,0 +1,48 @@
+---
+name: test
+authors: [me]
+
+login:
+  type: basic
+
+dimensions:
+  Value:
+    - name: [James, Jack]
+      address: [123, 455, 813]
+
+steps:
+  - task: A
+    repeat: across Value.name
+
+  - task: B
+    repeat: across Value.address
+    in between task: inbetween
+
+  - task: C
+
+tasks:
+  A:
+    - type: text
+      title: Test {{indexed Value.name}}
+      content: A Simple Test
+      next:
+        button: Next
+
+  B:
+    - type: text
+      title: Test {{indexed Value.address}}
+      content: A Simple Test 2
+      next:
+        button: Next 2
+
+  inbetween:
+    - type: text
+      title: In Between
+      content: in between content
+      next:
+        button: Next In Between
+
+  C:
+    - type: finish
+      title: Finished
+      content: Finished the test

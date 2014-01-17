@@ -19,14 +19,12 @@ define (["lib/lodash"], function (_) {
         }
 
         var matches = interval.match(/^([+-]?\d+) *(.*)$/);
-        console.log("matches is " + matches);
         if (!matches) {
             return undefined;
         }
 
         var number = parseInt(matches[1], 10);
         var word = matches[2].toLowerCase();
-        console.log("num word: " + number + " " + word);
 
         var timeUnits = [
             { "words": ["sec", "secs", "second", "seconds"], "unit": ONE_SECOND },
@@ -35,10 +33,6 @@ define (["lib/lodash"], function (_) {
             { "words": ["day", "days"],                      "unit": ONE_DAY },
             { "words": ["yr",  "yrs",  "year",   "years"],   "unit": ONE_YEAR }
         ];
-
-        console.log("timeunits: ");
-        console.log(timeUnits);
-        console.log("word: " + word);
 
         var found = _.find(timeUnits, function (timeUnit) {
             return _.contains(timeUnit.words, word);

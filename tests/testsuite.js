@@ -1,6 +1,5 @@
 (function () {
 
-    // TODO: Share this with the main.js
     requirejs.config({
         baseUrl: "../",
         shim: {
@@ -41,7 +40,9 @@
         "skinner/core/resolverTests.js",
         "skinner/core/subjectTests.js",
         "skinner/core/testPageTests.js",
-        "functional/functionalTests.js"
+        "functional/simpleTextTests.js",
+        "functional/simpleStepTests.js",
+        "functional/repeatStepTests.js"
     ];
 
     // Resolve all testModules and then start the Test Runner.

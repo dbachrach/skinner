@@ -28,23 +28,26 @@
 
         // Bust cache during development,
         // so a refresh in the browser gets the latest code.
+        // TODO: Strip in production
         urlArgs: "bust=" + (new Date()).getTime()
     });
 
-    var configFile = "ryaml!config/experiment";
-    var isTestMode = true; // TODO: Get this from somewhere
-    if (isTestMode) {
-        var search = window.location.search;
-        var matches = search.match(/config=(.*)&*/);
-        if (matches && matches.length == 2) {
-            configFile = "ryaml!tests/functional/configs/" + matches[1];
-        }
-    }
 
     // `main` dependencies: experiment
-    require(["lib/jquery", "src/skinner/core/experiment", configFile, "domReady!"], function ($, Experiment, expData, domReady) {
-        // Create a new experiment based on the data loaded from `experiment.yaml`, and begin.
-        var exp = new Experiment(expData);
-        exp.begin();
+    require(["lib/jquery", "domReady!", "src/skinner/core/experiment", "src/skinner/core/mode"], function ($, domReady, Experiment, mode) {
+        var configFile = "ryaml!config/experiment";
+        if (mode.isTestMode()) {
+            var search = window.location.search;
+            var matches = search.match(/config=([^&]*)&*/);
+            if (matches && matches.length === 2) {
+                configFile = "ryaml!tests/functional/configs/" + matches[1];
+            }
+        }
+
+        require([configFile], function (expData) {
+            // Create a new experiment based on the data loaded from `experiment.yaml`, and begin.
+            var exp = new Experiment(expData);
+            exp.begin();
+        })
     });
 }());

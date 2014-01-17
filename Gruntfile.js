@@ -31,6 +31,8 @@ module.exports = function(grunt) {
                     baseUrl: "./",
                     optimize: "uglify",
                     useStrict: true
+                    // TODO: Find nested dependencies
+                    // TODO: Handle the isintestmode case
                 }
             }
         },
