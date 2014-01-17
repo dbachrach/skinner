@@ -48,6 +48,6 @@
             // Create a new experiment based on the data loaded from `experiment.yaml`, and begin.
             var exp = new Experiment(expData);
             exp.begin();
-        })
+        });
     });
 }());

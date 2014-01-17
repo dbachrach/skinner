@@ -15,5 +15,5 @@ define([], function () {
 
     return {
         "isTestMode": isTestMode
-    }
+    };
 });
