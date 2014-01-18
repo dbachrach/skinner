@@ -47,7 +47,7 @@ module.exports = function (grunt) {
                 options: {
                     name: "src/main",
                     include: "<%= initBuildData %>",
-                    out: "release/src/main.js",
+                    out: "release/src/main-built.js",
                     mainConfigFile: "src/main.js",
                     baseUrl: "./",
                     optimize: "none",
@@ -68,14 +68,14 @@ module.exports = function (grunt) {
 
         removelogging: {
             dist: {
-                src: "release/src/main.js",
+                src: "release/src/main-built.js",
             }
         },
 
         uglify: {
             my_target: {
                 files: {
-                    "release/src/main.js": ["release/src/main.js"]
+                    "release/src/main-built.js": ["release/src/main-built.js"]
                 }
             }
         },
@@ -83,8 +83,24 @@ module.exports = function (grunt) {
         copy: {
             main: {
                 files: [
-                    { expand: true, src: ["config/**", "content/**", "css/**", "lib/**", "src/**", "index.html"], dest: "release/" }
-                ]
+                    {
+                        expand: true,
+                        src: ["config/**", "content/**", "css/**", "src/**"],
+                        dest: "release/"
+                    },
+                    {
+                        src: "index.html",
+                        dest: "release/",
+                    }
+                ],
+                options: {
+                    process: function (content, srcpath) {
+                        if (srcpath === "index.html") {
+                            content = content.replace(/<script data-main="src\/main.js" src="lib\/require.js"><\/script>/, "<script src=\"src/main-built.js\"></script>");
+                        }
+                        return content;
+                    }
+                }
             }
         }
     });
@@ -105,13 +121,12 @@ module.exports = function (grunt) {
     grunt.registerTask("build", ["initBuild", "copy", "requirejs", "removelogging", "uglify"]);
     grunt.registerTask("default", ["test", "build"]);
 
-    // TODO: Optimize further to parse experiment.yaml and include page types and content and html and maybe css.js and hbars.js?
+    // TODO: Optimize further to parse experiment.yaml and include page types and content and html?
     grunt.registerTask("initBuild", function () {
         var done = this.async();
         var files = [];
 
-        var walker = walk.walk("./src");
-        walker.on("file", function (root, stat, next) {
+        function onFile(root, stat, next) {
             var filename = stat.name;
             var extension = ".js";
             if (filename.substring(filename.length - extension.length, filename.length) === extension) {
@@ -120,10 +135,17 @@ module.exports = function (grunt) {
                 }
             }
             next();
-        });
-        walker.on("end", function () {
-            grunt.config(["initBuildData"], files);
-            done();
+        }
+
+        var srcWalker = walk.walk("./src");
+        srcWalker.on("file", onFile);
+        srcWalker.on("end", function () {
+            var libWalker = walk.walk("./lib");
+            libWalker.on("file", onFile);
+            libWalker.on("end", function () {
+                grunt.config(["initBuildData"], files);
+                done();
+            });
         });
     });
 };
