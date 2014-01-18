@@ -32,6 +32,7 @@
 - [ ] gather up all licenses
 - [ ] r optimize
 - [ ] disable console logs
+- [ ] use handlebars new unregister helper
 
 ## Postponed
 

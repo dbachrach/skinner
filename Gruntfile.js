@@ -99,7 +99,8 @@ module.exports = function (grunt) {
                             content = content.replace(/<script data-main="src\/main.js" src="lib\/require.js"><\/script>/, "<script src=\"src/main-built.js\"></script>");
                         }
                         return content;
-                    }
+                    },
+                    noProcess: ["**/*.{png,gif,jpg,ico,svg,ttf,eot,woff,otf}"]
                 }
             }
         }
