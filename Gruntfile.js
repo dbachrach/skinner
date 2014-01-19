@@ -19,13 +19,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // TODO: Add back:
-        /*
-            "validateJSDoc": {
-            "checkParamNames": true,
-            "requireParamTypes": true
-            },
-        */
         // JSCS settings
         jscs: {
             src: ["gruntfile.js", "src/**/*.js", "test/**/*.js"],

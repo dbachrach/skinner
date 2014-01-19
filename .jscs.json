@@ -16,5 +16,8 @@
     "disallowMultipleVarDecl": true,
     "disallowMixedSpacesAndTabs": true,
     "disallowTrailingWhitespace": true,
-    "requireKeywordsOnNewLine": ["else"]
+    "requireKeywordsOnNewLine": ["else"],
+    "validateJSDoc": {
+        "checkParamNames": true
+    }
 }
