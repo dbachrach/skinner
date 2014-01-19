@@ -1,2 +1,5 @@
-<div class="rendered-content">{{ content }}</div>
-<embed id="embed" src="http://www.classicgamesarcade.com/games/flash-tetris.swf" width="500px" height="500px" autostart="true" loop="false" controller="true"></embed>
+{{#if title}}
+    <h2 class="ui dividing header">{{{title}}}</h2>
+{{/if}}
+<div class="rendered-content">{{{content}}}</div>
+<div id="distractor-content"></div>
