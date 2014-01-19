@@ -1,0 +1,17 @@
+<div class="ui form">
+    <div class="default_question">{{data.question}}</div>
+    <div class="ui left aligned basic segment">
+        <div class="grouped inline fields">
+            {{#each scales}}
+            <div class="field">
+                <div class="ui large radio checkbox">
+                    <input type="radio" name="questionAnswer" id="questionAnswer-{{this.value}}" value="{{this.value}}" />
+                    <label for="questionAnswer-{{this.value}}">
+                        {{this.value}} {{#if this.subtitle }}({{{this.subtitle}}}){{/if}}
+                    </label>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

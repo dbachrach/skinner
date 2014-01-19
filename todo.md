@@ -11,11 +11,11 @@
 ## Skinner Core
 
 - [ ] write docs
-- [ ] % and %% variables should be available in templates?
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] Should we use {{{ }}} everywhere so html can go everywhere??
 - [ ] profile performance
+- [ ] Scale Question
 - [ ] all places with a title should do : {{#if title}}
     <h2 class="ui dividing header">{{{title}}}</h2>
 {{/if}}
@@ -33,8 +33,6 @@
 - [ ] allow branching based on subject's answer
 - [ ] better packaging with server component
 - [ ] gather up all licenses
-- [ ] r optimize
-- [ ] disable console logs
 - [ ] use handlebars new unregister helper
 
 ## Postponed
@@ -52,6 +50,8 @@
 - [ ] Prescreened subjects assigned to specific conditions
 - [ ] subject/password pair
 - [ ] Specify assignment percentages to dimensions
+- [ ] % and %% variables should be available in templates?
+    + I'm not sure if we need this. It should be possilbe to use other constructs. This will encourage branching code in the content files rather than the page/task model.
 
 ## Finished
 
@@ -120,3 +120,6 @@
 - [x] git track changes to case name for content folder
 - [x] make sure csv has new lines in email
 - [x] Distractor page cleanup
+- [x] r optimize
+- [x] disable console logs
+

@@ -4,7 +4,7 @@
         <div class="grouped inline fields">
             {{#each data.answers}}
             <div class="field">
-                <div class="ui green large radio checkbox">
+                <div class="ui large radio checkbox">
                     <input type="radio" name="questionAnswer" id="questionAnswer-{{@index}}" value="{{this}}" />
                     <label for="questionAnswer-{{@index}}">
                         {{#if ../[show answer labels]}}{{answerLabel @index}}) {{/if}}

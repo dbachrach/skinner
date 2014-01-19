@@ -116,7 +116,6 @@ tasks:
   survey:
     - type: test
       title: You're done with the test.
-      style: freeResponse
       question set: survey
       next:
         button: Next

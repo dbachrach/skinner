@@ -58,7 +58,8 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
 
             this.preShow();
 
-            loader.loadLayout(this.style, "question", _.extend({}, this.testData, { "data": this.data }), "#test", function () {
+            var bindContent = _.extend({}, this.testData, { data: this.data }, this.extendedBindContent());
+            loader.loadLayout(this.style, "question", bindContent, "#test", function () {
                 base.postShow();
             });
         },
@@ -112,7 +113,10 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
         },
         reportResults: function (subject, testId) {
             // Override
-        }
+        },
+        extendedBindContent: function () {
+            return {};
+        },
     });
 
     return Question;

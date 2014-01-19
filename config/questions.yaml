@@ -40,6 +40,30 @@ example:
 
 survey:
   - question: Do you have any comments?
+    style: freeResponse
+
+  - question: On a scale of 1 to 10, where 1 is 'not very likely' and 10 is 'very likely', how likely are you to recommend this.
+    style: scale
+    scale: 1 (not very likely) to 10 (very likely)
+
+  - question: Do you find this experiment effective?
+    style: scale
+    scale:
+      - 1 (Strongly Disagree)
+      - 2 (Disagree)
+      - 3 (Neutral)
+      - 4 (Agree)
+      - 5 (Strongly Agree)
+
+  - question: Do you find this experiment effective?
+    style: scale
+    scale:
+      - Strongly Disagree
+      - Disagree
+      - Neutral
+      - Agree
+      - Strongly Agree
+
 
 saturn-a:
   - question: What planet lacks an internal magnetic field?
