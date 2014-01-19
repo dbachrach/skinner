@@ -56,7 +56,7 @@ module.exports = function (grunt) {
 
         // QUnit settings
         qunit: {
-            all: ["tests/**/*.html"]
+            all: ["tests/tests.html"]
         },
 
         removelogging: {
