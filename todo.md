@@ -16,6 +16,7 @@
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] Should we use {{{ }}} everywhere so html can go everywhere??
+- [ ] profile performance
 
 ## Stretch Goals
 - [ ] Interrupters

@@ -10,6 +10,27 @@ define(function (require) {
         equal(q.caseSensitiveScoring, false);
     });
 
+    test("question - Initialization (with '*' answer)", function () {
+        var answer1 = "an answer";
+        var questionData = { "answers": [answer1 + "*"] };
+        var q = new Question(questionData);
+        deepEqual(q.data.answers, [answer1]);
+    });
+
+    test("question - Initialization (with ' *' answer)", function () {
+        var answer1 = "an answer";
+        var questionData = { "answers": [answer1 + " *"] };
+        var q = new Question(questionData);
+        deepEqual(q.data.answers, [answer1]);
+    });
+
+    test("question - Initialization (with lots of spaces in answer)", function () {
+        var answer1 = "an answer";
+        var questionData = { "answers": ["   " + answer1 + "                "] };
+        var q = new Question(questionData);
+        deepEqual(q.data.answers, [answer1]);
+    });
+
     test("qustion - correctAnswers()", function () {
         var correctAnswer = "Answer1";
         var questionData = { "answers": [correctAnswer + " *"] };
