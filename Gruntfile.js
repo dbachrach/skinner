@@ -29,6 +29,9 @@ module.exports = function (grunt) {
 
         // CSSLint settings
         csslint: {
+            options: {
+                csslintrc: '.csslintrc'
+            },
             strict: {
                 src: ["css/main.css", "src/**/*.css"]
             }
