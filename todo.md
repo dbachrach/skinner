@@ -4,7 +4,6 @@
 ## High Pri
 
 - [ ] Inline test
-- [ ] Hidden 'finish page' command to get CSV
 - [ ] try putting data into excel
 - [ ] update timer UI
 - [ ] update survey UI
@@ -14,7 +13,6 @@
 
 - [ ] ability to branch on all properties
 - [ ] write docs
-- [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] Should we use {{{ }}} everywhere so html can go everywhere??
 - [ ] profile performance
@@ -126,3 +124,5 @@
 - [x] r optimize
 - [x] disable console logs
 - [x] test timer
+- [x] Notes about modified yaml parser to take out inline {} mapping.
+- [x] Hidden 'finish page' command to get CSV

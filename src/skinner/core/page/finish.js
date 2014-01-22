@@ -1,4 +1,4 @@
-define (["src/skinner/core/page", "src/skinner/core/loader"], function (Page, loader) {
+define (["lib/jquery", "lib/mousetrap", "src/skinner/core/page", "src/skinner/core/loader"], function ($, Mousetrap, Page, loader) {
     "use strict";
 
     var FinishPage = Page.extend({
@@ -14,6 +14,12 @@ define (["src/skinner/core/page", "src/skinner/core/loader"], function (Page, lo
                 base.task.trial.end(function () {
                     loader.loadLayoutInPackage("finishCompleted", "src/skinner/core/", bindContent, "#finishContent");
                 });
+            });
+
+            Mousetrap.bind("r e s u l t s", function () {
+                var csv = base.task.trial.subject.exportToCSV();
+                $("#resultData").html(csv);
+                $("#resultMessage").show();
             });
         }
     });
