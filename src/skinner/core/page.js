@@ -1,4 +1,4 @@
-define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", "src/skinner/core/intervals", "src/skinner/core/keypath"], function (_, Class, Mousetrap, loader, intervals, keyPath) {
+define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", "src/skinner/core/intervals", "src/skinner/core/keypath", "peg!src/skinner/core/parser/showTimerStatement"], function ($, _, Class, Mousetrap, loader, intervals, keyPath, ShowTimerStatement) {
     "use strict";
 
     var Page = Class.extend({
@@ -38,19 +38,48 @@ define (["lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/core/loader", 
             // Override
         },
         startPageTimer: function () {
-            if (_.isNumber(this.time)) {
-                var base = this;
-                this.timeout = setTimeout(function () {
+            var base = this;
+
+            function updateTimer() {
+                // TODO: Formatting of time needs work
+                if (base.showTimer && base.timerValue <= base.hideTimerUntil) {
+                    $("#timer").text(base.timerValue);
+                }
+                base.timerValue--;
+                if (base.timerValue >= 0) {
+                    base.timerTimeout = _.delay(updateTimer, 1000);
+                }
+                else {
+                    $("#timer").hide();
                     base.pageTimerFired();
-                }, this.time);
+                }
+            }
+
+            if (_.isNumber(this.time)) {
+                this.timerValue = this.time / 1000;
+                this.hideTimerUntil = this.timerValue;
+
+                var showTimerStatement = keyPath(base.data, "show timer", false);
+                if (_.isBoolean(showTimerStatement)) {
+                    this.showTimer = showTimerStatement;
+                }
+                else if (_.isString(showTimerStatement)) {
+                    var parsedShowTimer = ShowTimerStatement.parse(showTimerStatement);
+                    this.hideTimerUntil = intervals.parseTimeInterval(parsedShowTimer) / 1000;
+
+                    this.showTimer = true;
+                }
+
+                $("#timer").text("").show();
+                updateTimer();
             }
         },
         pageTimerFired: function () {
             this.next();
         },
         cancelPageTimer: function () {
-            if (!_.isUndefined(this.timeout)) {
-                clearTimeout(this.timeout);
+            if (!_.isUndefined(this.timerTimeout)) {
+                clearTimeout(this.timerTimeout);
             }
         },
         hide: function () {

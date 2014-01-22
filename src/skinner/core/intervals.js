@@ -1,6 +1,8 @@
 define (["lib/lodash"], function (_) {
     "use strict";
 
+    // TODO: Use pegjs
+
     var ONE_SECOND = 1000;
     var ONE_MINUTE = 60 * ONE_SECOND;
     var ONE_HOUR   = 60 * ONE_MINUTE;

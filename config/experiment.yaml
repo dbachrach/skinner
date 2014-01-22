@@ -72,6 +72,7 @@ tasks:
     - type: text
       title: Passage {{_index}}
       content file: passage-{{indexed Order.passage}}
+      time: 9 minutes
       next:
         button: Continue
 
@@ -82,8 +83,8 @@ tasks:
     - type: test
       style: {{Preparation.type}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
-      # TODO: This should be:
-      # time: 30 seconds
+      time: 25 secs
+      show timer: with 10 seconds left
       next:
         button: Next
       show answer labels: true
