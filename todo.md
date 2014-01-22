@@ -3,11 +3,6 @@
 
 ## For Triangle
 
-### Erin
-- [ ] Finalize Instructions
-- [ ] Remove continue buttons from passages and add 9 min timer
-- [ ] Study only people tasks?
-
 ## Skinner Core
 
 - [ ] write docs
