@@ -1,12 +1,19 @@
 
 # TODO
 
-## For Triangle
+## High Pri
+
+- [ ] Inline test
+- [ ] Hidden 'finish page' command to get CSV
+- [ ] try putting data into excel
+- [ ] update timer UI
+- [ ] update survey UI
+- [ ] converge timer countdown
 
 ## Skinner Core
 
+- [ ] ability to branch on all properties
 - [ ] write docs
-- [ ] test timer
 - [ ] Notes about modified yaml parser to take out inline {} mapping.
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] Should we use {{{ }}} everywhere so html can go everywhere??
@@ -118,4 +125,4 @@
 - [x] Distractor page cleanup
 - [x] r optimize
 - [x] disable console logs
-
+- [x] test timer

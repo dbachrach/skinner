@@ -64,7 +64,7 @@ tasks:
     - show: if {{Preparation.type}} is "triangle"
       type: text
       title: You're ready to begin
-      content: If you have any questions, please contact the experiment administrator before proceeding.
+      content: If you have any questions, please contact the experimenter before proceeding.
       next:
         button: Begin
 
@@ -73,17 +73,20 @@ tasks:
       title: Passage {{_index}}
       content file: passage-{{indexed Order.passage}}
       time: 9 minutes
+      # TODO: Remove Continue button
       next:
         button: Continue
 
-    - type: countdown
+    - show: unless {{Preparation.type}} is "studyOnly"
+      type: countdown
       title: You are about to start the test in...
       time: 3 seconds
 
-    - type: test
+    - show: unless {{Preparation.type}} is "studyOnly"
+      type: test
       style: {{Preparation.type}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
-      time: 25 secs
+      time: 25 seconds
       show timer: with 10 seconds left
       next:
         button: Next
@@ -91,17 +94,35 @@ tasks:
       show test results: on completion
 
   midstudy:
+    - show: if {{Preparation.type}} is "studyOnly"
+      type: distractor
+      exercise: tetris
+      time: 250 seconds
+      content: You are now going to play Tetris.
+      # TODO: Remove
+      next:
+        button: Go!
+
     - type: text
-      title: You are about to read the next passage
+      title: You are about to read the next passage.
       content: Click next when ready to begin.
       next:
         button: Next
 
   distract:
-    - type: distractor
+    - show: if {{Preparation.type}} is "studyOnly"
+      type: distractor
       exercise: tetris
-      time: 4 minutes
-      # TODO: Can we use title? this content is not centered!
+      time: 550 seconds
+      content: You are now going to play Tetris.
+      # TODO: Remove
+      next:
+        button: Go!
+
+    - show: unless {{Preparation.type}} is "studyOnly"
+      type: distractor
+      exercise: tetris
+      time: 5 minutes
       content: You are now going to play Tetris.
       # TODO: Remove
       next:
@@ -115,13 +136,29 @@ tasks:
         button: Next
 
   survey:
-    - type: test
-      title: You're done with the test.
-      question set: survey
+    - show: if {{Preparation.type}} is "triangle"
+      type: test
+      title: Please answer the following question.
+      content: How much do you agree or disagree with the following statement about the <strong>triangle</strong> multiple-choice test?
+      question set: survey-triangle-scale
+      next:
+        button: Next
+
+    - show: if {{Preparation.type}} is "triangle"
+      type: test
+      title: Please answer the following question.
+      question set: survey-triangle-other
+      next:
+        button: Next
+
+    - show: unless {{Preparation.type}} is "triangle"
+      type: test
+      title: Please answer the following question.
+      question set: survey-{{Preparation.type}}
       next:
         button: Next
 
   finish:
     - type: finish
-      title: You have now completed the experiment on human memory and learning.
+      title: You have now completed the experiment.
       content file: finish
