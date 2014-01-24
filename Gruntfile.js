@@ -1,6 +1,8 @@
-var walk = require("walk");
 
 module.exports = function (grunt) {
+    "use strict";
+
+    var walk = require("walk");
 
     // Project configuration.
     grunt.initConfig({
@@ -103,14 +105,7 @@ module.exports = function (grunt) {
     });
 
     // Load plugins
-    grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-jscs-checker");
-    grunt.loadNpmTasks("grunt-contrib-csslint");
-    grunt.loadNpmTasks("grunt-contrib-requirejs");
-    grunt.loadNpmTasks("grunt-contrib-qunit");
-    grunt.loadNpmTasks("grunt-remove-logging");
-    grunt.loadNpmTasks("grunt-contrib-uglify");
-    grunt.loadNpmTasks("grunt-contrib-copy");
+    require('load-grunt-tasks')(grunt);
 
     // Tasks
     grunt.registerTask("lint", ["jshint", "jscs", "csslint"]);

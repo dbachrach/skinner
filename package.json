@@ -18,6 +18,7 @@
         "grunt-contrib-uglify": "~0.3.0",
         "walk": "~2.2.1",
         "grunt-jscs-checker": "~0.3.2",
-        "grunt-contrib-copy": "~0.5.0"
+        "grunt-contrib-copy": "~0.5.0",
+        "load-grunt-tasks": "~0.2.1"
     }
 }
