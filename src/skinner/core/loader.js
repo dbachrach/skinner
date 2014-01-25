@@ -76,18 +76,31 @@ define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/pack
         return modulePackage + moduleName;
     }
 
+    function rawLayoutPathForModule(modulePackage, name) {
+        return modulePackage + "layout/" + name;
+    }
     function layoutPathForModule(modulePackage, name) {
-        return "hbars!" + modulePackage + "layout/" + name;
+        return "hbars!" + rawLayoutPathForModule(modulePackage, name);
     }
 
+    function rawCssPathForModule(modulePackage, name, includeExtension) {
+        var extension = (includeExtension) ? ".css" : "";
+        return modulePackage + "layout/" + name + extension;
+    }
     function cssPathForModule(modulePackage, name) {
-        return "css!" + modulePackage + "layout/" + name;
+        return "css!" + rawCssPathForModule(modulePackage, name, false);
     }
 
     function loadLayout(name, type, bindings, selector, callback) {
         getModulePackage(name, type, function (modulePackage) {
             console.log("looking for layout `" + name + "` in module package `", modulePackage + "`");
             loadLayoutInPackage(name, modulePackage, bindings, selector, callback);
+        });
+    }
+
+    function unloadLayout(name, type, callback) {
+        getModulePackage(name, type, function (modulePackage) {
+            unloadLayoutInPackage(name, modulePackage, callback);
         });
     }
 
@@ -127,9 +140,12 @@ define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/pack
         loadLayout(name, "page", bindings, "#page", callback);
     }
 
+    function unloadPageLayout(name, callback) {
+        unloadLayout(name, "page", callback);
+    }
+
     function loadLayoutInPackage(name, pkg, bindings, selector, callback) {
         var layoutPath = layoutPathForModule(pkg, name);
-        console.log(layoutPath);
         var cssPath = cssPathForModule(pkg, name);
 
         require([layoutPath, cssPath], function (template) {
@@ -143,10 +159,21 @@ define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/pack
         });
     }
 
+    function unloadLayoutInPackage(name, pkg, callback) {
+        var cssPath = rawCssPathForModule(pkg, name, true);
+        console.log("Removing: " + "link[href='" + cssPath + "']");
+        $("link[href='" + cssPath + "']").remove();
+        if (callback) {
+            callback();
+        }
+    }
+
     return {
         loadModule: loadModule,
         loadLayout: loadLayout,
         loadPageLayout: loadPageLayout,
-        loadLayoutInPackage: loadLayoutInPackage
+        unloadPageLayout: unloadPageLayout,
+        loadLayoutInPackage: loadLayoutInPackage,
+        unloadLayoutInPackage: unloadLayoutInPackage
     };
 });
