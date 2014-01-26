@@ -1,4 +1,4 @@
-define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/keypath", "src/skinner/core/task", "peg!src/skinner/core/parser/repeatStatement"], function ($, _, Class, loader, keyPath, Task, RepeatStatementParser) {
+define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src/skinner/core/keypath", "src/skinner/core/task", "peg!src/skinner/core/parser/repeatStatement", "src/skinner/core/mode"], function ($, _, Class, loader, keyPath, Task, RepeatStatementParser, mode) {
     "use strict";
 
     var States = {
@@ -81,10 +81,11 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
             var base = this;
 
             function onDone() {
+                var delayLength = (mode.isTestMode()) ? 0 : 1000;
                 _.delay(function () {
                     $(window).off("beforeunload");
                     base._endCallback();
-                }, 1000);
+                }, delayLength);
             }
 
             console.log("---- COMPLETED CSV ----");
