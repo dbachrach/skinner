@@ -39,18 +39,19 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
         },
         startPageTimer: function () {
             var base = this;
+            var countdownElement = $("#timer");
 
             function updateTimer() {
                 // TODO: Formatting of time needs work
                 if (base.showTimer && base.timerValue <= base.hideTimerUntil) {
-                    $("#timer").text(base.timerValue);
+                    countdownElement.text(base.timerValue);
                 }
                 base.timerValue--;
                 if (base.timerValue >= 0) {
                     base.timerTimeout = _.delay(updateTimer, 1000);
                 }
                 else {
-                    $("#timer").hide();
+                    countdownElement.hide();
                     base.pageTimerFired();
                 }
             }
@@ -70,7 +71,7 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
                     this.showTimer = true;
                 }
 
-                $("#timer").text("").show();
+                countdownElement.text("").show();
                 updateTimer();
             }
         },
@@ -87,7 +88,10 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
 
             this.updateKeys(false);
 
-            this.postHide();
+            var base = this;
+            loader.unloadPageLayout(this.layoutName(), function () {
+                base.postHide();
+            });
         },
         preHide: function () {
             // Override
