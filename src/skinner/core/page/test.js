@@ -137,12 +137,12 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
             console.log("in next: with state===" + this.state);
             if (this.state === States.Test) {
+                var pageId = this.id();
 
                 if (keyPath(this.currentQuestion.data, "grouped", false)) {
                     this.cancelPageTimer();
 
                     if (keyPath(this.data, "report results", true)) {
-                        var pageId = this.id();
                         this.currentQuestion.reportResults(this.task.subject, pageId);
                         this.currentQuestion.reportGroupedResults(this.task.subject, pageId);
                     }
@@ -186,7 +186,6 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                     this.currentMaxScore += currentQuestionMaxScore;
 
                     if (keyPath(this.data, "report results", true)) {
-                        var pageId = this.id();
                         var contextId = this.currentQuestion.id;
                         this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
                         this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswers());
