@@ -1,10 +1,10 @@
 # Skinner
 
+## Skinner is in active development
+
 Skinner is a framework for building psychology experiments.
 
 Created by Dustin Bachrach and Erin Sparck.
-
-# Skinner is in active development
 
 ## Dependencies
 
