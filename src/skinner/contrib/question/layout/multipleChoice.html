@@ -1,5 +1,5 @@
 <div class="ui form">
-	<div class="default_question">{{data.question}}</div>
+	<div class="default_question">{{{data.question}}}</div>
     <div class="ui left aligned basic segment">
         <div class="grouped inline fields">
             {{#each data.answers}}
@@ -8,7 +8,7 @@
                     <input type="radio" name="questionAnswer" id="questionAnswer-{{@index}}" value="{{this}}" />
                     <label for="questionAnswer-{{@index}}">
                         {{#if ../[show answer labels]}}{{answerLabel @index}}) {{/if}}
-                        {{this}}
+                        {{{this}}}
                     </label>
                 </div>
             </div>
