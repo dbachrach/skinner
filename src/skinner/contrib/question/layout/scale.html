@@ -1,5 +1,41 @@
+{{#if data.grouped}}
+
+{{#if data.[question group]}}<div class="ui segment">{{{data.[question group]}}}</div>{{/if}}
+
 <div class="ui form">
-    <div class="default_question">{{data.question}}</div>
+    <table class="ui table segment">
+        <thead>
+            <tr>
+                <th></th>
+                {{#each scales}}
+                <th>
+                    {{this.value}} {{#if this.subtitle }}<br />({{{this.subtitle}}}){{/if}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody>
+        {{#each data.questions}}
+            <tr>
+                <td>{{{this.question}}}</td>
+                {{#each ../scales}}
+                <td>
+                    <div class="field">
+                      <div class="ui radio checkbox">
+                        <input class="ui large radio checkbox" type="radio" name="questionAnswer-{{../this.id}}" id="questionAnswer-{{../this.id}}-{{this.value}}" value="{{this.value}}" />
+                        <label for="questionAnswer-{{../this.id}}-{{this.value}}"></label>
+                      </div>
+                    </div>
+                </td>
+                {{/each}}
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
+{{else}}
+<div class="ui form">
+    <div class="default_question">{{{data.question}}}</div>
     <div class="ui left aligned basic segment">
         <div class="grouped inline fields">
             {{#each scales}}
@@ -15,3 +51,4 @@
         </div>
     </div>
 </div>
+{{/if}}

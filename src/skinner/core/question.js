@@ -114,6 +114,9 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
         reportResults: function (subject, testId) {
             // Override
         },
+        reportGroupedResults: function (subject, testId) {
+            // Override
+        },
         extendedBindContent: function () {
             return {};
         },

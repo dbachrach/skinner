@@ -50,77 +50,23 @@ survey-multipleChoice:
     style: freeResponse
 
 survey-triangle-scale:
-  - question: I understood the formatting.
+  - question group: How much do you agree or disagree with the following statements about the <strong>triangle</strong> multiple-choice test?
     style: scale
     scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
-
-  - question: I found the scoring to be confusing.
-    style: scale
-    scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
-
-  - question: The format better assessed what I knew compared with a standard multiple-choice test.
-    style: scale
-    scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
-
-  - question: I liked being able to receive partial credit.
-    style: scale
-    scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
-
-  - question: The format made me think more carefully about my answers than I otherwise would have.
-    style: scale
-    scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
-
-  - question: I recalled information from the passage about the incorrect alternatives while selecting my answer.
-    style: scale
-    scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
-
-  - question: Using this format helped me answer more questions on the final test than if I had not used it.
-    style: scale
-    scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
-
-  - question: Using this format made me more confident in my answers on the final test.
-    style: scale
-    scale:
-        - 1 (Strongly Disagree)
-        - 2 (Disagree)
-        - 3 (Neutral)
-        - 4 (Agree)
-        - 5 (Strongly Agree)
+      - 1 (Strongly Disagree)
+      - 2 (Disagree)
+      - 3 (Neutral)
+      - 4 (Agree)
+      - 5 (Strongly Agree)
+    questions:
+      - question: I understood the formatting.
+      - question: I found the scoring to be confusing.
+      - question: The format better assessed what I knew compared with a standard multiple-choice test.
+      - question: I liked being able to receive partial credit.
+      - question: The format made me think more carefully about my answers than I otherwise would have.
+      - question: I recalled information from the passage about the incorrect alternatives while selecting my answer.
+      - question: Using this format helped me answer more questions on the final test than if I had not used it.
+      - question: Using this format made me more confident in my answers on the final test.
 
 survey-triangle-other:
   - question: What was your strategy in answering the initial test questions? If you debated between two answer choices, what did you do?

@@ -13,8 +13,11 @@ data collection:
 dimensions:
   Preparation:
     - type: multipleChoice
+      distractionTaskTime: 5 minutes
     - type: triangle
+      distractionTaskTime: 5 minutes
     - type: studyOnly
+      distractionTaskTime: 550 seconds
 
   Order:
     - passage: [saturn, yellowstone]
@@ -110,19 +113,9 @@ tasks:
         button: Next
 
   distract:
-    - show: if {{Preparation.type}} is "studyOnly"
-      type: distractor
+    - type: distractor
       exercise: tetris
-      time: 550 seconds
-      content: You are now going to play Tetris.
-      # TODO: Remove
-      next:
-        button: Go!
-
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: distractor
-      exercise: tetris
-      time: 5 minutes
+      time: {{Preparation.distractionTaskTime}}
       content: You are now going to play Tetris.
       # TODO: Remove
       next:
@@ -138,8 +131,7 @@ tasks:
   survey:
     - show: if {{Preparation.type}} is "triangle"
       type: test
-      title: Please answer the following question.
-      content: How much do you agree or disagree with the following statement about the <strong>triangle</strong> multiple-choice test?
+      title: Please answer the following questions.
       question set: survey-triangle-scale
       next:
         button: Next

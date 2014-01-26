@@ -41,6 +41,12 @@ define(["lib/jquery", "src/skinner/core/question", "src/skinner/core/keypath", "
         extendedBindContent: function () {
             return { scales: this.scales };
         },
+        reportGroupedResults: function (subject, testId) {
+            _.each(this.data.questions, function (q) {
+                var answer = $("input[name=questionAnswer-" + q.id + "]:checked").val();
+                subject.report(testId, q.id, "answer", answer);
+            });
+        }
     });
 
     return ScaleQuestion;
