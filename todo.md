@@ -3,23 +3,20 @@
 
 ## High Pri
 
-- [ ] Inline test
 - [ ] try putting data into excel
-- [ ] update timer UI
-- [ ] update survey UI
-- [ ] converge timer countdown
+- [x] update timer UI
+- [x] update survey UI
+- [x] converge timer countdown
+- [ ] unload css for questions that are loaded after they are moved on from
 
 ## Skinner Core
 
-- [ ] ability to branch on all properties
 - [ ] write docs
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
-- [ ] Should we use {{{ }}} everywhere so html can go everywhere??
 - [ ] profile performance
 - [ ] Scale Question
-- [ ] all places with a title should do : {{#if title}}
-    <h2 class="ui dividing header">{{{title}}}</h2>
-{{/if}}
+- [ ] upgrade to latest version of all libs
+- [ ] Inline test
 
 ## Stretch Goals
 - [ ] Interrupters
@@ -126,3 +123,7 @@
 - [x] test timer
 - [x] Notes about modified yaml parser to take out inline {} mapping.
 - [x] Hidden 'finish page' command to get CSV
+- [x] fix distractor time being different cause us to create two distractor pages
+- [x] make a list of functional tests to create
+- [x] Should we use {{{ }}} everywhere so html can go everywhere??
+- [x] all places with a title should do : {{#if title}}<h2 class="ui dividing header">{{{title}}}</h2>{{/if}}

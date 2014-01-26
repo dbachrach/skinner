@@ -40,6 +40,7 @@
         "skinner/core/resolverTests.js",
         "skinner/core/subjectTests.js",
         "skinner/core/testPageTests.js",
+        "functional/dimensionsTests.js",
         "functional/simpleTextTests.js",
         "functional/simpleStepTests.js",
         "functional/repeatStepTests.js"

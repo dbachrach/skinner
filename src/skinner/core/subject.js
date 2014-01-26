@@ -12,7 +12,7 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
                 return size * options.length;
             }, 1);
 
-            var conditionNumber = this.number % conditionSize;
+            var conditionNumber = (this.number - 1) % conditionSize;
 
             var base = this;
             _.reduce(dimensions, function (previousOptionCount, options, dimension) {
