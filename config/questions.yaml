@@ -291,8 +291,8 @@ yellowstone-b:
 
   - question: The Black Hills region is found primarily in what state?
     answers:
-      - South Dakota
-      - Wyoming *
+      - South Dakota *
+      - Wyoming
       - Montana
 
   - question: At 10,243, what is the most prominent peak (but not the highest) in Yellowstone National Park?
