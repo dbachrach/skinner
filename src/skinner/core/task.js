@@ -23,7 +23,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
             if (this.pages.length <= this.currentPageIndex) {
                 return this.moveToNextStep();
             }
-            // TODO: Handle back button reloads a new page rather than using the old one
+
             var base = this;
 
             var pageData = resolver.resolveData(this.pages[this.currentPageIndex], this.subject, this.additionalDimensionData, this.context);

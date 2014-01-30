@@ -8,6 +8,8 @@
 - [x] update survey UI
 - [x] converge timer countdown
 - [ ] unload css for questions that are loaded after they are moved on from
+- [ ] disable login button until you enter a subject number
+- [ ] integrate with travis ci
 
 ## Skinner Core
 
