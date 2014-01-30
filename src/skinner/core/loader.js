@@ -171,6 +171,7 @@ define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/pack
     return {
         loadModule: loadModule,
         loadLayout: loadLayout,
+        unloadLayout: unloadLayout,
         loadPageLayout: loadPageLayout,
         unloadPageLayout: unloadPageLayout,
         loadLayoutInPackage: loadLayoutInPackage,
