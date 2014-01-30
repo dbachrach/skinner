@@ -1,0 +1,56 @@
+---
+name: test
+authors: [me]
+
+login:
+  type: basic
+
+dimensions:
+  Value:
+    - name: John
+    - name: Jack
+
+steps:
+  - task: A
+
+tasks:
+  A:
+    - show: if {{Value.name}} is "John"
+      type: text
+      title: Is John
+      next:
+        button: Next
+
+    - show: if {{Value.name}} is "Jack"
+      type: text
+      title: Is Jack
+      next:
+        button: Next
+
+    - show: unless {{Value.name}} is "John"
+      type: text
+      title: Unless John
+      next:
+        button: Next
+
+    - show: unless {{Value.name}} is "Jack"
+      type: text
+      title: Unless Jack
+      next:
+        button: Next
+
+    - show: if {{Value.name}} is not "John"
+      type: text
+      title: Not John
+      next:
+        button: Next
+
+    - show: if {{Value.name}} is not "Jack"
+      type: text
+      title: Not Jack
+      next:
+        button: Next
+
+    - type: finish
+      title: Finished
+      content: Finished the test

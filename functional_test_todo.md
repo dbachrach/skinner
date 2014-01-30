@@ -6,8 +6,6 @@ After an experiment, close the page, it should work
 CSV Export data
 Use html in title and content
 
-Test show statment, see if it ignores the page
-
 Unit tests loader.js
 
 Page with buttons, and page wihtout buttons, ensure they show/dontshow
@@ -59,3 +57,4 @@ Custom Page subclasses which exercise all the page overrides
 DONE
 Use {{}} in title and content (Tests resolver)
 Use {{indexed }} in title and content (Tests indexed resolver)
+Test show statment, see if it ignores the page. showif/unless is/isnot
