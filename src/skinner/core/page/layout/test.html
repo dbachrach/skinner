@@ -1,5 +1,11 @@
+{{#if inline}}
+<div class="ui blue segment">
+{{/if}}
 {{#if title}}
     <h2 class="ui dividing header">{{{title}}}</h2>
 {{/if}}
 <div class="rendered-content">{{{content}}}</div>
 <div id="test"></div>
+{{#if inline}}
+</div>
+{{/if}}

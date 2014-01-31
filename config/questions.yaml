@@ -1,5 +1,25 @@
 ---
 
+demographics:
+  - question: What is your gender?
+    style: multipleChoice
+    answers:
+      - Male
+      - Female
+
+  - question: What is your age?
+    style: cuedRecall
+
+  - question: What year are you in school?
+    style: multipleChoice
+    answers:
+      - 1st Year
+      - 2nd Year
+      - 3rd Year
+      - 4th Year
+      - 5th Year+
+
+
 example:
   - question: If you think the correct answer is vanilla and are mostly sure, but are also considering chocolate, where would you mark you answer?
     style: triangle
@@ -49,7 +69,7 @@ survey-multipleChoice:
   - question: Do you have any additional comments?
     style: freeResponse
 
-survey-triangle-scale:
+survey-triangle:
   - question group: How much do you agree or disagree with the following statements about the <strong>triangle</strong> multiple-choice test?
     style: scale
     scale:
@@ -68,7 +88,6 @@ survey-triangle-scale:
       - question: Using this format helped me answer more questions on the final test than if I had not used it.
       - question: Using this format made me more confident in my answers on the final test.
 
-survey-triangle-other:
   - question: What was your strategy in answering the initial test questions? If you debated between two answer choices, what did you do?
     style: freeResponse
 

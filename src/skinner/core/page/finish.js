@@ -1,4 +1,4 @@
-define (["lib/jquery", "lib/mousetrap", "src/skinner/core/page", "src/skinner/core/loader"], function ($, Mousetrap, Page, loader) {
+define (["lib/jquery", "lib/lodash", "lib/mousetrap", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath"], function ($, _, Mousetrap, Page, loader, keyPath) {
     "use strict";
 
     var FinishPage = Page.extend({
@@ -11,8 +11,15 @@ define (["lib/jquery", "lib/mousetrap", "src/skinner/core/page", "src/skinner/co
 
             var base = this;
             loader.loadLayoutInPackage("finishStatus", "src/skinner/core/", bindContent, "#finishContent", function () {
-                base.task.trial.end(function () {
-                    loader.loadLayoutInPackage("finishCompleted", "src/skinner/core/", bindContent, "#finishContent");
+                base.task.trial.end(function (error) {
+                    loader.loadLayoutInPackage("finishCompleted", "src/skinner/core/", bindContent, "#finishContent", function () {
+                        if (!_.isUndefined(error)) {
+                            $("<div/>", {
+                                class: "ui red message",
+                                html: keyPath(base.data, "error text", error)
+                            }).appendTo("#finishContent");
+                        }
+                    });
                 });
             });
 

@@ -41,8 +41,8 @@
             {{#each scales}}
             <div class="field">
                 <div class="ui large radio checkbox">
-                    <input type="radio" name="questionAnswer" id="questionAnswer-{{this.value}}" value="{{this.value}}" />
-                    <label for="questionAnswer-{{this.value}}">
+                    <input type="radio" name="questionAnswer-{{../this.id}}" id="questionAnswer-{{../this.id}}-{{this.value}}" value="{{this.value}}" />
+                    <label for="questionAnswer-{{../this.id}}-{{this.value}}">
                         {{this.value}} {{#if this.subtitle }}({{{this.subtitle}}}){{/if}}
                     </label>
                 </div>

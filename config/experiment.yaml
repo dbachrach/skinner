@@ -49,6 +49,14 @@ steps:
 
 tasks:
   prepare:
+    - type: test
+      title: Participation
+      content file: participation
+      question set: demographics
+      inline: true
+      next:
+        button: Next
+
     - type: text
       title: Instructions
       content file: instructions-{{Preparation.type}}
@@ -129,24 +137,10 @@ tasks:
         button: Next
 
   survey:
-    - show: if {{Preparation.type}} is "triangle"
-      type: test
-      title: Please answer the following questions.
-      question set: survey-triangle-scale
-      next:
-        button: Next
-
-    - show: if {{Preparation.type}} is "triangle"
-      type: test
-      title: Please answer the following question.
-      question set: survey-triangle-other
-      next:
-        button: Next
-
-    - show: unless {{Preparation.type}} is "triangle"
-      type: test
-      title: Please answer the following question.
+    - type: test
+      title: Please answer the following.
       question set: survey-{{Preparation.type}}
+      inline: true
       next:
         button: Next
 
@@ -154,3 +148,4 @@ tasks:
     - type: finish
       title: You have now completed the experiment.
       content file: finish
+      error text: Please do <b>NOT</b> close the window. Please go get your experimenter.

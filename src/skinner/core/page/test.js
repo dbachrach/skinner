@@ -4,9 +4,10 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
     var States = {
         PreTest: 0,
         Test: 1,
-        PostTest: 2,
-        ShowTestScore: 3,
-        Exit: 4
+        InlineTest: 2,
+        PostTest: 3,
+        ShowTestScore: 4,
+        Exit: 5
     };
 
     function isQuestionGrouped(question) {
@@ -28,6 +29,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
             this.currentScore = 0;
             this.currentMaxScore = 0;
+
+            this.testPerformsScoring = false;
 
             // Assign Question Ids
             var flattenedQuestions = _.flatten(_.map(this.questionsData, function (q) {
@@ -60,15 +63,32 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
         },
         nextState: function () {
             if (this.state === States.PreTest) {
-                this.state = States.Test;
-                this.currentQuestionIndex = -1;
+                if (keyPath(this.data, "inline", false)) {
+                    this.state = States.InlineTest;
+                    this.hasStartedInlineTest = false;
+                }
+                else {
+                    this.state = States.Test;
+                    this.currentQuestionIndex = -1;
+                }
+
                 this.nextState();
             }
             else if (this.state === States.Test) {
                 this.currentQuestionIndex++;
 
                 if (this.questionsData.length > this.currentQuestionIndex) {
-                    this.showQuestion();
+                    this.showSingleQuestion(this.questionsData[this.currentQuestionIndex]);
+                }
+                else {
+                    this.state = States.PostTest;
+                    this.nextState();
+                }
+            }
+            else if (this.state === States.InlineTest) {
+                if (!this.hasStartedInlineTest) {
+                    this.showAllQuestions();
+                    this.hasStartedInlineTest = true;
                 }
                 else {
                     this.state = States.PostTest;
@@ -76,6 +96,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 }
             }
             else if (this.state === States.PostTest) {
+                this.onPostTest();
+
                 if (keyPath(this.data, "show test results") === "on completion") {
                     this.state = States.ShowTestScore;
                     this.showTestScore();
@@ -93,31 +115,57 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 this.moveToNextPage();
             }
         },
-        showQuestion: function () {
+        showQuestion: function (q, where, callback) {
             var base = this;
 
-            var currentQuestionData = this.questionsData[this.currentQuestionIndex];
-            var currentQuestionStyle = keyPath(currentQuestionData, "style", this.style);
+            var questionStyle = keyPath(q, "style", this.style);
 
-            if (isQuestionGrouped(currentQuestionData)) {
-                loader.loadModule(currentQuestionStyle, "question", function (Question) {
-                    currentQuestionData.grouped = true;
-                    base.currentQuestion = new Question(currentQuestionData, null, base.data, currentQuestionStyle);
-                    base.currentQuestion.show();
-                    base.questionStartTime = _.now();
-
-                    base.startPageTimer();
+            if (isQuestionGrouped(q)) {
+                loader.loadModule(questionStyle, "question", function (Question) {
+                    q.grouped = true;
+                    var question = new Question(q, null, base.data, questionStyle);
+                    question.show(where);
+                    callback(question);
                 });
             }
             else {
-                loader.loadModule(currentQuestionStyle, "question", function (Question) {
-                    base.currentQuestion = new Question(currentQuestionData, currentQuestionData.id, base.data, currentQuestionStyle);
-                    base.currentQuestion.show();
-                    base.questionStartTime = _.now();
-
-                    base.startPageTimer();
+                loader.loadModule(questionStyle, "question", function (Question) {
+                    var question = new Question(q, q.id, base.data, questionStyle);
+                    question.show(where);
+                    callback(question);
                 });
             }
+        },
+        showSingleQuestion: function (q) {
+            var base = this;
+            this.showQuestion(q, "#test", function (question) {
+                base.currentQuestion = question;
+                base.startPageTimer();
+                base.questionStartTime = _.now();
+            });
+        },
+        showAllQuestions: function () {
+            var base = this;
+
+            this.currentQuestions = [];
+
+            $("#test").addClass("inline");
+
+            _.each(this.questionsData, function (q, index) {
+                var elementId = "test_question_" + q.id;
+                $("<div/>", {
+                    id: elementId,
+                    class: "inline_question"
+                }).appendTo("#test");
+
+                base.showQuestion(q, "#" + elementId, function (question) {
+                    base.currentQuestions[index] = question;
+                });
+            });
+
+            // TODO: Can we get this to start after all questions have done their callbacks?
+            this.startPageTimer();
+            this.questionStartTime = _.now();
         },
         showTestScore: function () {
             // TODO: These should be exposed in experiment.yaml
@@ -127,7 +175,16 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             };
             loader.loadLayoutInPackage("testresults", "src/skinner/core/", bindings, "#test");
         },
+        onPostTest: function () {
+            if (this.testPerformsScoring) {
+                var pageId = this.id();
+                var contextId = "final";
+                this.task.subject.report(pageId, contextId, "final score", this.currentScore);
+                this.task.subject.report(pageId, contextId, "final max score", this.currentMaxScore);
+            }
+        },
         next: function () {
+            var base = this;
             function playOptionalSound(soundFile) {
                 if (!_.isUndefined(soundFile)) {
                     new howler.Howl({
@@ -136,8 +193,55 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 }
             }
 
-            console.log("in next: with state===" + this.state);
-            if (this.state === States.Test) {
+            // TODO: This can use a lot of refactoring!!. lots of repetition
+            if (this.state === States.InlineTest) {
+                var pageId = this.id();
+
+                this.cancelPageTimer();
+
+                var questionEndTime = _.now();
+
+                var questionTime = questionEndTime - this.questionStartTime;
+
+                _.each(this.currentQuestions, function (question) {
+                    if (keyPath(question.data, "grouped", false)) {
+                        if (keyPath(base.data, "report results", true)) {
+                            question.reportResults(base.task.subject, pageId);
+                            question.reportGroupedResults(base.task.subject, pageId);
+                        }
+                    }
+                    else {
+                        var isCorrect = question.isCorrect();
+
+                        var performsScoring = question.performsScoring();
+                        var currentQuestionScore = 0;
+                        var currentQuestionMaxScore = 0;
+                        if (performsScoring) {
+                            this.testPerformsScoring = true;
+                            currentQuestionScore = question.tallyScore();
+                            currentQuestionMaxScore = question.maxScore();
+
+                            base.currentScore += currentQuestionScore;
+                            base.currentMaxScore += currentQuestionMaxScore;
+                        }
+
+                        if (keyPath(base.data, "report results", true)) {
+                            var contextId = question.id;
+                            base.task.subject.report(pageId, contextId, "answer", question.selectedAnswer());
+                            if (!_.isEmpty(question.correctAnswers())) {
+                                base.task.subject.report(pageId, contextId, "correct answer", question.correctAnswers());
+                            }
+                            if (performsScoring) {
+                                base.task.subject.report(pageId, contextId, "score", currentQuestionScore);
+                                base.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
+                            }
+                            base.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+                            question.reportResults(base.task.subject, pageId);
+                        }
+                    }
+                });
+            }
+            else if (this.state === States.Test) {
                 var pageId = this.id();
 
                 if (keyPath(this.currentQuestion.data, "grouped", false)) {
@@ -149,7 +253,6 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                     }
                 }
                 else {
-                    console.log("in next: with state===test");
                     var incorrectMessageId = "__incorrectAnswerMessage";
 
                     $("#" + incorrectMessageId).remove();
@@ -182,6 +285,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
                     var performsScoring = this.currentQuestion.performsScoring();
                     if (performsScoring) {
+                        this.testPerformsScoring = true;
                         var currentQuestionScore = this.currentQuestion.tallyScore();
                         var currentQuestionMaxScore = this.currentQuestion.maxScore();
 

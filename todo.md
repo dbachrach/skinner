@@ -4,12 +4,14 @@
 ## High Pri
 
 - [ ] try putting data into excel
-- [x] update timer UI
-- [x] update survey UI
-- [x] converge timer countdown
-- [ ] unload css for questions that are loaded after they are moved on from
-- [ ] disable login button until you enter a subject number
-- [ ] integrate with travis ci
+- [x] start numbering questions at 1 not 0
+- [x] remove spelling dist for non correct answered questions
+- [x] don't report correct answer/score if its not useful
+- [x] removing css then adding it back fails to visually display it after its added back.
+- [x] inline test
+- [x] inline test with grouped questions
+- [x] web upload failure
+- [x] report test results as its own line in CSV
 
 ## Skinner Core
 
@@ -19,6 +21,9 @@
 - [ ] Scale Question
 - [ ] upgrade to latest version of all libs
 - [ ] Inline test
+- [ ] integrate with travis ci
+- [ ] unload css for questions that are loaded after they are moved on from (in animation branch)
+- [ ] animation
 
 ## Stretch Goals
 - [ ] Interrupters
@@ -53,79 +58,3 @@
 - [ ] % and %% variables should be available in templates?
     + I'm not sure if we need this. It should be possilbe to use other constructs. This will encourage branching code in the content files rather than the page/task model.
 
-## Finished
-
-- [x] Make page background white box
-- [x] Semantic UI everywhere
-- [x] Define conditions
-- [x] Program how conditions work
-- [x] Record subject's actions
-- [x] Retina support for triangle
-- [x] Correct module loading
-- [x] Condition options ({{}} in yaml, {{}} in txt files, yaml ifs)
-- [x] Add distr to require map
-- [x] Add sections concept to experiment
-- [x] Move layouts into package folders
-- [x] Modified YAML parser to support no {} style dictionaries
-- [x] put text focus in cued recall box
-- [x] Make it so question classes don't have to implement id and correctAnswer parts
-- [x] wait for document ready via requirejs
-- [x] switch to _package.yaml
-- [x] only load package layout at startup
-- [x] skinner.js to loader.js
-- [x] make loadmoduledefinitions remember its state
-- [x] load css for modules
-- [x] turn off reporting for an individual tests
-- [x] Multiple choice option: Show A/B/C/etc
-- [x] Test questions should use handlebars
-- [x] Parser for statements like repeat across and show if/unless
-- [x] spell check for cuedrecall
-- [x] Case insensitive answer scoring
-- [x] Repeat task n times
-- [x] jslint it all
-- [x] EditorConfig
-- [x] pages should use inheritance
-- [x] lib folder for vendor stuff
-- [x] report spelling distance option
-- [x] keyboard for next/prev
-- [x] move css into new folders
-- [x] Convert to CSV
-- [x] consider moving to lodash
-- [x] PathFind has 3 copies. make one.
-- [x] use handlebars for resolving dimensions and data
-- [x] rename helpers.js
-- [x] Sounds
-- [x] Make all pages support Time, and figure out a clean way to do it with test and countdown pages
-- [x] different question types for a question set
-- [x] Figure out r.js and how to compile all of this into a single file
-- [x] Task/Page ids for reporting, maybe add id() function to classes, and then reporting uses that
-- [x] Add tests
-- [x] trim whitespace from answers in questions.yaml
-- [x] feedback: final score (1)
-- [x] Choosing a condition
-- [x] scoring for triangle
-- [x] Survey (4)
-- [x] in between for repeats (2)
-- [x] only advance after correct answer (3)
-- [x] support correct answer instead of only * based answers
-- [X] support multiple correct answers
-- [x] images in pages
-- [x] make example not report to CSV
-- [x] Fill out instructions
-- [x] Example triangle
-- [x] remove sounds
-- [x] make erin's email clickable
-- [x] rename content files to be .html
-- [x] Figure out how finishing works
-- [x] git track changes to case name for content folder
-- [x] make sure csv has new lines in email
-- [x] Distractor page cleanup
-- [x] r optimize
-- [x] disable console logs
-- [x] test timer
-- [x] Notes about modified yaml parser to take out inline {} mapping.
-- [x] Hidden 'finish page' command to get CSV
-- [x] fix distractor time being different cause us to create two distractor pages
-- [x] make a list of functional tests to create
-- [x] Should we use {{{ }}} everywhere so html can go everywhere??
-- [x] all places with a title should do : {{#if title}}<h2 class="ui dividing header">{{{title}}}</h2>{{/if}}

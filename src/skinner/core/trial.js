@@ -88,6 +88,10 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                 }, delayLength);
             }
 
+            function onFailure(error) {
+                base._endCallback(error);
+            }
+
             console.log("---- COMPLETED CSV ----");
             console.log(csv);
             console.log("---- END CSV ----");
@@ -112,7 +116,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             console.log("Failed to upload -- " + textStatus + " -- " + errorThrown);
-                            // TODO: Handle better?
+                            onFailure(textStatus + " -- " + errorThrown);
                         }
                     });
                 }

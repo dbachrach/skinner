@@ -13,20 +13,23 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
 
         postShow: function () {
             // After loading the page, put the cursor focus on the answer text box.
-            $("#answer").focus();
+
+            // TODO: It's ugly that the question has to use keypath about the testdata
+            if (!keyPath(this.testData, "inline", false)) {
+                $(this.where + " #answer").focus();
+            }
         },
 
         selectedAnswer: function () {
             // Return the answer text box's value.
-            return $("#answer").val();
+            return $(this.where + " #answer").val();
         },
 
         reportResults: function (subject, pageId) {
             var reportSpellingDistance = keyPath(this.testData, "report.spelling distance", true);
             if (reportSpellingDistance && !_.isEmpty(this.correctAnswers())) {
-                // TODO: Only do spelling distance if a correct answer is specified
                 // TODO: Iterate over all correct answers, and return the lowest distance
-                var levenshtein = _s.levenshtein($("#answer").val(), this.correctAnswers()[0]);
+                var levenshtein = _s.levenshtein($(this.where + " #answer").val(), this.correctAnswers()[0]);
                 subject.report(pageId, this.id, "Spelling Distance", levenshtein);
             }
         }

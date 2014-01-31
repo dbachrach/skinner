@@ -14,7 +14,8 @@ define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars"], function (
             });
 		},
 		selectedAnswer: function () {
-			return $("input[name=questionAnswer]:checked").val();
+            // TODO: Can we not have to use this.where?
+			return $(this.where + " input[name=questionAnswer-" + this.id + "]:checked").val();
 		}
 	});
 

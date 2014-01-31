@@ -53,13 +53,15 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
                 return _s.trim(answer);
             });
         },
-        show: function () {
+        show: function (where) {
             var base = this;
+
+            this.where = where;
 
             this.preShow();
 
             var bindContent = _.extend({}, this.testData, { data: this.data }, this.extendedBindContent());
-            loader.loadLayout(this.style, "question", bindContent, "#test", function () {
+            loader.loadLayout(this.style, "question", bindContent, where, function () {
                 base.postShow();
             });
         },

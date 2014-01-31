@@ -4,3 +4,13 @@
     font-style: italic;
     margin-bottom: 20px;
 }
+
+.inline .default_question {
+    font-size: 24px;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+.inline_question {
+    margin-top: 20px;
+}
