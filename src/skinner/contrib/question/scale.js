@@ -36,7 +36,7 @@ define(["lib/jquery", "src/skinner/core/question", "src/skinner/core/keypath", "
             }
         },
         selectedAnswer: function () {
-            return $("input[name=questionAnswer-" + this.id +"]:checked").val();
+            return $("input[name=questionAnswer-" + this.id + "]:checked").val();
         },
         extendedBindContent: function () {
             return { scales: this.scales };

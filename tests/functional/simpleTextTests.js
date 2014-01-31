@@ -7,6 +7,7 @@ define(function (require) {
 
     test("functional/simple-text", function () {
         expect(0);
+        F("#subjectNumber").type("1");
         F("#loginButton").visible().click();
         F("#page h2").text("Test");
         F("#page .rendered-content").text("A Simple Test");
@@ -24,6 +25,7 @@ define(function (require) {
 
     test("functional/simple-text-file", function () {
         expect(0);
+        F("#subjectNumber").type("1");
         F("#loginButton").visible().click();
         F("#page h2").text("Test");
         F("#page .rendered-content").text("A Simple Test From a File");

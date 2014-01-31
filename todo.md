@@ -4,23 +4,13 @@
 ## High Pri
 
 - [ ] try putting data into excel
-- [x] start numbering questions at 1 not 0
-- [x] remove spelling dist for non correct answered questions
-- [x] don't report correct answer/score if its not useful
-- [x] removing css then adding it back fails to visually display it after its added back.
-- [x] inline test
-- [x] inline test with grouped questions
-- [x] web upload failure
-- [x] report test results as its own line in CSV
 
 ## Skinner Core
 
 - [ ] write docs
 - [ ] full support for experiment.yaml settings for reporting each thing and a global on/off switch per page
 - [ ] profile performance
-- [ ] Scale Question
 - [ ] upgrade to latest version of all libs
-- [ ] Inline test
 - [ ] integrate with travis ci
 - [ ] unload css for questions that are loaded after they are moved on from (in animation branch)
 - [ ] animation

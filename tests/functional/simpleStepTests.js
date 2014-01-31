@@ -7,6 +7,7 @@ define(function (require) {
 
     test("functional/simple-step", function () {
         expect(0);
+        F("#subjectNumber").type("1");
         F("#loginButton").visible().click();
         F("#page h2").text("Test");
         F("#page .rendered-content").text("A Simple Test");

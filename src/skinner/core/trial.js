@@ -92,9 +92,9 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                 base._endCallback(error);
             }
 
-            console.log("---- COMPLETED CSV ----");
-            console.log(csv);
-            console.log("---- END CSV ----");
+            console.log("---- COMPLETED CSV ----") /* RemoveLogging:skip */;
+            console.log(csv) /* RemoveLogging:skip */;
+            console.log("---- END CSV ----") /* RemoveLogging:skip */;
 
 
             if (keyPath(this.dataCollection, "type") === "upload to server") {

@@ -193,16 +193,13 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 }
             }
 
+            var pageId = this.id();
+            var questionEndTime = _.now();
+            var questionTime = questionEndTime - this.questionStartTime;
+
             // TODO: This can use a lot of refactoring!!. lots of repetition
             if (this.state === States.InlineTest) {
-                var pageId = this.id();
-
                 this.cancelPageTimer();
-
-                var questionEndTime = _.now();
-
-                var questionTime = questionEndTime - this.questionStartTime;
-
                 _.each(this.currentQuestions, function (question) {
                     if (keyPath(question.data, "grouped", false)) {
                         if (keyPath(base.data, "report results", true)) {
@@ -242,11 +239,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 });
             }
             else if (this.state === States.Test) {
-                var pageId = this.id();
-
+                this.cancelPageTimer();
                 if (keyPath(this.currentQuestion.data, "grouped", false)) {
-                    this.cancelPageTimer();
-
                     if (keyPath(this.data, "report results", true)) {
                         this.currentQuestion.reportResults(this.task.subject, pageId);
                         this.currentQuestion.reportGroupedResults(this.task.subject, pageId);
@@ -270,12 +264,6 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         return;
                     }
 
-                    this.cancelPageTimer();
-
-                    var questionEndTime = _.now();
-
-                    var questionTime = questionEndTime - this.questionStartTime;
-
                     if (isCorrect) {
                         playOptionalSound(this.data["correct sound"]);
                     }
@@ -284,10 +272,12 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                     }
 
                     var performsScoring = this.currentQuestion.performsScoring();
+                    var currentQuestionScore = 0;
+                    var currentQuestionMaxScore = 0;
                     if (performsScoring) {
                         this.testPerformsScoring = true;
-                        var currentQuestionScore = this.currentQuestion.tallyScore();
-                        var currentQuestionMaxScore = this.currentQuestion.maxScore();
+                        currentQuestionScore = this.currentQuestion.tallyScore();
+                        currentQuestionMaxScore = this.currentQuestion.maxScore();
 
                         this.currentScore += currentQuestionScore;
                         this.currentMaxScore += currentQuestionMaxScore;
