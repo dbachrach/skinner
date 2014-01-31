@@ -160,9 +160,12 @@ define (["lib/jquery", "lib/lodash", "lib/underscore.string", "ryaml!config/pack
     }
 
     function unloadLayoutInPackage(name, pkg, callback) {
-        var cssPath = rawCssPathForModule(pkg, name, true);
-        console.log("Removing: " + "link[href='" + cssPath + "']");
-        $("link[href='" + cssPath + "']").remove();
+        var rawCssPath = rawCssPathForModule(pkg, name, true);
+        $("link[href='" + rawCssPath + "']").remove();
+
+        var cssPath = cssPathForModule(pkg, name);
+        requirejs.undef("lib/" + cssPath);
+
         if (callback) {
             callback();
         }
