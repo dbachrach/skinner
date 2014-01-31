@@ -18,8 +18,10 @@ define (["lib/jquery", "lib/class"], function ($, Class) {
             }
 
             $("#loginButton").click(function () {
-                var number = $("#subjectNumber").val();
-                callback(number);
+                if (!$("#loginButton").prop("disabled")) {
+                    var number = $("#subjectNumber").val();
+                    callback(number);
+                }
             });
 
             $("#subjectNumber").keyup(function () {
