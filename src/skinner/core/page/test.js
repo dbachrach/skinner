@@ -39,7 +39,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 }
             }));
             _.each(flattenedQuestions, function (q, index) {
-                q.id = index.toString();
+                var displayIndex = index + 1;
+                q.id = displayIndex.toString();
             });
 
             // TODO: Support randomizng inside a question group too
@@ -172,9 +173,6 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
                     var questionTime = questionEndTime - this.questionStartTime;
 
-                    var currentQuestionScore = this.currentQuestion.tallyScore();
-                    var currentQuestionMaxScore = this.currentQuestion.maxScore();
-
                     if (isCorrect) {
                         playOptionalSound(this.data["correct sound"]);
                     }
@@ -182,15 +180,25 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         playOptionalSound(this.data["incorrect sound"]);
                     }
 
-                    this.currentScore += currentQuestionScore;
-                    this.currentMaxScore += currentQuestionMaxScore;
+                    var performsScoring = this.currentQuestion.performsScoring();
+                    if (performsScoring) {
+                        var currentQuestionScore = this.currentQuestion.tallyScore();
+                        var currentQuestionMaxScore = this.currentQuestion.maxScore();
+
+                        this.currentScore += currentQuestionScore;
+                        this.currentMaxScore += currentQuestionMaxScore;
+                    }
 
                     if (keyPath(this.data, "report results", true)) {
                         var contextId = this.currentQuestion.id;
                         this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
-                        this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswers());
-                        this.task.subject.report(pageId, contextId, "score", currentQuestionScore);
-                        this.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
+                        if (!_.isEmpty(this.currentQuestion.correctAnswers())) {
+                            this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswers());
+                        }
+                        if (performsScoring) {
+                            this.task.subject.report(pageId, contextId, "score", currentQuestionScore);
+                            this.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
+                        }
                         this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
                         this.currentQuestion.reportResults(this.task.subject, pageId);
                     }

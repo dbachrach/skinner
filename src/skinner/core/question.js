@@ -75,6 +75,9 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
         correctAnswers: function () {
             return this._correctAnswers;
         },
+        performsScoring: function () {
+            return (!_.isEmpty(this.correctAnswers()));
+        },
         tallyScore: function () {
             if (this.isCorrect()) {
                 return 1;

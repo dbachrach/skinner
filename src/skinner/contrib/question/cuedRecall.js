@@ -23,7 +23,7 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
 
         reportResults: function (subject, pageId) {
             var reportSpellingDistance = keyPath(this.testData, "report.spelling distance", true);
-            if (reportSpellingDistance) {
+            if (reportSpellingDistance && !_.isEmpty(this.correctAnswers())) {
                 // TODO: Only do spelling distance if a correct answer is specified
                 // TODO: Iterate over all correct answers, and return the lowest distance
                 var levenshtein = _s.levenshtein($("#answer").val(), this.correctAnswers()[0]);
