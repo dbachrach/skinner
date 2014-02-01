@@ -1,0 +1,23 @@
+---
+
+simpletest:
+  - question: What's your name?
+  - question: What's your age?
+  - question: What's your gender?
+
+multipleChoiceTest:
+  - question: What's your favorite city?
+    answers:
+      - San Antonio, TX
+      - Seattle, WA
+      - Los Angeles, CA
+  - question: What's your favorite color?
+    answers:
+      - Red
+      - Green
+      - Purple
+  - question: What's your favorite food?
+    answers:
+      - Pizza
+      - Ice Cream
+      - Salad

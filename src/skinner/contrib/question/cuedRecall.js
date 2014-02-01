@@ -16,20 +16,20 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
 
             // TODO: It's ugly that the question has to use keypath about the testdata
             if (!keyPath(this.testData, "inline", false)) {
-                $(this.where + " #answer").focus();
+                $("#answer-" + this.id).focus();
             }
         },
 
         selectedAnswer: function () {
             // Return the answer text box's value.
-            return $(this.where + " #answer").val();
+            return $("#answer-" + this.id).val();
         },
 
         reportResults: function (subject, pageId) {
             var reportSpellingDistance = keyPath(this.testData, "report.spelling distance", true);
             if (reportSpellingDistance && !_.isEmpty(this.correctAnswers())) {
                 // TODO: Iterate over all correct answers, and return the lowest distance
-                var levenshtein = _s.levenshtein($(this.where + " #answer").val(), this.correctAnswers()[0]);
+                var levenshtein = _s.levenshtein($("#answer-"  + this.id).val(), this.correctAnswers()[0]);
                 subject.report(pageId, this.id, "Spelling Distance", levenshtein);
             }
         }

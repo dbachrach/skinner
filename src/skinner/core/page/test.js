@@ -1,4 +1,26 @@
-define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", "lib/ryaml!config/questions"], function ($, _, howler, Page, loader, keyPath, allQuestionData) {
+
+// TODO: This is really defined in the mode module. figure out how to get this double require level
+function isTestMode() {
+    var search = window.location.search;
+    var matches = search.match(/test=([^&]*)&*/);
+    if (matches && matches.length == 2) {
+        if (matches[1] === "true") {
+            return true;
+        }
+    }
+    return false;
+}
+
+var questionsFile = "ryaml!config/questions";
+if (isTestMode()) {
+    var search = window.location.search;
+    var matches = search.match(/questions=([^&]*)&*/);
+    if (matches && matches.length === 2) {
+        questionsFile = "ryaml!tests/functional/configs/" + matches[1];
+    }
+}
+
+define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", questionsFile], function ($, _, howler, Page, loader, keyPath, allQuestionData) {
     "use strict";
 
     var States = {
@@ -197,6 +219,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             var questionEndTime = _.now();
             var questionTime = questionEndTime - this.questionStartTime;
 
+            var reportResponseTime = keyPath(this.data, "report.response time", true);
+
             // TODO: This can use a lot of refactoring!!. lots of repetition
             if (this.state === States.InlineTest) {
                 this.cancelPageTimer();
@@ -232,7 +256,9 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                                 base.task.subject.report(pageId, contextId, "score", currentQuestionScore);
                                 base.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
                             }
-                            base.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+                            if (reportResponseTime) {
+                                base.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+                            }
                             question.reportResults(base.task.subject, pageId);
                         }
                     }
@@ -293,7 +319,9 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                             this.task.subject.report(pageId, contextId, "score", currentQuestionScore);
                             this.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
                         }
-                        this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+                        if (reportResponseTime) {
+                            this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+                        }
                         this.currentQuestion.reportResults(this.task.subject, pageId);
                     }
                 }

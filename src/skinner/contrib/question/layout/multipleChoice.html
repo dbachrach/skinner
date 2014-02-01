@@ -5,10 +5,7 @@
         <div class="field">
             <div class="ui large radio checkbox">
                 <input type="radio" name="questionAnswer-{{../this.data.id}}" id="questionAnswer-{{../this.data.id}}-{{@index}}" value="{{this}}" />
-                <label for="questionAnswer-{{../this.data.id}}-{{@index}}">
-                    {{#if ../[show answer labels]}}{{answerLabel @index}}) {{/if}}
-                    {{{this}}}
-                </label>
+                <label for="questionAnswer-{{../this.data.id}}-{{@index}}">{{#if ../[show answer labels]}}{{answerLabel @index}}) {{/if}}{{{this}}}</label>
             </div>
         </div>
         {{/each}}

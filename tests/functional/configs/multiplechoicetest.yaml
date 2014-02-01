@@ -1,0 +1,25 @@
+---
+name: test
+authors: [me]
+
+login:
+  type: basic
+
+steps:
+  - task: A
+
+tasks:
+  A:
+    - type: test
+      title: Test
+      content: A Simple Test
+      question set: multipleChoiceTest
+      style: multipleChoice
+      report:
+        response time: false
+      next:
+        button: Next
+
+    - type: finish
+      title: Finished
+      content: Finished the test
