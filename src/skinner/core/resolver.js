@@ -12,7 +12,6 @@ define (["lib/lodash", "lib/Handlebars", "src/skinner/core/keypath"], function (
         });
 
         function mapper(value) {
-            console.log(value);
             if (_.isArray(value) || _.isObject(value)) {
                 return resolveData(value, subject, additionalDimensionData, context);
             }
