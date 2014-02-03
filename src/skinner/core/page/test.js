@@ -196,6 +196,10 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 content: "<p>Your score: <strong>" + this.currentScore + "</strong></p><p>Max score: <strong>" + this.currentMaxScore + "</strong></p>"
             };
             loader.loadLayoutInPackage("testresults", "src/skinner/core/", bindings, "#test");
+
+            // TODO: This is a super hack!!!!!
+             _.extend(this.data, { "next": { "button": "Next" } });
+            this.updateButtons();
         },
         onPostTest: function () {
             if (this.testPerformsScoring) {
