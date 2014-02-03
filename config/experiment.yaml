@@ -84,9 +84,6 @@ tasks:
       title: Passage {{_index}}
       content file: passage-{{indexed Order.passage}}
       time: 9 minutes
-      # TODO: Remove Continue button
-      next:
-        button: Continue
 
     - show: unless {{Preparation.type}} is "studyOnly"
       type: countdown
@@ -97,10 +94,9 @@ tasks:
       type: test
       style: {{Preparation.type}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
+      order: random
       time: 25 seconds
       show timer: with 10 seconds left
-      next:
-        button: Next
       show answer labels: true
       show test results: on completion
 
@@ -110,9 +106,6 @@ tasks:
       exercise: tetris
       time: 250 seconds
       content: You are now going to play Tetris.
-      # TODO: Remove
-      next:
-        button: Go!
 
     - type: text
       title: You are about to read the next passage.
@@ -125,14 +118,12 @@ tasks:
       exercise: tetris
       time: {{Preparation.distractionTaskTime}}
       content: You are now going to play Tetris.
-      # TODO: Remove
-      next:
-        button: Go!
 
   exam:
     - type: test
       style: cuedRecall
       question set: {{indexed Order.passage}}-{{Variation.exam}}
+      order: random
       next:
         button: Next
 
