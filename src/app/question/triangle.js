@@ -143,6 +143,7 @@ define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
     function QuestionBoard(canvas) {
         this.canvas = canvas;
         this.ctx = this.canvas[0].getContext('2d');
+        this.disabled = false;
 
         if (window.devicePixelRatio === 2) {
             this.ctx.scale(2, 2);
@@ -201,10 +202,13 @@ define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
         }, this);
     };
     QuestionBoard.prototype.hitTest = function (p) {
-        var hit = this.interactiveElements().filter(function (e) {
-            return (e.hitTest(p));
-        });
-        return hit[0];
+        if (!this.disabled) {
+            var hit = this.interactiveElements().filter(function (e) {
+                return (e.hitTest(p));
+            });
+            return hit[0];
+        }
+        return undefined;
     };
     QuestionBoard.prototype.deselectAll = function () {
         this.interactiveElements().forEach(function (e) {
@@ -364,6 +368,9 @@ define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
         },
         selectedAnswer: function () {
             return this.qboard.selectedAnswer();
+        },
+        disable: function () {
+            this.qboard.disabled = true;
         },
         maxScore: function () {
             return 3;

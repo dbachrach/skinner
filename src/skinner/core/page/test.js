@@ -26,10 +26,12 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
     var States = {
         PreTest: 0,
         Test: 1,
-        InlineTest: 2,
-        PostTest: 3,
-        ShowTestScore: 4,
-        Exit: 5
+        TestShowCorrectAnswer: 2,
+        TestInner: 3,
+        InlineTest: 4,
+        PostTest: 5,
+        ShowTestScore: 6,
+        Exit: 7
     };
 
     function isQuestionGrouped(question) {
@@ -90,16 +92,27 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                     this.hasStartedInlineTest = false;
                 }
                 else {
-                    this.state = States.Test;
+                    this.state = States.TestInner;
                     this.currentQuestionIndex = -1;
                 }
 
                 this.nextState();
             }
             else if (this.state === States.Test) {
+                if (keyPath(this.data, "show correct answer", false)) {
+                    this.state = States.TestShowCorrectAnswer;
+                    this.showCorrectAnswer();
+                }
+                else {
+                    this.state = States.TestInner;
+                    this.nextState();
+                }
+            }
+            else if (this.state === States.TestInner) {
                 this.currentQuestionIndex++;
 
                 if (this.questionsData.length > this.currentQuestionIndex) {
+                    this.state = States.Test;
                     this.showSingleQuestion(this.questionsData[this.currentQuestionIndex]);
                 }
                 else {
@@ -131,6 +144,10 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             }
             else if (this.state === States.ShowTestScore) {
                 this.state = States.Exit;
+                this.nextState();
+            }
+            else if (this.state === States.TestShowCorrectAnswer) {
+                this.state = States.TestInner;
                 this.nextState();
             }
             else if (this.state === States.Exit) {
@@ -200,6 +217,23 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             // TODO: This is a super hack!!!!!
              _.extend(this.data, { "next": { "button": "Next" } });
             this.updateButtons();
+        },
+        showCorrectAnswer: function () {
+            var correctAnswer = this.currentQuestion.correctAnswers()[0];
+            $("<div/>", {
+                class: "ui blue huge message",
+                html: "The correct answer is <b>" + correctAnswer + "</b>."
+            }).appendTo("#test");
+
+            this.currentQuestion.disable();
+
+            var base = this;
+
+            // TODO: allow the time to be specified in experiment.yaml
+            _.delay(function () {
+                base.nextState();
+            }, 4000);
+
         },
         onPostTest: function () {
             if (this.testPerformsScoring) {

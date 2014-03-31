@@ -125,6 +125,9 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
         extendedBindContent: function () {
             return {};
         },
+        disable: function () {
+            // Override
+        }
     });
 
     return Question;
