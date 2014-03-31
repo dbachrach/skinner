@@ -19,6 +19,11 @@ demographics:
       - 4th Year
       - 5th Year+
 
+  - question: Is English your native language?
+    style: multipleChoice
+    answers:
+      - Yes
+      - No
 
 example:
   - question: If you think the correct answer is vanilla and are mostly sure, but are also considering chocolate, where would you mark you answer?
