@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Triangle Experiment
+name: Erin Sparck's Restudy Triangle Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -13,11 +13,8 @@ data collection:
 dimensions:
   Preparation:
     - type: multipleChoice
-      distractionTaskTime: 5 minutes
     - type: triangle
-      distractionTaskTime: 5 minutes
     - type: studyOnly
-      distractionTaskTime: 550 seconds
 
   Order:
     - passage: [saturn, yellowstone]
@@ -100,13 +97,23 @@ tasks:
       show answer labels: true
       show test results: on completion
 
-  midstudy:
     - show: if {{Preparation.type}} is "studyOnly"
       type: distractor
       exercise: tetris
       time: 250 seconds
       content: You are now going to play Tetris.
 
+    - type: text
+      title: You will now have 4 minutes to review the passage again.
+      next:
+        button: Continue
+
+    - type: text
+      title: Passage {{_index}}
+      content file: passage-{{indexed Order.passage}}
+      time: 4 minutes
+
+  midstudy:
     - type: text
       title: You are about to read the next passage.
       content: Click next when ready to begin.
@@ -116,7 +123,7 @@ tasks:
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
+      time: 5 minutes
       content: You are now going to play Tetris.
 
   exam:
