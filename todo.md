@@ -1,10 +1,6 @@
 
 # TODO
 
-## High Pri
-
-- [ ] try putting data into excel
-
 ## Skinner Core
 
 - [ ] write docs
