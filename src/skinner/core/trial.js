@@ -103,7 +103,8 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
                 if (!_.isUndefined(server)) {
                     var uploadData = {
                         subject: this.subject.number,
-                        data: csv
+                        data: csv,
+                        name: base.experimentName
                     };
                     $.ajax({
                         type: "POST",
