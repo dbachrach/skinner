@@ -14,10 +14,6 @@ dimensions:
   Preparation:
     - type: multipleChoice
       distractionTaskTime: 5 minutes
-    - type: triangle
-      distractionTaskTime: 5 minutes
-    - type: studyOnly
-      distractionTaskTime: 550 seconds
 
   Order:
     - passage: [saturn, yellowstone]
@@ -63,21 +59,6 @@ tasks:
       next:
         button: Start
 
-    - show: if {{Preparation.type}} is "triangle"
-      type: test
-      question set: example
-      require correct answer: true
-      incorrect answer message: That's not correct. Try again.
-      report results: false
-      next:
-        button: Next
-
-    - show: if {{Preparation.type}} is "triangle"
-      type: text
-      title: You're ready to begin
-      content: If you have any questions, please contact the experimenter before proceeding.
-      next:
-        button: Begin
 
   study:
     - type: text
@@ -85,13 +66,11 @@ tasks:
       content file: passage-{{indexed Order.passage}}
       time: 9 minutes
 
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: countdown
+    - type: countdown
       title: You are about to start the test in...
       time: 3 seconds
 
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: test
+    - type: test
       style: {{Preparation.type}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
       order: random
@@ -99,14 +78,9 @@ tasks:
       show timer: with 10 seconds left
       show answer labels: true
       show test results: on completion
+      #TODO Add in confidence question
 
   midstudy:
-    - show: if {{Preparation.type}} is "studyOnly"
-      type: distractor
-      exercise: tetris
-      time: 250 seconds
-      content: You are now going to play Tetris.
-
     - type: text
       title: You are about to read the next passage.
       content: Click next when ready to begin.
