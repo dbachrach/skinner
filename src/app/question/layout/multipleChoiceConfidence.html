@@ -1,0 +1,24 @@
+<div class="ui form" id="mc_question">
+    <div class="default_question">{{{data.question}}}</div>
+    <div class="grouped inline fields mc_fields">
+        {{#each data.answers}}
+        <div class="field">
+            <div class="ui large radio checkbox">
+                <input type="radio" name="questionAnswer-{{../this.data.id}}" id="questionAnswer-{{../this.data.id}}-{{@index}}" value="{{this}}" />
+                <label for="questionAnswer-{{../this.data.id}}-{{@index}}">{{#if ../[show answer labels]}}{{answerLabel @index}}) {{/if}}{{{this}}}</label>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<div class="ui form" id="mc_confidence">
+    <p>How confident were you in your answer (0-100)?</p>
+    <div class="ui input">
+        <input type="text" id="confidence-answer-{{data.id}}">
+    </div>
+    <div class="ui right labeled icon blue button" id="altNextButton">
+        <i class="right arrow icon"></i>
+        <span class="content">Next</span>
+    </div>
+</div>

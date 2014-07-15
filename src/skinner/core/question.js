@@ -125,6 +125,9 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
         extendedBindContent: function () {
             return {};
         },
+        moveOn: function () {
+            return false;
+        },
     });
 
     return Question;

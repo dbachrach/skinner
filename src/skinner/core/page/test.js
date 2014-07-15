@@ -267,6 +267,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         }
                     }
                 });
+
+                this.nextState();
             }
             else if (this.state === States.Test) {
                 this.cancelPageTimer();
@@ -329,9 +331,11 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         this.currentQuestion.reportResults(this.task.subject, pageId);
                     }
                 }
-            }
 
-            this.nextState();
+                if (_.isUndefined(this.currentQuestion) || !this.currentQuestion.moveOn()) {
+                    this.nextState();
+                }
+            }
         }
     });
 
