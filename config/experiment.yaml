@@ -9,11 +9,6 @@ data collection:
   type: upload to server
   server: http://skinnerweb.azurewebsites.net/
 
-dimensions:
-  Variation:
-    - practice: a
-    - practice: b
-
 
 steps:
   - task: prepare
@@ -48,35 +43,26 @@ tasks:
   initialTest:
     - type: test
       style: multipleChoice
-      question set: practice-{{Variation.practice}}
+      question set: marginalKnowledge
+      select: 1 randomly from [T1, T2]
       order: random
       next:
         button: Next
       show answer labels: true
 
-  midstudy:
-    - show: if {{Preparation.type}} is "studyOnly"
-      type: distractor
-      exercise: tetris
-      time: 250 seconds
-      content: You are now going to play Tetris.
-
-    - type: text
-      title: You are about to read the next passage.
-      content: Click next when ready to begin.
-      next:
-        button: Next
-
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
+      time: 3 minutes
       content: You are now going to play Tetris.
+      next:
+        button: Next # TODO: Remove
 
-  exam:
+  finalExam:
     - type: test
       style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.exam}}
+      question set: marginalKnowledge
+      select: 2 randomly from [T1, T2], all randomly from [general]
       order: random
       next:
         button: Next
@@ -84,7 +70,7 @@ tasks:
   survey:
     - type: test
       title: Please answer the following.
-      question set: survey-{{Preparation.type}}
+      question set: survey
       inline: true
       next:
         button: Next

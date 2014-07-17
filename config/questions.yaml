@@ -20,23 +20,47 @@ survey:
   - question: Do you have comments on this experiment?
     style: freeResponse
 
-practice-a:
-  - question:
-    answers:
-    -
-    -
-    -
-    - 
-
-
-practice-b:
-  - question:
-    answers:
-    -
-    -
-    -
-    - 
-
-finalExam:
-  - question:
-    correct answer:
+marginalKnowledge:
+  T1: 
+    - question: Who wrote 'Lost'?
+      answers:
+        - John Locke
+        - JJ Abrams *
+        - William Shakespeare
+    - question: Who wrote 'Hamlet'?
+      answers:
+        - John Locke
+        - JJ Abrams
+        - William Shakespeare *
+    - question: Who wrote 'Two Treatises of Government'?
+      answers:
+        - John Locke *
+        - JJ Abrams 
+        - William Shakespeare
+  T2:
+    - question: Who is the president?
+      answers:
+        - Barack Obama *
+        - John Williams
+        - Rocky
+    - question: Who composed 'Star Wars'?
+      answers:
+        - Barack Obama
+        - John Williams *
+        - Rocky
+    - question: What was Stalone's best role?
+      answers:
+        - Barack Obama
+        - John Williams
+        - Rocky *
+  general:
+    - question: What's the speed of a swallow?
+      answers:
+        - African or american? *
+        - 30 mph
+        - 299792458 m/s
+    - question: Who invented facebook?
+      answers:
+        - Mark Zuckerburg *
+        - Eduardo Savein
+        - The Winklevii

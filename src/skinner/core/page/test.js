@@ -20,7 +20,7 @@ if (isTestMode()) {
     }
 }
 
-define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", questionsFile], function ($, _, howler, Page, loader, keyPath, allQuestionData) {
+define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", questionsFile, "peg!src/skinner/core/parser/selectStatement"], function ($, _, howler, Page, loader, keyPath, allQuestionData, SelectStatementParser) {
     "use strict";
 
     var States = {
@@ -37,15 +37,29 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
         return (!_.isUndefined(questionGroup));
     }
 
+    var allQuestionsDataRemovedTracker = _.cloneDeep(allQuestionData);
+
     var TestPage = Page.extend({
         init: function (data, task) {
+            var base = this;
+
             this._super(data, task);
 
             this.style = keyPath(this.data, "style", "multipleChoice");
             this.questionSet = keyPath(this.data, "question set");
             this.questionsData = allQuestionData[this.questionSet];
+            this.questionsDataRemovedTracker = allQuestionsDataRemovedTracker[this.questionSet];
             this.order = keyPath(this.data, "order");
             this.requireCorrectAnswer = keyPath(this.data, "require correct answer", false);
+            this.select = undefined
+            
+            var selectStatement = keyPath(this.data, "select");
+            if (!_.isUndefined(selectStatement)) {
+                var select = SelectStatementParser.parse(selectStatement);
+                if (!_.isUndefined(select)) {
+                    this.select = select
+                }
+            }
 
             this.autoStartPageTimer = false;
 
@@ -54,23 +68,88 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
             this.testPerformsScoring = false;
 
-            // Assign Question Ids
-            var flattenedQuestions = _.flatten(_.map(this.questionsData, function (q) {
-                if (isQuestionGrouped(q)) {
-                    return keyPath(q, "questions", []);
-                }
-                else {
-                    return q;
-                }
-            }));
-            _.each(flattenedQuestions, function (q, index) {
+            var totalQuestionList = undefined;
+
+            if (_.isUndefined(this.select)) {
+                // Assign Question Ids
+                var flattenedQuestions = _.flatten(_.map(this.questionsData, function (q) {
+                    if (isQuestionGrouped(q)) {
+                        return keyPath(q, "questions", []);
+                    }
+                    else {
+                        return q;
+                    }
+                }));
+
+                totalQuestionList = flattenedQuestions;
+            }
+            else {
+
+                console.log("select statement:");
+                console.log(this.select);
+                console.log("question data:");
+                console.log(_.cloneDeep(this.questionsData));
+
+                var allQuestions = [];
+
+                _.each(this.select, function (selector) {
+                    // TODO: Support the "each topic" topics value
+                    _.each(selector.topics, function (topic) {
+                        console.log("investigating topic " + topic);
+                        if (_.isNumber(selector.times)) {
+                            _.each(_.range(selector.times), function (occurence) {
+                                var topicData = base.questionsData[topic];
+
+                                var question = _.sample(topicData);
+
+                                question.__topic = topic;
+
+                                var strippedQuestion = _.omit(question, ["__topic", "__topicId"]);
+                                question.__topicId = _.findIndex(base.questionsDataRemovedTracker[topic], strippedQuestion) + 1;
+
+                                console.log("Picked question from " + topic + " time no. "+ occurence);
+                                console.log(question);
+
+                                allQuestions.push(question);
+
+                                base.questionsData[topic] = _.without(topicData, question);
+                            });
+                        }
+                        else if (selector.times === "all") {
+                            var topicData = base.questionsData[topic];
+
+                            _.each(topicData, function (q) {
+                                q.__topic = topic;
+
+                                var strippedQuestion = _.omit(q, ["__topic", "__topicId"]);
+                                q.__topicId = _.findIndex(base.questionsDataRemovedTracker[topic], strippedQuestion) + 1;
+                            });
+
+                            console.log("picked all questions from " + topic);
+                            console.log(topicData);
+                            allQuestions = allQuestions.concat(topicData);
+
+                            base.questionsData[topic] = [];
+                        }
+                    });
+                });
+
+                totalQuestionList = allQuestions;
+
+                console.log("Total question list is:");
+                console.log(totalQuestionList);
+                console.log("Leaving behind questionsData:");
+                console.log(this.questionsData);
+            }
+
+            _.each(totalQuestionList, function (q, index) {
                 var displayIndex = index + 1;
                 q.id = displayIndex.toString();
             });
 
             // TODO: Support randomizng inside a question group too
             if (this.order === "random") {
-                this.questionsData = _.shuffle(this.questionsData);
+                this.questionsData = _.shuffle(totalQuestionList);
             }
 
             this.state = States.PreTest;
@@ -263,6 +342,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                             if (reportResponseTime) {
                                 base.task.subject.report(pageId, contextId, "time(ms)", questionTime);
                             }
+                            base.task.subject.report(pageId, contextId, "topic", question.data.__topic);
+                            base.task.subject.report(pageId, contextId, "topic id", question.data.__topicId);
                             question.reportResults(base.task.subject, pageId);
                         }
                     }
@@ -326,6 +407,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         if (reportResponseTime) {
                             this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
                         }
+                        this.task.subject.report(pageId, contextId, "topic", this.currentQuestion.data.__topic);
+                        this.task.subject.report(pageId, contextId, "topic id", this.currentQuestion.data.__topicId)
                         this.currentQuestion.reportResults(this.task.subject, pageId);
                     }
                 }
