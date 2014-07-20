@@ -20,7 +20,7 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
                 $("#answer-" + this.id).focus();
             }
 
-            // TODO: Shouldn't do this only on cued recall. 
+            // TODO: Shouldn't do this only on cued recall.
             // TODO: How does requireAnswer work with inline test?
             if (this.requireAnswer) {
 
@@ -31,9 +31,9 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
                     }
                     else {
                         $("#nextButton").prop("disabled", false);
-                        $("#nextButton").removeClass("disabled");     
+                        $("#nextButton").removeClass("disabled");
                     }
-                }
+                };
 
                 $("#answer-" + this.id).keyup(function () {
                     updateNextButton();

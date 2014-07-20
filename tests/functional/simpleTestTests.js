@@ -27,6 +27,7 @@ define(function (require) {
         F("#page h2").text("Finished");
         F("#page .rendered-content").text("Finished the test");
         F("#page").type("results");
+        
         F("#resultData").visible().html('"page","id","subject","answer"<br>"A-test-cuedRecall-simpletest","1","1","John"<br>"A-test-cuedRecall-simpletest","2","1","35"<br>"A-test-cuedRecall-simpletest","3","1","Male"');
     });
 

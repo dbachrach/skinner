@@ -51,13 +51,13 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             this.questionsDataRemovedTracker = allQuestionsDataRemovedTracker[this.questionSet];
             this.order = keyPath(this.data, "order");
             this.requireCorrectAnswer = keyPath(this.data, "require correct answer", false);
-            this.select = undefined
-            
+            this.select = undefined;
+
             var selectStatement = keyPath(this.data, "select");
             if (!_.isUndefined(selectStatement)) {
                 var select = SelectStatementParser.parse(selectStatement);
                 if (!_.isUndefined(select)) {
-                    this.select = select
+                    this.select = select;
                 }
             }
 
@@ -68,7 +68,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
             this.testPerformsScoring = false;
 
-            var totalQuestionList = undefined;
+            var totalQuestionList;
 
             if (_.isUndefined(this.select)) {
                 // Assign Question Ids
@@ -107,7 +107,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                                 var strippedQuestion = _.omit(question, ["__topic", "__topicId"]);
                                 question.__topicId = _.findIndex(base.questionsDataRemovedTracker[topic], strippedQuestion) + 1;
 
-                                console.log("Picked question from " + topic + " time no. "+ occurence);
+                                console.log("Picked question from " + topic + " time no. " + occurence);
                                 console.log(question);
 
                                 allQuestions.push(question);
@@ -342,8 +342,13 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                             if (reportResponseTime) {
                                 base.task.subject.report(pageId, contextId, "time(ms)", questionTime);
                             }
-                            base.task.subject.report(pageId, contextId, "topic", question.data.__topic);
-                            base.task.subject.report(pageId, contextId, "topic id", question.data.__topicId);
+
+                            if (!_.isUndefined(question.data.__topic)) {
+                                base.task.subject.report(pageId, contextId, "topic", question.data.__topic);
+                            }
+                            if (!_.isUndefined(question.data.__topicId)) {
+                                base.task.subject.report(pageId, contextId, "topic id", question.data.__topicId);
+                            }
                             question.reportResults(base.task.subject, pageId);
                         }
                     }
@@ -407,8 +412,13 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         if (reportResponseTime) {
                             this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
                         }
-                        this.task.subject.report(pageId, contextId, "topic", this.currentQuestion.data.__topic);
-                        this.task.subject.report(pageId, contextId, "topic id", this.currentQuestion.data.__topicId)
+
+                        if (!_.isUndefined(this.currentQuestion.data.__topic)) {
+                            this.task.subject.report(pageId, contextId, "topic", this.currentQuestion.data.__topic);
+                        }
+                        if (!_.isUndefined(this.currentQuestion.data.__topicId)) {
+                            this.task.subject.report(pageId, contextId, "topic id", this.currentQuestion.data.__topicId);
+                        }
                         this.currentQuestion.reportResults(this.task.subject, pageId);
                     }
                 }
