@@ -9,16 +9,16 @@
     ],
     "license": "MIT",
     "devDependencies": {
-        "grunt": "~0.4.2",
-        "grunt-contrib-jshint": "~0.7.2",
-        "grunt-contrib-requirejs": "~0.4.1",
-        "grunt-contrib-csslint": "~0.1.2",
-        "grunt-contrib-qunit": "~0.3.0",
+        "grunt": "~0.4.5",
+        "grunt-contrib-jshint": "~0.10.0",
+        "grunt-contrib-requirejs": "~0.4.4",
+        "grunt-contrib-csslint": "~0.2.0",
+        "grunt-contrib-qunit": "~0.5.2",
         "grunt-remove-logging": "~0.2.0",
-        "grunt-contrib-uglify": "~0.3.0",
-        "walk": "~2.2.1",
-        "grunt-jscs-checker": "~0.3.2",
+        "grunt-contrib-uglify": "~0.5.0",
+        "walk": "~2.3.3",
+        "grunt-jscs": "~0.6.1",
         "grunt-contrib-copy": "~0.5.0",
-        "load-grunt-tasks": "~0.2.1"
+        "load-grunt-tasks": "~0.6.0"
     }
 }
