@@ -7,6 +7,17 @@ demographics:
       - Male
       - Female
 
+  - question: What is your highest level of education?
+    style: multipleChoice
+    answers:
+      - Some High School
+      - High School
+      - Some College
+      - Associate Degree
+      - Bachelor's Degree
+      - Some Graduate School
+      - Postgraduate Degree
+
   - question: What is your age?
     style: cuedRecall
 
@@ -22,45 +33,263 @@ survey:
 
 marginalKnowledge:
   T1: 
-    - question: Who wrote 'Lost'?
+    - question: What is the Capital of New York?
       answers:
-        - John Locke
-        - JJ Abrams *
-        - William Shakespeare
-    - question: Who wrote 'Hamlet'?
+        - Albany*
+        - New York City
+        - Kitty Hawk
+        - Syracuse
+    - question: Where is the United Nations headquartered?
       answers:
-        - John Locke
-        - JJ Abrams
-        - William Shakespeare *
-    - question: Who wrote 'Two Treatises of Government'?
+        - Albany
+        - New York City*
+        - Kitty Hawk
+        - Syracuse
+    - question: Where did the Wright Brothers make their first flight?
       answers:
-        - John Locke *
-        - JJ Abrams 
-        - William Shakespeare
+        - Albany
+        - New York City 
+        - Kitty Hawk*
+        - Syracuse
   T2:
-    - question: Who is the president?
+    - question: What was the name of the infamous American traitor in the Revolutionary War?
       answers:
-        - Barack Obama *
-        - John Williams
-        - Rocky
-    - question: Who composed 'Star Wars'?
+        - Benedict Arnold*
+        - George Armstrong Custer
+        - Norman Schwarzkopf
+        - Nathanael Greene
+    - question: What was the last name of the commander who lost the battle of Big Horn River?
       answers:
-        - Barack Obama
-        - John Williams *
-        - Rocky
-    - question: What was Stalone's best role?
+        - Benedict Arnold
+        - George Armstrong Custer*
+        - Norman Schwarzkopf
+        - Nathanael Greene
+    - question: What was the name of the commander of the allied forces in Operation Desert Storm?
       answers:
-        - Barack Obama
-        - John Williams
-        - Rocky *
+        - Benedict Arnold
+        - George Armstrong Custer
+        - Norman Schwarzkopf*
+        - Nathanael Greene
+  T3: 
+    - question: Who wrote ‘Call of the Wild’?
+      answers:
+        - Jack London*
+        - Harriet Beecher Stowe
+        - Charles Dickens
+        - Emily Bronte
+    - question: Who wrote ‘Uncle Tom’s Cabin’?
+      answers:
+        - Jack London
+        - Harriet Beecher Stowe*
+        - Charles Dickens
+        - Emily Bronte
+    - question: Who wrote ‘Oliver Twist’?
+      answers:
+        - Jack London
+        - Harriet Beecher Stowe
+        - Charles Dickens*
+        - Emily Bronte
+  T4:
+    - question: What was the disease known as the black plague?
+      answers:
+        - Bubonic*
+        - Jaundice
+        - Polio
+        - Malaria 
+    - question: What is the name of the disease of the liver caused by abnormally high levels of bile in the blood that gives the skin a yellow color?
+      answers:
+        - Bubonic
+        - Jaundice*
+        - Polio
+        - Malaria 
+    - question: What is the name of the prominent early 1900’s disease in which victims were unable to walk or had leg braces?
+      answers:
+        - Bubonic*
+        - Jaundice
+        - Polio*
+        - Malaria 
+  T5: 
+    - question: What is a group of Ants called?
+      answers:
+        - Colony*
+        - Gaggle
+        - Filly
+        - Mare
+    - question: What is a group of Geese called?
+      answers:
+        - Colony
+        - Gaggle*
+        - Filly
+        - Mare
+    - question: What is the name of a female horse?
+      answers:
+        - Colony
+        - Gaggle
+        - Filly*
+        - Mare
+  T6:
+    - question: What is the technical name for a collar bone?
+      answers:
+        - Clavicle*
+        - Mandible
+        - Femur
+        - Tibia
+    - question: What do we call the bone which composes the lower jaw?
+      answers:
+        - Clavicle
+        - Mandible*
+        - Femur
+        - Tibia
+    - question: What is the longest bone in the body and is located in the upper leg?
+      answers:
+        - Clavicle
+        - Mandible
+        - Femur*
+        - Tibia
+  T7:
+    - question: What was the name of the artist who painted the Mona Lisa?
+      answers:
+        - Leonardo Da Vinci*
+        - Claude Monet
+        - Vincent Van Gogh
+        - Andy Warhol
+    - question: What was the name of the nearly-blind impressionist artist who painted a series of mural-sized pictures of water lilies near the end of his life?
+      answers:
+        - Leonardo Da Vinci
+        - Claude Monet*
+        - Vincent Van Gogh
+        - Andy Warhol
+    - question: What was the name of the post impressionist Dutch painter who cut off his own ear?
+      answers:
+        - Leonardo Da Vinci
+        - Claude Monet
+        - Vincent Van Gogh*
+        - Andy Warhol
+
   general:
-    - question: What's the speed of a swallow?
+    - question: Excluding Australia what is the largest island in the world?
       answers:
-        - African or american? *
-        - 30 mph
-        - 299792458 m/s
-    - question: Who invented facebook?
+        - Greenland*
+    - question: What are the wooden clappers called that Spanish dancer hold in their hands?
       answers:
-        - Mark Zuckerburg *
-        - Eduardo Savein
-        - The Winklevii
+        - Castanets*
+    - question: On top of which mountain was Moses given the Ten Commandments?
+      answers:
+        - Sinai *
+    - question: What is the term for sexual pleasure derived from being subjected to pain?
+      answers:
+        - Masochism *
+    - question: What is the long process by which a dead organism turns to stone?
+      answers:
+        - petrification *
+    - question: What device is used to measure levels of radioactivity?
+      answers:
+        - geiger counter *
+    - question: Who was the mythical Roman goddess of love?
+      answers:
+        - Venus *
+    - question: What is the instrument used to measure earthquakes?
+      answers:
+        - seismograph *
+    - question: What was the last name of the playwright whose works include ‘The Glass Menagerie’ and ‘Cat on a Hot Tin Roof’
+      answers:
+        - Williams *
+    - question: In mammals the period of time between fertilization of the egg and the birth of the young is known by what scientific term?
+      answers:
+        - gestation *
+    - question: What is the term signifying the mythic sought after ‘perfect society’?
+      answers:
+        - utopia *
+    - question: What mammal has armor-like body plates as its most distinguishing feature?
+      answers:
+        - armadillo *
+    - question: What was the last name of the man who invented the cotton gin?
+      answers:
+        - Whitney *
+    - question: What is the name of the shell from which people hear the sea?
+      answers:
+        - Conch *
+    - question: Norman Rockwell painted more than 30 covers for what magazine?
+      answers:
+        - The Saturday Evening Post *
+    - question: What substance causes an increase in the rate of a chemical reaction without participating in the reaction?
+      answers:
+        - catalyst *
+    - question: What was the location of George Washington’s encampment where his men suffered every conceivable hardship from 1777-1778?
+      answers:
+        - Valley Forge *
+    - question: Who shot an apple off his son’s head in the 14th century?
+      answers:
+        - William Tell *
+    - question: What is the term for a long poem which tells a story such as the Odyssey and the Iliad?
+      answers:
+        - epic *
+    - question: What type of paper is commonly used as an acid-base indicator in chemistry classes?
+      answers:
+        - litmus *
+    - question: What was the last name of the man who wrote ‘The Star Spangled Banner’?
+      answers:
+        - key *
+    - question: What was the name of the building on top of the Acropolis in Athens?
+      answers:
+        - Parthenon *
+    - question: What is the first name of the school teacher who was chased by the headless horseman in ‘The Legend of Sleepy Hollow’?
+      answers:
+        - Ichabod *
+    - question: What was the last name of the first man to fly solo across the Atlantic Ocean?
+      answers:
+        - Lindbergh *
+    - question: What river separates Washington D.C. from Virginia?
+      answers:
+        - Potomac *
+    - question: What is the term for the first aid instrument which stops the flow of blood in an artery- preventing it from being lost through a wound??
+      answers:
+        - tourniquet *
+    - question: What was the name given to the wars waged by the Christian nations of Europe to reclaim the Holy Lands?
+      answers:
+        - Crusades *
+    - question: What is the term for someone who doubts but does not deny the existence of God?
+      answers:
+        - Agnostic *
+    - question: Which ‘Peanuts’ character constantly refers to Peppermint Patty as sir?
+      answers:
+        - Marcie *
+    - question: What mythical creature did Perseus kill?
+      answers:
+        - Medusa *
+    - question: What was the name of the vehicle used to carry and cook food on cattle drives?
+      answers:
+        - chuckwagon *
+    - question: What is the term given to pure spiritual love which is devoid of carnal desires between members of opposite sexes?
+      answers:
+        - platonic *
+    - question: What is the name of the large hairy poisonous spider that lives near bananas?
+      answers:
+        - tarantula *
+    - question: What is a male witch called?
+      answers:
+        - warlock *
+    - question: What is the term for the student who is second highest in scholastic rank and often gives the opening address at graduation?
+      answers:
+        - Salutatorian *
+    - question: What is the term frequently applied to Christ’s doctrine of doing to others as we would wish them to do unto us?
+      answers:
+        - golden rule *
+    - question: What peace treaty ended World War I?
+      answers:
+        - Versailles *
+    - question: In ‘Romeo and Juliet’ who were the Montagues feuding with?
+      answers:
+        - Capulets *
+    - question: What was Fonzie’s real name in television’s ‘Happy Days’?
+      answers:
+        - Arthur *
+    - question: What was the name of the obnoxious rooster in the Warner Brothers cartoons?
+      answers:
+        - Foghorn Leghorn *
+    - question: What was the last name of the actress who received the Best Actress award for the movie ‘Mary Poppins’?
+      answers:
+        - Andrews *
+    - question: Humans are classified as what species?
+      answers:
+        - homo sapiens *

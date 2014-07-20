@@ -12,6 +12,7 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
             this.testData = testData;
             this.style = style;
             this.caseSensitiveScoring = keyPath(this.testData, "case sensitive scoring", false);
+            this.requireAnswer = keyPath(this.testData, "require answer", false);
 
             this.data.answers = keyPath(this.data, "answers", []);
 

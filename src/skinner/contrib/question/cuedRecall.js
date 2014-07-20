@@ -12,11 +12,34 @@ define(["lib/jquery", "lib/lodash", "lib/underscore.string", "src/skinner/core/q
         },
 
         postShow: function () {
+            var base = this;
             // After loading the page, put the cursor focus on the answer text box.
 
             // TODO: It's ugly that the question has to use keypath about the testdata
             if (!keyPath(this.testData, "inline", false)) {
                 $("#answer-" + this.id).focus();
+            }
+
+            // TODO: Shouldn't do this only on cued recall. 
+            // TODO: How does requireAnswer work with inline test?
+            if (this.requireAnswer) {
+
+                var updateNextButton = function () {
+                    if ($("#answer-" + base.id).val().length === 0) {
+                        $("#nextButton").prop("disabled", true);
+                        $("#nextButton").addClass("disabled");
+                    }
+                    else {
+                        $("#nextButton").prop("disabled", false);
+                        $("#nextButton").removeClass("disabled");     
+                    }
+                }
+
+                $("#answer-" + this.id).keyup(function () {
+                    updateNextButton();
+                });
+
+                updateNextButton();
             }
         },
 

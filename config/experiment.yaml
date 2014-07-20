@@ -15,8 +15,6 @@ steps:
 
   - task: initialTest
 
-  - task: distract
-
   - task: finalExam
 
   - task: survey
@@ -44,26 +42,19 @@ tasks:
     - type: test
       style: multipleChoice
       question set: marginalKnowledge
-      select: 1 randomly from [T1, T2]
+      select: 1 randomly from [T1, T2, T3, T4, T5, T6, T7]
       order: random
-      next:
-        button: Next
+      time: 12 seconds
+      show timer: with 5 seconds left
       show answer labels: true
-
-  distract:
-    - type: distractor
-      exercise: tetris
-      time: 3 minutes
-      content: You are now going to play Tetris.
-      next:
-        button: Next # TODO: Remove
 
   finalExam:
     - type: test
       style: cuedRecall
       question set: marginalKnowledge
-      select: 2 randomly from [T1, T2], all randomly from [general]
+      select: 2 randomly from [T1, T2, T3, T4, T5, T6, T7], 14 randomly from [general]
       order: random
+      require answer: true
       next:
         button: Next
 
