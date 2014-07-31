@@ -33,7 +33,7 @@ define (["lib/jquery", "lib/lodash", "lib/mousetrap", "src/skinner/core/page", "
         },
         extendedBindContent: function () {
             if (_.isUndefined(this.verificationCode)) {
-                return {}
+                return {};
             }
             return { verificationCode: this.verificationCode };
         },
