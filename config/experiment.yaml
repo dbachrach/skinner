@@ -69,3 +69,4 @@ tasks:
     - type: finish
       title: You have now completed the experiment.
       content file: finish
+      supplies verification code: true

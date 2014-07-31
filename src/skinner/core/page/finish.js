@@ -5,11 +5,17 @@ define (["lib/jquery", "lib/lodash", "lib/mousetrap", "src/skinner/core/page", "
         var s = '';
         var randomchar = function () {
             var n = Math.floor(Math.random() * 62);
-            if (n<10) return n; //1-10
-            if (n<36) return String.fromCharCode(n+55); //A-Z
-            return String.fromCharCode(n+61); //a-z
+            if (n < 10) {
+                return n; //1-10
+            }
+            if (n < 36) {
+                return String.fromCharCode(n + 55); //A-Z
+            }
+            return String.fromCharCode(n + 61); //a-z
+        };
+        while (s.length< L) {
+            s+= randomchar();
         }
-        while (s.length< L) s+= randomchar();
         return s;
     }
 
@@ -17,13 +23,18 @@ define (["lib/jquery", "lib/lodash", "lib/mousetrap", "src/skinner/core/page", "
         init: function (data, task) {
             this._super(data, task);
 
-            this.verificationCode = randomString(10);
+            if (keyPath(this.data, "supplies verification code", false)) {
+                this.verificationCode = randomString(10);
 
-            var pageId = this.id();
-            var contextId = "finish";
-            this.task.subject.report(pageId, contextId, "verification code", this.verificationCode);
+                var pageId = this.id();
+                var contextId = "finish";
+                this.task.subject.report(pageId, contextId, "verification code", this.verificationCode);
+            }
         },
         extendedBindContent: function () {
+            if (_.isUndefined(this.verificationCode)) {
+                return {}
+            }
             return { verificationCode: this.verificationCode };
         },
         postShow: function () {

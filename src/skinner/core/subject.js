@@ -12,20 +12,17 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
                 return size * options.length;
             }, 1);
 
-            if (conditionSize > 1) {
+            var conditionNumber = (this.number - 1) % conditionSize;
+            console.log(conditionNumber);
 
-                var conditionNumber = (this.number - 1) % conditionSize;
-                console.log(conditionNumber);
+            var base = this;
+            _.reduce(dimensions, function (previousOptionCount, options, dimension) {
+                var currentOptionCount = options.length;
+                var offset = (Math.floor(conditionNumber / previousOptionCount)) % currentOptionCount;
 
-                var base = this;
-                _.reduce(dimensions, function (previousOptionCount, options, dimension) {
-                    var currentOptionCount = options.length;
-                    var offset = (Math.floor(conditionNumber / previousOptionCount)) % currentOptionCount;
-
-                    base.condition[dimension] = options[offset];
-                    return previousOptionCount * currentOptionCount;
-                }, 1);
-            }
+                base.condition[dimension] = options[offset];
+                return previousOptionCount * currentOptionCount;
+            }, 1);
 
             this.reports = [];
         },
