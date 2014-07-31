@@ -70,3 +70,4 @@ tasks:
       title: You have now completed the experiment.
       content file: finish
       supplies verification code: true
+      error text: Your verification code is <i>FF310FF</i>.
