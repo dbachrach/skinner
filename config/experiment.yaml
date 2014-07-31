@@ -26,7 +26,6 @@ tasks:
   prepare:
     - type: test
       title: Participation
-      content file: participation
       question set: demographics
       inline: true
       next:
@@ -70,4 +69,3 @@ tasks:
     - type: finish
       title: You have now completed the experiment.
       content file: finish
-      error text: Please do <b>NOT</b> close the window. Please go get your experimenter.
