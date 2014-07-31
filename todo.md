@@ -10,6 +10,7 @@
 - [ ] integrate with travis ci
 - [ ] unload css for questions that are loaded after they are moved on from (in animation branch)
 - [ ] animation
+- [ ] report the total experiment time in CSV
 
 ## Stretch Goals
 - [ ] Interrupters
