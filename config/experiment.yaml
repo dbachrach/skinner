@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Marginal Knowledge Control Experiment
+name: Erin Sparck's Marginal Knowledge Exposure Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -31,7 +31,7 @@ tasks:
 
     - type: text
       title: Instructions
-      content file: instructions-marginalKnowledge
+      content file: instructions-marginalKnowledgeExposure
       next:
         button: Start
 
@@ -39,7 +39,7 @@ tasks:
     - type: test
       style: cuedRecall
       question set: marginalKnowledge
-      select: 2 randomly from [T1, T2, T3, T4, T5, T6, T7]
+      select: all randomly from [T1, T2, T3, T4, T5, T6, T7]
       order: random
       require answer: true
       next:

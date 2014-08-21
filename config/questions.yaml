@@ -28,6 +28,8 @@ demographics:
       - No
 
 survey:
+  - question: Did you look up any answers to the questions after the last session?
+    style: freeResponse
   - question: Do you have comments on this experiment?
     style: freeResponse
 
