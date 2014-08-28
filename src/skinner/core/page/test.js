@@ -225,6 +225,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 loader.loadModule(questionStyle, "question", function (Question) {
                     q.grouped = true;
                     var question = new Question(q, null, base.data, questionStyle);
+                    question.page = base;
                     question.show(where);
                     callback(question);
                 });
@@ -232,6 +233,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             else {
                 loader.loadModule(questionStyle, "question", function (Question) {
                     var question = new Question(q, q.id, base.data, questionStyle);
+                    question.page = base;
                     question.show(where);
                     callback(question);
                 });

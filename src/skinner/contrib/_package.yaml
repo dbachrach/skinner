@@ -12,6 +12,7 @@ question:
   - freeResponse
   - multipleChoice
   - scale
+  - yesNo
 
 login:
   - basic

@@ -30,6 +30,66 @@ demographics:
 survey:
   - question: Do you have comments on this experiment?
     style: freeResponse
+  - question: (Optional) If you would like to participate in future related surveys for additional funds, please enter your email address. This is not required to receive credit for this survey.
+    style: cuedRecall
+
+marginalKnowledgeExposure:
+  - question: <b>A</b><br/><br/>Albany
+    correct answer: Yes
+  - question: <b>M</b><br/><br/>New York City
+    correct answer: No
+  - question: <b>K</b><br/><br/>Kitty Hawk
+    correct answer: Yes
+  - question: <b>R</b><br/><br/>Syracuse
+    correct answer: No
+  - question: <b>B</b><br/><br/>Benedict Arnold
+    correct answer: Yes
+  - question: <b>J</b><br/><br/>George Armstrong Custer
+    correct answer: No
+  - question: <b>N</b><br/><br/>Norman Schwarzkopf
+    correct answer: Yes
+  - question: <b>O</b><br/><br/>Nathanael Greene
+    correct answer: No
+  - question: <b>J</b><br/><br/>Jack London
+    correct answer: Yes
+  - question: <b>L</b><br/><br/>Harriet Beecher Stowe
+    correct answer: No
+  - question: <b>C</b><br/><br/>Charles Dickens
+    correct answer: Yes
+  - question: <b>F</b><br/><br/>Emily Bronte
+    correct answer: No
+  - question: <b>B</b><br/><br/>Bubonic
+    correct answer: Yes
+  - question: <b>Z</b><br/><br/>Jaundice
+    correct answer: No
+  - question: <b>P</b><br/><br/>Polio
+    correct answer: Yes
+  - question: <b>T</b><br/><br/>Malaria
+    correct answer: No
+  - question: <b>C</b><br/><br/>Colony
+    correct answer: Yes
+  - question: <b>P</b><br/><br/>Gaggle
+    correct answer: No
+  - question: <b>F</b><br/><br/>Filly
+    correct answer: Yes
+  - question: <b>U</b><br/><br/>Mare
+    correct answer: No
+  - question: <b>C</b><br/><br/>Clavicle
+    correct answer: Yes
+  - question: <b>A</b><br/><br/>Mandible
+    correct answer: No
+  - question: <b>F</b><br/><br/>Femur
+    correct answer: Yes
+  - question: <b>S</b><br/><br/>Tibia
+    correct answer: No
+  - question: <b>L</b><br/><br/>Leonardo Da Vinci
+    correct answer: Yes
+  - question: <b>V</b><br/><br/>Claude Monet
+    correct answer: No
+  - question: <b>V</b><br/><br/>Vincent Van Gogh
+    correct answer: Yes
+  - question: <b>B</b><br/><br/>Andy Warhol
+    correct answer: No
 
 marginalKnowledge:
   T1: 

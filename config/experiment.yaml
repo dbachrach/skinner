@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Marginal Knowledge Experiment
+name: Erin Sparck's Marginal Knowledge Exposure Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -33,19 +33,16 @@ tasks:
 
     - type: text
       title: Instructions
-      content file: instructions-marginalKnowledge
+      content file: instructions-marginalKnowledgeExposure
       next:
         button: Start
 
   initialTest:
     - type: test
-      style: multipleChoice
-      question set: marginalKnowledge
-      select: 1 randomly from [T1, T2, T3, T4, T5, T6, T7]
+      style: yesNo
+      question set: marginalKnowledgeExposure
       order: random
-      time: 12 seconds
-      show timer: with 5 seconds left
-      show answer labels: true
+      time: 3 seconds
 
   finalExam:
     - type: test
