@@ -7,14 +7,14 @@ define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars", "lib/mouset
 
             this.chosenAnswer = "";
         },
-        preShow: function() {
+        preShow: function () {
             var base = this;
             Mousetrap.bind("y", function (e) {
-                base.chosenAnswer = "Yes"
+                base.chosenAnswer = "Yes";
                 base.page.next();
             });
             Mousetrap.bind("n", function (e) {
-                base.chosenAnswer = "No"
+                base.chosenAnswer = "No";
                 base.page.next();
             });
         },
