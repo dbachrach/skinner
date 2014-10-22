@@ -12,7 +12,7 @@ define(["lib/jquery", "src/skinner/core/question", "lib/Handlebars"], function (
             //          `{{answerLabel 2 }}` -> `"C) "`.
             Handlebars.registerHelper("answerLabel", function (index) {
                 return String.fromCharCode(65 + index);
-            });  
+            });
         },
         postShow: function () {
             $("#mc_confidence").hide();

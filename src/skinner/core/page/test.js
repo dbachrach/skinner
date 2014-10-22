@@ -283,7 +283,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 else {
                     if (!_.isUndefined(this.currentQuestion) && !this.currentQuestion.moveOn()) {
                         console.log("moving on to next state");
-                        goToNextState = false
+                        goToNextState = false;
                     }
                     else if (!_.isUndefined(this.currentQuestion)) {
                         var incorrectMessageId = "__incorrectAnswerMessage";
