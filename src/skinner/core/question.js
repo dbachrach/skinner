@@ -126,7 +126,7 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/l
             return {};
         },
         moveOn: function () {
-            return false;
+            return true;
         },
     });
 

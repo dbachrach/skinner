@@ -146,6 +146,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 loader.loadModule(questionStyle, "question", function (Question) {
                     q.grouped = true;
                     var question = new Question(q, null, base.data, questionStyle);
+                    question.test = base;
                     question.show(where);
                     callback(question);
                 });
@@ -153,6 +154,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             else {
                 loader.loadModule(questionStyle, "question", function (Question) {
                     var question = new Question(q, q.id, base.data, questionStyle);
+                    question.test = base;
                     question.show(where);
                     callback(question);
                 });
@@ -225,6 +227,8 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
             var reportResponseTime = keyPath(this.data, "report.response time", true);
 
+            var goToNextState = true;
+
             // TODO: This can use a lot of refactoring!!. lots of repetition
             if (this.state === States.InlineTest) {
                 this.cancelPageTimer();
@@ -267,8 +271,6 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         }
                     }
                 });
-
-                this.nextState();
             }
             else if (this.state === States.Test) {
                 this.cancelPageTimer();
@@ -279,62 +281,68 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                     }
                 }
                 else {
-                    var incorrectMessageId = "__incorrectAnswerMessage";
-
-                    $("#" + incorrectMessageId).remove();
-
-                    var isCorrect = this.currentQuestion.isCorrect();
-
-                    if (this.requireCorrectAnswer && !isCorrect) {
-                        var incorrectMessage = keyPath(this.data, "incorrect answer message", "Incorrect");
-                        // Show incorrect answer message.
-                        $("<div/>", {
-                            id: incorrectMessageId,
-                            class: "ui red message",
-                            text: incorrectMessage
-                        }).appendTo("#test");
-                        return;
+                    if (!_.isUndefined(this.currentQuestion) && !this.currentQuestion.moveOn()) {
+                        console.log("moving on to next state");
+                        goToNextState = false
                     }
+                    else if (!_.isUndefined(this.currentQuestion)) {
+                        var incorrectMessageId = "__incorrectAnswerMessage";
 
-                    if (isCorrect) {
-                        playOptionalSound(this.data["correct sound"]);
-                    }
-                    else {
-                        playOptionalSound(this.data["incorrect sound"]);
-                    }
+                        $("#" + incorrectMessageId).remove();
 
-                    var performsScoring = this.currentQuestion.performsScoring();
-                    var currentQuestionScore = 0;
-                    var currentQuestionMaxScore = 0;
-                    if (performsScoring) {
-                        this.testPerformsScoring = true;
-                        currentQuestionScore = this.currentQuestion.tallyScore();
-                        currentQuestionMaxScore = this.currentQuestion.maxScore();
+                        var isCorrect = this.currentQuestion.isCorrect();
 
-                        this.currentScore += currentQuestionScore;
-                        this.currentMaxScore += currentQuestionMaxScore;
-                    }
-
-                    if (keyPath(this.data, "report results", true)) {
-                        var contextId = this.currentQuestion.id;
-                        this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
-                        if (!_.isEmpty(this.currentQuestion.correctAnswers())) {
-                            this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswers());
+                        if (this.requireCorrectAnswer && !isCorrect) {
+                            var incorrectMessage = keyPath(this.data, "incorrect answer message", "Incorrect");
+                            // Show incorrect answer message.
+                            $("<div/>", {
+                                id: incorrectMessageId,
+                                class: "ui red message",
+                                text: incorrectMessage
+                            }).appendTo("#test");
+                            return;
                         }
+
+                        if (isCorrect) {
+                            playOptionalSound(this.data["correct sound"]);
+                        }
+                        else {
+                            playOptionalSound(this.data["incorrect sound"]);
+                        }
+
+                        var performsScoring = this.currentQuestion.performsScoring();
+                        var currentQuestionScore = 0;
+                        var currentQuestionMaxScore = 0;
                         if (performsScoring) {
-                            this.task.subject.report(pageId, contextId, "score", currentQuestionScore);
-                            this.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
+                            this.testPerformsScoring = true;
+                            currentQuestionScore = this.currentQuestion.tallyScore();
+                            currentQuestionMaxScore = this.currentQuestion.maxScore();
+
+                            this.currentScore += currentQuestionScore;
+                            this.currentMaxScore += currentQuestionMaxScore;
                         }
-                        if (reportResponseTime) {
-                            this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+
+                        if (keyPath(this.data, "report results", true)) {
+                            var contextId = this.currentQuestion.id;
+                            this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
+                            if (!_.isEmpty(this.currentQuestion.correctAnswers())) {
+                                this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswers());
+                            }
+                            if (performsScoring) {
+                                this.task.subject.report(pageId, contextId, "score", currentQuestionScore);
+                                this.task.subject.report(pageId, contextId, "max score", currentQuestionMaxScore);
+                            }
+                            if (reportResponseTime) {
+                                this.task.subject.report(pageId, contextId, "time(ms)", questionTime);
+                            }
+                            this.currentQuestion.reportResults(this.task.subject, pageId);
                         }
-                        this.currentQuestion.reportResults(this.task.subject, pageId);
                     }
                 }
+            }
 
-                if (_.isUndefined(this.currentQuestion) || !this.currentQuestion.moveOn()) {
-                    this.nextState();
-                }
+            if (goToNextState) {
+                this.nextState();
             }
         }
     });
