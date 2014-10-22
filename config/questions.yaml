@@ -74,6 +74,31 @@ survey-multipleChoice:
   - question: Do you have any additional comments?
     style: freeResponse
 
+survey-multipleChoiceConfidence:
+  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
+    style: freeResponse
+
+  - question: Did you think about information related to the incorrect alternatives during the initial test?
+    style: scale
+    scale:
+      - 1 (Strongly Disagree)
+      - 2 (Disagree)
+      - 3 (Neutral)
+      - 4 (Agree)
+      - 5 (Strongly Agree)
+
+  - question: Did taking the initial test help you answer more questions correctly on the final test than if you had not taken the initial test at all?
+    style: scale
+    scale:
+      - 1 (Strongly Disagree)
+      - 2 (Disagree)
+      - 3 (Neutral)
+      - 4 (Agree)
+      - 5 (Strongly Agree)
+
+  - question: Do you have any additional comments?
+    style: freeResponse
+
 survey-triangle:
   - question group: How much do you agree or disagree with the following statements about the <strong>triangle</strong> multiple-choice test?
     style: scale
