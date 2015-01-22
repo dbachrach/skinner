@@ -41,6 +41,8 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
             var base = this;
             var countdownElement = $("#timer");
 
+            this.showTimer = false;
+
             function updateTimer() {
                 // TODO: Formatting of time needs work
                 if (base.showTimer && base.timerValue <= base.hideTimerUntil) {
@@ -71,8 +73,15 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
                     this.showTimer = true;
                 }
 
-                countdownElement.text("").show();
-                updateTimer();
+                if (this.showTimer) {
+                    countdownElement.text("").show();
+                    updateTimer();
+                }
+                else {
+                    _.delay(function () {
+                        base.pageTimerFired();
+                    }, this.time);
+                }
             }
         },
         pageTimerFired: function () {
