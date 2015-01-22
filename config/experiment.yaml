@@ -12,6 +12,10 @@ data collection:
 
 dimensions:
   Preparation:
+    - type: multipleChoice
+      distractionTaskTime: 5 minutes
+    - type: triangle
+      distractionTaskTime: 5 minutes
     - type: multipleChoiceConfidence
       distractionTaskTime: 5 minutes
 
@@ -57,6 +61,22 @@ tasks:
       content file: instructions-{{Preparation.type}}
       next:
         button: Start
+
+    - show: if {{Preparation.type}} is "triangle"
+      type: test
+      question set: example
+      require correct answer: true
+      incorrect answer message: That's not correct. Try again.
+      report results: false
+      next:
+        button: Next
+
+    - show: if {{Preparation.type}} is "triangle"
+      type: text
+      title: You're ready to begin
+      content: If you have any questions, please contact the experimenter before proceeding.
+      next:
+        button: Begin
 
 
   study:
