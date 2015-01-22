@@ -6,4 +6,5 @@ author: Dustin Bachrach
 question:
   - triangle
   - multipleChoiceConfidence
+  - multipleChoiceSequential
 

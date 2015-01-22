@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Standard MC + Confidence Experiment
+name: Erin Sparck's Sequential Presentation Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -12,8 +12,8 @@ data collection:
 
 dimensions:
   Preparation:
-    - type: multipleChoiceConfidence
-      distractionTaskTime: 5 minutes
+    # - type: multipleChoice
+    - type: multipleChoiceSequential
 
   Order:
     - passage: [saturn, yellowstone]
@@ -26,7 +26,7 @@ dimensions:
       exam: a
 
 steps:
-  - task: prepare
+  # - task: prepare
 
   - task: study
     repeat: across Order.passage
@@ -60,14 +60,14 @@ tasks:
 
 
   study:
-    - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
-      time: 9 minutes
+    # - type: text
+    #   title: Passage {{_index}}
+    #   content file: passage-{{indexed Order.passage}}
+    #   time: 9 minutes
 
-    - type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
+    # - type: countdown
+    #   title: You are about to start the test in...
+    #   time: 3 seconds
 
     - type: test
       style: {{Preparation.type}}
@@ -77,6 +77,8 @@ tasks:
       show timer: with 10 seconds left
       show answer labels: true
       show test results: on completion
+      sequential answer initial delay: 3 seconds
+      sequential answer time: 3 seconds
 
   midstudy:
     - type: text
@@ -88,7 +90,7 @@ tasks:
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
+      time: 5 minutes
       content: You are now going to play Tetris.
 
   exam:

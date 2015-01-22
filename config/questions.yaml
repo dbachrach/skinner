@@ -74,6 +74,13 @@ survey-multipleChoice:
   - question: Do you have any additional comments?
     style: freeResponse
 
+survey-multipleChoiceSequential:
+  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
+    style: freeResponse
+
+  - question: Do you have any additional comments?
+    style: freeResponse
+
 survey-multipleChoiceConfidence:
   - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
     style: freeResponse
