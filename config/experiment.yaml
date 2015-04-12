@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Sequential Presentation Experiment
+name: Erin Sparck's Sequential vs Simultaneous Presentation Experiment 1
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -12,8 +12,12 @@ data collection:
 
 dimensions:
   Preparation:
-    # - type: multipleChoice
+    - type: multipleChoice
     - type: multipleChoiceSequential
+
+  Instruction:
+    - type: think
+    - type: nothink
 
   Order:
     - passage: [saturn, yellowstone]
@@ -26,7 +30,7 @@ dimensions:
       exam: a
 
 steps:
-  # - task: prepare
+  - task: prepare
 
   - task: study
     repeat: across Order.passage
@@ -54,31 +58,31 @@ tasks:
 
     - type: text
       title: Instructions
-      content file: instructions-{{Preparation.type}}
+      content file: instructions-{{Preparation.type}}-{{Instruction.type}}
       next:
         button: Start
 
 
   study:
-    # - type: text
-    #   title: Passage {{_index}}
-    #   content file: passage-{{indexed Order.passage}}
-    #   time: 9 minutes
+    - type: text
+      title: Passage {{_index}}
+      content file: passage-{{indexed Order.passage}}
+      time: 9 minutes
 
-    # - type: countdown
-    #   title: You are about to start the test in...
-    #   time: 3 seconds
+    - type: countdown
+      title: You are about to start the test in...
+      time: 3 seconds
 
     - type: test
       style: {{Preparation.type}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
       order: random
-      time: 25 seconds
-      show timer: with 10 seconds left
+      time: 30 seconds
+      show timer: with 5 seconds left
       show answer labels: true
       show test results: on completion
-      sequential answer initial delay: 3 seconds
-      sequential answer time: 3 seconds
+      sequential answer initial delay: 10 seconds
+      sequential answer time: 5 seconds
 
   midstudy:
     - type: text
@@ -97,6 +101,13 @@ tasks:
     - type: test
       style: cuedRecall
       question set: {{indexed Order.passage}}-{{Variation.exam}}
+      order: random
+      next:
+        button: Next
+
+    - type: test
+      style: cuedRecall
+      question set: {{indexed Order.passage}}-{{Variation.practice}}
       order: random
       next:
         button: Next
