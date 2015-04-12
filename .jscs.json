@@ -9,7 +9,6 @@
     "disallowSpacesInsideParentheses": true,
     "disallowSpaceAfterObjectKeys": true,
     "requireCommaBeforeLineBreak": true,
-    "disallowImplicitTypeConversion": ["string"],
     "disallowKeywords": ["with"],
     "requireLineFeedAtFileEnd": true,
     "disallowMultipleVarDecl": true,

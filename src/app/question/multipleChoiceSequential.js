@@ -20,7 +20,7 @@ define(["lib/jquery", "src/skinner/contrib/question/multipleChoice", "lib/Handle
 
             function showAnswer(i) {
                 $("#question_descriptions").show();
-                
+
                 _.each(base.data.answers, function (value, answerIndex) {
                     $("#descr_questionAnswer-" + base.data.id + "-" + answerIndex + "").hide();
                 });
