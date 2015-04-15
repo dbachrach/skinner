@@ -138,6 +138,11 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             }
         },
         showQuestion: function (q, where, callback) {
+
+            // Make a full copy of q, so we don't modify the static
+            // question data held in questionData
+            q = _.cloneDeep(q);
+
             var base = this;
 
             var questionStyle = keyPath(q, "style", this.style);
