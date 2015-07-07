@@ -278,6 +278,7 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 });
             }
             else if (this.state === States.Test) {
+                var contextId = this.currentQuestion.id;
                 this.cancelPageTimer();
                 if (keyPath(this.currentQuestion.data, "grouped", false)) {
                     if (keyPath(this.data, "report results", true)) {
@@ -290,7 +291,6 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         console.log("moving on to next state");
 
                         if (keyPath(this.data, "report results", true)) {
-                            var contextId = this.currentQuestion.id;
                             if (reportResponseTime) {
                                 this.task.subject.report(pageId, contextId, "time(ms) - interphase", questionTime);
                             }
@@ -335,7 +335,6 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                         }
 
                         if (keyPath(this.data, "report results", true)) {
-                            var contextId = this.currentQuestion.id;
                             this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
                             if (!_.isEmpty(this.currentQuestion.correctAnswers())) {
                                 this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswers());
