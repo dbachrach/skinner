@@ -4,4 +4,9 @@
 
 #altNextButton {
     margin-top: 20px;
+    /* This is super hacky, because this specific
+    experiment, doesn't need the alt buttons.
+    Figure out how to only show altNextButton if no next button is
+    already shown */
+    display: none;
 }

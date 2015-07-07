@@ -288,6 +288,13 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                 else {
                     if (!_.isUndefined(this.currentQuestion) && !this.currentQuestion.moveOn()) {
                         console.log("moving on to next state");
+
+                        if (keyPath(this.data, "report results", true)) {
+                            var contextId = this.currentQuestion.id;
+                            if (reportResponseTime) {
+                                this.task.subject.report(pageId, contextId, "time(ms) - interphase", questionTime);
+                            }
+                        }
                         goToNextState = false;
                     }
                     else if (!_.isUndefined(this.currentQuestion)) {
