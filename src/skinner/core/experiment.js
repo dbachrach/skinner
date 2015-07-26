@@ -21,8 +21,8 @@ define(["lib/class", "src/skinner/core/subject", "src/skinner/core/trial", "src/
          */
         begin: function () {
             var base = this;
-            this.startLogin(function (subjectNumber) {
-                var subject = new Subject(subjectNumber, base.data.dimensions);
+            this.startLogin(function (subjectNumber, subjectData) {
+                var subject = new Subject(subjectNumber, base.data.dimensions, subjectData);
                 base.startTrial(subject);
             });
         },
@@ -32,7 +32,7 @@ define(["lib/class", "src/skinner/core/subject", "src/skinner/core/trial", "src/
          * Starts the login process.
          * Uses the experiment's `login` method to implement login and receive a subject number.
          * @param callback Function to invoke after login succeeds.
-         * The `callback` is called with one argument: `(subjectNumber)`.
+         * The `callback` is called with two arguments: `(subjectNumber, subjectData)`.
          */
         startLogin: function (callback) {
             var base = this;

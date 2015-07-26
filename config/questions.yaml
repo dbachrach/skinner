@@ -460,3 +460,12 @@ lightningPractice:
       - The downward motion of the current.
       - Negatively charged particles then rush from the cloud to the ground.
 
+tevvtPhase2-free-response:
+  - question: Please write down an explanation of how lightning works. Be as complete and thorough as possible. A 'next' button will appear after 5 minutes allowing you to move forward. If you need longer than 5 minutes, you can continue for as long as you need.
+
+tevvtPhase2-transfer:
+  - question: What could you do to decrease the intensity of lightning?
+  - question: Suppose you see clouds in the sky but no lightning. Why not?
+  - question: What does air temperature have to do with lightning?
+  - question: What causes lightning?
+

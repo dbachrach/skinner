@@ -3,8 +3,9 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
 
     var Subject = Class.extend({
 
-        init: function (number, dimensions) {
+        init: function (number, dimensions, subjectData) {
             this.number = number;
+            this.subjectData = subjectData;
 
             this.condition = {};
 
@@ -39,6 +40,11 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
                     id: contextId,
                     subject: this.number
                 };
+
+                if (this.subjectData) {
+                    report.subjectData = this.subjectData;
+                }
+
                 this.reports.push(report);
             }
 
