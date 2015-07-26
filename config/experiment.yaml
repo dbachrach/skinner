@@ -35,8 +35,7 @@ tasks:
       style: freeResponse
       title: Please answer the question
       question set: tevvtPhase2-free-response
-      time: 5 seconds
-      # time: 5 minutes
+      time: 5 minutes
       show next button after time: true
       next:
         button: Next
