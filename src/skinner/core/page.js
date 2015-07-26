@@ -8,7 +8,7 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
             this.type = keyPath(this.data, "type");
 
             this.time = intervals.parseTimeInterval(keyPath(this.data, "time"));
-            this.showNextButtonAfterTime = keyPath(this.data, "show next button after time", false)
+            this.showNextButtonAfterTime = keyPath(this.data, "show next button after time", false);
             this.autoStartPageTimer = true;
         },
         id: function () {
@@ -132,7 +132,7 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
             var base = this;
 
             // Update UI Buttons
-            loader.loadLayoutInPackage("buttons", "src/skinner/core/", this.data, "#buttons", function() {
+            loader.loadLayoutInPackage("buttons", "src/skinner/core/", this.data, "#buttons", function () {
                 if (base.showNextButtonAfterTime) {
                     $("#nextButton").hide();
                 }
