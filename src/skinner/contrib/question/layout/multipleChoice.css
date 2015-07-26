@@ -1,3 +1,7 @@
 .mc_fields {
     text-align:left;
 }
+
+.mc_field {
+    margin-bottom: 20px !important;
+}

@@ -2,7 +2,7 @@
 	<div class="default_question">{{{data.question}}}</div>
     <div class="grouped inline fields mc_fields">
         {{#each data.answers}}
-        <div class="field">
+        <div class="field mc_field">
             <div class="ui large radio checkbox">
                 <input type="radio" name="questionAnswer-{{../this.data.id}}" id="questionAnswer-{{../this.data.id}}-{{@index}}" value="{{this}}" />
                 <label for="questionAnswer-{{../this.data.id}}-{{@index}}">{{#if ../[show answer labels]}}{{answerLabel @index}}) {{/if}}{{{this}}}</label>

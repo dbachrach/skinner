@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Standard MC + Confidence Self-Paced Experiment
+name: Erin Sparck's Testing Effect- Video Versus Text
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -11,35 +11,22 @@ data collection:
 
 
 dimensions:
-  Preparation:
-    - type: multipleChoice
-      distractionTaskTime: 5 minutes
-    - type: triangle
-      distractionTaskTime: 5 minutes
-    - type: multipleChoiceConfidence
-      distractionTaskTime: 5 minutes
+  Study:
+    - type: video
+    - type: text
 
-  Order:
-    - passage: [saturn, yellowstone]
-    - passage: [yellowstone, saturn]
-
-  Variation:
-    - practice: a
-      exam: b
-    - practice: b
-      exam: a
+  FollowUp:
+    - type: repeat
+    - type: practiceTest
 
 steps:
   - task: prepare
 
   - task: study
-    repeat: across Order.passage
-    in between task: midstudy
 
-  - task: distract
+  - task: midStudy
 
-  - task: exam
-    repeat: across Order.passage
+  - task: followUp
 
   - task: survey
 
@@ -58,71 +45,47 @@ tasks:
 
     - type: text
       title: Instructions
-      content file: instructions-{{Preparation.type}}
+      content file: instructions-{{Study.type}}
       next:
         button: Start
 
-    - show: if {{Preparation.type}} is "triangle"
-      type: test
-      question set: example
-      require correct answer: true
-      incorrect answer message: That's not correct. Try again.
-      report results: false
-      next:
-        button: Next
-
-    - show: if {{Preparation.type}} is "triangle"
-      type: text
-      title: You're ready to begin
-      content: If you have any questions, please contact the experimenter before proceeding.
-      next:
-        button: Begin
-
-
   study:
     - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
-      time: 9 minutes
-
-    - type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
-
-    - type: test
-      style: {{Preparation.type}}
-      question set: {{indexed Order.passage}}-{{Variation.practice}}
-      order: random
+      title: How lightning is formed
+      content file: study-{{Study.type}}
+      time: 192 seconds
+      show next button after time: true
       next:
         button: Next
-      show answer labels: true
-      show test results: on completion
 
-  midstudy:
+  midStudy:
     - type: text
-      title: You are about to read the next passage.
-      content: Click next when ready to begin.
+      content file: midStudy-{{FollowUp.type}}
       next:
         button: Next
 
-  distract:
-    - type: distractor
-      exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
-      content: You are now going to play Tetris.
-
-  exam:
-    - type: test
-      style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.exam}}
-      order: random
+  followUp:
+    - show: if {{FollowUp.type}} is "repeat"
+      type: text
+      title: How lightning is formed
+      content file: study-{{Study.type}}
+      time: 192 seconds
+      show next button after time: true
       next:
         button: Next
+
+    - show: if {{FollowUp.type}} is "practiceTest"
+      type: test
+      style: multipleChoice
+      question set: lightningPractice
+      time: 24 seconds
+      show timer: with 10 seconds left
+      show answer labels: true
 
   survey:
     - type: test
       title: Please answer the following.
-      question set: survey-{{Preparation.type}}
+      question set: survey-lightning
       inline: true
       next:
         button: Next
@@ -130,5 +93,5 @@ tasks:
   finish:
     - type: finish
       title: You have now completed the experiment.
-      content file: finish
+      content file: finish-lightning
       error text: Please do <b>NOT</b> close the window. Please go get your experimenter.

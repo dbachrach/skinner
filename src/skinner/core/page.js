@@ -8,6 +8,7 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
             this.type = keyPath(this.data, "type");
 
             this.time = intervals.parseTimeInterval(keyPath(this.data, "time"));
+            this.showNextButtonAfterTime = keyPath(this.data, "show next button after time", false)
             this.autoStartPageTimer = true;
         },
         id: function () {
@@ -85,7 +86,12 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
             }
         },
         pageTimerFired: function () {
-            this.next();
+            if (this.showNextButtonAfterTime) {
+                $("#nextButton").show();
+            }
+            else {
+                this.next();
+            }
         },
         cancelPageTimer: function () {
             if (!_.isUndefined(this.timerTimeout)) {
@@ -123,8 +129,14 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
             return {};
         },
         updateButtons: function () {
+            var base = this;
+
             // Update UI Buttons
-            loader.loadLayoutInPackage("buttons", "src/skinner/core/", this.data, "#buttons");
+            loader.loadLayoutInPackage("buttons", "src/skinner/core/", this.data, "#buttons", function() {
+                if (base.showNextButtonAfterTime) {
+                    $("#nextButton").hide();
+                }
+            });
         },
         updateKeys: function (enable) {
             // Update keys

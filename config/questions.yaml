@@ -25,6 +25,9 @@ demographics:
       - Yes
       - No
 
+  - question: Please enter the email address you registered with SONA
+    style: cuedRecall
+
 example:
   - question: If you think the correct answer is vanilla and are mostly sure, but are also considering chocolate, where would you mark you answer?
     style: triangle
@@ -62,6 +65,46 @@ example:
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test3.png" class="ui right floated image" /> how many points would you get?
     style: cuedRecall
     correct answer: 1
+
+survey-lightning:
+  - question: Do you have comments on this experiment?
+    style: freeResponse
+
+  - question: Rate your level of meteorology knowledge
+    style: scale
+    scale:
+      - 1 (Very Low)
+      - 2 ()
+      - 3 ()
+      - 4 ()
+      - 5 (Very High)
+
+  - question: How difficult was it to learn from the material that you studied?
+    style: scale
+    scale:
+      - 1 (Very Easy)
+      - 2 ()
+      - 3 ()
+      - 4 ()
+      - 5 (Very Difficult)
+
+  - question: How interesting was the material that you studied?
+    style: scale
+    scale:
+      - 1 (Very Boring)
+      - 2 ()
+      - 3 ()
+      - 4 ()
+      - 5 (Very Interesting)
+
+  - question: How likely are you to remember the material that you studied on a later test?
+    style: scale
+    scale:
+      - 1 (Not Very Likely)
+      - 2 ()
+      - 3 ()
+      - 4 ()
+      - 5 (Very Likely)
 
 survey-studyOnly:
   - question: Do you have comments on this experiment?
@@ -367,3 +410,53 @@ yellowstone-b:
       - Geyser *
       - Hot Spring
       - Fumarole
+
+lightningPractice:
+  - question: How does a cloud form?
+    answers:
+      - As air in an updraft cools, water vapor condenses into water droplets. *
+      - Rising air currents cause electrical charges to form causing water vapor to rise to the top.
+      - Ice crystals from the freezing layer move downward condensing into water droplets.
+
+  - question: The upper portion of a cloud is composed of _________________.
+    answers:
+      - Water droplets
+      - Air currents
+      - Ice Crystals *
+
+  - question: What is produced when downdrafts strike the ground?
+    answers:
+      - Electrical charges
+      - Cool gusts of wind *
+      - Rain
+
+  - question: The negatively charged particles move to the ____________ of the cloud, and most of the positively charged particles move to the ____________.
+    answers:
+      - Bottom; Top *
+      - Top; Bottom
+      - Middle; Top
+
+  - question: A stepped leader of ____________ charges moves downward in a series of steps. A ___________ charged leader travels up from such objects as trees and buildings.
+    answers:
+      - Positive; Negative
+      - Negative; Positive *
+      - Positive; Neutrally
+
+  - question: The two leaders general meet about how many feet off of the ground?
+    answers:
+      - 125
+      - 165 *
+      - 195
+
+  - question: What happens as the leader strikes near the ground?
+    answers:
+      - Negatively charged particles then rush from the cloud to the ground along the path created by the leaders.
+      - The negatively charged particles move to the bottom of the cloud, and most of the positively charged particles rise to the top.
+      - An opposite charge is induced, so positively charged particles from the ground rush upward. *
+
+  - question: What produces the bright light that people notice as a flash of lighting?
+    answers:
+      - The upward motion of the current. *
+      - The downward motion of the current.
+      - Negatively charged particles then rush from the cloud to the ground.
+
