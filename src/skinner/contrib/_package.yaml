@@ -6,6 +6,7 @@ author: skinner
 page:
   - countdown
   - distractor
+  - flashcard
 
 question:
   - cuedRecall

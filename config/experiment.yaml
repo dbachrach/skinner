@@ -30,6 +30,8 @@ dimensions:
       exam: a
 
 steps:
+  - task: flash
+
   - task: prepare
 
   - task: study
@@ -47,6 +49,13 @@ steps:
 
 
 tasks:
+  flash:
+    - type: flashcard
+      title: flashcard
+      flashcard set: flashes
+      order: random
+      time: 2 seconds
+
   prepare:
     - type: test
       title: Participation
