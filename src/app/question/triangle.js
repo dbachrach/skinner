@@ -358,9 +358,14 @@ define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
                 canvas[0].width = 600;
                 canvas[0].height = 450;
             }
-            var showScore = false;
+            var showScore = true;
             this.qboard = this.buildBoard(canvas, showScore);
             this.qboard.redraw();
+
+            $('#yy_button').click(function() {
+                var img = canvas[0].toDataURL("image/png");
+                document.write('<img src="'+img+'"/>');
+            })
         },
         selectedAnswer: function () {
             return this.qboard.selectedAnswer();

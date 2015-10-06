@@ -29,10 +29,10 @@ example:
   - question: If you think the correct answer is vanilla and are mostly sure, but are also considering chocolate, where would you mark you answer?
     style: triangle
     answers:
-      - Chocolate
-      - Vanilla
-      - Stawberry
-    correct answer: chocolate-3-vanilla
+      - Victoria
+      - Vancouver
+      - Berlin
+    correct answer: Victoria
 
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test1.png" class="ui right floated image" /> how many points would you get towards your score?
     style: cuedRecall
