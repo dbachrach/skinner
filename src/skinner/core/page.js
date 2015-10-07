@@ -92,7 +92,7 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
                 clearTimeout(this.timerTimeout);
             }
         },
-        timerTime: function() {
+        timerTime: function () {
             return this.time;
         },
         hide: function () {

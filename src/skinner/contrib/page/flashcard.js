@@ -39,7 +39,7 @@ define (["lib/jquery", "src/skinner/core/page", "src/skinner/core/loader", "src/
         },
         showFlashcard: function (data) {
             var layout;
-            if (this.currentFlashcardIndex % 2 == 0) {
+            if (this.currentFlashcardIndex % 2 === 0) {
                 layout = 'flashCardFront';
             }
             else {
@@ -48,8 +48,8 @@ define (["lib/jquery", "src/skinner/core/page", "src/skinner/core/loader", "src/
             loader.loadLayoutInPackage(layout, "src/skinner/contrib/", data, "#flashcard");
             this.startPageTimer();
         },
-        timerTime: function() {
-            if (this.currentFlashcardIndex % 2 == 0) {
+        timerTime: function () {
+            if (this.currentFlashcardIndex % 2 === 0) {
                 return this.timeFront;
             }
             else {
