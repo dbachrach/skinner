@@ -1,6 +1,6 @@
 var flashcardFile = "ryaml!config/flashcards";
 
-define (["lib/jquery", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", flashcardFile], function ($, Page, loader, keyPath, allFlashcardData) {
+define (["lib/jquery", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", "src/skinner/core/intervals", flashcardFile], function ($, Page, loader, keyPath, intervals, allFlashcardData) {
     "use strict";
 
     var FlashcardPage = Page.extend({
@@ -11,6 +11,10 @@ define (["lib/jquery", "src/skinner/core/page", "src/skinner/core/loader", "src/
             this.flashcardsData = allFlashcardData[this.flashcardSet];
 
             this.order = keyPath(this.data, "order");
+
+            // TODO: These should fallback on this.time if not here
+            this.timeFront = intervals.parseTimeInterval(keyPath(this.data, "time front"));
+            this.timeBack = intervals.parseTimeInterval(keyPath(this.data, "time back"));
 
             if (this.order === "random") {
                 this.flashcardsData = _.shuffle(this.flashcardsData);
@@ -43,6 +47,14 @@ define (["lib/jquery", "src/skinner/core/page", "src/skinner/core/loader", "src/
             }
             loader.loadLayoutInPackage(layout, "src/skinner/contrib/", data, "#flashcard");
             this.startPageTimer();
+        },
+        timerTime: function() {
+            if (this.currentFlashcardIndex % 2 == 0) {
+                return this.timeFront;
+            }
+            else {
+                return this.timeBack;
+            }
         },
         next: function () {
             this.cancelPageTimer();

@@ -58,7 +58,7 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
                 }
             }
 
-            if (_.isNumber(this.time)) {
+            if (_.isNumber(this.timerTime())) {
                 this.timerValue = this.time / 1000;
                 this.hideTimerUntil = this.timerValue;
 
@@ -80,7 +80,7 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
                 else {
                     _.delay(function () {
                         base.pageTimerFired();
-                    }, this.time);
+                    }, this.timerTime());
                 }
             }
         },
@@ -91,6 +91,9 @@ define (["lib/jquery", "lib/lodash", "lib/class", "lib/mousetrap", "src/skinner/
             if (!_.isUndefined(this.timerTimeout)) {
                 clearTimeout(this.timerTimeout);
             }
+        },
+        timerTime: function() {
+            return this.time;
         },
         hide: function () {
             this.preHide();

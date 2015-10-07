@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Sequential vs Simultaneous Presentation Experiment 1
+name: Erin Sparck's GRE Flashcard Plus MC Test
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -13,35 +13,24 @@ data collection:
 dimensions:
   Preparation:
     - type: multipleChoice
-    - type: multipleChoiceSequential
-
-  Instruction:
-    - type: think
-    - type: nothink
-
-  Order:
-    - passage: [saturn, yellowstone]
-    - passage: [yellowstone, saturn]
+    - type: flashcard
 
   Variation:
-    - practice: a
-      exam: b
-    - practice: b
-      exam: a
+    - group: a
+    - group: b
 
 steps:
-  - task: flash
-
   - task: prepare
 
   - task: study
-    repeat: across Order.passage
-    in between task: midstudy
+
+  - task: midstudy
+
+  - task: secondStudy
 
   - task: distract
 
   - task: exam
-    repeat: across Order.passage
 
   - task: survey
 
@@ -49,13 +38,6 @@ steps:
 
 
 tasks:
-  flash:
-    - type: flashcard
-      title: flashcard
-      flashcard set: flashes
-      order: random
-      time: 2 seconds
-
   prepare:
     - type: test
       title: Participation
@@ -67,56 +49,53 @@ tasks:
 
     - type: text
       title: Instructions
-      content file: instructions-{{Preparation.type}}-{{Instruction.type}}
+      content file: instructions-gre-{{Preparation.type}}
       next:
         button: Start
 
-
   study:
-    - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
-      time: 9 minutes
-
-    - type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
-
-    - type: test
-      style: {{Preparation.type}}
-      question set: {{indexed Order.passage}}-{{Variation.practice}}
+    - type: flashcard
+      flashcard set: study-gre
       order: random
-      time: 30 seconds
-      show timer: with 5 seconds left
-      show answer labels: true
-      show test results: on completion
-      sequential answer initial delay: 10 seconds
-      sequential answer time: 5 seconds
+      time front: 3 seconds
+      time back: 9 seconds
 
   midstudy:
     - type: text
-      title: You are about to read the next passage.
-      content: Click next when ready to begin.
+      content file: midstudy-gre-{{Preparation.type}}
       next:
-        button: Next
+        button: Go
+
+  secondStudy:
+    - show: if {{Preparation.type}} is "flashcard"
+      type: flashcard
+      flashcard set: study-gre
+      order: random
+      time front: 3 seconds
+      time back: 9 seconds
+
+    - show: if {{Preparation.type}} is "multipleChoice"
+      type: test
+      style: multipleChoiceSequential
+      question set: gre-study-mc-{{Variation.group}}
+      order: random
+      time: 12 seconds
+      show timer: with 9 seconds left
+      show answer labels: true
+      sequential answer initial delay: 3 seconds
+      sequential answer time: 0 seconds
 
   distract:
     - type: distractor
       exercise: tetris
-      time: 5 minutes
+      time: 5 seconds
+      # TODO: 5 minutes
       content: You are now going to play Tetris.
 
   exam:
     - type: test
-      style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.exam}}
-      order: random
-      next:
-        button: Next
-
-    - type: test
-      style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.practice}}
+      style: multipleChoice
+      question set: final-gre
       order: random
       next:
         button: Next
@@ -124,7 +103,8 @@ tasks:
   survey:
     - type: test
       title: Please answer the following.
-      question set: survey-{{Preparation.type}}
+      # TODO: Get questions
+      question set: survey-gre
       inline: true
       next:
         button: Next
