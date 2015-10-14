@@ -1,0 +1,18 @@
+{{#if data.grouped}}
+
+<div class="ui form">
+{{#if data.[question group]}}<div class="default_question">{{{data.[question group]}}}</div>{{/if}}
+    <div class="grouped inline fields cb_fields">
+    {{#each data.questions}}
+            <div class="field">
+                  <div class="ui checkbox">
+                    <input class="ui large checkbox" type="checkbox" name="questionAnswer-{{this.id}}" id="questionAnswer-{{this.id}}" />
+                    <label for="questionAnswer-{{this.id}}">{{{this.question}}}</label>
+                  </div>
+            </div>
+    {{/each}}
+    </div>
+</div>
+{{else}}
+TODO: THIS NEEDS TO BE IMPLEMENTED
+{{/if}}

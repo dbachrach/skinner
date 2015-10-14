@@ -38,17 +38,41 @@ demographics:
       - No
 
 survey-gre:
-  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
-    style: freeResponse
-
-  - question: On a scale from 1 to 5, answer the following statement-- During the multiple-choice test, seeing the answers one at a time would have made me think about the incorrect alternatives more than seeing them all at the same time.
+  - question: When trying to learn new vocabulary words, which of the following strategies do you use the most?
     style: multipleChoice
     answers:
-      - 1 (Strongly Disagree)
-      - 2 (Disagree)
-      - 3 (Neutral)
-      - 4 (Agree)
-      - 5 (Strongly Agree)
+      - Flashcards
+      - Quizzing yourself (from a book, with a friend, etc.)
+      - Taking practice tests
+      - Reading definitions
+      - Other (please write in the box below)
+
+  - question: If you selected other, please write your strategy
+    style: cuedRecall
+
+  - question group: Please mark any additional strategies that you use when learning new vocabulary words.
+    style: checkbox
+    questions:
+      - question: Flashcards
+      - question: Quizzing yourself (from a book, with a friend, etc.)
+      - question: Taking practice tests
+      - question: Reading definitions
+      - question: Other (please write in the box below)
+
+  - question: If you selected other, please write your strategy
+    style: cuedRecall
+
+  - question: Which strategy do you think is most effective in helping people learn new vocabulary words?
+    style: multipleChoice
+    answers:
+      - Flashcards
+      - Quizzing yourself (from a book, with a friend, etc.)
+      - Taking practice tests
+      - Reading definitions
+      - Other (please write in the box below)
+
+  - question: If you selected other, please write your strategy
+    style: cuedRecall
 
   - question: Do you have any additional comments?
     style: freeResponse
