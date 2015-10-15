@@ -80,7 +80,7 @@ tasks:
       question set: gre-study-mc-{{Variation.group}}
       order: random
       time: 12 seconds
-      show timer: with 9 seconds left
+      show timer: with 5 seconds left
       show answer labels: true
       sequential answer initial delay: 3 seconds
       sequential answer time: 0 seconds
@@ -103,7 +103,6 @@ tasks:
   survey:
     - type: test
       title: Please answer the following.
-      # TODO: Get questions
       question set: survey-gre
       inline: true
       next:

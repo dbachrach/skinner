@@ -80,206 +80,206 @@ survey-gre:
 gre-study-mc-a:
   - question: Pith
     answers:
-    - 3po
-    - a mixture or medley
-    - the core or essence *
+    -  a mixture or medley
+    -  a payment or profit received in addition to a regular wage or salary
+    -  the core or essence *
   - question: Crotchet
     answers:
-    - the avoidance of activity or exertion
-    - 5ds
-    - a perverse or unfounded belief or notion *
+    -  a perverse or unfounded belief or notion *
+    -  a sudden outburst of emotion or action
+    -  the avoidance of activity or exertion
   - question: Disportment
     answers:
-    - 8sd
-    - an amusement or diversion *
-    - waste or debris
-  # - question: Frisson
-  #   answers:
-  #   - a sudden strong feeling of excitement or fear *
-  #   - the climax or culmination
-  #   - 29vcx
-  # - question: Scintilla
-  #   answers:
-  #   - distress or embarrassment at having failure or humiliation
-  #   - a tiny trace of a specified quality or feeling *
-  #   - 19fdas2
+    -  waste or debris
+    -  an amusement or diversion *
+    -  a sheath, as for a dagger or sword
+  - question: Frisson
+    answers:
+    -  a sudden strong feeling of excitement or fear *
+    -  the condition of being temporarily set aside
+    -  the climax or culmination
+  - question: Scintilla
+    answers:
+    -  swiftness of action or motion
+    -  a tiny trace of a specified quality or feeling *
+    -  distress or embarrassment at having failure or humiliation
   # - question: Proprinquinty
   #   answers:
-  #   - the state of being close to someone or something *
-  #   - 23cmv
-  #   - the use of trickery to achieve some purpose
+  #   -  the use of trickery to achieve some purpose
+  #   -  the state of being close to someone or something *
+  #   -  a splendid or striking array
   # - question: Morass
   #   answers:
-  #   - the use of indirect speech or writing
-  #   - a complicated or confused situation *
-  #   - 17u
+  #   -  a confused mass or jumble
+  #   -  a complicated or confused situation *
+  #   -  the use of indirect speech or writing
   # - question: Patois
   #   answers:
-  #   - the disposition to use violence
-  #   - the informal speech used by a particular social group *
-  #   - 9sd
+  #   -  a travel or journey, especially by foot
+  #   -  the informal speech used by a particular social group *
+  #   -  the disposition to use violence
   # - question: Erudition
   #   answers:
-  #   - the quality of having or showing great knowledge *
-  #   - 11sadsd
-  #   - excessive confidence or boldness
+  #   -  equipment used for a specific task or purpose
+  #   -  excessive confidence or boldness
+  #   -  the quality of having or showing great knowledge *
   # - question: Languor
   #   answers:
-  #   - 2wrong
-  #   - a champion or advocate
-  #   - the state or feeling, often pleasant, of tiredness or inertia *
+  #   -  the state or feeling, often pleasant, of tiredness or inertia *
+  #   -  a champion or advocate
+  #   -  an act of colliding or striking
   # - question: Mélange
   #   answers:
-  #   - a mixture or medley *
-  #   - 30rrjpo
-  #   - 27asdas
+  #   -  a long pompous speech, especially one delivered before a gathering
+  #   -  exaltation to divine rank or stature
+  #   -  a mixture or medley *
   # - question: Indolence
   #   answers:
-  #   - the avoidance of activity or exertion *
-  #   - 4ja
-  #   - 16ssdfd
+  #   -  the avoidance of activity or exertion *
+  #   -  an offense or resentment
+  #   -  a visible trace, evidence, or sign of something that no longer exists
   # - question: Detritus
   #   answers:
-  #   - 14sewrd
-  #   - 1blah
-  #   - waste or debris *
+  #   -  a small mallet used by a presiding officer or an auctioneer
+  #   -  waste or debris *
+  #   -  a ceremonial staff borne or displayed as the symbol of authority
   # - question: Apogee
   #   answers:
-  #   - the climax or culmination *
-  #   - 20a
-  #   - 18sdasfd
+  #   -  the state of being very generous or forgiving
+  #   -  the climax or culmination *
+  #   -  a gap or interruption in space, time, or continuity
   # - question: Chagrin
   #   answers:
-  #   - 22sd
-  #   - distress or embarrassment at having failure or humiliation *
-  #   - 12sdfdsa
+  #   -  A poem composed in mournful couplets
+  #   -  a conversation, especially a formal one
+  #   -  distress or embarrassment at having failure or humiliation *
   # - question: Chicanery
   #   answers:
-  #   - 25reresd
-  #   - the use of trickery to achieve some purpose *
-  #   - 24qw
+  #   -  a crude figure or dummy representing a hated person or group
+  #   -  the use of trickery to achieve some purpose *
+  #   -  a state of paralyzing dismay
   # - question: Periphrasis
   #   answers:
-  #   - 15u8
-  #   - the use of indirect speech or writing *
-  #   - 21pk
+  #   -  a direct, straight course
+  #   -  a difficult or disagreeable responsibility or necessity
+  #   -  the use of indirect speech or writing *
   # - question: Truculence
   #   answers:
-  #   - the disposition to use violence *
-  #   - 7sderq
-  #   - 13q
+  #   -  strong criticism
+  #   -  composure or self-possession especially when in a dangerous situation
+  #   -  the disposition to use violence *
   # - question: Temerity
   #   answers:
-  #   - excessive confidence or boldness *
-  #   - 26ew
-  #   - 10s1d
+  #   -  excessive confidence or boldness *
+  #   -  a reading desk with a slanted top holding scriptural passages
+  #   -  a benefit bestowed, especially one bestowed in response to a request
   # - question: Exponent
   #   answers:
-  #   - 28lkxc
-  #   - a champion or advocate *
-  #   - 6sdad
+  #   -  a feud between two families or clans
+  #   -  the act or skill of swimming
+  #   -  a champion or advocate *
 
 gre-study-mc-b:
   - question: Mélange
     answers:
-    - 25reresd
-    - the core or essence
-    - a mixture or medley *
+    -  the core or essence
+    -  a reading desk with a slanted top holding scriptural passages
+    -  a mixture or medley *
   - question: Indolence
     answers:
-    - 24qw
-    - the avoidance of activity or exertion *
-    - a perverse or unfounded belief or notion
+    -  a perverse or unfounded belief or notion
+    -  a crude figure or dummy representing a hated person or group
+    -  the avoidance of activity or exertion *
   - question: Detritus
     answers:
-    - 23cmv
-    - waste or debris *
-    - an amusement or diversion
-  # - question: Apogee
-  #   answers:
-  #   - a sudden strong feeling of excitement or fear
-  #   - the climax or culmination *
-  #   - 5ds
-  # - question: Chagrin
-  #   answers:
-  #   - distress or embarrassment at having failure or humiliation *
-  #   - 10s1d
-  #   - a tiny trace of a specified quality or feeling
+    -  an amusement or diversion
+    -  a payment or profit received in addition to a regular wage or salary
+    -  waste or debris *
+  - question: Apogee
+    answers:
+    -  a long pompous speech, especially one delivered before a gathering
+    -  the climax or culmination *
+    -  a sudden strong feeling of excitement or fear
+  - question: Chagrin
+    answers:
+    -  distress or embarrassment at having failure or humiliation *
+    -  a splendid or striking array
+    -  a tiny trace of a specified quality or feeling
   # - question: Chicanery
   #   answers:
-  #   - the state of being close to someone or something
-  #   - 11sadsd
-  #   - the use of trickery to achieve some purpose *
+  #   -  the state of being close to someone or something
+  #   -  the use of trickery to achieve some purpose *
+  #   -  a sheath, as for a dagger or sword
   # - question: Periphrasis
   #   answers:
-  #   - the use of indirect speech or writing *
-  #   - a complicated or confused situation
-  #   - 28lkxc
+  #   -  a difficult or disagreeable responsibility or necessity
+  #   -  the use of indirect speech or writing *
+  #   -  a complicated or confused situation
   # - question: Truculence
   #   answers:
-  #   - 30rrjpo
-  #   - the informal speech used by a particular social group
-  #   - the disposition to use violence *
+  #   -  the disposition to use violence *
+  #   -  the informal speech used by a particular social group
+  #   -  a gap or interruption in space, time, or continuity
   # - question: Temerity
   #   answers:
-  #   - the quality of having or showing great knowledge
-  #   - 26ew
-  #   - excessive confidence or boldness *
+  #   -  composure or self-possession especially when in a dangerous situation
+  #   -  the quality of having or showing great knowledge
+  #   -  excessive confidence or boldness *
   # - question: Exponent
   #   answers:
-  #   - 20a
-  #   - the state or feeling, often pleasant, of tiredness or inertia
-  #   - a champion or advocate *
+  #   -  the state or feeling, often pleasant, of tiredness or inertia
+  #   -  a feud between two families or clans
+  #   -  a champion or advocate *
   # - question: Pith
   #   answers:
-  #   - the core or essence *
-  #   - 29vcx
-  #   - 22sd
+  #   -  the core or essence *
+  #   -  a benefit bestowed, especially one bestowed in response to a request
+  #   -  equipment used for a specific task or purpose
   # - question: Crotchet
   #   answers:
-  #   - 3po
-  #   - 2wrong
-  #   - a perverse or unfounded belief or notion *
+  #   -  a perverse or unfounded belief or notion *
+  #   -  strong criticism
+  #   -  a state of paralyzing dismay
   # - question: Disportment
   #   answers:
-  #   - 21pk
-  #   - an amusement or diversion *
-  #   - 19fdas2
+  #   -  a sudden outburst of emotion or action
+  #   -  a ceremonial staff borne or displayed as the symbol of authority
+  #   -  an amusement or diversion *
   # - question: Frisson
   #   answers:
-  #   - 18sdasfd
-  #   - a sudden strong feeling of excitement or fear *
-  #   - 16ssdfd
+  #   -  A poem composed in mournful couplets
+  #   -  swiftness of action or motion
+  #   -  a sudden strong feeling of excitement or fear *
   # - question: Scintilla
   #   answers:
-  #   - 14sewrd
-  #   - a tiny trace of a specified quality or feeling *
-  #   - 1blah
+  #   -  a travel or journey, especially by foot
+  #   -  a tiny trace of a specified quality or feeling *
+  #   -  a small mallet used by a presiding officer or an auctioneer
   # - question: Proprinquinty
   #   answers:
-  #   - 27asdas
-  #   - the state of being close to someone or something *
-  #   - 15u8
+  #   -  the state of being close to someone or something *
+  #   -  the condition of being temporarily set aside
+  #   -  a confused mass or jumble
   # - question: Morass
   #   answers:
-  #   - 8sd
-  #   - 6sdad
-  #   - a complicated or confused situation *
+  #   -  an act of colliding or striking
+  #   -  a visible trace, evidence, or sign of something that no longer exists
+  #   -  a complicated or confused situation *
   # - question: Patois
   #   answers:
-  #   - 4ja
-  #   - 17u
-  #   - the informal speech used by a particular social group *
+  #   -  the informal speech used by a particular social group *
+  #   -  an offense or resentment
+  #   -  a direct, straight course
   # - question: Erudition
   #   answers:
-  #   - 7sderq
-  #   - the quality of having or showing great knowledge *
-  #   - 12sdfdsa
+  #   -  the quality of having or showing great knowledge *
+  #   -  the act or skill of swimming
+  #   -  exaltation to divine rank or stature
   # - question: Languor
   #   answers:
-  #   - the state or feeling, often pleasant, of tiredness or inertia *
-  #   - 13q
-  #   - 9sd
+  #   -  the state of being very generous or forgiving
+  #   -  the state or feeling, often pleasant, of tiredness or inertia *
+  #   -  a conversation, especially a formal one
 
 final-gre:
   - question: Professor Johnson was known as a probing questioner of his class he always wanted to get to the ______________ of any intellectual matter.
@@ -303,20 +303,20 @@ final-gre:
     - Vocations
     - Languor
     - Indolence
-  # - question: A __________________ ran through the crowd of protestors chanting threats again the queen when she made the sudden announcement that she would abdicate the throne.
-  #   answers:
-  #   - Frisson *
-  #   - Panegyric
-  #   - Disportment
-  #   - Patois
-  #   - Truculence
-  # - question: It takes only a _______________ of dry brush for an accidental spark to turn into a destructive wildfire.
-  #   answers:
-  #   - Surfeit
-  #   - Scintilla *
-  #   - Pallet
-  #   - Frisson
-  #   - Pith
+  - question: A __________________ ran through the crowd of protestors chanting threats again the queen when she made the sudden announcement that she would abdicate the throne.
+    answers:
+    - Frisson *
+    - Panegyric
+    - Disportment
+    - Patois
+    - Truculence
+  - question: It takes only a _______________ of dry brush for an accidental spark to turn into a destructive wildfire.
+    answers:
+    - Surfeit
+    - Scintilla *
+    - Pallet
+    - Frisson
+    - Pith
   # - question: In contrast to American social conventions regarding neighborly relationships, in which those who reside in close proximity often interact on a familiar basis, residential ______________ does not necessarily imply intimacy among the English.
   #   answers:
   #   - Commodiousness
