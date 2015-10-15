@@ -93,6 +93,11 @@ tasks:
       content: You are now going to play Tetris.
 
   exam:
+    - type: text
+      content file: preexam-gre
+      next:
+        button: Go
+
     - type: test
       style: multipleChoice
       question set: final-gre
