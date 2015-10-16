@@ -88,8 +88,7 @@ tasks:
   distract:
     - type: distractor
       exercise: tetris
-      time: 5 seconds
-      # TODO: 5 minutes
+      time: 5 minutes
       content: You are now going to play Tetris.
 
   exam:
