@@ -80,9 +80,9 @@ tasks:
 
   study:
     - type: text
-      title: Passage
+      title: Passage 1
       content file: passage-{{Order.study}}
-      time: 9 minutes
+      time: 9 seconds
 
     - type: countdown
       title: You are about to start the test in...
@@ -92,8 +92,8 @@ tasks:
       style: {{Preparation.type}}
       question set: {{Order.study}}-{{Variation.practice}}
       order: random
-      next:
-        button: Next
+      time: 5 seconds
+      show timer: with 10 seconds left
       show answer labels: true
       show test results: on completion
 
@@ -106,9 +106,9 @@ tasks:
 
   secondstudy:
     - type: text
-      title: Passage
+      title: Passage 2
       content file: passage-{{Order.secondstudy}}
-      time: 9 minutes
+      time: 9 seconds
 
     - type: countdown
       title: You are about to start the test in...
@@ -118,15 +118,15 @@ tasks:
       style: multipleChoice
       question set: {{Order.secondstudy}}-{{Variation.practice}}
       order: random
-      next:
-        button: Next
+      time: 5 seconds
+      show timer: with 10 seconds left
       show answer labels: true
       show test results: on completion
 
   distract:
     - type: distractor
       exercise: tetris
-      time: 5 minutes
+      time: 5 seconds
       content: You are now going to play Tetris.
 
   exam:
