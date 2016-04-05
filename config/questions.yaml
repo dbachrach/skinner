@@ -31,7 +31,7 @@ example:
     answers:
       - Chocolate
       - Vanilla
-      - Stawberry
+      - Strawberry
     correct answer: chocolate-3-vanilla
 
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test1.png" class="ui right floated image" /> how many points would you get towards your score?
@@ -43,7 +43,7 @@ example:
     answers:
       - Chocolate *
       - Vanilla
-      - Stawberry
+      - Strawberry
 
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test2.png" class="ui right floated image" /> how many points would you lose?
     style: cuedRecall
@@ -56,69 +56,21 @@ example:
     answers:
       - Chocolate
       - Vanilla
-      - Stawberry
+      - Strawberry
     correct answer: chocolate-2-vanilla
 
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test3.png" class="ui right floated image" /> how many points would you get?
     style: cuedRecall
     correct answer: 1
 
-survey-studyOnly:
-  - question: Do you have comments on this experiment?
-    style: freeResponse
-
-survey-multipleChoice:
-  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
-    style: freeResponse
-
-  - question: Do you have any additional comments?
-    style: freeResponse
-
-survey-multipleChoiceConfidence:
-  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
-    style: freeResponse
-
-  - question: Did you think about information related to the incorrect alternatives during the initial test?
-    style: scale
-    scale:
-      - 1 (Strongly Disagree)
-      - 2 (Disagree)
-      - 3 (Neutral)
-      - 4 (Agree)
-      - 5 (Strongly Agree)
-
-  - question: Did taking the initial test help you answer more questions correctly on the final test than if you had not taken the initial test at all?
-    style: scale
-    scale:
-      - 1 (Strongly Disagree)
-      - 2 (Disagree)
-      - 3 (Neutral)
-      - 4 (Agree)
-      - 5 (Strongly Agree)
-
-  - question: Do you have any additional comments?
-    style: freeResponse
-
-survey-triangle:
-  - question group: How much do you agree or disagree with the following statements about the <strong>triangle</strong> multiple-choice test?
-    style: scale
-    scale:
-      - 1 (Strongly Disagree)
-      - 2 (Disagree)
-      - 3 (Neutral)
-      - 4 (Agree)
-      - 5 (Strongly Agree)
-    questions:
-      - question: I understood the formatting.
-      - question: I found the scoring to be confusing.
-      - question: The format better assessed what I knew compared with a standard multiple-choice test.
-      - question: I liked being able to receive partial credit.
-      - question: The format made me think more carefully about my answers than I otherwise would have.
-      - question: I recalled information from the passage about the incorrect alternatives while selecting my answer.
-      - question: Using this format helped me answer more questions on the final test than if I had not used it.
-      - question: Using this format made me more confident in my answers on the final test.
-
+survey-cwtransfer:
   - question: What was your strategy in answering the initial test questions? If you debated between two answer choices, what did you do?
+    style: freeResponse
+
+  - question: Did you pay more attention to the second passage's test after taking the first test?
+    style: freeResponse
+
+  - question: Did you do anything differently while answering the questions on the second passage's test than the first passage's test? (If yes, please explain.)
     style: freeResponse
 
   - question: Do you have any additional comments?

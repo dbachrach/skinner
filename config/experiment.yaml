@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Standard MC + Confidence Self-Paced Experiment
+name: Erin Sparck's Confidence Weighted Transfer
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -13,15 +13,13 @@ data collection:
 dimensions:
   Preparation:
     - type: multipleChoice
-      distractionTaskTime: 5 minutes
     - type: triangle
-      distractionTaskTime: 5 minutes
-    - type: multipleChoiceConfidence
-      distractionTaskTime: 5 minutes
 
   Order:
-    - passage: [saturn, yellowstone]
-    - passage: [yellowstone, saturn]
+    - study: saturn
+      secondstudy: yellowstone
+    - study: yellowstone
+      secondstudy: saturn
 
   Variation:
     - practice: a
@@ -33,13 +31,14 @@ steps:
   - task: prepare
 
   - task: study
-    repeat: across Order.passage
-    in between task: midstudy
+
+  - task: midstudy
+
+  - task: secondstudy
 
   - task: distract
 
   - task: exam
-    repeat: across Order.passage
 
   - task: survey
 
@@ -81,8 +80,8 @@ tasks:
 
   study:
     - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
+      title: Passage
+      content file: passage-{{Order.study}}
       time: 9 minutes
 
     - type: countdown
@@ -91,7 +90,7 @@ tasks:
 
     - type: test
       style: {{Preparation.type}}
-      question set: {{indexed Order.passage}}-{{Variation.practice}}
+      question set: {{Order.study}}-{{Variation.practice}}
       order: random
       next:
         button: Next
@@ -105,16 +104,35 @@ tasks:
       next:
         button: Next
 
+  secondstudy:
+    - type: text
+      title: Passage
+      content file: passage-{{Order.secondstudy}}
+      time: 9 minutes
+
+    - type: countdown
+      title: You are about to start the test in...
+      time: 3 seconds
+
+    - type: test
+      style: multipleChoice
+      question set: {{Order.secondstudy}}-{{Variation.practice}}
+      order: random
+      next:
+        button: Next
+      show answer labels: true
+      show test results: on completion
+
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
+      time: 5 minutes
       content: You are now going to play Tetris.
 
   exam:
     - type: test
       style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.exam}}
+      question set: {{Order.secondstudy}}-{{Variation.exam}}
       order: random
       next:
         button: Next
@@ -122,7 +140,7 @@ tasks:
   survey:
     - type: test
       title: Please answer the following.
-      question set: survey-{{Preparation.type}}
+      question set: survey-cwtransfer
       inline: true
       next:
         button: Next
