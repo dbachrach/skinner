@@ -70,7 +70,7 @@ survey-cwtransfer:
   - question: Did you pay more attention to the second passage's test after taking the first test?
     style: freeResponse
 
-  - question: Did you do anything differently while answering the questions on the second passage's test than the first passage's test? (If yes, please explain.)
+  - question: Did you do anything differently while answering the questions on the second passage's test than you did on the first passage's test? (If yes, please explain.)
     style: freeResponse
 
   - question: Do you have any additional comments?
