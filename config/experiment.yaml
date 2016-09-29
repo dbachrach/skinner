@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Confidence Weighted Transfer
+name: Erin Sparck's Confidence Weighted Transfer Multiple Choice Final Test
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -131,16 +131,17 @@ tasks:
 
   exam:
     - type: test
-      style: cuedRecall
+      style: multipleChoice
       question set: {{Order.secondstudy}}-{{Variation.exam}}
       order: random
+      show answer labels: true
       next:
         button: Next
 
   survey:
     - type: test
       title: Please answer the following.
-      question set: survey-cwtransfer
+      question set: survey-cwtransfermcf
       inline: true
       next:
         button: Next
