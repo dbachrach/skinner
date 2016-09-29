@@ -395,12 +395,17 @@ define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
             var cCircle = new Circle(c, this.data.answers[2], (this.data.answers[2] === correctAnswer) ? correctAnswerScore : incorrectAnswerScore);
             cCircle.addLabel(this.data.answers[2] + ((showScore) ? " (" + cCircle.score + ")" : ""), LabelLocation.BELOW);
 
-            var centerCircle = new Circle(center, "none", noAnswerScore);
-            centerCircle.addLabel("Don't know" + ((showScore) ? " (" + noAnswerScore + ")" : ""), LabelLocation.ABOVE);
-
             var qboard = new QuestionBoard(canvas);
             qboard.addElement(new Triangle(a, b, c));
-            qboard.addElements([aCircle, bCircle, cCircle, centerCircle]);
+            qboard.addElements([aCircle, bCircle, cCircle]);
+
+            var showDontKnow = false;
+            if (showDontKnow) {
+                var centerCircle = new Circle(center, "none", noAnswerScore);
+                centerCircle.addLabel("Don't know" + ((showScore) ? " (" + noAnswerScore + ")" : ""), LabelLocation.ABOVE);
+                qboard.addElement(centerCircle);
+            }
+
             qboard.addElements(generateCirclesBetweenCircles(aCircle, bCircle, this.pointsPerEdge, LabelLocation.LEFT, showScore));
             qboard.addElements(generateCirclesBetweenCircles(bCircle, cCircle, this.pointsPerEdge, LabelLocation.BELOW, showScore));
             qboard.addElements(generateCirclesBetweenCircles(cCircle, aCircle, this.pointsPerEdge, LabelLocation.RIGHT, showScore));
