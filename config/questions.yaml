@@ -63,7 +63,7 @@ example:
     style: cuedRecall
     correct answer: 1
 
-survey-cwtransfermcf:
+survey-cwtransfer-two:
   - question: What was your strategy in answering the initial test questions? If you debated between two answer choices, what did you do?
     style: freeResponse
 

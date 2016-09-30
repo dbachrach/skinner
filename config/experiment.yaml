@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Confidence Weighted Transfer Multiple Choice Final Test
+name: Erin Sparck's Confidence Weighted Transfer 2
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -30,11 +30,11 @@ dimensions:
 steps:
   - task: prepare
 
-  - task: study
+  - task: passagereading
 
   - task: midstudy
 
-  - task: secondstudy
+  - task: practicetests
 
   - task: distract
 
@@ -78,16 +78,29 @@ tasks:
         button: Begin
 
 
-  study:
+  passagereading:
     - type: text
       title: Passage 1
       content file: passage-{{Order.study}}
       time: 9 minutes
 
     - type: countdown
-      title: You are about to start the test in...
+      title: You are about to read the next passage.
       time: 3 seconds
 
+    - type: text
+      title: Passage 2
+      content file: passage-{{Order.secondstudy}}
+      time: 9 minutes
+
+  midstudy:
+    - type: text
+      title: You are now going to answer some questions.
+      content: Click next when ready to begin.
+      next:
+        button: Next
+
+  practicetests:
     - type: test
       style: {{Preparation.type}}
       question set: {{Order.study}}-{{Variation.practice}}
@@ -97,22 +110,11 @@ tasks:
       show answer labels: true
       show test results: on completion
 
-  midstudy:
     - type: text
-      title: You are about to read the next passage.
+      title: You are now going to answer some more questions.
       content: Click next when ready to begin.
       next:
         button: Next
-
-  secondstudy:
-    - type: text
-      title: Passage 2
-      content file: passage-{{Order.secondstudy}}
-      time: 9 minutes
-
-    - type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
 
     - type: test
       style: multipleChoice
@@ -131,17 +133,16 @@ tasks:
 
   exam:
     - type: test
-      style: multipleChoice
+      style: cuedRecall
       question set: {{Order.secondstudy}}-{{Variation.exam}}
       order: random
-      show answer labels: true
       next:
         button: Next
 
   survey:
     - type: test
       title: Please answer the following.
-      question set: survey-cwtransfermcf
+      question set: survey-cwtransfer-two
       inline: true
       next:
         button: Next
