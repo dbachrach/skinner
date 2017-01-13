@@ -12,10 +12,14 @@ data collection:
 
 dimensions:
   Preparation:
-    - type: studyOnly
     - type: multipleChoice
+      distractionTaskTime: 5 minutes
     - type: multipleChoiceConfidence
+      distractionTaskTime: 5 minutes
     - type: triangle
+      distractionTaskTime: 5 minutes
+    - type: studyOnly
+      distractionTaskTime: 550 seconds
 
 
   Order:
@@ -63,7 +67,8 @@ tasks:
 
 
   study:
-    - type: test
+    - show: unless {{Preparation.type}} is "studyOnly"
+      type: test
       style: {{Preparation.type}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
       order: random
@@ -72,7 +77,8 @@ tasks:
       show answer labels: true
       show test results: on completion
 
-    - type: countdown
+    - show: unless {{Preparation.type}} is "studyOnly"
+      type: countdown
       title: You are about to read the passage in...
       time: 3 seconds
 
@@ -83,6 +89,12 @@ tasks:
 
 
   midstudy:
+    - show: if {{Preparation.type}} is "studyOnly"
+      type: distractor
+      exercise: tetris
+      time: 250 seconds
+      content: You are now going to play Tetris.
+
     - type: text
       title: You are about to move onto the next section.
       content: Click next when ready to begin.
@@ -92,7 +104,7 @@ tasks:
   distract:
     - type: distractor
       exercise: tetris
-      time: 5 minutes
+      time: {{Preparation.distractionTaskTime}}
       content: You are now going to play Tetris.
 
   exam:
