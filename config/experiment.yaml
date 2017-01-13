@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Standard MC + Confidence Experiment
+name: Erin Sparck's pretest-mc-mc+confjudgment-cw-studyonly Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -12,8 +12,11 @@ data collection:
 
 dimensions:
   Preparation:
+    - type: studyOnly
+    - type: multipleChoice
     - type: multipleChoiceConfidence
-      distractionTaskTime: 5 minutes
+    - type: triangle
+
 
   Order:
     - passage: [saturn, yellowstone]
@@ -60,15 +63,6 @@ tasks:
 
 
   study:
-    - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
-      time: 9 minutes
-
-    - type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
-
     - type: test
       style: {{Preparation.type}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
@@ -78,9 +72,19 @@ tasks:
       show answer labels: true
       show test results: on completion
 
+    - type: countdown
+      title: You are about to read the passage in...
+      time: 3 seconds
+
+    - type: text
+      title: Passage {{_index}}
+      content file: passage-{{indexed Order.passage}}
+      time: 9 minutes
+
+
   midstudy:
     - type: text
-      title: You are about to read the next passage.
+      title: You are about to move onto the next section.
       content: Click next when ready to begin.
       next:
         button: Next
@@ -88,7 +92,7 @@ tasks:
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
+      time: 5 minutes
       content: You are now going to play Tetris.
 
   exam:
