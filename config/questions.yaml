@@ -31,7 +31,7 @@ example:
     answers:
       - Chocolate
       - Vanilla
-      - Stawberry
+      - Strawberry
     correct answer: chocolate-3-vanilla
 
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test1.png" class="ui right floated image" /> how many points would you get towards your score?
@@ -43,7 +43,7 @@ example:
     answers:
       - Chocolate *
       - Vanilla
-      - Stawberry
+      - Strawberry
 
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test2.png" class="ui right floated image" /> how many points would you lose?
     style: cuedRecall
@@ -56,7 +56,7 @@ example:
     answers:
       - Chocolate
       - Vanilla
-      - Stawberry
+      - Strawberry
     correct answer: chocolate-2-vanilla
 
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test3.png" class="ui right floated image" /> how many points would you get?
