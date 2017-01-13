@@ -1,4 +1,4 @@
-define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
+define (["lib/jquery", "src/skinner/core/question", "src/skinner/core/keypath"], function ($, Question, keyPath) {
     "use strict";
 
     var LabelLocation = {
@@ -399,8 +399,7 @@ define (["lib/jquery", "src/skinner/core/question"], function ($, Question) {
             qboard.addElement(new Triangle(a, b, c));
             qboard.addElements([aCircle, bCircle, cCircle]);
 
-            var showDontKnow = false;
-            if (showDontKnow) {
+            if (!keyPath(this.testData, "show dont know", false)) {
                 var centerCircle = new Circle(center, "none", noAnswerScore);
                 centerCircle.addLabel("Don't know" + ((showScore) ? " (" + noAnswerScore + ")" : ""), LabelLocation.ABOVE);
                 qboard.addElement(centerCircle);

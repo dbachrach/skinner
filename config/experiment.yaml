@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Triangle Experiment
+name: Erin Sparck's dont-know-mc-cw Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -13,11 +13,11 @@ data collection:
 dimensions:
   Preparation:
     - type: multipleChoice
-      distractionTaskTime: 5 minutes
     - type: triangle
-      distractionTaskTime: 5 minutes
-    - type: studyOnly
-      distractionTaskTime: 550 seconds
+
+  Options:
+    - dontKnow: true
+    - dontKnow: false
 
   Order:
     - passage: [saturn, yellowstone]
@@ -85,28 +85,21 @@ tasks:
       content file: passage-{{indexed Order.passage}}
       time: 9 minutes
 
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: countdown
+    - type: countdown
       title: You are about to start the test in...
       time: 3 seconds
 
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: test
+    - type: test
       style: {{Preparation.type}}
+      show dont know: {{Options.dontKnow}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
       order: random
-      time: 25 seconds
-      show timer: with 10 seconds left
+      time: 5 seconds
+      show timer: with 3 seconds left
       show answer labels: true
       show test results: on completion
 
   midstudy:
-    - show: if {{Preparation.type}} is "studyOnly"
-      type: distractor
-      exercise: tetris
-      time: 250 seconds
-      content: You are now going to play Tetris.
-
     - type: text
       title: You are about to read the next passage.
       content: Click next when ready to begin.
@@ -116,7 +109,7 @@ tasks:
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
+      time: 5 minutes
       content: You are now going to play Tetris.
 
   exam:

@@ -9,5 +9,13 @@
             </div>
         </div>
         {{/each}}
+        {{#if [show dont know]}}
+            <div class="field">
+                <div class="ui large radio checkbox">
+                    <input type="radio" name="questionAnswer-{{../this.data.id}}" id="questionAnswer-{{../this.data.id}}-DontKnow" value="Dont Know" />
+                    <label for="questionAnswer-{{../this.data.id}}-DontKnow">{{#if ../[show answer labels]}}{{answerLabel data.answers.length}}) {{/if}}Don't Know</label>
+                </div>
+            </div>
+        {{/if}}
     </div>
 </div>
