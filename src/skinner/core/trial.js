@@ -77,7 +77,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
         },
 
         complete: function () {
-            var csv = this.subject.exportToCSV();
+            var csv = this.subject.exportToCSV().csv;
 
             var base = this;
 

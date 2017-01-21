@@ -24,7 +24,7 @@ define (["lib/jquery", "lib/lodash", "lib/mousetrap", "src/skinner/core/page", "
             });
 
             Mousetrap.bind("r e s u l t s", function () {
-                var csv = base.task.trial.subject.exportToCSV();
+                var csv = base.task.trial.subject.exportToCSV().html;
                 $("#resultData").html(csv);
                 $("#resultMessage").show();
             });

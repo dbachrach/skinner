@@ -65,7 +65,10 @@ define (["lib/lodash", "lib/underscore.string", "lib/class", "src/skinner/core/k
                 });
                 return _.map(row, quoter).join(",");
             });
-            return _.map(headers, quoter).join(",") + "<br/>" + rows.join("<br/>");
+            return {
+              html: _.map(headers, quoter).join(",") + "<br/>" + rows.join("<br/>"),
+              csv: _.map(headers, quoter).join(",") + "\n" + rows.join("\n")
+            };
         },
 
         conditionForPath: function (path) {
