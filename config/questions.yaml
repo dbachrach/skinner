@@ -68,17 +68,10 @@ survey-studyOnly:
     style: freeResponse
 
 survey-multipleChoice:
-  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
+  - question: What was your strategy in answering the initial pre-test question? If you debated between two answer choices, what did you do?
     style: freeResponse
 
-  - question: Do you have any additional comments?
-    style: freeResponse
-
-survey-multipleChoiceConfidence:
-  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
-    style: freeResponse
-
-  - question: Did you think about information related to the incorrect alternatives during the initial test?
+  - question: Did taking the initial pre-test help you answer more questions correctly on the final test than if you had not taken the initial pre-test at all?
     style: scale
     scale:
       - 1 (Strongly Disagree)
@@ -87,7 +80,14 @@ survey-multipleChoiceConfidence:
       - 4 (Agree)
       - 5 (Strongly Agree)
 
-  - question: Did taking the initial test help you answer more questions correctly on the final test than if you had not taken the initial test at all?
+  - question: Do you have any additional comments?
+    style: freeResponse
+
+survey-multipleChoiceConfidence:
+  - question: What was your strategy in answering the initial pre-test question? If you debated between two answer choices, what did you do?
+    style: freeResponse
+
+  - question: Did taking the initial pre-test help you answer more questions correctly on the final test than if you had not taken the initial pre-test at all?
     style: scale
     scale:
       - 1 (Strongly Disagree)
@@ -100,7 +100,10 @@ survey-multipleChoiceConfidence:
     style: freeResponse
 
 survey-triangle:
-  - question group: How much do you agree or disagree with the following statements about the <strong>triangle</strong> multiple-choice test?
+  - question: What was your strategy in answering the initial pre-test question? If you debated between two answer choices, what did you do?
+    style: freeResponse
+
+  - question: Did taking the initial pre-test help you answer more questions correctly on the final test than if you had not taken the initial pre-test at all?
     style: scale
     scale:
       - 1 (Strongly Disagree)
@@ -108,18 +111,6 @@ survey-triangle:
       - 3 (Neutral)
       - 4 (Agree)
       - 5 (Strongly Agree)
-    questions:
-      - question: I understood the formatting.
-      - question: I found the scoring to be confusing.
-      - question: The format better assessed what I knew compared with a standard multiple-choice test.
-      - question: I liked being able to receive partial credit.
-      - question: The format made me think more carefully about my answers than I otherwise would have.
-      - question: I recalled information from the passage about the incorrect alternatives while selecting my answer.
-      - question: Using this format helped me answer more questions on the final test than if I had not used it.
-      - question: Using this format made me more confident in my answers on the final test.
-
-  - question: What was your strategy in answering the initial test questions? If you debated between two answer choices, what did you do?
-    style: freeResponse
 
   - question: Do you have any additional comments?
     style: freeResponse
