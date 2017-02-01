@@ -95,7 +95,7 @@ tasks:
       question set: {{indexed Order.passage}}-{{Variation.practice}}
       order: random
       time: 25 seconds
-      show timer: with 3 seconds left
+      show timer: with 10 seconds left
       show answer labels: true
       show test results: on completion
 
