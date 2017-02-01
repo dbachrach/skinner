@@ -399,7 +399,7 @@ define (["lib/jquery", "src/skinner/core/question", "src/skinner/core/keypath"],
             qboard.addElement(new Triangle(a, b, c));
             qboard.addElements([aCircle, bCircle, cCircle]);
 
-            if (!keyPath(this.testData, "show dont know", false)) {
+            if (keyPath(this.testData, "show dont know", false)) {
                 var centerCircle = new Circle(center, "none", noAnswerScore);
                 centerCircle.addLabel("Don't know" + ((showScore) ? " (" + noAnswerScore + ")" : ""), LabelLocation.ABOVE);
                 qboard.addElement(centerCircle);

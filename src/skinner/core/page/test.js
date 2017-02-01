@@ -39,6 +39,9 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
 
     var TestPage = Page.extend({
         init: function (data, task) {
+            // Turn the 'show dont know' string into a bool.
+            _.extend(data, { "show dont know": data['show dont know'] === 'true' });
+
             this._super(data, task);
 
             this.style = keyPath(this.data, "style", "multipleChoice");

@@ -66,6 +66,7 @@ tasks:
     - show: if {{Preparation.type}} is "triangle"
       type: test
       question set: example-{{Options.dontKnow}}
+      show dont know: {{Options.dontKnow}}
       require correct answer: true
       incorrect answer message: That's not correct. Try again.
       report results: false
