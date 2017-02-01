@@ -59,7 +59,7 @@ tasks:
 
     - type: text
       title: Instructions
-      content file: instructions-{{Preparation.type}}
+      content file: instructions-{{Preparation.type}}-{{Options.dontKnow}}
       next:
         button: Start
 
@@ -94,7 +94,7 @@ tasks:
       show dont know: {{Options.dontKnow}}
       question set: {{indexed Order.passage}}-{{Variation.practice}}
       order: random
-      time: 5 seconds
+      time: 25 seconds
       show timer: with 3 seconds left
       show answer labels: true
       show test results: on completion
