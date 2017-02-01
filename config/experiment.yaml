@@ -16,8 +16,8 @@ dimensions:
     - type: triangle
 
   Options:
-    - dontKnow: true
-    - dontKnow: false
+    - dontKnow: "true"
+    - dontKnow: "false"
 
   Order:
     - passage: [saturn, yellowstone]
@@ -65,7 +65,7 @@ tasks:
 
     - show: if {{Preparation.type}} is "triangle"
       type: test
-      question set: example
+      question set: example-{{Options.dontKnow}}
       require correct answer: true
       incorrect answer message: That's not correct. Try again.
       report results: false
