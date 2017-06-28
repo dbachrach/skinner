@@ -1,9 +1,9 @@
 ---
-name: Erin Sparck's dont-know-mc-cw Experiment
+name: Erin Sparck's variable-encoding-beliefs Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
-  type: basic
+  type: random
 
 data collection:
   type: upload to server
@@ -11,36 +11,11 @@ data collection:
 
 
 dimensions:
-  Preparation:
-    - type: multipleChoice
-    - type: triangle
-
-  Options:
-    - dontKnow: "true"
-    - dontKnow: "false"
-
-  Order:
-    - passage: [saturn, yellowstone]
-    - passage: [yellowstone, saturn]
-
-  Variation:
-    - practice: a
-      exam: b
-    - practice: b
-      exam: a
-
+  Condition:
+    - type: ALL
 
 steps:
   - task: prepare
-
-  - task: study
-    repeat: across Order.passage
-    in between task: midstudy
-
-  - task: distract
-
-  - task: exam
-    repeat: across Order.passage
 
   - task: survey
 
@@ -57,80 +32,16 @@ tasks:
       next:
         button: Next
 
-    - type: text
-      title: Instructions
-      content file: instructions-{{Preparation.type}}-{{Options.dontKnow}}
-      next:
-        button: Start
-
-    - show: if {{Preparation.type}} is "triangle"
-      type: test
-      question set: example-{{Options.dontKnow}}
-      show dont know: {{Options.dontKnow}}
-      require correct answer: true
-      incorrect answer message: That's not correct. Try again.
-      report results: false
-      next:
-        button: Next
-
-    - show: if {{Preparation.type}} is "triangle"
-      type: text
-      title: You're ready to begin
-      content: If you have any questions, please contact the experimenter before proceeding.
-      next:
-        button: Begin
-
-  study:
-    - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
-      time: 9 minutes
-
-    - type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
-
-    - type: test
-      style: {{Preparation.type}}
-      show dont know: {{Options.dontKnow}}
-      question set: {{indexed Order.passage}}-{{Variation.practice}}
-      order: random
-      time: 25 seconds
-      show timer: with 10 seconds left
-      show answer labels: true
-      show test results: on completion
-
-  midstudy:
-    - type: text
-      title: You are about to read the next passage.
-      content: Click next when ready to begin.
-      next:
-        button: Next
-
-  distract:
-    - type: distractor
-      exercise: tetris
-      time: 5 minutes
-      content: You are now going to play Tetris.
-
-  exam:
-    - type: test
-      style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.exam}}
-      order: random
-      next:
-        button: Next
-
   survey:
     - type: test
-      title: Please answer the following.
-      question set: survey-{{Preparation.type}}
+      title: Please read the following and answer the questions.
+      question set: survey-variable-encoding-beliefs
       inline: true
       next:
         button: Next
 
   finish:
     - type: finish
-      title: You have now completed the experiment.
+      title: You have now completed the survey. Thank you!
       content file: finish
       error text: Please do <b>NOT</b> close the window. Please go get your experimenter.

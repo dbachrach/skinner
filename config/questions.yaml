@@ -6,6 +6,7 @@ demographics:
     answers:
       - Male
       - Female
+      - Other
 
   - question: What is your age?
     style: cuedRecall
@@ -18,8 +19,15 @@ demographics:
       - 3rd Year
       - 4th Year
       - 5th Year+
+      - Other
 
   - question: Is English your native language?
+    style: multipleChoice
+    answers:
+      - Yes
+      - No
+
+  - question: Are you fluent in English?
     style: multipleChoice
     answers:
       - Yes
@@ -100,6 +108,29 @@ example-false:
   - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test3.png" class="ui right floated image" /> how many points would you get?
     style: cuedRecall
     correct answer: 1
+
+survey-variable-encoding-beliefs:
+  - question: Imagine you are using flashcards to study for a foreign language vocabulary test.  When studying each pair of words, one on each side of the flashcard, you have the option to either be presented with the foreign language word and produce the English word (e.g., you first see gato and have to produce cat).  This is the <b>easy</b> direction.  On the other hand, you can be presented with the English word and produce the foreign language word (e.g., you first see cat and have to produce gato).  This is the <b>difficult</b> direction.<br/><br/>Given that you can go through your flashcards 4 times, which of the following study sequences do you think would be the <b>most effective</b> for learning given that you might have to produce both the English word as well as the foreign language word on the test?<br/>
+    style: multipleChoice
+    answers:
+      - Easy; Easy; Easy; Easy 	(e.g., you produce <i>cat</i> 4 times)
+      - Difficult; Difficult; Difficult; Difficult (e.g., you produce <i>gato</i> 4 times)
+      - Easy; Easy; Difficult; Difficult (e.g., you produce <i>cat</i> the first 2 times, <i>gato</i> the second 2 times)
+      - Difficult; Difficult, Easy; Easy (e.g., you produce <i>gato</i> the first 2 times, <i>cat</i> the second 2 times)
+
+  - question: <br/>Which of the study sequences is <b>most similar</b> to what you personally use when studying vocabulary words?<br/>
+    style: multipleChoice
+    answers:
+      - Easy; Easy; Easy; Easy 	(e.g., you produce <i>cat</i> 4 times)
+      - Difficult; Difficult; Difficult; Difficult (e.g., you produce <i>gato</i> 4 times)
+      - Easy; Easy; Difficult; Difficult (e.g., you produce <i>cat</i> the first 2 times, <i>gato</i> the second 2 times)
+      - Difficult; Difficult, Easy; Easy (e.g., you produce <i>gato</i> the first 2 times, <i>cat</i> the second 2 times)
+
+
+  - question: Please describe how you typically study vocabulary words.
+    style: freeResponse
+  - question: Do you have anything else to add?
+    style: freeResponse
 
 survey-studyOnly:
   - question: Do you have comments on this experiment?
