@@ -103,7 +103,7 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
 
                 if (!_.isUndefined(server)) {
                     var uploadData = {
-                        subject: this.subject.condition.Preparation.type + '_' + this.subject.condition.Options.dontKnow + '_' + this.subject.number,
+                        subject: this.subject.number,
                         data: csv,
                         name: base.experimentName
                     };
