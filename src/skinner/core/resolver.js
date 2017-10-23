@@ -12,7 +12,8 @@ define (["lib/lodash", "lib/Handlebars", "src/skinner/core/keypath"], function (
         });
 
         Handlebars.registerHelper("reported", function (page, id, key) {
-            for (var report of subject.reports) {
+            for (var i = 0; i < subject.reports.length; i++) {
+                var report = subject.reports[i];
                 if (report.page === page && report.id === id) {
                     return report[key];
                 }
