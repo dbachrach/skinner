@@ -1,9 +1,9 @@
 ---
-name: Erin Sparck's Triangle Experiment
+name: Erin Sparck's variable-encoding-beliefs-choose-trial Experiment
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
-  type: basic
+  type: random
 
 data collection:
   type: upload to server
@@ -11,36 +11,39 @@ data collection:
 
 
 dimensions:
-  Preparation:
-    - type: multipleChoice
-      distractionTaskTime: 5 minutes
-    - type: triangle
-      distractionTaskTime: 5 minutes
-    - type: studyOnly
-      distractionTaskTime: 550 seconds
-
-  Order:
-    - passage: [saturn, yellowstone]
-    - passage: [yellowstone, saturn]
-
-  Variation:
-    - practice: a
-      exam: b
-    - practice: b
-      exam: a
-
+  Condition:
+    - type: ALL
 
 steps:
   - task: prepare
 
-  - task: study
-    repeat: across Order.passage
-    in between task: midstudy
+  - task: study # 1
+
+  - task: prompt
+
+  - task: testA
+    context: 1
+
+  - task: restudy # 2
+
+  - task: testA
+    context: 2
+
+  - task: restudy # 3
+
+  - task: reprompt
+
+  - task: testB
+    context: 3
+
+  - task: restudy # 4
+
+  - task: testB
+    context: 4
 
   - task: distract
 
   - task: exam
-    repeat: across Order.passage
 
   - task: survey
 
@@ -59,78 +62,126 @@ tasks:
 
     - type: text
       title: Instructions
-      content file: instructions-{{Preparation.type}}
+      content file: instructions
       next:
         button: Start
 
-    - show: if {{Preparation.type}} is "triangle"
-      type: test
-      question set: example
-      require correct answer: true
-      incorrect answer message: That's not correct. Try again.
-      report results: false
+  study:
+    - type: wordpair
+      wordpair set: wordset
+      aKey: lithuanian
+      bKey: english
+      order: random
+      time: 5 seconds
+
+  restudy:
+    - type: text
+      content: Please study the words again.
       next:
         button: Next
 
-    - show: if {{Preparation.type}} is "triangle"
-      type: text
-      title: You're ready to begin
-      content: If you have any questions, please contact the experimenter before proceeding.
+    - type: wordpair
+      wordpair set: wordset
+      aKey: lithuanian
+      bKey: english
+      order: random
+      time: 5 seconds
+
+  prompt:
+    - type: test
+      content: Now you will be given a practice test on the pairs as if you were using flashcards. Would you like to be given the Lithuanian word and asked to retrieve the English word?  Or given the English word and asked to retrieve the Lithuanian words?
+      style: multipleChoice
+      question set: first-prompt
+      next:
+        button: Next
+
+  testA:
+    - type: text
+      content: Type the correct answer in the box provided.  Don't worry about exact spelling, but try your best and do not leave anything blank.  You will be given 8 seconds to type an answer in before automatically being moved on to the next word.
       next:
         button: Begin
 
-  study:
-    - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
-      time: 9 minutes
-
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
-
-    - show: unless {{Preparation.type}} is "studyOnly"
+    - show: if "{{reported "prompt-test-multipleChoice-first-prompt" "1" "answer"}}" is "Given English; Retrieve Lithuanian"
       type: test
-      style: {{Preparation.type}}
-      question set: {{indexed Order.passage}}-{{Variation.practice}}
+      style: cuedRecall
       order: random
-      time: 25 seconds
-      show timer: with 10 seconds left
-      show answer labels: true
-      show test results: on completion
+      time: 8 seconds
+      dynamic questions:
+        wordpair set: wordset
+        questionKey: english
+        answerKey: lithuanian
 
-  midstudy:
-    - show: if {{Preparation.type}} is "studyOnly"
-      type: distractor
-      exercise: tetris
-      time: 250 seconds
-      content: You are now going to play Tetris.
+    - show: if "{{reported "prompt-test-multipleChoice-first-prompt" "1" "answer"}}" is "Given Lithuanian; Retrieve English"
+      type: test
+      style: cuedRecall
+      order: random
+      time: 8 seconds
+      dynamic questions:
+        wordpair set: wordset
+        questionKey: lithuanian
+        answerKey: english
 
-    - type: text
-      title: You are about to read the next passage.
-      content: Click next when ready to begin.
+  reprompt:
+    - type: test
+      content: Now you will be given another practice test on the pairs using flashcards.  Would you like to be given the Lithuanian word and asked to retrieve the English word?  Or given the English word and asked to retrieve the Lithuanian words?
+      style: multipleChoice
+      question set: second-prompt
       next:
         button: Next
+
+  testB:
+    - type: text
+      content: Type the correct answer in the box provided.  Don't worry about exact spelling, but try your best and do not leave anything blank.  You will be given 8 seconds to type an answer in before automatically being moved on to the next word.
+      next:
+        button: Begin
+
+    - show: if "{{reported "reprompt-test-multipleChoice-second-prompt" "1" "answer"}}" is "Given English; Retrieve Lithuanian"
+      type: test
+      style: cuedRecall
+      order: random
+      time: 8 seconds
+      dynamic questions:
+        wordpair set: wordset
+        questionKey: english
+        answerKey: lithuanian
+
+    - show: if "{{reported "reprompt-test-multipleChoice-second-prompt" "1" "answer"}}" is "Given Lithuanian; Retrieve English"
+      type: test
+      style: cuedRecall
+      order: random
+      time: 8 seconds
+      dynamic questions:
+        wordpair set: wordset
+        questionKey: lithuanian
+        answerKey: english
+
 
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
-      content: You are now going to play Tetris.
+      time: 10 minutes
+      content: You will now play Tetris.
 
   exam:
+    - type: text
+      content: You will be tested on the words one final time. Type the correct answer in the box provided. Don't worry about exact spelling, but try your best and do not leave anything blank.  You will be given 12 seconds to type an answer in before automatically being moved on to the next word.
+      next:
+        button: Begin
+
     - type: test
       style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.exam}}
       order: random
-      next:
-        button: Next
+      time: 12 seconds
+      dynamic questions:
+        wordpair set: wordset
+        randomKeys:
+          - english
+          - lithuanian
 
   survey:
     - type: test
       title: Please answer the following.
-      question set: survey-{{Preparation.type}}
+      question set: survey
       inline: true
       next:
         button: Next

@@ -6,6 +6,7 @@ author: skinner
 page:
   - countdown
   - distractor
+  - wordpair
 
 question:
   - cuedRecall
@@ -15,3 +16,4 @@ question:
 
 login:
   - basic
+  - random

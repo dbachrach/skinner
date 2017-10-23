@@ -12,6 +12,7 @@ function isTestMode() {
 }
 
 var questionsFile = "ryaml!config/questions";
+var wordpairsFile = "ryaml!config/wordpairs";
 if (isTestMode()) {
     var search = window.location.search;
     var matches = search.match(/questions=([^&]*)&*/);
@@ -20,7 +21,7 @@ if (isTestMode()) {
     }
 }
 
-define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", questionsFile], function ($, _, howler, Page, loader, keyPath, allQuestionData) {
+define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src/skinner/core/loader", "src/skinner/core/keypath", questionsFile, wordpairsFile], function ($, _, howler, Page, loader, keyPath, allQuestionData, allWordpairsData) {
     "use strict";
 
     var States = {
@@ -42,8 +43,65 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
             this._super(data, task);
 
             this.style = keyPath(this.data, "style", "multipleChoice");
-            this.questionSet = keyPath(this.data, "question set");
-            this.questionsData = allQuestionData[this.questionSet];
+
+            var dynamicQuestions = keyPath(this.data, "dynamic questions", null);
+            if (dynamicQuestions) {
+                var wordpairSet = keyPath(dynamicQuestions, "wordpair set", null);
+                if (wordpairSet) {
+                    var randomKeys = keyPath(dynamicQuestions, "randomKeys");
+                    if (randomKeys) {
+                        this.questionSet = 'wordpairs-' + wordpairSet + '-random';
+
+                        var len = allWordpairsData[wordpairSet].length;
+                        this.questionsData = _.shuffle(allWordpairsData[wordpairSet])
+                            .map(function (wordpair, i) {
+                                var questionKey;
+                                var answerKey;
+
+                                if (i < len / 2)  {
+                                    questionKey = randomKeys[0];
+                                    answerKey = randomKeys[1];
+                                }
+                                else {
+                                    questionKey = randomKeys[1];
+                                    answerKey = randomKeys[0];
+                                }
+
+                                return {
+                                    question: wordpair[questionKey],
+                                    answers: [
+                                        wordpair[answerKey] + " *"
+                                    ],
+                                    direction: questionKey + ' to ' + answerKey
+                                };
+                            });
+                    }
+                    else {
+                        var questionKey = keyPath(dynamicQuestions, "questionKey");
+                        var answerKey = keyPath(dynamicQuestions, "answerKey");
+                        this.questionSet = 'wordpairs-' + wordpairSet + '-' + questionKey + '-to-' + answerKey;
+
+                        this.questionsData = allWordpairsData[wordpairSet]
+                            .map(function (wordpair) {
+                                return {
+                                    question: wordpair[questionKey],
+                                    answers: [
+                                        wordpair[answerKey] + " *"
+                                    ],
+                                    direction: questionKey + ' to ' + answerKey
+                                };
+                            });
+                    }
+                }
+                else {
+                    throw new Exception("No dynamic questions found");
+                }
+            }
+            else {
+                this.questionSet = keyPath(this.data, "question set");
+                this.questionsData = allQuestionData[this.questionSet];
+            }
+
             this.order = keyPath(this.data, "order");
             this.requireCorrectAnswer = keyPath(this.data, "require correct answer", false);
 
@@ -321,6 +379,9 @@ define (["lib/jquery", "lib/lodash", "lib/howler", "src/skinner/core/page", "src
                     if (keyPath(this.data, "report results", true)) {
                         var contextId = this.currentQuestion.id;
                         this.task.subject.report(pageId, contextId, "answer", this.currentQuestion.selectedAnswer());
+                        if (this.currentQuestion.data.direction) {
+                            this.task.subject.report(pageId, contextId, "direction", this.currentQuestion.data.direction);
+                        }
                         if (!_.isEmpty(this.currentQuestion.correctAnswers())) {
                             this.task.subject.report(pageId, contextId, "correct answer", this.currentQuestion.correctAnswers());
                         }

@@ -11,6 +11,16 @@ define (["lib/lodash", "lib/Handlebars", "src/skinner/core/keypath"], function (
             return key[context];
         });
 
+        Handlebars.registerHelper("reported", function (page, id, key) {
+            for (var report of subject.reports) {
+                if (report.page === page && report.id === id) {
+                    return report[key];
+                }
+            }
+            return null;
+        });
+
+
         function mapper(value) {
             if (_.isArray(value) || _.isObject(value)) {
                 return resolveData(value, subject, additionalDimensionData, context);

@@ -199,6 +199,10 @@ define(["lib/jquery", "lib/lodash", "lib/class", "src/skinner/core/loader", "src
         },
         showStep: function (repeatIndex) {
             var stepData = this.steps[this.currentStepIndex];
+            var context = keyPath(stepData, 'context', null);
+            if (context) {
+                repeatIndex = context;
+            }
 
             this.showTask(stepData.task, repeatIndex);
         },

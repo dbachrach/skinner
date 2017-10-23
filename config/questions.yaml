@@ -6,6 +6,7 @@ demographics:
     answers:
       - Male
       - Female
+      - Other
 
   - question: What is your age?
     style: cuedRecall
@@ -18,6 +19,7 @@ demographics:
       - 3rd Year
       - 4th Year
       - 5th Year+
+      - Other
 
   - question: Is English your native language?
     style: multipleChoice
@@ -25,320 +27,70 @@ demographics:
       - Yes
       - No
 
-example:
-  - question: If you think the correct answer is vanilla and are mostly sure, but are also considering chocolate, where would you mark you answer?
-    style: triangle
+  - question: Are you fluent in English?
+    style: multipleChoice
     answers:
-      - Chocolate
-      - Vanilla
-      - Strawberry
-    correct answer: chocolate-3-vanilla
+      - Yes
+      - No
 
-  - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test1.png" class="ui right floated image" /> how many points would you get towards your score?
+  - question: Do you know any Lithuanian?
+    style: multipleChoice
+    answers:
+      - Yes
+      - No
+
+  - question: Have you ever participated in an experiment where you learned Lithuanian?
+    style: multipleChoice
+    answers:
+      - Yes
+      - No
+
+survey:
+  - question: What percentage of total words do you think you recalled on the final test?
     style: cuedRecall
-    correct answer: 2
 
-  - question: If you were highly confident the answer is chocolate, where would you mark your answer?
-    style: triangle
-    answers:
-      - Chocolate *
-      - Vanilla
-      - Strawberry
-
-  - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test2.png" class="ui right floated image" /> how many points would you lose?
+  - question: What percentage of the words where you had to retrieve the English word do you think you recalled on the final test?
     style: cuedRecall
-    correct answers:
-      - 10
-      - -10
 
-  - question: If you are equally torn between chocolate and vanilla, where would you mark your answer?
-    style: triangle
-    answers:
-      - Chocolate
-      - Vanilla
-      - Strawberry
-    correct answer: chocolate-2-vanilla
-
-  - question: Given your answer and the correct answer is vanilla, <img src="content/images/example_test3.png" class="ui right floated image" /> how many points would you get?
+  - question: What percentage of the words where you had to retrieve the Lithuanian word do you think you recalled on the final test?
     style: cuedRecall
-    correct answer: 1
 
-survey-studyOnly:
-  - question: Do you have comments on this experiment?
+  - question: You were given two choices in this experiment to either retrieve the Lithuanian or the English word during the practice tests.  After the fact, do you wish you had changed either of your decisions on how to study the words?
+    style: multipleChoice
+    answers:
+      - Yes
+      - No
+
+  - question: If yes, please explain which of the two decisions (first, second, or both) you wish you had made differently and why.
     style: freeResponse
 
-survey-multipleChoice:
-  - question: What was your strategy in answering the initial test question? If you debated between two answer choices, what did you do?
+  - question: Imagine you are using flashcards to study for a foreign language vocabulary test, similar to what you just completed.  When studying each pair of words, one on each side of the flashcard, you have the option to either be presented with the foreign language word and produce the English word (e.g., you first see gato and have to produce cat).  This is the <b>easy</b> direction.  On the other hand, you can be presented with the English word and produce the foreign language word (e.g., you first see cat and have to produce gato).  This is the <b>difficult</b> direction.<br/><br/>Given that you can go through your flashcards 4 times, which of the following study sequences do you think would be the <b>most effective</b> for learning given that you might have to produce both the English word as well as the foreign language word on the test?<br/>
+    style: multipleChoice
+    answers:
+      - Easy; Easy; Easy; Easy 	(e.g., you produce <i>cat</i> 4 times)
+      - Difficult; Difficult; Difficult; Difficult (e.g., you produce <i>gato</i> 4 times)
+      - Easy; Easy; Difficult; Difficult (e.g., you produce <i>cat</i> the first 2 times, <i>gato</i> the second 2 times)
+      - Difficult; Difficult, Easy; Easy (e.g., you produce <i>gato</i> the first 2 times, <i>cat</i> the second 2 times)
+
+  - question: <br/>Which of the study sequences is <b>most similar</b> to what you personally use when studying vocabulary words?<br/>
+    style: multipleChoice
+    answers:
+      - Easy; Easy; Easy; Easy 	(e.g., you produce <i>cat</i> 4 times)
+      - Difficult; Difficult; Difficult; Difficult (e.g., you produce <i>gato</i> 4 times)
+      - Easy; Easy; Difficult; Difficult (e.g., you produce <i>cat</i> the first 2 times, <i>gato</i> the second 2 times)
+      - Difficult; Difficult, Easy; Easy (e.g., you produce <i>gato</i> the first 2 times, <i>cat</i> the second 2 times)
+
+  - question: Do you have any additional comments about how you study foreign language vocabulary or the experiment in general?
     style: freeResponse
 
-  - question: Do you have any additional comments?
-    style: freeResponse
-
-survey-triangle:
-  - question group: How much do you agree or disagree with the following statements about the <strong>triangle</strong> multiple-choice test?
-    style: scale
-    scale:
-      - 1 (Strongly Disagree)
-      - 2 (Disagree)
-      - 3 (Neutral)
-      - 4 (Agree)
-      - 5 (Strongly Agree)
-    questions:
-      - question: I understood the formatting.
-      - question: I found the scoring to be confusing.
-      - question: The format better assessed what I knew compared with a standard multiple-choice test.
-      - question: I liked being able to receive partial credit.
-      - question: The format made me think more carefully about my answers than I otherwise would have.
-      - question: I recalled information from the passage about the incorrect alternatives while selecting my answer.
-      - question: Using this format helped me answer more questions on the final test than if I had not used it.
-      - question: Using this format made me more confident in my answers on the final test.
-
-  - question: What was your strategy in answering the initial test questions? If you debated between two answer choices, what did you do?
-    style: freeResponse
-
-  - question: Do you have any additional comments?
-    style: freeResponse
-
-saturn-a:
-  - question: What planet lacks an internal magnetic field?
+first-prompt:
+  - question: ""
     answers:
-      - Venus *
-      - Mercury
-      - Jupiter
+      - Given Lithuanian; Retrieve English
+      - Given English; Retrieve Lithuanian
 
-  - question: Saturn's rings were first observed in what year? (at the time, however, they were not known to be rings)
+second-prompt:
+  - question: ""
     answers:
-      - 1610 *
-      - 1675
-      - 1789
-
-  - question: In 1655, who became the first scientist to suggest that Saturn is surrounded by a ring?
-    answers:
-      - Maxwell
-      - Huygens *
-      - Keeler
-
-  - question: The atmosphere of Saturn's rings is primarily composed of what element?
-    answers:
-      - Oxygen *
-      - Hydrogen
-      - Helium
-
-  - question: What is Saturn's second largest moon (a moon that is believed to have its own fragile ring system)?
-    answers:
-      - Titan
-      - Rhea *
-      - Mimas
-
-  - question: Saturn was first visited in September of 1979 by which space probe?
-    answers:
-      - Voyager 1
-      - Pioneer 11 *
-      - Voyager 2
-
-  - question: Only seven of Saturn's known ________ are massive enough to have collapsed into hydrostatic equilibrium.
-    answers:
-      - moons *
-      - rings
-      - spokes
-
-  - question: How long does it take Saturn to rotate once on its axis?
-    answers:
-      - 10 Earth hours *
-      - 88 Earth days
-      - 30 Earth years
-
-  - question: The area between the A ring and the F ring is known as the ________.
-    answers:
-      - Cassini Division
-      - Encke Gap
-      - Roche Division *
-
-  - question: Saturn gets its name from Saturnus, the ________ god of agriculture and harvest.
-    answers:
-      - Roman *
-      - Chinese
-      - Hindu
-
-saturn-b:
-  - question: On what planet is a day longer than a year?
-    answers:
-      - Venus
-      - Mercury *
-      - Jupiter
-
-  - question: In what year did William Herschel discover Mimas and Enceladus, two moons of Saturn?
-    answers:
-      - 1610
-      - 1675
-      - 1789 *
-
-  - question: Who first proposed that Saturn's rings aren't solid, but must instead be composed of many small particles?
-    answers:
-      - Maxwell *
-      - Huygens
-      - Keeler
-
-  - question: The body of Saturn is primarily composed of what element?
-    answers:
-      - Oxygen
-      - Hydrogen *
-      - Helium
-
-  - question: What is Saturn's largest moon?
-    answers:
-      - Titan *
-      - Rhea
-      - Mimas
-
-  - question: Which space probe collected data demonstrating wind speeds on Saturn exceeding 1,800 km/hour?
-    answers:
-      - Voyager 1 *
-      - Pioneer 11
-      - Voyager 2
-
-  - question: ________ appear to be a seasonal phenomenon, disappearing in the Saturnian midwinter and midsummer.
-    answers:
-      - moons
-      - rings
-      - spokes *
-
-  - question: How long does it take Saturn to revolve around the sun?
-    answers:
-      - 10 Earth hours
-      - 88 Earth days
-      - 30 Earth years *
-
-  - question: The area between the A ring and the B ring is known as the ________.
-    answers:
-      - Cassini Division *
-      - Encke Gap
-      - Roche Division
-
-  - question: What ancient culture designated Saturn as the 'earth star'?
-    answers:
-      - Roman
-      - Chinese *
-      - Hindu
-
-yellowstone-a:
-  - question: What explorer left the Lewis and Clark Expedition to explore the region with a group of fur trappers?
-    answers:
-      - Colter *
-      - Bridger
-      - Hayden
-
-  - question: About 600 of what threatened species live within the Greater Yellowstone Ecosystem?
-    answers:
-      - elk
-      - bison
-      - grizzly bears *
-
-  - question: Attacks by what tribe caused Colter to leave the Yellowstone region?
-    answers:
-      - Minnetaree
-      - Shoeshone
-      - Blackfeet *
-
-  - question: What is the tallest geyser in Yellowstone National Park?
-    answers:
-      - Old Faithful
-      - Steamboat Geyser *
-      - Castle Geyser
-
-  - question: In what year did Colter first explore Yellowstone with a group of fur trappers?
-    answers:
-      - 1806 *
-      - 1856
-      - 1872
-
-  - question: The majority of Yellowstone National Park resides in what state?
-    answers:
-      - South Dakota
-      - Wyoming *
-      - Montana
-
-  - question: What is the highest peak in Yellowstone National Park?
-    answers:
-      - Eagle Peak *
-      - Mt. Washburn
-      - Beartooth
-
-  - question: Who was Yellowstone National Park's first Superintendent, who served for five years devoid of salary, funding, and staffing?
-    answers:
-      - Mather
-      - Grant
-      - Langford *
-
-  - question: Which species of tree covers 80% of the total forested areas in Yellowstone National Park?
-    answers:
-      - Douglas Fir
-      - Lodgepole Pine *
-      - Whitebark Pine
-
-  - question: What type of geothermal feature is an opening in the earth's crust that emits steam and gasses?
-    answers:
-      - Geyser
-      - Hot Spring
-      - Fumarole *
-
-yellowstone-b:
-  - question: What mountain man reported observing boiling springs, sprouting water, and a mountain of yellow rock, but was largely ignored due to a reputation of being a 'spinner of yarns'?
-    answers:
-      - Colter
-      - Bridger *
-      - Hayden
-
-  - question: What species makes up the largest population of a large mammal species in Yellowstone National Park?
-    answers:
-      - elk *
-      - bison
-      - grizzly bears
-
-  - question: French trappers named Yellowstone River "Roche Jaune," probably a translation of what Native American tribe's name for Yellow Rock River?
-    answers:
-      - Minnetaree *
-      - Shoeshone
-      - Blackfeet
-
-  - question: What geyser is thought to be the oldest in the world?
-    answers:
-      - Old Faithful
-      - Steamboat Geyser
-      - Castle Geyser *
-
-  - question: In what year did Yellowstone become a National Park?
-    answers:
-      - 1806
-      - 1856
-      - 1872 *
-
-  - question: The Black Hills region is found primarily in what state?
-    answers:
-      - South Dakota *
-      - Wyoming
-      - Montana
-
-  - question: At 10,243, what is the most prominent peak (but not the highest) in Yellowstone National Park?
-    answers:
-      - Eagle Peak
-      - Mt. Washburn *
-      - Beartooth
-
-  - question: Who signed a bill into law making Yellowstone the first national park?
-    answers:
-      - Mather
-      - Grant *
-      - Langford
-
-  - question: As of 2007, which tree, found only in scattered groves, is threatened by a specific fungus?
-    answers:
-      - Douglas Fir
-      - Lodgepole Pine
-      - Whitebark Pine *
-
-  - question: With only about 300 examples in the park, what is the least common type of hydrothermal feature in Yellowstone?
-    answers:
-      - Geyser *
-      - Hot Spring
-      - Fumarole
+      - Given Lithuanian; Retrieve English
+      - Given English; Retrieve Lithuanian
