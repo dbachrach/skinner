@@ -25,6 +25,24 @@ demographics:
       - Yes
       - No
 
+  - question: How would you rate your knowledge on the topic of Saturn?
+    style: scale
+    scale:
+      - 1 (Strongly Disagree)
+      - 2 (Disagree)
+      - 3 (Neutral)
+      - 4 (Agree)
+      - 5 (Strongly Agree)
+
+  - question: How would you rate your knowledge on the topic of Yellowstone National Park?
+    style: scale
+    scale:
+      - 1 (Strongly Disagree)
+      - 2 (Disagree)
+      - 3 (Neutral)
+      - 4 (Agree)
+      - 5 (Strongly Agree)
+
 example:
   - question: If you think the correct answer is vanilla and are mostly sure, but are also considering chocolate, where would you mark you answer?
     style: triangle
