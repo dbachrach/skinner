@@ -6,6 +6,7 @@ demographics:
     answers:
       - Male
       - Female
+      - Other
 
   - question: What is your age?
     style: cuedRecall
@@ -18,6 +19,7 @@ demographics:
       - 3rd Year
       - 4th Year
       - 5th Year+
+      - Other
 
   - question: Is English your native language?
     style: multipleChoice
