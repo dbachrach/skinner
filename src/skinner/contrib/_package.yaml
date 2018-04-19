@@ -12,6 +12,7 @@ question:
   - freeResponse
   - multipleChoice
   - scale
+  - checkbox
 
 login:
   - basic
