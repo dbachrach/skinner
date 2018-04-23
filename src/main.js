@@ -1,5 +1,4 @@
 (function () {
-
     // Configure RequireJS
     requirejs.config({
         baseUrl: "./",

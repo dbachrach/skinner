@@ -7,18 +7,25 @@ define (["lib/jquery", "src/skinner/core/page", "src/skinner/core/loader", "src/
         init: function (data, task) {
             this._super(data, task);
 
-            this.wordpairSet = keyPath(this.data, "wordpair set");
-
             var aKey = keyPath(this.data, "aKey");
             var bKey = keyPath(this.data, "bKey");
-            this.wordpairData = allWordpairData[this.wordpairSet]
-                .map(function (d) {
 
-                    return {
-                        wordA: d[aKey],
-                        wordB: d[bKey]
-                    };
-                });
+            // This allows either a single `wordpair set` or a list of `wordpair sets` to be provided.
+            // If multiple word pair sets are provided they are merged together.
+            // Any conflicting entries are overriden (later values override earlier values).
+            var wordpairSet = keyPath(this.data, "wordpair set");
+            var wordpairSets = keyPath(this.data, "wordpair sets", [wordpairSet]);
+
+            this.wordpairData = wordpairSets.reduce(function (acc, wordpairSet) {
+                allWordpairData[wordpairSet]
+                    .forEach(function (d) {
+                        acc.push({
+                            wordA: d[aKey],
+                            wordB: d[bKey]
+                        });
+                    });
+                return acc;
+            }, []);
 
             this.order = keyPath(this.data, "order");
 

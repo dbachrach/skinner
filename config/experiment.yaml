@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's Triangle Experiment
+name: Erin Sparck's CW Vocabulary Experiment Part 1
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -13,36 +13,26 @@ data collection:
 dimensions:
   Preparation:
     - type: multipleChoice
-      distractionTaskTime: 5 minutes
     - type: triangle
-      distractionTaskTime: 5 minutes
+    - type: cuedRecall
     - type: studyOnly
-      distractionTaskTime: 550 seconds
 
-  Order:
-    - passage: [saturn, yellowstone]
-    - passage: [yellowstone, saturn]
-
-  Variation:
-    - practice: a
-      exam: b
-    - practice: b
-      exam: a
+  Group:
+    - wordset: 1
+    - wordset: 2
+    - wordset: 3
 
 
 steps:
   - task: prepare
 
   - task: study
-    repeat: across Order.passage
-    in between task: midstudy
+
+  - task: study
 
   - task: distract
 
   - task: exam
-    repeat: across Order.passage
-
-  - task: survey
 
   - task: finish
 
@@ -57,11 +47,12 @@ tasks:
       next:
         button: Next
 
-    - type: text
+    - show: if {{Preparation.type}} is "triangle"
+      type: text
       title: Instructions
-      content file: instructions-{{Preparation.type}}
+      content file: tutorial-triangle
       next:
-        button: Start
+        button: Next
 
     - show: if {{Preparation.type}} is "triangle"
       type: test
@@ -72,68 +63,52 @@ tasks:
       next:
         button: Next
 
-    - show: if {{Preparation.type}} is "triangle"
-      type: text
-      title: You're ready to begin
-      content: If you have any questions, please contact the experimenter before proceeding.
+    - type: text
+      title: Instructions
+      content file: instructions
       next:
-        button: Begin
+        button: Start
 
   study:
-    - type: text
-      title: Passage {{_index}}
-      content file: passage-{{indexed Order.passage}}
-      time: 9 minutes
-
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: countdown
-      title: You are about to start the test in...
-      time: 3 seconds
-
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: test
-      style: {{Preparation.type}}
-      question set: {{indexed Order.passage}}-{{Variation.practice}}
+    - type: wordpair
+      wordpair sets:
+        - wordset-1
+        - wordset-2
+        - wordset-3
+      aKey: word
+      bKey: definition
       order: random
-      time: 25 seconds
-      show timer: with 10 seconds left
-      show answer labels: true
-      show test results: on completion
-
-  midstudy:
-    - show: if {{Preparation.type}} is "studyOnly"
-      type: distractor
-      exercise: tetris
-      time: 250 seconds
-      content: You are now going to play Tetris.
-
-    - type: text
-      title: You are about to read the next passage.
-      content: Click next when ready to begin.
-      next:
-        button: Next
+      time: 5 seconds
 
   distract:
     - type: distractor
       exercise: tetris
-      time: {{Preparation.distractionTaskTime}}
-      content: You are now going to play Tetris.
+      time: 5 minutes
+      content: You will now play Tetris for 5 minutes.
 
   exam:
-    - type: test
-      style: cuedRecall
-      question set: {{indexed Order.passage}}-{{Variation.exam}}
-      order: random
+    - type: text
+      title: Test Instructions
+      content file: exam-instructions-{{Preparation.type}}
       next:
-        button: Next
+        button: Start
 
-  survey:
-    - type: test
-      title: Please answer the following.
-      question set: survey-{{Preparation.type}}
-      inline: true
-      next:
-        button: Next
+    - show: unless {{Preparation.type}} is "studyOnly"
+      type: test
+      style: {{Preparation.type}}
+      question set: exam-words-{{Group.wordset}}
+      order: random
+      time: 25 seconds
+      show timer: with 10 seconds left
+      show answer labels: true
+
+    - show: if {{Preparation.type}} is "studyOnly"
+      type: wordpair
+      wordpair set: wordset-{{Group.wordset}}
+      aKey: word
+      bKey: definition
+      order: random
+      time: 25 seconds
 
   finish:
     - type: finish
