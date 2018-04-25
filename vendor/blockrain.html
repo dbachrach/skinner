@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta charset="utf-8" />
+
+      <link href='http://fonts.googleapis.com/css?family=Play:400,700' rel='stylesheet' type='text/css'>
+
+      <link rel="stylesheet" href="blockrain.css">
+      <style>
+            body {
+              margin: 0;
+              padding: 0;
+            }
+
+            .game {
+              width: 500px;
+              height: 500px;
+            }
+      </style>
+    </head>
+    <body>
+        <div class="game" id="tetris-demo"></div>
+
+        <script src="jquery-1.11.1.min.js"></script>
+        <script src="blockrain.jquery.min.js"></script>
+
+        <script>
+          var $demo = $('#tetris-demo').blockrain({
+            speed: 100,
+            autoBlockWidth: true,
+            theme: 'candy'
+          });
+        </script>
+
+    </body>
+</html>

@@ -82,7 +82,7 @@ tasks:
 
   distract:
     - type: distractor
-      exercise: tetris
+      exercise: tetris2
       time: 5 minutes
       content: You will now play Tetris for 5 minutes.
 

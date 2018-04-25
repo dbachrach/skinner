@@ -89,6 +89,11 @@ module.exports = function (grunt) {
                     {
                         src: "index.html",
                         dest: "release/",
+                    },
+                    {
+                        expand: true,
+                        src: ["vendor/**"],
+                        dest: "release/",
                     }
                 ],
                 options: {
