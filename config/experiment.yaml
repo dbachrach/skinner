@@ -1,5 +1,5 @@
 ---
-name: Erin Sparck's CW Vocabulary Experiment Part 1
+name: Erin Sparck's CW Vocabulary Experiment Part 2
 authors: [Erin M. Sparck, Robert A. Bjork, Elizabeth L. Bjork]
 
 login:
@@ -19,99 +19,66 @@ dimensions:
 
   Group:
     - wordset: 1
+      other-wordset-a: 2
+      other-wordset-b: 3
     - wordset: 2
+      other-wordset-a: 3
+      other-wordset-b: 1
     - wordset: 3
+      other-wordset-a: 1
+      other-wordset-b: 2
 
 
 steps:
   - task: prepare
 
-  - task: study
-
-  - task: study
-
-  - task: distract
-
   - task: exam
+
+  - task: survey
 
   - task: finish
 
 
 tasks:
   prepare:
+    - type: text
+      title: Instructions
+      content file: part2-instructions
+      next:
+        button: Start
+
+  exam:
     - type: test
-      title: Participation
-      content file: participation
-      question set: demographics
+      style: cuedRecall
+      question set: exam-words-{{Group.other-wordset-a}}
+      order: random
+      next:
+        button: Next
+
+    - type: test
+      style: cuedRecall
+      question set: exam-words-{{Group.other-wordset-b}}
+      order: random
+      next:
+        button: Next
+
+    - type: test
+      style: cuedRecall
+      question set: exam-words-{{Group.wordset}}
+      order: random
+      next:
+        button: Next
+
+  survey:
+    - type: test
+      title: Please answer the following.
+      question set: survey-{{Preparation.type}}
       inline: true
       next:
         button: Next
 
-    - show: if {{Preparation.type}} is "triangle"
-      type: text
-      title: Instructions
-      content file: tutorial-triangle
-      next:
-        button: Next
-
-    - show: if {{Preparation.type}} is "triangle"
-      type: test
-      question set: example
-      require correct answer: true
-      incorrect answer message: That's not correct. Try again.
-      report results: false
-      next:
-        button: Next
-
-    - type: text
-      title: Instructions
-      content file: instructions
-      next:
-        button: Start
-
-  study:
-    - type: wordpair
-      wordpair sets:
-        - wordset-1
-        - wordset-2
-        - wordset-3
-      aKey: word
-      bKey: definition
-      order: random
-      time: 5 seconds
-
-  distract:
-    - type: distractor
-      exercise: tetris2
-      time: 5 minutes
-      content: You will now play Tetris for 5 minutes.
-
-  exam:
-    - type: text
-      title: Test Instructions
-      content file: exam-instructions-{{Preparation.type}}
-      next:
-        button: Start
-
-    - show: unless {{Preparation.type}} is "studyOnly"
-      type: test
-      style: {{Preparation.type}}
-      question set: exam-words-{{Group.wordset}}
-      order: random
-      time: 25 seconds
-      show timer: with 10 seconds left
-      show answer labels: true
-
-    - show: if {{Preparation.type}} is "studyOnly"
-      type: wordpair
-      wordpair set: wordset-{{Group.wordset}}
-      aKey: word
-      bKey: definition
-      order: random
-      time: 25 seconds
-
   finish:
     - type: finish
       title: You have now completed the experiment.
-      content file: finish
-      error text: Please do <b>NOT</b> close the window. Please go get your experimenter.
+      content file: part2-finish
+      error text: Please do <b>NOT</b> close the window. Please contact emsparck@ucla.edu.
